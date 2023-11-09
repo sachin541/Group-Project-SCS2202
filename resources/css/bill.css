@@ -1,0 +1,144 @@
+/* The Modal (hidden by default) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  min-width: 400px;
+  position: relative;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal-form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.modal-form-control {
+  width: 100%;
+  margin: 0;
+  height: 30px;
+}
+
+.modal-submit-btn {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.bill-outer-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 2rem;
+}
+
+.table-container {
+  margin-top: 2rem;
+  border: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.bill-inner-2 {
+  box-sizing: border-box;
+  padding-top: 5.5rem;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.total-box {
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.net-total {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.create-btn-box {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  flex-direction: column;
+}
+
+.create-btn {
+  background-color: #008000;
+  color: white;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.create-btn:hover {
+  background-color: rgba(0, 128, 0, 0.791);
+}
+
+.clear-btn {
+  background-color: red;
+  color: white;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.clear-btn:hover {
+  background-color: rgba(128, 0, 0, 0.791);
+}

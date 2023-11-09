@@ -1,0 +1,110 @@
+body,
+html {
+  width: 100%;
+  margin: 0;
+}
+
+.secondary-inner {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  grid-gap: 4rem;
+  height: 90vh;
+  padding: 2rem;
+}
+
+.grid-item-1 {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 2rem;
+}
+
+.grid-item-2 {
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.grid-inner-item-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-inner-item-2 {
+  border: 1px solid red;
+  border-radius: 10px;
+  background-image: url("../images/coming-soon.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.build-btn {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 20px 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 4rem;
+}
+
+h3 {
+  margin: 2rem;
+}
+
+.treasury-inner {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  grid-gap: 4rem;
+  padding: 2rem;
+  /* box-sizing: content-box; */
+}
+
+.grid2-item-1 {
+  display: grid;
+  grid-template-rows: 3fr 2fr;
+  grid-gap: 2rem;
+}
+
+.grid2-item-1 div {
+  display: grid;
+  padding: 2rem;
+}
+.grid2-item-1 div p {
+  text-align: left;
+}
+
+.grid2-item-2 {
+  border: 1px solid green;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.items-trending {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid2-inner-item-1 {
+  border: 1px solid green;
+  border-radius: 10px;
+}
+
+.grid2-inner-item-2 {
+  border: 1px solid green;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+}
+
+
+
+
+

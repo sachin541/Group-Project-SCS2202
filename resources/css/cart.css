@@ -1,0 +1,80 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.header-container {
+  margin: 2rem;
+}
+
+.img {
+  height: 2rem;
+  width: auto;
+}
+
+.header {
+  font-size: 3rem;
+  margin-left: 2rem;
+}
+
+.cart-body {
+  height: 70vh;
+  overflow-y: auto;
+}
+
+.list .item {
+  margin: 1rem;
+  margin-right: 3rem;
+  display: grid;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-gap: 1rem;
+  height: 6rem;
+  border-bottom: 1px solid green;
+  border-radius: 5px;
+}
+
+.list .img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list .item-img {
+  height: 5rem;
+  width: auto;
+  border: 1px solid red;
+}
+
+.grid-inner {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  padding-right: 1rem;
+}
+
+.add-btn {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.remove-btn {
+  background-color: red;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}

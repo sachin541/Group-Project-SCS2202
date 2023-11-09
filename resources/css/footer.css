@@ -1,0 +1,33 @@
+.footer-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr;
+  grid-template-rows: 1fr;
+  grid-gap: 3rem;
+  background-color: #562929;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  align-items: center;
+}
+
+.footer-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-img {
+  width: 10rem;
+  height: auto;
+}
+
+.footer-ul,
+.footer-li a {
+  color: white;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.footer-data-container {
+  color: white;
+  text-align: center;
+}

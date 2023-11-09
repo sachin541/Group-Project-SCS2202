@@ -1,0 +1,155 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.build-outer-container {
+  padding: 2rem;
+}
+
+.build-selector {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  justify-content: start;
+  align-items: center;
+}
+
+.select-build {
+  width: 300px;
+  height: 30px;
+}
+
+.progress-container {
+  width: 100%;
+  height: 30px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: green;
+  transition: width 0.3s ease-in-out;
+}
+
+.build-container {
+  height: 60vh;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 2rem;
+}
+
+.build-inner-1 {
+  height: 100%;
+  background-color: #f0f0f0;
+  overflow-y: auto;
+}
+
+.build-inner-2 {
+  height: 100%;
+  background-color: #f0f0f0;
+  overflow-y: auto;
+}
+
+.build-recomendations {
+  margin-top: 2rem;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.item {
+  flex: 0 0 calc(100% / 4);
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 24px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  cursor: pointer;
+  background-size: 100% 200%;
+  transition: background 1s;
+  background-position: 0% 0%;
+}
+
+.item:hover {
+  background: linear-gradient(to bottom, white 0%, #e74c3c 50%);
+  background-size: 100% 100%;
+  background-position: 0% 100%;
+  color: white;
+}
+
+.prev-button {
+  background: transparent;
+  padding: 10px 0px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 2%;
+  bottom: -13%;
+  transition: 0.5s ease;
+  border-radius: 5px;
+}
+
+.next-button {
+  background: transparent;
+  padding: 10px 0px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 2%;
+  bottom: -13%;
+  transition: 0.5s ease;
+  border-radius: 5px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #272626;
+}
+
+#itemList {
+  list-style: none;
+  padding: 0;
+}
+
+#itemList li {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(95, 89, 89);
+  color: white;
+  margin: 5px;
+}
+
+#itemList li:hover {
+  background-color: #e74d3cd0;
+}
+
+#itemList li.selected {
+  background-color: #e74c3c;
+  color: white;
+}

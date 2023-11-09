@@ -1,0 +1,153 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.stock-outer-container {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-gap: 2rem;
+  height: 100%;
+}
+
+.stock-inner {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.inner-1 {
+  margin-inline: 2rem;
+  display: grid;
+  grid-template-rows: 2fr 6fr 2fr;
+  grid-gap: 2rem;
+}
+
+.form-group {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.form-control {
+  margin-top: 0.5rem;
+  height: 30px;
+  font-size: medium;
+}
+
+.stock-details-box {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+.stock-note-box {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+.inner-2 {
+  display: grid;
+  grid-template-rows: 2fr 3fr 1fr;
+  grid-gap: 2rem;
+}
+
+.stock-arival-dates-box {
+  border-radius: 10px;
+  padding-inline: 1rem;
+  overflow-y: auto;
+  background-color: #f0f0f0;
+}
+
+.stock-level-box {
+  border-radius: 10px;
+  padding-inline: 1rem;
+  overflow-y: auto;
+  background-color: #f0f0f0;
+}
+
+.button-set {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 0.5rem;
+}
+
+.btn {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: auto;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: rgba(0, 128, 0, 0.791);
+}
+
+/* The Modal (hidden by default) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Semi-transparent overlay */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal-form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.modal-form-control {
+  width: 100%;
+  margin: 0;
+  height: 30px;
+}
+
+.modal-submit-btn {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

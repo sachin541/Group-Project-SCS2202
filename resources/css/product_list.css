@@ -1,0 +1,79 @@
+body,
+html {
+  height: auto;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+}
+
+.main-outer {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.main-side-nav {
+  height: 100%;
+  border-right: 2px solid white;
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.nav-panel {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Style the list items */
+.nav-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the links */
+.nav-link {
+  text-decoration: none;
+  background-color: gray;
+  color: white;
+  width: 100%;
+  height: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  outline: none;
+  margin-bottom: 0.5rem;
+  border: none;
+  /* padding: 5px 10px; */
+}
+
+.l-img {
+  /* border: 1px solid red; */
+  text-align: end;
+  padding-right: 5px;
+}
+
+.txt {
+  text-align: start;
+  padding-left: 10px;
+  font-size: 1rem;
+}
+
+/* Change link styles on hover */
+.nav-link:hover {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.clickedButton {
+  background-color: #e74c3c;
+  color: white;
+}
+

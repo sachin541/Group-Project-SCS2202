@@ -1,0 +1,105 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.error {
+  color: red;
+  margin: 0.5rem;
+}
+
+.outer-container {
+  height: 100%;
+  width: 100%;
+}
+
+.inner-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  width: 80%;
+}
+
+.image {
+  height: auto;
+  width: 70%;
+}
+
+.form-container {
+  width: 100%;
+  border-left: 2px solid black;
+}
+
+.form-inner-container {
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form,
+.field {
+  width: 100%;
+}
+
+.field-container {
+  margin: 0.5rem;
+}
+
+#forget-pass {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.field {
+  height: 30px;
+}
+
+a {
+  color: grey;
+}
+
+input[type="submit"] {
+  background-color: #008000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 650px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-container {
+    border-left: none;
+  }
+
+  .form-inner-container {
+    margin: 0.5rem;
+    padding: 0;
+  }
+}

@@ -1,0 +1,98 @@
+body,
+html {
+  width: 100%;
+  margin: 0;
+}
+
+.repair-outer-container {
+  margin-bottom: 2rem;
+}
+
+.repair-header-container {
+  margin: 2rem;
+}
+
+.repair-body-container {
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-gap: 2rem;
+  padding-inline: 2rem;
+  margin-bottom: 2rem;
+}
+
+.repair-grid-container1 {
+  padding-inline: 1rem;
+  border: 1px solid green;
+  height: 100%;
+}
+
+.repair-grid-container2 {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 3fr 2fr;
+  grid-gap: 2rem;
+}
+
+.current-repairs-box {
+  padding-inline: 1rem;
+  border: 1px solid green;
+}
+
+.complains-box {
+  padding-inline: 1rem;
+  border: 1px solid green;
+}
+
+.repair-img {
+  height: 2rem;
+  width: auto;
+}
+
+.repair-header {
+  font-size: 3rem;
+  margin-left: 2rem;
+}
+
+.add-btn {
+  background-color: #008000;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+}
+
+.remove-btn {
+  background-color: red;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+}
+
+.repair-request-box {
+  height: 90%;
+}
+
+.repair-btn-container {
+  text-align: right;
+  padding-bottom: 1rem;
+}
+
+.repair-btn-container a {
+  font-weight: 600;
+  padding: 10px 50px;
+  text-decoration: none;
+  color: white;
+}
+
+.purchase-btn-container {
+  text-align: right;
+  margin: 2rem;
+}
+
+.purchase-btn-container a {
+  padding: 10px 50px;
+  text-decoration: none;
+  color: white;
+}
