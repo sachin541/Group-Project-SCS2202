@@ -15,7 +15,7 @@
     <header class="outer-grid-container">
         <div class="logo-container">
             <a href="../pages/home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
-            <p class="name">TECHZONE</p>
+            <p class="name">COMPUTIFY</p>
         </div>
 
         <div class="container">
