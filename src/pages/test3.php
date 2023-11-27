@@ -8,6 +8,10 @@
 <?php
 echo $_SERVER['DOCUMENT_ROOT'];
 ?>
+<?php
+echo $_SERVER['DOCUMENT_ROOT'];
+?>
+
 
 </body>
 </html>
