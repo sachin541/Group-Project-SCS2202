@@ -29,28 +29,88 @@ $laptopProducts = $product->getProductsByCategory($category);
 <aside class="main-side-nav">
   <nav class="nav-panel">
     <ul class="nav-list">
+
     <li class="nav-item">
         <form action="product_list.php" method="post">
           <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
+          <input type="submit" value="     LAPTOPS     " class="nav-link">
         </form>
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="test">
-          <input type="submit" value="Phone" class="nav-link">
+          <input type="hidden" name="category" value="CPU">
+          <input type="submit" value="CPU" class="nav-link">
         </form>
     </li>
     <li class="nav-item">
-        <form action="your_current_page.php" method="post">
-          <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="gpu">
+          <input type="submit" value="GPU" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="memory">
+          <input type="submit" value="Memory" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="motherboard">
+          <input type="submit" value="Motherboard" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="powersupply">
+          <input type="submit" value="PowerSupply" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="storage">
+          <input type="submit" value="Storage" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="CPU">
+          <input type="submit" value="CPU" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="gpu">
+          <input type="submit" value="GPU" class="nav-link">
+        </form>
+    </li>
+    <!-- <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="CPU_cooler">
+          <input type="submit" value="CPU_Cooler" class="nav-link">
+        </form>
+    </li> -->
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="case">
+          <input type="submit" value="Case" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="monitor">
+          <input type="submit" value="Monitor" class="nav-link">
+        </form>
+    </li>
+    <li class="nav-item">
+        <form action="product_list.php" method="post">
+          <input type="hidden" name="category" value="accessories">
+          <input type="submit" value="Accessories" class="nav-link">
         </form>
     </li>
 
 
-      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
-      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
+     
       
     </ul>
   </nav>
@@ -69,7 +129,7 @@ $laptopProducts = $product->getProductsByCategory($category);
         <p>Discount: $<?php echo htmlspecialchars($item['discount']); ?>%</p> <!-- Assuming discount is a percentage -->
         <p>Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
         <!-- Add to Cart Button -->
-        <form action="../helpers/add_to_cart.php" method="post">
+        <form action="product_details.php" method="get">
             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
             <input type="submit" value="Add to Cart" class="add-to-cart-button">
         </form>

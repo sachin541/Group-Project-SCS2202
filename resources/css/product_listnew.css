@@ -24,6 +24,7 @@ html {
   box-sizing: border-box;
   padding: 1rem;
   overflow-y: auto;
+  padding-bottom: 2px
 }
 
 .nav-panel {
@@ -135,7 +136,7 @@ html {
   }
 
 
-  /* Existing styles ... */
+
 
 /* Sidebar styles */
 .main-side-nav {
@@ -145,7 +146,7 @@ html {
   bottom: 100;
   width: auto; /* Adjust the width as needed */
   background-color: #000000; /* Sidebar background color */
-  /* overflow: hidden; */
+  
 }
 
 .nav-panel {
