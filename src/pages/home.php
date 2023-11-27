@@ -6,47 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/home.css">
-    <link href="https://fonts.cdnfonts.com/css/hero-new" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.cdnfonts.com/css/hero-new" rel="stylesheet" type="text/css"> -->
 
 </head>
 
 <body>
 
-    <div class="main-container">
 
-        <?php
-        // Initialize the session
-        session_start();
 
-        // Check if the user is logged in, show registered header if not then redirect show unregistered header
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            include '../components/unreg_header.php';
-        } else {
-            include '../components/reg_header.php';
-        }
-        include '../components/carousel.php';
-        ?>
+<?php require_once '../components/headers/main_header.php';?>
+    
+<div class="main-container"> 
+
+       
 
     </div>
-
+    <?php include '../components/carousel.php';?>
     <div class="secondary-container">
         <div class="arrivals">
-            <?php include '../components/new_arivals_slider.php' ?>
+            <!-- <?php include '../components/new_arivals_slider.php' ?> -->
         </div>
-<!-- 
-        <div class="secondary-inner">
-            <div class="grid-item-1">
-                <div class="grid-inner-item-1">
-                    <a href="build.php" class="build-btn">Build your PC</a>
-                </div>
-                <div class="grid-inner-item-2">
 
-                </div>
-            </div>
-            <div class="grid-item-2">
-                <h3>Trending Builds</h3>
-            </div>
-        </div> -->
 
         <div class="treasury-inner">
             <div class="grid2-item-1">
@@ -92,7 +72,7 @@
             </div>
         </div>
     </div>
-    <?php include '../components/footer.php' ?>
+    <!-- <?php include '../components/footer.php' ?> -->
 
 </body>
 

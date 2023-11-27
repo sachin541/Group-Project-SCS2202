@@ -1,18 +1,18 @@
 <?php
-require_once '../classes/database.php'; 
-require_once '../classes/product.php';
+require_once '../../classes/database.php'; 
+require_once '../../classes/product.php';
 
 $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
 
-$category = isset($_POST['category']) ? $_POST['category'] : 'laptop'; // Default to 'laptop' if no POST request
-$laptopProducts = $product->getProductsByCategory($category);
+// Fetch laptop products
+$laptopProducts = $product->getProductsByCategory('laptop');
 
 ?>
 
 
-<?php require_once '../components/headers/main_header.php';?> 
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,38 +20,31 @@ $laptopProducts = $product->getProductsByCategory($category);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laptop Products</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/product_listnew.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/css/product_listnew.css" />
+
+
 <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css" /> -->
 </head>
+<?php require_once '../../components/headers/main_header.php';?> 
+
 <body>
 
 
 <aside class="main-side-nav">
   <nav class="nav-panel">
     <ul class="nav-list">
-    <li class="nav-item">
-        <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
-        </form>
-    </li>
-    <li class="nav-item">
-        <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="test">
-          <input type="submit" value="Phone" class="nav-link">
-        </form>
-    </li>
-    <li class="nav-item">
-        <form action="your_current_page.php" method="post">
-          <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
-        </form>
-    </li>
-
-
+      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
       <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
       <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
-      
+      <li class="nav-item"><a href="wow" class="nav-link">Laptops</a></li>
+      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
+      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
+      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
+      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
+      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
+      <li class="nav-item"><a href="wow" class="nav-link">Laptops</a></li>
+      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
+      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
     </ul>
   </nav>
 </aside>
@@ -79,4 +72,3 @@ $laptopProducts = $product->getProductsByCategory($category);
 
 </body>
 </html>
-

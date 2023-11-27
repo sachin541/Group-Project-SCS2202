@@ -6,8 +6,8 @@ $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
 
-$category = isset($_POST['category']) ? $_POST['category'] : 'laptop'; // Default to 'laptop' if no POST request
-$laptopProducts = $product->getProductsByCategory($category);
+// Fetch laptop products
+$laptopProducts = $product->getProductsByCategory('laptop');
 
 ?>
 
@@ -29,29 +29,15 @@ $laptopProducts = $product->getProductsByCategory($category);
 <aside class="main-side-nav">
   <nav class="nav-panel">
     <ul class="nav-list">
-    <li class="nav-item">
-        <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
-        </form>
-    </li>
-    <li class="nav-item">
-        <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="test">
-          <input type="submit" value="Phone" class="nav-link">
-        </form>
-    </li>
-    <li class="nav-item">
-        <form action="your_current_page.php" method="post">
-          <input type="hidden" name="category" value="laptop">
-          <input type="submit" value="Laptops" class="nav-link">
-        </form>
-    </li>
-
-
+      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
       <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
       <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
-      
+      <li class="nav-item"><a href="wow" class="nav-link">Laptops</a></li>
+      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
+      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
+      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
+      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
+      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
     </ul>
   </nav>
 </aside>
@@ -79,4 +65,3 @@ $laptopProducts = $product->getProductsByCategory($category);
 
 </body>
 </html>
-
