@@ -55,7 +55,8 @@ if (isset($_GET['product_id'])) {
             <p>Discount: $<?php echo htmlspecialchars($productDetails['discount']); ?>%</p>
             <p>Brand: <?php echo htmlspecialchars($productDetails['brand']); ?></p>
             <!-- Add to Cart Form -->
-            <form action="../helpers/add_to_cart.php" method="post">
+            <form action="../helpers/cart_handler.php" method="post">
+                <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="product_id" value="<?php echo $productDetails['id']; ?>">
                 <input type="submit" value="Add to Cart" class="add-to-cart-button">
             </form>

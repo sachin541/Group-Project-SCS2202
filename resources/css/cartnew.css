@@ -1,0 +1,125 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cart Container */
+.cart-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Cart Item */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Product Details */
+.details {
+    flex-grow: 1;
+    padding: 0 15px;
+}
+
+.details div {
+    margin-bottom: 5px;
+}
+
+.details h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.details p {
+    margin: 0;
+    color: #666;
+}
+
+/* Quantity Controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls form {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls input[type="text"] {
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.quantity-controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Product Image */
+.cart-item img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+/* Cart Total Amount Styling */
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+}
+
+
