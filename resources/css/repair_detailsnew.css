@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul li a {
+    color: #dadfe3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+.create_repair {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    text-decoration: none;
+    background-color: #a43d3d;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 4px;
+    margin-top: 0px;
+    margin-left: 100px; 
+    margin-right: 100px;
+    margin-bottom: 100px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.create_repair:hover {
+    background-color: rgb(94, 86, 185);
+}
+
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+  }
+
+/* Additional styling can go here */

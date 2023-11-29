@@ -7,6 +7,7 @@
 
 <?php
 echo $_SERVER['DOCUMENT_ROOT'];
+echo date("Y");
 ?>
 
 </body>

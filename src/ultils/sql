@@ -75,3 +75,46 @@ CREATE TABLE cart_items (
 );
 
 
+CREATE TABLE cusomer_details (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    customer_name VARCHAR(255) NOT NULL,
+    customer_address VARCHAR(255) NOT NULL,
+    mobile_no BIGINT(10) NOT NULL,
+    date_of_birth DATE,
+    loyalty_points INT(255),
+    customer_id INT(255) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id)
+    
+);
+
+
+CREATE TABLE repairs (
+    repair_id INT NOT NULL AUTO_INCREMENT,
+
+    customer_id INT NOT NULL,
+
+    customer_name VARCHAR(255),
+    contact BIGINT(10) NOT NULL,
+    
+    added_timestamp DATE DEFAULT CURRENT_DATE,
+    technician_assigned_date VARCHAR(255) DEFAULT NULL,
+    repair_wip_date VARCHAR(255) DEFAULT NULL,
+    repair_completed_date VARCHAR(255) DEFAULT NULL,
+    item_collected_date VARCHAR(255) DEFAULT NULL,
+    
+    item_name VARCHAR(255),
+    repair_description TEXT,
+
+    amount DECIMAL(10, 2),
+    
+    technician_id INT,
+
+    PRIMARY KEY (repair_id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id)
+    
+    
+);
+
+
+
