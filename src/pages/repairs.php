@@ -28,7 +28,11 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
             <li>
                 Repair ID: <?php echo htmlspecialchars($repair['repair_id']); ?>, 
                 Item: <?php echo htmlspecialchars($repair['item_name']); ?>
-                <a href="repair_details.php?id=<?php echo $repair['repair_id']; ?>">Details</a>
+                <form action="repair_details.php" method="post">
+                <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
+                    <input type="submit" value="Details">
+                </form>
+                <!-- <a href="repair_details.php?id=<?php echo $repair['repair_id']; ?>">Details</a> get req -->
             </li>
         <?php endforeach; ?>
     </ul>

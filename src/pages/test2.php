@@ -1,67 +1,80 @@
-<?php
-require_once '../classes/database.php'; 
-require_once '../classes/product.php';
-
-$database = new Database();
-$db = $database->getConnection();
-$product = new Product($db);
-
-// Fetch laptop products
-$laptopProducts = $product->getProductsByCategory('laptop');
-
-?>
-
-
-<?php require_once '../components/headers/main_header.php';?> 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laptop Products</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/product_listnew.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css" /> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headers.css">
+    
 </head>
 <body>
+    <header class="headermain">
+      <?php require_once '../components/headers/main_header.php';?>
+    </header>
 
-
-<aside class="main-side-nav">
-  <nav class="nav-panel">
-    <ul class="nav-list">
-      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
-      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
-      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
-      <li class="nav-item"><a href="wow" class="nav-link">Laptops</a></li>
-      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
-      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
-      <li class="nav-item"><a href="laptops.php" class="nav-link">Laptops</a></li>
-      <li class="nav-item"><a href="smartphones.php" class="nav-link">Smartphones</a></li>
-      <li class="nav-item"><a href="accessories.php" class="nav-link">Accessories</a></li>
-    </ul>
-  </nav>
-</aside>
-
-
-
-
-<div class="products-container">
-    <?php foreach ($laptopProducts as $item): ?>
-    <div class="product-card">
-        <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
-        <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
-        <p><?php echo htmlspecialchars($item['product_description']); ?></p>
-        <p>Price: $<?php echo htmlspecialchars($item['price']); ?></p>
-        <p>Discount: $<?php echo htmlspecialchars($item['discount']); ?>%</p> <!-- Assuming discount is a percentage -->
-        <p>Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
-        <!-- Add to Cart Button -->
-        <form action="../helpers/add_to_cart.php" method="post">
-            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-            <input type="submit" value="Add to Cart" class="add-to-cart-button">
-        </form>
+    <div>
+        
     </div>
-    <?php endforeach; ?>
-</div>
 
+    <?php
+    $ref_number = 1; 
+    $start_date = date("Y/m/d"); 
+    $item_name = "lol";
+    
+    $tech_date = "28/29/30"; 
+    $tech_mobile = 843589;
+    $tech_name = "testname"; 
+
+    $repair_start_date = date("y/m/d");
+    $repair_completed_date = date("y/m/d");
+    $payment_done_date = date("y/m/d");
+    ?>
+
+
+
+
+    <div>
+    <h1>Repair Request Progress</h1>
+<ul>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Request created!"?></div>
+        <div class="title">
+          <div style="margin-bottom: 20px;">REF No : <?php echo $ref_number?></div>
+          <div style="margin-bottom: 20px;">Date : <?php echo $start_date?></div>
+        <div class="descr">A repair order for the item '<?php echo $item_name; ?>' has been successfully created. We will promptly assign a technician to handle your repair needs.</div>
+    </li>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Technician assigned!"?></div>
+        <div style="margin-bottom: 20px;"></div>
+        <div style="margin-bottom: 20px;">Technician Name : <?php echo $tech_name?></div>
+        <div style="margin-bottom: 20px;">Technician Mobile : <?php echo $tech_mobile?></div>
+        <div style="margin-bottom: 20px;">Date : <?php echo $tech_date?></div>
+        <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
+    </li>
+    </li>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Repair in progress!"?></div>
+        <div style="margin-bottom: 20px;"></div>
+        <div style="margin-bottom: 20px;">Date : <?php echo $repair_start_date?></div>
+        <div class="descr">Repair is in progress.</div>
+    </li>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Repair completed!"?></div>
+        <div style="margin-bottom: 20px;"></div>
+        <div style="margin-bottom: 20px;">Date : <?php echo $repair_completed_date?></div>
+        <div class="descr">Repair has been completed item is read for collection.</div>
+    </li>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Payment made!"?></div>
+        <div style="margin-bottom: 20px;"></div>
+        <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div>
+        <div class="descr">Payment Made! Request completed.</div>
+        
+    </li>
+    
+</ul>
+    </div>
 </body>
 </html>
