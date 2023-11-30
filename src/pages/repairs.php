@@ -23,8 +23,9 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
 </head>
 <body>
     <div  style="text-align: center;">
-    <h1>Your Repairs</h1>
+        <h1>Your Repairs</h1>
     </div>
+
     <ul>
         <?php foreach($repairs as $repair) : ?>
             <div class="repairs-list">
@@ -42,12 +43,13 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
             </div>
         <?php endforeach; ?>
     </ul>
+    
 
        
 
 
     <div class = "create_repair">
-    <a href="create_repair.php">New Repair</a>
+        <a href="create_repair.php">New Repair</a>
     </div>
 
 </body>

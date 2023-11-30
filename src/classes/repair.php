@@ -21,6 +21,18 @@ class Repair {
         }
     }
 
+    public function getTechnicianRepairsbyID($technicianId) {
+        try {
+            $query = "SELECT repair_id, item_name FROM repairs WHERE technician_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $technicianId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); //fetching man rows
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+
     public function createRepair($customer_id, $contact, $item_name, $repair_description) {
         try {
             // Prepare the SQL statement
@@ -57,6 +69,21 @@ class Repair {
         } catch(PDOException $e) {
             throw $e;
         }
+    }
+    
+
+    public function getAllNewRepairs(){
+        try {
+           
+            $query = "SELECT * FROM repairs WHERE technician_assigned_date IS NULL";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+
+        } catch(PDOException $e) {
+            throw $e;
+        }
+
     }
 
 

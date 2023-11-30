@@ -50,7 +50,7 @@ class Cart {
                 $updateStmt->bindParam(3, $productId);
 
                 $updateStmt->execute();
-                return "Quantity updated"; // or return some other indicator
+                return "Quantity updated"; 
             }
 
             // If the product is not in the cart, add it
