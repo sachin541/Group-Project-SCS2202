@@ -19,7 +19,7 @@ $laptopProducts = $product->getProductsByCategory($category);
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laptop Products</title>
+<title>Products</title>
 <link rel="stylesheet" type="text/css" href="../../resources/css/product_listnew.css" />
 <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css" /> -->
 </head>

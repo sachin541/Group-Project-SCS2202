@@ -1,4 +1,4 @@
-<?php require_once '../components/headers/main_header.php';?>
+
 
 <!DOCTYPE html>
 <html>
@@ -6,6 +6,7 @@
     <title>Create New Repair</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/repair_form.css">
 </head>
+<?php require_once '../components/headers/main_header.php';?>
 <body>
     <h1>Create New Repair</h1>
     <form action="../helpers/handle_repair.php" method="post">

@@ -15,7 +15,7 @@ class Repair {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $customerId, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); //fetching man rows
         } catch(PDOException $e) {
             throw $e;
         }
@@ -40,6 +40,22 @@ class Repair {
         } catch(PDOException $e) {
             // Handle the exception (you can log this or return a custom error message)
             return false;
+        }
+    }
+
+
+
+    public function getAllFromRepairById($repairId) {
+        try {
+           
+            $query = "SELECT * FROM repairs WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $repairId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch(PDOException $e) {
+            throw $e;
         }
     }
 
