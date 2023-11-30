@@ -12,25 +12,30 @@ if (isset($_POST["repair_id"])) {
     
     $repairDetails = $repair->getAllFromRepairById($_POST["repair_id"]);
 
+
+
+    
     
     if ($repairDetails) {
-        
-        $repairId = $repairDetails['repair_id'];
-        $customerId = $repairDetails['customer_id'];
-        $customerName = $repairDetails['customer_name'];
-        $contact = $repairDetails['contact'];
-        //stage 1 
-        $addedTimestamp = $repairDetails['added_timestamp'];
-        //stage 2 
-        $technicianAssignedDate = $repairDetails['technician_assigned_date'];
-        //stage 3 
-        $repairWipDate = $repairDetails['repair_wip_date'];
-        //stage 4 
-        $repairCompletedDate = $repairDetails['repair_completed_date'];
-        //stage 5
-        $itemCollectedDate = $repairDetails['item_collected_date'];
+        //
+        $ref_number = $repairDetails['repair_id'];
 
-        $itemName = $repairDetails['item_name'];
+        $customerId = $repairDetails['customer_id']; //not used 
+        $customerName = $repairDetails['customer_name']; //not used 
+
+        $customerContact = $repairDetails['contact'];
+        //stage 1 
+        $start_date = $repairDetails['added_timestamp'];
+        //stage 2 
+        $tech_date = $repairDetails['technician_assigned_date'];
+        //stage 3 
+        $repair_start_date = $repairDetails['repair_wip_date'];
+        //stage 4 
+        $repair_completed_date = $repairDetails['repair_completed_date'];
+        //stage 5
+        $payment_done_date = $repairDetails['item_collected_date'];
+
+        $item_name = $repairDetails['item_name'];
         $repairDescription = $repairDetails['repair_description'];
         $amount = $repairDetails['amount'];
         $technicianId = $repairDetails['technician_id'];
@@ -46,15 +51,15 @@ if (isset($_POST["repair_id"])) {
 
 // echo $addedTimestamp; 
 
-if($itemCollectedDate){
+if($payment_done_date){
     require_once '../components/repair_timeline/stage4.php';
-}else if($repairCompletedDate){
+}else if($repair_completed_date){
+    require_once '../components/repair_timeline/stage4.php';
+}else if($repair_start_date){
     require_once '../components/repair_timeline/stage3.php';
-}else if($repairWipDate){
-    require_once '../components/repair_timeline/stage2.php';
 
-}else if($technicianAssignedDate){
-    require_once '../components/repair_timeline/stage1.php';
+}else if($tech_date){
+    require_once '../components/repair_timeline/stage2.php';
 }else{
     require_once '../components/repair_timeline/stage1.php';
 }

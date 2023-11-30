@@ -25,19 +25,28 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
     <h1>Your Repairs</h1>
     <ul>
         <?php foreach($repairs as $repair) : ?>
-            <li>
-                Repair ID: <?php echo htmlspecialchars($repair['repair_id']); ?>, 
-                Item: <?php echo htmlspecialchars($repair['item_name']); ?>
-                <form action="repair_details.php" method="post">
-                <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
-                    <input type="submit" value="Details">
-                </form>
-                <!-- <a href="repair_details.php?id=<?php echo $repair['repair_id']; ?>">Details</a> get req -->
-            </li>
+            <div class="repairs-list">
+                <ul>
+                    <li>
+                        <form action="repair_details.php" method="post" class="details-form">
+                            <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
+                            <input type="submit" value="Details" class="details-button">
+                        </form>
+                        Repair ID: <span class="repair-id"><?php echo htmlspecialchars($repair['repair_id']); ?></span>,
+                        Item: <span class="item-name"><?php echo htmlspecialchars($repair['item_name']); ?></span>
+                        
+                    </li>
+                </ul>
+            </div>
         <?php endforeach; ?>
     </ul>
-        <div class = "create_repair">
+
+       
+
+
+    <div class = "create_repair">
     <a href="create_repair.php">New Repair</a>
-        </div>
+    </div>
+
 </body>
 </html>

@@ -102,5 +102,55 @@ body {
   .add-to-cart-button:hover {
     background-color: #ae4c4c;
   }
+
+
+  .repairs-list {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.repairs-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.repairs-list li {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.repair-id, .item-name {
+    font-weight: bold;
+}
+
+.details-form {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.details-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.details-button:hover {
+    background-color: #45a049;
+}
+
   
   

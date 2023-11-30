@@ -10,7 +10,8 @@ $db = $database->getConnection();
 $repair = new Repair($db);
 
 // Retrieve customer_id from session
-$customer_id = $_SESSION['user_id']; // Ensure this is the correct session variable name
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['rq_type'] == "new_repair_customer" )
+$customer_id = $_SESSION['user_id'];
 
 $contact = $_POST['contact'];
 $item_name = $_POST['item_name'];
@@ -20,6 +21,7 @@ $result = $repair->createRepair($customer_id, $contact, $item_name, $repair_desc
 
 if ($result) {
     echo "Repair created successfully.";
+    header('Location: ../pages/repairs.php');
 } else {
     echo "Error creating repair.";
 }

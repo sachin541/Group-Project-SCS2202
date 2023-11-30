@@ -1,38 +1,62 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
     margin: 0;
-    
+    padding: 20px;
 }
 
 h1 {
-    color: #333;
     text-align: center;
+    color: #333;
 }
 
-ul {
-    list-style-type: none;
+.repairs-list {
+    
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+.repairs-list ul {
+    list-style: none;
     padding: 0;
 }
 
-ul li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.repairs-list li {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    font-size: 16px;
 }
 
-ul li a {
-    color: #dadfe3;
-    text-decoration: none;
+.repair-id, .item-name {
     font-weight: bold;
+    margin-right: 10px;
 }
 
-ul li a:hover {
-    text-decoration: underline;
+.details-form {
+    display: inline;
 }
+
+.details-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+}
+
+.details-form {
+    text-align: left; /* Align the contents of the form to the left */
+}
+
 
 .create_repair {
     position: fixed;
@@ -61,5 +85,3 @@ a {
     color: rgb(255, 255, 255);
     text-decoration: none;
   }
-
-/* Additional styling can go here */
