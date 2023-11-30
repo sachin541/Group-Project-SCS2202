@@ -22,7 +22,9 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
     
 </head>
 <body>
+    <div  style="text-align: center;">
     <h1>Your Repairs</h1>
+    </div>
     <ul>
         <?php foreach($repairs as $repair) : ?>
             <div class="repairs-list">
