@@ -105,6 +105,42 @@ class Repair {
             return false;
         }
     }
+
+    public function progress_repair_stage2($repairId) {
+        try {
+            $query = "UPDATE repairs SET repair_wip_date = CURDATE() WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $repairId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+    public function progress_repair_stage3($repairId) {
+        try {
+            $query = "UPDATE repairs SET repair_completed_date = CURDATE() WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $repairId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+    public function progress_repair_stage4($repairId) {
+        try {
+            $query = "UPDATE repairs SET item_collected_date = CURDATE() WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $repairId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
     
 
 

@@ -10,9 +10,17 @@ $db = $database->getConnection();
 $repair = new Repair($db);
 $techobj = new Technician();
 
-if (isset($_POST["repair_id"])) {
+if (isset($_POST["repair_id"])|| $_SESSION['current_repair_tech']) {
+    if (isset($_SESSION['current_repair_tech'])) {
+        $repairID = $_SESSION['current_repair_tech']; 
+        unset($_SESSION['current_repair_tech']);
+        
+    }else{
+        $repairID = $_POST["repair_id"]; 
+    }
+
     
-    $repairDetails = $repair->getAllFromRepairById($_POST["repair_id"]);
+    $repairDetails = $repair->getAllFromRepairById($repairID);
 
 
 
@@ -63,7 +71,7 @@ if($tech_date){
 
 
 if($payment_done_date){
-    require_once '../components/repair_timeline_tech/stage4.php';
+    require_once '../components/repair_timeline_tech/stage5.php';
 }else if($repair_completed_date){
     require_once '../components/repair_timeline_tech/stage4.php';
 }else if($repair_start_date){

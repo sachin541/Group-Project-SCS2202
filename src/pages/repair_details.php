@@ -50,15 +50,17 @@ if (isset($_POST["repair_id"])) {
     
     echo "Repair ID is not provided.";
 }
+
 if($tech_date){
 $technicianDetails = $techobj->getTechnicianByStaffId($technicianId); 
 
 $tech_mobile = $technicianDetails['mobile_no'];
-$tech_name = $technicianDetails['staff_name'];}
+$tech_name = $technicianDetails['staff_name'];
+}
 // echo $addedTimestamp; 
 
 if($payment_done_date){
-    require_once '../components/repair_timeline/stage4.php';
+    require_once '../components/repair_timeline/stage5.php';
 }else if($repair_completed_date){
     require_once '../components/repair_timeline/stage4.php';
 }else if($repair_start_date){

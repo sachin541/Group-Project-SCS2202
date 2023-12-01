@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
-    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headers.css">
     
 </head>
 <body>
     
 
+   
 
 
 
@@ -39,25 +40,25 @@
         <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
     </li>
     </li>
-    <li style="--accent-color:#29ab4c">
-        <div class="date"><?php echo "Repair in progress!"?></div>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Repair in progress!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_start_date?></div>
         <div class="descr">Repair is in progress.</div>
     </li>
-    <!-- <li style="--accent-color:#080a0d">
-        <div class="date"><?php echo "✔️ Repair completed"?></div>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Repair completed!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_completed_date?></div>
         <div class="descr">Repair has been completed item is read for collection.</div>
-    </li> -->
-    <!-- <li style="--accent-color:#080a0d">
+    </li>
+    <li style="--accent-color:#080a0d">
         <div class="date"><?php echo "✔️ Payment made!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div>
         <div class="descr">Payment Made! Request completed.</div>
         
-    </li> -->
+    </li>
     
 </ul>
     </div>

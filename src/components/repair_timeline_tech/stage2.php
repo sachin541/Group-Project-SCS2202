@@ -38,14 +38,21 @@
         <div style="margin-bottom: 20px;">Technician Mobile : <?php echo $tech_mobile?></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $tech_date?></div>
         <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
+        <div class="accept_button">
+        <form action="../helpers/repair_handler.php" method="post" class="details-form">
+                <input type="hidden" name="stage2_accept" value="true">
+                <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                <input type="submit" value="Next stage" class="details-button">
+        </form>
+        </div>
     </li>
     </li>
-    <li style="--accent-color:#29ab4c">
+    <!-- <li style="--accent-color:#29ab4c">
         <div class="date"><?php echo "Repair in progress!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_start_date?></div>
         <div class="descr">Repair is in progress.</div>
-    </li>
+    </li> -->
     <!-- <li style="--accent-color:#080a0d">
         <div class="date"><?php echo "✔️ Repair completed"?></div>
         <div style="margin-bottom: 20px;"></div>

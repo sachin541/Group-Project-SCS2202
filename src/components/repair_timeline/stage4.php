@@ -5,26 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/timeline.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/headers.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headers.css">
     
 </head>
 <body>
     
 
-    <?php
-    $ref_number = 1; 
-    $start_date = date("Y/m/d"); 
-    $item_name = "lol";
     
-    $tech_date = "28/29/30"; 
-    $tech_mobile = 843589;
-    $tech_name = "testname"; 
-
-    $repair_start_date = date("y/m/d");
-    $repair_completed_date = date("y/m/d");
-    $payment_done_date = date("y/m/d");
-    ?>
 
 
 
@@ -53,7 +41,7 @@
     </li>
     </li>
     <li style="--accent-color:#080a0d">
-        <div class="date"><?php echo "✔️ Repair in progress!"?></div>
+        <div class="date"><?php echo "✔️ Repair started!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_start_date?></div>
         <div class="descr">Repair is in progress.</div>
@@ -62,13 +50,13 @@
         <div class="date"><?php echo "✔️ Repair completed!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_completed_date?></div>
-        <div class="descr">Repair has been completed item is read for collection.</div>
+        <div class="descr">Repair has been completed item is ready for collection.</div>
     </li>
-    <li style="--accent-color:#080a0d">
-        <div class="date"><?php echo "✔️ Payment made!"?></div>
+    <li style="--accent-color:#29ab4c">
+        <div class="date"><?php echo "Payment and collection pending!"?></div>
         <div style="margin-bottom: 20px;"></div>
-        <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div>
-        <div class="descr">Payment Made! Request completed.</div>
+        <!-- <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div> -->
+        <!-- <div class="descr">Payment Made! Request completed.</div> -->
         
     </li>
     

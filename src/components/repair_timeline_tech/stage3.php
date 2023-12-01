@@ -12,19 +12,7 @@
 <body>
     
 
-    <?php
-    $ref_number = 1; 
-    $start_date = date("Y/m/d"); 
-    $item_name = "lol";
     
-    $tech_date = "28/29/30"; 
-    $tech_mobile = 843589;
-    $tech_name = "testname"; 
-
-    $repair_start_date = date("y/m/d");
-    $repair_completed_date = date("y/m/d");
-    $payment_done_date = date("y/m/d");
-    ?>
 
 
 
@@ -52,25 +40,20 @@
         <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
     </li>
     </li>
-    <li style="--accent-color:#080a0d">
-        <div class="date"><?php echo "✔️ Repair started!"?></div>
+    <li style="--accent-color:#29ab4c">
+        <div class="date"><?php echo "Repair in progress!"?></div>
         <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $repair_start_date?></div>
         <div class="descr">Repair is in progress.</div>
+        <div class="accept_button">
+        <form action="../helpers/repair_handler.php" method="post" class="details-form">
+                <input type="hidden" name="stage3_accept" value="true">
+                <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                <input type="submit" value="Next stage" class="details-button">
+        </form>
+        </div>
     </li>
-    <li style="--accent-color:#080a0d">
-        <div class="date"><?php echo "✔️ Repair completed!"?></div>
-        <div style="margin-bottom: 20px;"></div>
-        <div style="margin-bottom: 20px;">Date : <?php echo $repair_completed_date?></div>
-        <div class="descr">Repair has been completed item is ready for collection.</div>
-    </li>
-    <li style="--accent-color:#29ab4c">
-        <div class="date"><?php echo "Payment and collection pending!"?></div>
-        <div style="margin-bottom: 20px;"></div>
-        <!-- <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div> -->
-        <!-- <div class="descr">Payment Made! Request completed.</div> -->
-        
-    </li>
+  
     
 </ul>
     </div>
