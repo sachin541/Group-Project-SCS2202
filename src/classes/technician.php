@@ -22,8 +22,5 @@ class Technician extends User {
     // Other technician-specific methods...
 }
 
-// Usage example
-// $technician = new Technician();
-// $allTechnicians = $technician->getAllTechnicians();
-// $specificTechnician = $technician->getTechnicianById(1);
+
 ?>
