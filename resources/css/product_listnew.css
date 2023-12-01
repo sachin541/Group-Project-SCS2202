@@ -127,13 +127,16 @@ html {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    margin-top: 10px; /* Spacing from the brand */
+    margin-top: 10px;
+    margin-bottom: 0; /* Spacing from the brand */
     width: 100%; /* Make the button expand to the card width */
   }
   
   .add-to-cart-button:hover {
     background-color: #b9d4e2;
   }
+
+  
 
 
 

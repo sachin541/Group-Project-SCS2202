@@ -86,6 +86,30 @@ class Repair {
 
     }
 
+    public function assignTechnicianToRepair($repairId, $technicianId) {
+        try {
+            // Prepare the SQL statement
+            $query = "UPDATE repairs SET technician_id = ?, technician_assigned_date = CURDATE() WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+
+            // Bind parameters
+            $stmt->bindParam(1, $technicianId, PDO::PARAM_INT);
+            $stmt->bindParam(2, $repairId, PDO::PARAM_INT);
+
+            // Execute the statement
+            $stmt->execute();
+
+            return true;
+        } catch(PDOException $e) {
+            // Handle the exception (you can log this or return a custom error message)
+            return false;
+        }
+    }
+    
+
+
+    
+
 
 
 }

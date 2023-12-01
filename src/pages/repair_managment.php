@@ -34,7 +34,7 @@ $myrepairs = $repair->getTechnicianRepairsbyID($technicianId);
             <div class="repairs-list">
                 <ul>
                     <li>
-                        <form action="repair_details.php" method="post" class="details-form">
+                        <form action="repair_managment_details.php" method="post" class="details-form">
                             <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
                             <input type="submit" value="Details" class="details-button">
                         </form>
@@ -70,7 +70,7 @@ $myrepairs = $repair->getTechnicianRepairsbyID($technicianId);
             <div class="repairs-list">
                 <ul>
                     <li>
-                        <form action="repair_details.php" method="post" class="details-form">
+                        <form action="repair_managment_details.php" method="post" class="details-form">
                             <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
                             <input type="submit" value="Details" class="details-button">
                         </form>

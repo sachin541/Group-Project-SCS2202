@@ -5,26 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/timeline.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/headers.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
+    
     
 </head>
 <body>
     
 
-    <?php
-    $ref_number = 1; 
-    $start_date = date("Y/m/d"); 
-    $item_name = "lol";
-    
-    $tech_date = "28/29/30"; 
-    $tech_mobile = 843589;
-    $tech_name = "testname"; 
-
-    $repair_start_date = date("y/m/d");
-    $repair_completed_date = date("y/m/d");
-    $payment_done_date = date("y/m/d");
-    ?>
 
 
 

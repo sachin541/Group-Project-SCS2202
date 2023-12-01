@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/headers.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline_tech.css">
+    
     
 </head>
 <body>
     
 
-    
+   
 
 
 
@@ -30,10 +30,19 @@
           <div style="margin-top: 10px; margin-bottom: 20px;">Item name: <?php echo $item_name; ?></div>
           
           <div style= "word-wrap: break-word;" class="descr">Description: <?php echo htmlspecialchars($repairDescription); ?></div>
+          
+          
 
     </li>
-    <li style="--accent-color:#29ab4c">
-        <div class="date"><?php echo "Technician will be assigned shortly!"?></div>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "Technician will be assigned shortly!"?> </div>
+        <div class="accept_button">
+        <form action="../helpers/repair_handler.php" method="post" class="details-form">
+                <input type="hidden" name="tech_accept" value="true">
+                <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                <input type="submit" value="Accept" class="details-button">
+        </form>
+        </div>
         <!-- <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Technician Name : <?php echo $tech_name?></div>
         <div style="margin-bottom: 20px;">Technician Mobile : <?php echo $tech_mobile?></div>

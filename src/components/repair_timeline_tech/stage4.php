@@ -5,15 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/headers.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/timeline_tech.css">
+    
     
 </head>
 <body>
     
 
+    <?php
+    $ref_number = 1; 
+    $start_date = date("Y/m/d"); 
+    $item_name = "lol";
     
+    $tech_date = "28/29/30"; 
+    $tech_mobile = 843589;
+    $tech_name = "testname"; 
 
+    $repair_start_date = date("y/m/d");
+    $repair_completed_date = date("y/m/d");
+    $payment_done_date = date("y/m/d");
+    ?>
 
 
 
@@ -32,15 +43,15 @@
           <div style= "word-wrap: break-word;" class="descr">Description: <?php echo htmlspecialchars($repairDescription); ?></div>
 
     </li>
-    <li style="--accent-color:#29ab4c">
-        <div class="date"><?php echo "Technician will be assigned shortly!"?></div>
-        <!-- <div style="margin-bottom: 20px;"></div>
+    <li style="--accent-color:#080a0d">
+        <div class="date"><?php echo "✔️ Technician assigned!"?></div>
+        <div style="margin-bottom: 20px;"></div>
         <div style="margin-bottom: 20px;">Technician Name : <?php echo $tech_name?></div>
         <div style="margin-bottom: 20px;">Technician Mobile : <?php echo $tech_mobile?></div>
         <div style="margin-bottom: 20px;">Date : <?php echo $tech_date?></div>
-        <div class="descr">A Technician has been assinged to the Job. Please get into contact</div> -->
+        <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
     </li>
-    <!-- </li>
+    </li>
     <li style="--accent-color:#080a0d">
         <div class="date"><?php echo "✔️ Repair in progress!"?></div>
         <div style="margin-bottom: 20px;"></div>
@@ -59,7 +70,7 @@
         <div style="margin-bottom: 20px;">Date : <?php echo $payment_done_date?></div>
         <div class="descr">Payment Made! Request completed.</div>
         
-    </li> -->
+    </li>
     
 </ul>
     </div>
