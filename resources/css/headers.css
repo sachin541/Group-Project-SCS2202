@@ -1,9 +1,14 @@
 /* Base styles */
+body{
+  margin:0;
+  font-family: Arial;
+}
+
 .outer-grid-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #333; /* Example background color */
+  background: #000000; /* Example background color */
   color: white;
   padding: 0 20px;
 }
@@ -18,6 +23,7 @@
 }
 
 .name {
+  
   font-size: 1.5em;
   font-weight: bold;
   margin-right: 10px;

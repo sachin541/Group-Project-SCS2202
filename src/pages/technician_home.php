@@ -11,7 +11,7 @@ require_once '../components/headers/main_header.php';
 </head>
 <div id="cont">
     <div class="grid-container">
-        <a href="" class="card">
+        <a href="./repair_managment.php" class="card">
         <div class="card">
             <img src="../../resources/images/homePagImages/technician/pc_repairs.png" class="foto" style="width:100%">
             <header>

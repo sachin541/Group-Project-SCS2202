@@ -12,7 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['role'] = $loginResult['role'];
 
         echo 'Login successful!';
-        header('Location: ../pages/home.php');
+
+        if($_SESSION['role'] == 'technician'){
+            header('Location: ../pages/technician_home.php');
+        }
+        else{
+            header('Location: ../pages/login.php');
+        }
+
+
+
+
+        
         
     } else {
         $_SESSION['error_message'] = 'Incorrect username or password';
