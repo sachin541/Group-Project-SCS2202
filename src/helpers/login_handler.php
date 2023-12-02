@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../pages/technician_home.php');
         }
         else{
-            header('Location: ../pages/login.php');
+            header('Location: ../pages/home.php');
         }
 
 
