@@ -1,15 +1,15 @@
 .create_repair {
-    position: fixed;
+    position: auto;
     bottom: 0;
     left: 0;
     right: 0;
     display: grid;
     text-decoration: none;
-    background-color: #a43d3d;
+    background-color: lightcoral;
     color: white;
     padding: 20px 40px;
     border-radius: 4px;
-    margin-top: 0px;
+    margin-top: 100px;
     margin-left: 100px; 
     margin-right: 100px;
     margin-bottom: 100px;

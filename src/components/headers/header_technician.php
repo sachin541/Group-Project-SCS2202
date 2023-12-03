@@ -17,9 +17,9 @@
 
         <div class="container">
             <div id="menu" class="menu">
-                <a href="../pages/product_list.php" class="topnav-item">Products</a>
+                <a href="../pages/builds.php" class="topnav-item">Builds</a>
                 <a href="../pages/repair_managment.php" class="topnav-item">Repairs</a>
-                <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
+                <!-- <a href="../pages/contact_us.php" class="topnav-item"></a> -->
                 <a href="../ultils/logout.php" class="unreg-log">Log Out</a>
             </div>
             <div class="content">

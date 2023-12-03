@@ -7,7 +7,7 @@ require_once '../components/headers/main_header.php';
 <html>
 <head>
     <title>Grid Layout Example</title>
-    <link rel="stylesheet"  href="../../resources/css/test3.css">
+    <link rel="stylesheet"  href="../../resources/css/technician_home.css">
 </head>
 <div id="cont">
     <div class="grid-container">

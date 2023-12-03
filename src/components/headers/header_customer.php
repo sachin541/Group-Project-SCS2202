@@ -20,8 +20,10 @@
 
         <div class="container">
             <div id="menu" class="menu">
-                <a href="../pages/product_list.php" class="topnav-item">Products</a>
-                <a href="../pages/repairs.php" class="topnav-item">Repairs</a>
+                <a href="../pages/product_list.php" class="topnav-item">Products 🖥️</a>
+                <a href="../pages/view_cart.php" class="topnav-item">Cart 🛒</a>
+                <a href="../pages/repairs.php" class="topnav-item">Repairs 🔧</a>
+                
                 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
                 <!-- <a href="../pages/repairs.php" class="topnav-item">Repairs</a> -->
                 <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
