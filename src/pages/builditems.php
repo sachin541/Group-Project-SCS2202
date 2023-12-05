@@ -44,6 +44,8 @@
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id) . '"/>';
             
             echo '</form>';
+
+            
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
             echo '</div>';
@@ -62,10 +64,17 @@
                 
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
+
                 echo '<form method="post" action="your_post_handler.php">';
                 echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id) . '"/>';
                 echo '<button type="submit" class="change-btn">Change</button>';
                 echo '</form>';
+
+                echo '<form method="post" action="your_post_handler.php">';
+                echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id) . '"/>';
+                echo '<button type="submit" class="remove-btn">Remove</button>';
+                echo '</form>';
+
                 echo '</div>'; // product-actions
                 echo '</div>'; // product-row
                 echo '</div>';
