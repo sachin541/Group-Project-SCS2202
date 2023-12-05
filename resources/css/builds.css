@@ -1,0 +1,243 @@
+.main-row {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.product-title {
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #000000; /* Choose a color that matches your theme */
+    /* margin-bottom: 10px; */
+    margin-top: 10px; /* Spacing between the title and the product */
+    margin-left: 100px;
+}
+
+.product-row {
+    border: 1px solid #ddd;
+    padding: 0px;
+    margin: 1px auto;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+
+
+.product-row:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Darker shadow on hover */
+    transform: translateY(-4px); /* Slight lift effect */
+}
+
+.product-row img {
+    width: 60px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px; /* Rounded corners */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.product-info {
+    display: flex;
+    gap: 1px;
+    align-items: center;
+    font-size: 0.5rem; /* Adjust font size */
+    color: #333; /* Dark grey color for better readability */
+}
+
+.product-info span {
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin-right: 10px;
+    font-size: 1.1rem; /* Slightly larger font size for item name */
+    font-weight: bold; /* Make the item name bold */
+    color: #333; /* Space between elements */
+}
+.product-actions {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items vertically */
+    gap: 1px; /* Space between price and button */
+}
+.product-actions span {
+    font-size: 1.2rem; /* Larger font size for price */
+    font-weight: 600; /* Semi-bold for price */
+    color: #007bff; /* Example: a shade of blue for the price */
+    padding: 1px 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 123, 255, 0.1); /* Light background for the price */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+.change-btn {
+    padding: 6px 45px;
+    margin-top: 10px;
+    background-color: #000000; /* Example color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Adding transform to the transition */
+}
+
+.change-btn:hover {
+    background-color: red; /* Darker shade for hover effect */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.product-row form {
+    margin-left: 10px;
+}
+
+/* special select */
+.main-row2 {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.product-row2 {
+    border: 1px solid #ddd;
+    padding: 0px;
+    margin: 1px auto;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+.product-row2:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Darker shadow on hover */
+    transform: translateY(-4px); /* Slight lift effect */
+    background-color: red;
+}
+
+.product-row2 img {
+    width: 40px;
+    height: auto;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px; /* Rounded corners */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+.product-info2 {
+    display: flex;
+    gap: 10px;
+    padding-right: 140px;
+    align-items: center;
+    font-size: 1rem; /* Adjust font size */
+    color: #333; /* Dark grey color for better readability */
+}
+
+.product-info2 span {
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin-right: 10px;
+    font-size: 2.1rem; /* Slightly larger font size for item name */
+    font-weight: bold; /* Make the item name bold */
+    color: white; /* Space between elements */
+}
+
+
+
+/* Mobile responsiveness and other existing styles */
+
+
+/* Mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .product-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-row img {
+        width: 50%; /* Smaller image size for mobile */
+        max-width: 100px; /* Set a max-width to keep images from being too large */
+        margin-right: 0; /* Remove margin on the right */
+        margin-bottom: 10px; /* Add space below the image */
+    }
+
+    .product-info {
+        margin-bottom: 10px;
+    }
+
+    .product-actions {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start;
+        width: 100%;
+        align-items: center;
+    }
+
+    .change-btn {
+        
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-top: 10px; /* Add space above the button */
+    }
+
+    /**/
+     .product-row2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-row2 img {
+        width: 50%; /* Smaller image size for mobile */
+        max-width: 100px; /* Set a max-width to keep images from being too large */
+        margin-right: 0; /* Remove margin on the right */
+        margin-bottom: 10px; /* Add space below the image */
+        align-items: center;
+    }
+
+    .product-info2 {
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .product-actions2 {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+        width: 100%;
+    }
+
+    .change-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-top: 10px; /* Add space above the button */
+    }
+
+    .product-info2 span {
+        white-space: nowrap; /* Prevents text from wrapping */
+        
+        font-size: 1.1rem; /* Slightly larger font size for item name */
+        font-weight: bold; /* Make the item name bold */
+        color: white; /* Space between elements */
+    }
+}
+
+
+
+
+
+
+
+

@@ -81,6 +81,7 @@ $totalAmount = 0; //used in loop later to cal total in cart
 
 
 <script>
+    
 function increaseQuantity(productId) {
     var form = document.getElementById('update-form-' + productId);
     var quantityInput = form.querySelector('input[name="quantity"]');

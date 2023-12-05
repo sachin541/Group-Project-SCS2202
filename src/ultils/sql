@@ -35,17 +35,25 @@ CREATE TABLE technician (
 );
 
 
+CREATE TABLE login_details (
+    id INT(11) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    user_password VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    emp_role VARCHAR NOT NULL, 
+    emp_role VARCHAR(255) NOT NULL, 
     staff_name VARCHAR(255) NOT NULL,
     staff_address VARCHAR(255) NOT NULL,
     mobile_no VARCHAR(20),
     alternative_mobile_no VARCHAR(20),
     date_of_birth DATE,
     sal INT,
-    staff_id INT NULL, 
-    FOREIGN KEY (staff_id) REFERENCES login_details(id) ON DELETE SET NULL
+    staff_id INT(11) NOT NULL, 
+    FOREIGN KEY (staff_id) REFERENCES login_details(id)
 );
 
 
@@ -115,6 +123,10 @@ CREATE TABLE repairs (
     
     
 );
+
+
+
+
 
 
 
