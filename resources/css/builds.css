@@ -19,7 +19,7 @@
 
 .product-row {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 6px 20px;
     margin: 1px auto;
     background-color: #f4f4f4;
     display: flex;
@@ -59,7 +59,7 @@
 
 .product-info span {
     white-space: nowrap; /* Prevents text from wrapping */
-    margin-right: 10px;
+    margin-left: 80px;
     font-size: 1.1rem; /* Slightly larger font size for item name */
     font-weight: bold; /* Make the item name bold */
     color: #333; /* Space between elements */
@@ -131,7 +131,7 @@
 
 .product-row2 {
     border: 1px solid #ddd;
-    padding: 0px;
+    padding: 6px 20px;
     margin: 1px auto;
     background-color: black;
     display: flex;
@@ -162,14 +162,14 @@
     gap: 10px;
     padding-right: 140px;
     align-items: center;
-    font-size: 1rem; /* Adjust font size */
+    font-size: 0.8rem; /* Adjust font size */
     color: #333; /* Dark grey color for better readability */
 }
 
 .product-info2 span {
     white-space: nowrap; /* Prevents text from wrapping */
-    margin-right: 10px;
-    font-size: 2.1rem; /* Slightly larger font size for item name */
+    margin-right: 100px;
+    font-size: 1.9rem; /* Slightly larger font size for item name */
     font-weight: bold; /* Make the item name bold */
     color: white; /* Space between elements */
 }
@@ -195,6 +195,14 @@
 
     .product-info {
         margin-bottom: 10px;
+    }
+
+    .product-info span {
+        text-wrap: balance; /* Prevents text from wrapping */
+        margin-left: 50px;
+        font-size: 1.1rem; /* Slightly larger font size for item name */
+        font-weight: bold; /* Make the item name bold */
+        color: #333; /* Space between elements */
     }
 
     .product-actions {
@@ -227,14 +235,15 @@
     }
 
     .product-row2 img {
-        width: 50%; /* Smaller image size for mobile */
+        width: 20%; /* Smaller image size for mobile */
         max-width: 100px; /* Set a max-width to keep images from being too large */
         margin-right: 0; /* Remove margin on the right */
-        margin-bottom: 10px; /* Add space below the image */
+        margin-bottom: 0px; /* Add space below the image */
         align-items: center;
     }
 
     .product-info2 {
+        margin-left: 250px;
         margin-bottom: 10px;
         align-items: center;
     }

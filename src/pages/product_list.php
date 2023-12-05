@@ -44,35 +44,35 @@ $laptopProducts = $product->getProductsByCategory($category);
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="gpu">
+          <input type="hidden" name="category" value="GPU">
           <input type="submit" value="GPU" class="nav-link">
         </form>
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="memory">
+          <input type="hidden" name="category" value="Memory">
           <input type="submit" value="Memory" class="nav-link">
         </form>
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="motherboard">
+          <input type="hidden" name="category" value="MotherBoard">
           <input type="submit" value="Motherboard" class="nav-link">
         </form>
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="powersupply">
+          <input type="hidden" name="category" value="PowerSupply">
           <input type="submit" value="PowerSupply" class="nav-link">
         </form>
     </li>
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="storage">
+          <input type="hidden" name="category" value="Storage">
           <input type="submit" value="Storage" class="nav-link">
         </form>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <form action="product_list.php" method="post">
           <input type="hidden" name="category" value="CPU">
           <input type="submit" value="CPU" class="nav-link">
@@ -83,7 +83,7 @@ $laptopProducts = $product->getProductsByCategory($category);
           <input type="hidden" name="category" value="gpu">
           <input type="submit" value="GPU" class="nav-link">
         </form>
-    </li>
+    </li> -->
     <!-- <li class="nav-item">
         <form action="product_list.php" method="post">
           <input type="hidden" name="category" value="CPU_cooler">
@@ -92,7 +92,7 @@ $laptopProducts = $product->getProductsByCategory($category);
     </li> -->
     <li class="nav-item">
         <form action="product_list.php" method="post">
-          <input type="hidden" name="category" value="case">
+          <input type="hidden" name="category" value="Case">
           <input type="submit" value="Case" class="nav-link">
         </form>
     </li>
