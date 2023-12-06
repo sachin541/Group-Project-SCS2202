@@ -47,15 +47,15 @@ class Product {
 
     public function getProductById($productId) {
         try {
-            $query = "SELECT * FROM products WHERE id = ? LIMIT 1"; // Make sure to limit the result to 1
+            $query = "SELECT * FROM products WHERE id = ? LIMIT 1"; 
             $stmt = $this->db->prepare($query);
 
-            // Bind the product ID to the placeholder
+            
             $stmt->bindParam(1, $productId, PDO::PARAM_INT);
 
             $stmt->execute();
 
-            // Fetch the product data
+            
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
             throw $e;

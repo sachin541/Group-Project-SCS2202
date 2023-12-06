@@ -37,17 +37,7 @@ class UserManager {
         }
     }
 
-    // public function addStaff($name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id) {
-    //     return $this->addEmployee('staff', $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id);
-    // }
-
-    // public function addDeliverer($name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id) {
-    //     return $this->addEmployee('deliverer', $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id);
-    // }
-
-    // public function addTechnician($name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id) {
-    //     return $this->addEmployee('technician', $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id);
-    // }
+    
 
     public function addEmployee($emp_role , $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id) {
         $stmt = $this->db->prepare("INSERT INTO employees (emp_role, staff_name, staff_address, mobile_no, alternative_mobile_no, date_of_birth, sal, staff_id) VALUES (:emp_role , :name, :address, :mobile_no, :alternative_mobile_no, :date_of_birth, :sal, :staff_id)");
@@ -61,5 +51,57 @@ class UserManager {
         $stmt->bindParam(':staff_id', $staff_id);
 
         return $stmt->execute();
+    }
+
+
+    public function getDistinctRoles() {
+        $stmt = $this->db->prepare("SELECT DISTINCT emp_role FROM employees");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+    }
+
+    public function getAllEmployees($role = null) {
+        $query = "SELECT * FROM employees";
+        if ($role) {
+            $query .= " WHERE emp_role = :role";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':role', $role);
+        } else {
+            $stmt = $this->db->prepare($query);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    // public function deleteEmployee($id) {
+    //     $stmt = $this->db->prepare("DELETE FROM employees WHERE id = :id");
+    //     $stmt->bindParam(':id', $id);
+    //     return $stmt->execute();
+    // }
+
+    public function deleteEmployee($id) {
+        // Start a transaction
+        $this->db->beginTransaction();
+
+        try {
+            // Delete from the employees table
+            $stmt1 = $this->db->prepare("DELETE FROM employees WHERE staff_id = :id");
+            $stmt1->bindParam(':id', $id);
+            $stmt1->execute();
+
+            // Delete from the login_details table
+            $stmt2 = $this->db->prepare("DELETE FROM login_details WHERE id = :id");
+            $stmt2->bindParam(':id', $id);
+            $stmt2->execute();
+
+            // Commit the transaction
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            // Rollback the transaction in case of error
+            $this->db->rollback();
+            return false;
+        }
     }
 }

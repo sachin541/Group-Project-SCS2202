@@ -16,8 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
         $price = $_POST['price'];
         $discount = $_POST['discount'];
         $brand = $_POST['brand'];
-        // Image handling will depend on how you are planning to upload images
-        // For simplicity, we're assuming images are being sent as binary data
+        
         $image1 = file_get_contents($_FILES['image1']['tmp_name']);
         $image2 = file_get_contents($_FILES['image2']['tmp_name']);
         $image3 = file_get_contents($_FILES['image3']['tmp_name']);

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access session variables
+session_start(); 
 
 require_once '../classes/database.php'; 
 require_once '../classes/repair.php';
@@ -9,7 +9,7 @@ $db = $database->getConnection();
 
 $repair = new Repair($db);
 
-// Retrieve customer_id from session
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['rq_type'] == "new_repair_customer" )
 $customer_id = $_SESSION['user_id'];
 

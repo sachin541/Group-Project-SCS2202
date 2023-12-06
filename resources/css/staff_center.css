@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    /* padding: 20px; */
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+}
+
+.table-container {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 95%;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate; /* Changed to separate for individual tbody */
+    border-spacing: 0 15px; /* Adds spacing between rows */
+    font-size: 0.95em;
+}
+
+tbody {
+    background-color: #ffffff; /* Background for each row */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for each row */
+}
+
+th {
+    background-color: #000000;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.90em;
+    font-weight: bold;
+}
+
+tbody:hover {
+    background-color: #b4b4b4;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.action-buttons form {
+    margin: 0; /* Removes default margin from forms */
+}
+
+.edit-button, .delete-button {
+    padding: 8px 12px; 
+    width: 80px; 
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.edit-button {
+    background-color: #5e5cb8;
+    color: white;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+.edit-button:hover, .delete-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.filter-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-form select, 
+.filter-form input[type="submit"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 0.9em;
+}
+
+.filter-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+.add-employee-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.add-employee-button {
+    padding: 20px 55px;
+    background-color: #4CAF50; /* Or any color of your choice */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-employee-button:hover {
+    background-color: #45a049; /* Slightly darker shade on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

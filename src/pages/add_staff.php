@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-            session_start();
+           require_once '../components/headers/main_header.php';
             if (isset($_SESSION['add_staff_error'])) {
                 $email_already_in_use_err = htmlspecialchars($_SESSION['add_staff_error']);
                 unset($_SESSION['add_staff_error']); // Clear the message after displaying

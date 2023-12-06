@@ -1,7 +1,7 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/UserManager.php'; 
-
+require_once '../components/headers/main_header.php';
 $database = new Database();
 $db = $database->getConnection(); 
 
@@ -23,17 +23,17 @@ $employees = $userManager->getAllEmployees($roleFilter);
     <h1>Staff Center</h1>
 
     <!-- Role Filter Form -->
-    <form action="" method="get">
-        <select name="role_filter">
-            <option value="">All Roles</option>
-            <?php
-            $roles = $userManager->getDistinctRoles();
-            foreach ($roles as $role) {
-                echo '<option value="' . htmlspecialchars($role) . '"' . ($role === $roleFilter ? ' selected' : '') . '>' . htmlspecialchars($role) . '</option>';
-            }
-            ?>
-        </select>
-        <input type="submit" value="Filter">
+    <form action="" method="get" class="filter-form">
+    <select name="role_filter">
+        <option value="">All Roles</option>
+        <?php
+        $roles = $userManager->getDistinctRoles();
+        foreach ($roles as $role) {
+            echo '<option value="' . htmlspecialchars($role) . '"' . ($role === $roleFilter ? ' selected' : '') . '>' . htmlspecialchars($role) . '</option>';
+        }
+        ?>
+    </select>
+    <input type="submit" value="Filter">
     </form>
 
     <div class="table-container">
@@ -65,19 +65,31 @@ $employees = $userManager->getAllEmployees($roleFilter);
                         <td><?= htmlspecialchars($row['sal']) ?></td>
                         <td><?= htmlspecialchars($row['staff_id']) ?></td>
                         <td>
+                        <div class="action-buttons">
                             <form action="path_to_edit_handler.php" method="post">
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                
                                 <input type="submit" class="edit-button" value="Edit">
                             </form>
-                            <form action="path_to_delete_handler.php" method="post">
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <form action="../helpers/employee_handler.php" method="post">
+                                <input type="hidden" name="id" value="<?= $row['staff_id'] ?>">
+                                <input type="hidden" name="handler_type" value="remove_staff">
                                 <input type="submit" class="delete-button" value="Delete" onclick="return confirm('Are you sure you want to delete this?');">
                             </form>
-                        </td>
+                        </div>
+                    </td>
                     </tr>
                 </tbody>
             <?php endforeach; ?>
         </table>
     </div>
+
+
+    <div class="add-employee-container">
+    <form action="./add_staff.php" method="post">
+        <input type="submit" class="add-employee-button" value="Add New Employee">
+    </form>
+</div>
 </body>
 </html>
+
