@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result) {
             echo "New employee added successfully.";
-            header('Location: ../pages/home.php'); //change this later ------------
+            header('Location: ../pages/staff_center.php'); 
         } else {
             echo "Failed to add new employee.";
         }

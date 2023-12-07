@@ -18,13 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         else{
             header('Location: ../pages/home.php');
-        }
-
-
-
-
-        
-        
+        }  
     } else {
         $_SESSION['error_message'] = 'Incorrect username or password';
         header('Location: ../pages/login.php');
@@ -32,4 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     }
 }
+
+
+
 ?>

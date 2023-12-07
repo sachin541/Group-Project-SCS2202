@@ -139,3 +139,21 @@ tbody:hover {
     background-color: #45a049; /* Slightly darker shade on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+.button-like-link {
+    display: inline-block; /* Makes the link behave like a block element */
+    background-color: blue; /* Button color */
+    color: white; /* Text color */
+    padding: 8px 30px; /* Top and bottom padding, Left and right padding */
+    text-align: center;
+    text-decoration: none; /* Removes underline from links */
+    font-size: 0.85em; /* Font size */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer */
+    transition: background-color 0.3s, box-shadow 0.2s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+
+

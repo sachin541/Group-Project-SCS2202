@@ -40,7 +40,7 @@ $employees = $userManager->getAllEmployees($roleFilter);
     <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Role</th>
                     <th>Name</th>
                     <th>Address</th>
@@ -66,11 +66,12 @@ $employees = $userManager->getAllEmployees($roleFilter);
                         <td><?= htmlspecialchars($row['staff_id']) ?></td>
                         <td>
                         <div class="action-buttons">
-                            <form action="path_to_edit_handler.php" method="post">
+                            <!-- <form action="../helpers/employee_handler.php" method="post">
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                 
                                 <input type="submit" class="edit-button" value="Edit">
-                            </form>
+                            </form> -->
+                            <a href="edit_staff.php?id=<?= $row['staff_id'] ?>" class="button-like-link">Edit</a>
                             <form action="../helpers/employee_handler.php" method="post">
                                 <input type="hidden" name="id" value="<?= $row['staff_id'] ?>">
                                 <input type="hidden" name="handler_type" value="remove_staff">

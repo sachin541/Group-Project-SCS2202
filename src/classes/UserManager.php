@@ -104,4 +104,53 @@ class UserManager {
             return false;
         }
     }
+
+
+    public function updateEmployee($staff_id, $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal) {
+        try {
+            $stmt = $this->db->prepare("UPDATE employees SET staff_name = :name, staff_address = :address, mobile_no = :mobile_no, alternative_mobile_no = :alternative_mobile_no, date_of_birth = :date_of_birth, sal = :sal WHERE staff_id = :staff_id");
+            
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':address', $address);
+            $stmt->bindParam(':mobile_no', $mobile_no);
+            $stmt->bindParam(':alternative_mobile_no', $alternative_mobile_no);
+            $stmt->bindParam(':date_of_birth', $date_of_birth);
+            $stmt->bindParam(':sal', $sal);
+            $stmt->bindParam(':staff_id', $staff_id);
+            
+            $stmt->execute();
+    
+            // Check for SQL execution errors
+            if ($stmt->errorCode() != '00000') {
+                $errorInfo = $stmt->errorInfo();
+                throw new Exception("SQL Error: {$errorInfo[2]}");
+            }
+    
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            error_log("Update Employee Error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+
+    public function getStaffById($staff_id) {
+        // Prepare a SQL statement to select the staff member by their staff_id
+        $stmt = $this->db->prepare("SELECT * FROM employees WHERE staff_id = :staff_id");
+        
+        // Bind the staff_id parameter to the prepared statement
+        $stmt->bindParam(':staff_id', $staff_id, PDO::PARAM_INT);
+
+        // Execute the statement
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return it
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+
+
+   
+    
 }
