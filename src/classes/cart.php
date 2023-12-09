@@ -130,5 +130,32 @@ class Cart {
         }
     }
 
+
+    public function updateProductQuantities($userId) {
+        try {
+            $this->db->beginTransaction();
+
+            
+            $cartItems = $this->getCartItemsByUserId($userId);
+
+            
+            foreach ($cartItems as $item) {
+                $updateQuery = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+                $updateStmt = $this->db->prepare($updateQuery);
+
+                $updateStmt->bindParam(1, $item['quantity'], PDO::PARAM_INT);
+                $updateStmt->bindParam(2, $item['product_id'], PDO::PARAM_INT);
+
+                $updateStmt->execute();
+            }
+
+            $this->db->commit();
+            return "Product quantities updated";
+        } catch(PDOException $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
 }
 ?>

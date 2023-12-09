@@ -22,10 +22,10 @@ $cartItems = $cart->getCartItemsByUserId($userId);
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_on_delivery") {
     try {
         // Process the order
-        $orderId = $checkout->createOrder($userId, $_POST, $cartItems);
-
+        $orderId = $checkout->createOrder($userId, $_POST, $cartItems);//creates order
+        $cart->updateProductQuantities($userId);//updates the qty of the products 
         $cart->clearCart($userId);//clears the cart
-        
+        //cocurrency issues 
         header('Location: order_success.php?order_id=' . $orderId);
         exit;
     } catch (Exception $e) {
