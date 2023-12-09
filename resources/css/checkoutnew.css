@@ -1,0 +1,71 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Checkout container */
+.checkout-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Form styling */
+.checkout-form div {
+    margin-bottom: 10px;
+}
+
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.checkout-form input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.checkout-form input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+/* Cart summary styling */
+.cart-summary {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.cart-summary ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-summary li {
+    margin-bottom: 5px;
+    line-height: 1.6;
+}
+
+/* Payment options */
+.payment-options {
+    margin-top: 20px;
+}
+
+.payment-options label {
+    margin-left: 5px;
+}

@@ -70,7 +70,7 @@ class Cart {
 
     public function getCartItemsByUserId($userId) {
         try {
-            $query = "SELECT p.*, c.quantity FROM cart_items c JOIN products p ON c.product_id = p.id WHERE c.user_id = ?";
+            $query = "SELECT p.*, c.quantity , c.product_id FROM cart_items c JOIN products p ON c.product_id = p.id WHERE c.user_id = ?";
             //replace the 1 ? with the user id 
             $stmt = $this->db->prepare($query);
             
@@ -111,6 +111,20 @@ class Cart {
             $stmt->bindParam(3, $productId, PDO::PARAM_INT);
 
             $stmt->execute();
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+
+    public function clearCart($userId) {
+        try {
+            $query = "DELETE FROM cart_items WHERE user_id = ?";
+            $stmt = $this->db->prepare($query);
+
+            $stmt->bindParam(1, $userId, PDO::PARAM_INT);
+
+            $stmt->execute();
+            return "true";
         } catch(PDOException $e) {
             throw $e;
         }

@@ -1,42 +1,5 @@
-CREATE TABLE staff (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_name VARCHAR(255) NOT NULL,
-    staff_address VARCHAR(255) NOT NULL,
-    mobile_no VARCHAR(20),
-    alternative_mobile_no VARCHAR(20),
-    date_of_birth DATE,
-    sal INT,
-    staff_id INT NULL, 
-    FOREIGN KEY (staff_id) REFERENCES login_details(id) ON DELETE SET NULL
-);
-
-CREATE TABLE deliverer (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_name VARCHAR(255) NOT NULL,
-    staff_address VARCHAR(255) NOT NULL,
-    mobile_no VARCHAR(20),
-    alternative_mobile_no VARCHAR(20),
-    date_of_birth DATE,
-    sal INT,
-    staff_id INT NULL, 
-    FOREIGN KEY (staff_id) REFERENCES login_details(id) ON DELETE SET NULL
-);
-
-CREATE TABLE technician (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_name VARCHAR(255) NOT NULL,
-    staff_address VARCHAR(255) NOT NULL,
-    mobile_no VARCHAR(20),
-    alternative_mobile_no VARCHAR(20),
-    date_of_birth DATE,
-    sal INT,
-    staff_id INT NULL, 
-    FOREIGN KEY (staff_id) REFERENCES login_details(id) ON DELETE SET NULL
-);
-
-
 CREATE TABLE login_details (
-    id INT(11) NOT NULL,
+    id INT(11) NOT NULL AUTO_INCREMENT,
     email VARCHAR(30) NOT NULL,
     user_password VARCHAR(255) DEFAULT NULL,
     role VARCHAR(30) NOT NULL,
@@ -125,9 +88,6 @@ CREATE TABLE repairs (
 );
 
 
-
-
-
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     total DECIMAL(10, 2),
@@ -139,9 +99,11 @@ CREATE TABLE Orders (
     email VARCHAR(255),
     phone VARCHAR(255),
     delivery_city_address VARCHAR(255),
+    postalcode VARCHAR(255),
     city VARCHAR(255),
-    delivery_id INT,  
-    customer_id INT 
+    province VARCHAR(255),  -- Added province column
+    delivery_id INT,
+    customer_id INT
 );
 
 
@@ -153,4 +115,3 @@ CREATE TABLE Order_Items (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (product_id) REFERENCES Products(id)  
 );
-

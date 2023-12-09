@@ -31,7 +31,16 @@
         <input type="text" name="product_name" placeholder="Product Name" required>
     </div>
     <div>
-        <input type="text" name="category" placeholder="Category" required>
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="laptop">Laptops</option>
+            <option value="CPU">CPU</option>
+            <option value="GPU">GPU</option>
+            <option value="Memory">Memory</option>
+            <option value="MotherBoard">Motherboard</option>
+            <option value="PowerSupply">Power Supply</option>
+            <option value="Storage">Storage</option>
+        </select>
     </div>
     <div>
         <input type="number" name="quantity" placeholder="Quantity" required>

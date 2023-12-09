@@ -13,7 +13,7 @@ $db = $database->getConnection();
 $cart = new Cart($db);
 $product = new Product($db);
 
-$userId = $_POST['user_id']; // or however you retrieve the user ID
+$userId = $_POST['user_id'];
 $cartItems = $cart->getCartItemsByUserId($userId);
 
 $allItemsInStock = true;
@@ -42,6 +42,6 @@ if (!$allItemsInStock) {
     exit;
 } 
 else {
-    echo "worked";
+    header('Location: ../pages/checkout.php');
 }
 ?>
