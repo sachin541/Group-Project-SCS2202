@@ -1,0 +1,71 @@
+/* invoice-style.css */
+
+.invoice-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    border: 2px solid #ccc; 
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-header h1 {
+    color: #333;
+    text-align: center;
+}
+
+.customer-details .details-table, .order-items .items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.details-table td, .items-table th, .items-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.items-table th {
+    background-color: #f0f0f0;
+    text-align: left;
+}
+
+.invoice-footer {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.invoice-footer .total-amount {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.print-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.print-button:hover {
+    background-color: #45a049;
+}
+
+.error-message, .not-found {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media print {
+    .main-header {
+        display: none;
+    }
+
+    
+}

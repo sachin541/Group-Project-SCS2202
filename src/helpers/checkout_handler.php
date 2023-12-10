@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_on_
         $cart->updateProductQuantities($userId);//updates the qty of the products 
         $cart->clearCart($userId);//clears the cart
         //cocurrency issues 
-        header('Location: order_success.php?order_id=' . $orderId);
+        header('Location: ../pages/order_success.php?order_id=' . $orderId);
         exit;
     } catch (Exception $e) {
         echo $e;
