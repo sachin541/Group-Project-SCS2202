@@ -72,7 +72,7 @@
                 echo '</div>'; // product-info
                 
                 echo '<div class="product-actions">';
-                echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
+                echo '<span>Price: Rs.' . htmlspecialchars($productDetails['price']) . '</span>';
                 //change item
                 echo '<form method="post" action="./build_parts.php">';
                 echo '<input type="hidden" name="category" value="' . htmlspecialchars($title) . '"/>';

@@ -1,83 +1,55 @@
 <?php
 require_once '../classes/database.php'; 
-require_once '../classes/UserManager.php'; 
+require_once '../classes/product.php';
 
 $database = new Database();
-$db = $database->getConnection(); 
+$db = $database->getConnection();
+$product = new Product($db);
 
-$userManager = new UserManager();
+$category = isset($_POST['category']) ? $_POST['category'] : 'laptop'; // Default to 'laptop' if no POST request
+$laptopProducts = $product->getProductsByCategory($category);
 
-// Handle role filter
-$roleFilter = isset($_GET['role_filter']) ? $_GET['role_filter'] : null;
-$employees = $userManager->getAllEmployees($roleFilter);
 ?>
+
+
+<?php require_once '../components/headers/main_header.php';?> 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Staff Center</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/staff_center.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products</title>
+<link rel="stylesheet" type="text/css" href="../../resources/css/product_listnew.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css" /> -->
 </head>
 <body>
-    <h1>Staff Center</h1>
 
-    <!-- Role Filter Form -->
-    <form action="" method="get">
-        <select name="role_filter">
-            <option value="">All Roles</option>
-            <?php
-            $roles = $userManager->getDistinctRoles();
-            foreach ($roles as $role) {
-                echo '<option value="' . htmlspecialchars($role) . '"' . ($role === $roleFilter ? ' selected' : '') . '>' . htmlspecialchars($role) . '</option>';
-            }
-            ?>
-        </select>
-        <input type="submit" value="Filter">
-    </form>
 
-    <div class="table-container">
-    <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Role</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Mobile No</th>
-                    <th>Alternative Mobile No</th>
-                    <th>Date of Birth</th>
-                    <th>Salary</th>
-                    <th>Staff ID</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <?php foreach ($employees as $row): ?>
-                <tbody>
-                    <tr>
-                        <td><?= htmlspecialchars($row['id']) ?></td>
-                        <td><?= htmlspecialchars($row['emp_role']) ?></td>
-                        <td><?= htmlspecialchars($row['staff_name']) ?></td>
-                        <td><?= htmlspecialchars($row['staff_address']) ?></td>
-                        <td><?= htmlspecialchars($row['mobile_no']) ?></td>
-                        <td><?= htmlspecialchars($row['alternative_mobile_no']) ?></td>
-                        <td><?= htmlspecialchars($row['date_of_birth']) ?></td>
-                        <td><?= htmlspecialchars($row['sal']) ?></td>
-                        <td><?= htmlspecialchars($row['staff_id']) ?></td>
-                        <td>
-                            <form action="path_to_edit_handler.php" method="post">
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                <input type="submit" class="edit-button" value="Edit">
-                            </form>
-                            <form action="path_to_delete_handler.php" method="post">
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                <input type="submit" class="delete-button" value="Delete" onclick="return confirm('Are you sure you want to delete this?');">
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            <?php endforeach; ?>
-        </table>
+
+
+
+
+
+<div class="products-container">
+    <?php foreach ($laptopProducts as $item): ?>
+    <div class="product-card">
+        <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
+        <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
+        <p><?php echo htmlspecialchars($item['product_description']); ?></p>
+        <p>Price: $<?php echo htmlspecialchars($item['price']); ?></p>
+        <p>Discount: $<?php echo htmlspecialchars($item['discount']); ?>%</p> <!-- Assuming discount is a percentage -->
+        <p>Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
+        <!-- Add to Cart Button -->
+        <form action="../helpers/build_create.php" method="post">
+            <input type="hidden" name="handler_type" value="set_item">
+            <input type="hidden" name="category" value="<?php echo $category ?>">
+            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+            <input type="submit" value="Add to Build" class="add-to-cart-button">
+        </form>
     </div>
+    <?php endforeach; ?>
+</div>
+
 </body>
 </html>
