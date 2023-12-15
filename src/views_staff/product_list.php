@@ -129,18 +129,30 @@ function formatPrice($price) {
               <div class="product-image">
                   <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
               </div>
+
               <div class="product-details">
                   <h3 class="product-title"><?php echo htmlspecialchars($item['product_name']); ?></h3>
                   <p class="product-price">Price: Rs <?php echo htmlspecialchars(number_format($item['price'])); ?></p>
                   <p class="product-brand">Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
                   <p class="product-qty">Stock: <?php echo htmlspecialchars($item['quantity']); ?></p>
               </div>
+
+              <div class="stock-controls">
+                <form action="../helpers/product_handler.php" method="post" id="stock-form-<?php echo $item['id']; ?>">
+                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                    <input type="hidden" name="formType" value="update_qty">
+                    <button type="button" onclick="adjustStock(<?php echo $item['id']; ?>, -1)">-</button>
+                    <input type="number" name="quantity" value="<?php echo htmlspecialchars($item['quantity']); ?>" min="0">
+                    <button type="button" onclick="adjustStock(<?php echo $item['id']; ?>, 1)">+</button>
+                    <input type="submit" value="Update">
+                </form>
+              </div>
               
               <div class="product-actions">
                   <form action="product_details.php" method="get">
                       <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                      <input type="hidden" name="type" value="update_product">
-                      <input type="submit" value="Update" class="add-to-cart-button">
+                      <input type="hidden" name="formType" value="update_product">
+                      <input type="submit" value="Edit" class="add-to-cart-button">
                   </form>
               </div>
 
@@ -150,6 +162,15 @@ function formatPrice($price) {
                     <input type="hidden" name="formType" value="delete_product">
                     <input type="hidden" name="category" value="<?php echo $category; ?>">
                     <input type="submit" value="Delete" class="add-to-cart-button">
+                </form>
+              </div>
+
+              <div class="product-actions">
+                <form action="../helpers/product_handler.php" method="post">
+                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                    <input type="hidden" name="formType" value="delete_product">
+                    <input type="hidden" name="category" value="<?php echo $category; ?>">
+                    <input type="submit" value="Add to Order" class="add-to-cart-button">
                 </form>
               </div>
 
@@ -171,3 +192,14 @@ function formatPrice($price) {
 
 </body>
 </html>
+
+
+
+<script>
+function adjustStock(productId, adjustment) {
+    var form = document.getElementById('stock-form-' + productId);
+    var quantityInput = form.querySelector('input[name="quantity"]');
+    var newQuantity = parseInt(quantityInput.value) + adjustment;
+    quantityInput.value = Math.max(0, newQuantity); // Ensures stock is not negative
+}
+</script>

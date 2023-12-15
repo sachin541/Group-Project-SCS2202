@@ -115,27 +115,27 @@ body {
   .product-details {
     display: grid;
     grid-template-rows: auto auto auto; /* Three rows for title, price, and brand */
-    gap: 5px; /* Space between rows */
-    padding: 10px;
+    gap: 1px; /* Space between rows */
+    padding: 5px;
     text-align: center;
   }
   
   .product-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
   }
   
   .product-price {
-    margin: 10px;
-    font-size: 20px;
+    margin: 8px;
+    font-size: 18px;
     color: #555;
     background-color: none;
   }
   
   .product-brand {
     margin: 5px;
-    font-size: 16px;
+    font-size: 14px;
     color: #555;
   }
   
@@ -152,8 +152,8 @@ body {
   .add-to-cart-button {
     background-color: #000000; /* Background color */
     color: white; /* Text color */
-    padding: 10px 5px;
-    margin-top: 5px;
+    padding: 8px 4px;
+    margin-top: 3px;
     text-decoration: none; /* No underline */
     display: block; /* Block display */
     border: none; /* No border */
@@ -161,7 +161,7 @@ body {
     cursor: pointer; /* Cursor style */
     width: 100%; /* Full width */
     text-align: center; /* Centered text */
-    font-size: 20px;
+    font-size: 19px;
   }
   
   /* Add to Cart Button Hover Effect */
@@ -221,3 +221,49 @@ body {
     z-index: 1;
   } */
   
+
+  .stock-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+.stock-controls input[type="number"] {
+    width: 60px; /* Fixed width for number input */
+    text-align: center;
+    border: 1px solid #bdc3c7; /* Subtle border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px;
+}
+
+.stock-controls button {
+    background-color: #16a085; /* Stylish green for buttons */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stock-controls button:hover {
+    background-color: #1abc9c; /* Lighter green on hover */
+}
+
+.stock-controls input[type="submit"] {
+  background-color: #000000; /* Stylish green for update action */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-left: 10px; /* Space from the quantity input */
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.stock-controls input[type="submit"]:hover {
+  background-color: red; /* Lighter green on hover */
+}

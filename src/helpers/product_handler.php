@@ -61,6 +61,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
     }
 
 
+    if (isset($_POST['product_id']) && isset($_POST['quantity']) && $_POST['formType'] == "update_qty") {
+        $database = new Database();
+        $db = $database->getConnection();
+        $product = new Staff();
+        
+        
+        $productId = $_POST['product_id'];
+        $newQuantity = max(0, $_POST['quantity']); // Ensures stock is not negative
+    
+        $product->updateProductStock($productId, $newQuantity);
+    
+        // Redirect back to the product list page
+        header('Location: ../views_staff/product_list.php');
+        exit;
+    }
+
+
 
 
 ?>

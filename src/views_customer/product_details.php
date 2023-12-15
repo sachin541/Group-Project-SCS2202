@@ -1,7 +1,7 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/product.php';
-
+require_once '../components/headers/main_header.php';
 // Check if the product ID is set in the query string
 if (isset($_GET['product_id'])) {
     $productId = $_GET['product_id'];
@@ -19,7 +19,7 @@ if (isset($_GET['product_id'])) {
 }
 ?>
 
-<?php require_once '../components/headers/main_header.php';?> 
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +52,7 @@ if (isset($_GET['product_id'])) {
             <h1><?php echo htmlspecialchars($productDetails['product_name']); ?></h1>
             <p><?php echo htmlspecialchars($productDetails['product_description']); ?></p>
             <p>Price: $<?php echo htmlspecialchars($productDetails['price']); ?></p>
-            <p>Discount: $<?php echo htmlspecialchars($productDetails['discount']); ?>%</p>
+            <p>In Stock: <?php echo htmlspecialchars($productDetails['quantity']); ?></p>
             <p>Brand: <?php echo htmlspecialchars($productDetails['brand']); ?></p>
             <!-- Add to Cart Form -->
             <form action="../helpers/cart_handler.php" method="post">
