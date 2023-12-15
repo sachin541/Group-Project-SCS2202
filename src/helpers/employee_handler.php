@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['handler_type'] == "remove_s
    
     if ($userManager->deleteEmployee($id)) {
         
-        header('Location: ../pages/staff_center.php');
+        header('Location: ../views_manager/staff_center.php');
         exit;
     } 
 

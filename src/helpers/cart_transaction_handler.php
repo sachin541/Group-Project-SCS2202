@@ -37,11 +37,11 @@ if (!$allItemsInStock) {
     
     
     $_SESSION['out_of_stock_message'] = implode(", ", $outOfStockItems);
-    header('Location: ../pages/view_cart.php');
+    header('Location: ../views_customer/view_cart.php');
 
     exit;
 } 
 else {
-    header('Location: ../pages/checkout.php');
+    header('Location: ../views_customer/checkout.php');
 }
 ?>

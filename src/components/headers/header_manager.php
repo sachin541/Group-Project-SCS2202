@@ -11,16 +11,16 @@
 <body>
     <header class="outer-grid-container">
         <div class="logo-container">
-            <a href="../pages/manager_home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
+            <a href="../views_manager/manager_home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
             <p class="name">COMPUTIFY</p>
         </div>
 
         <div class="container">
             <div id="menu" class="menu">
-                <a href="../pages/product_list.php" class="topnav-item">Products</a>
-                <a href="../pages/staff_center.php" class="topnav-item">Staff Center</a>
-                <a href="../pages/add_staff.php" class="topnav-item">Add Staff</a>
-                <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
+                <!-- <a href="../views_main/product_list.php" class="topnav-item">Products</a> -->
+                <a href="../views_manager/staff_center.php" class="topnav-item">Staff Center</a>
+                <a href="../views_manager/add_staff.php" class="topnav-item">Add Staff</a>
+                <!-- <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a> -->
                 <a href="../ultils/logout.php" class="unreg-log">Log Out</a>
             </div>
             <div class="content">

@@ -19,6 +19,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirect to the login page or home page
-header('Location: ../pages/home.php');
+header('Location: ../views_main/home.php');
 exit;
 ?>

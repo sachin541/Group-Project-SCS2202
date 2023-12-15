@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirect back to the product display page or handle otherwise
-    header('Location: ../pages/build_Item_selector.php');
+    header('Location: ../views_customer/build_Item_selector.php');
     exit;
 }
 

@@ -21,7 +21,7 @@ $result = $repair->createRepair($customer_id, $contact, $item_name, $repair_desc
 
 if ($result) {
     echo "Repair created successfully.";
-    header('Location: ../pages/repairs.php');
+    header('Location: ../views_customer/repairs.php');
 } else {
     echo "Error creating repair.";
 }

@@ -14,14 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Login successful!';
 
         if($_SESSION['role'] == 'technician'){
-            header('Location: ../pages/technician_home.php');
+            header('Location: ../views_tech/technician_home.php');
+        }
+        if($_SESSION['role'] == 'manager'){
+            header('Location: ../views_manager/manager_home.php');
         }
         else{
-            header('Location: ../pages/home.php');
+            header('Location: ../views_main/home.php');
         }  
     } else {
         $_SESSION['error_message'] = 'Incorrect username or password';
-        header('Location: ../pages/login.php');
+        header('Location: ../views_main/login.php');
         exit;
         
     }

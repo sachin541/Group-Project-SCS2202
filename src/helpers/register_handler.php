@@ -8,11 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($registrationSuccessful) {
         echo 'Registration successful!';
-        header('Location: ../pages/login.php');
+        header('Location: ../views_main/login.php');
     } else {
         echo 'Registration failed.';
         $_SESSION['registration_error'] = 'Registration failed. Email may already be in use.';
-        header('Location: ../pages/reg.php');
+        header('Location: ../views_main/reg.php');
         exit;
     }
 }

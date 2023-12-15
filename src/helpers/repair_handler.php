@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tech_accept'])){
     if ($repair) {
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        header('Location: ../pages/repair_managment_details.php');
+        header('Location: ../views_tech/repair_managment_details.php');
     } else {
         echo "Failed to accept";
     }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stage2_accept'])){
     if ($repair) {
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        header('Location: ../pages/repair_managment_details.php');
+        header('Location: ../views_tech/repair_managment_details.php');
         
     } else {
         echo "Failed to accept";
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stage3_accept'])){
     if ($repair) {
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        header('Location: ../pages/repair_managment_details.php');
+        header('Location: ../views_tech/repair_managment_details.php');
         
     } else {
         echo "Failed to accept";
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stage4_accept'])){
     if ($repair) {
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        header('Location: ../pages/repair_managment_details.php');
+        header('Location: ../views_tech/repair_managment_details.php');
         
     } else {
         echo "Failed to accept";

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result) {
             echo "New employee added successfully.";
-            header('Location: ../pages/staff_center.php'); 
+            header('Location: ../views_manager/staff_center.php'); 
         } else {
             echo "Failed to add new employee.";
         }
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //echo "Failed to add user.";
         session_start();
         $_SESSION['add_staff_error'] = 'Failed to add user. Email already in use.';
-        header('Location: ../pages/add_staff.php');
+        header('Location: ../views_manager/add_staff.php');
         exit;
     }
 }

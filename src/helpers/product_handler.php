@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
                 echo "New product added successfully.";
                 session_start();
                 $_SESSION['product_adder'] = 'New product added successfully.';
-                header('Location: ../pages/add_product.php');
+                header('Location: ../views_staff/add_product.php');
             } else {
                 echo "Failed to add new product.";
             }

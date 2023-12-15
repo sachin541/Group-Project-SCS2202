@@ -13,17 +13,18 @@
 
 <body>
     <header class="outer-grid-container">
+        
         <div class="logo-container">
-            <a href="../pages/home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
+            <a href="../views_main/home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
             <p class="name">COMPUTIFY</p>
         </div>
 
         <div class="container">
             <div id="menu" class="menu">
-                <a href="../pages/product_list.php" class="topnav-item">Products 🖥️</a>
-                <a href="../pages/view_cart.php" class="topnav-item">Cart 🛒</a>
-                <a href="../pages/repairs.php" class="topnav-item">Repairs 🔧</a>
-                <a href="../pages/build_Item_selector.php" class="topnav-item">Builds 🔧</a>
+                <a href="../views_customer/product_list.php" class="topnav-item">Products 🖥️</a>
+                <a href="../views_customer/view_cart.php" class="topnav-item">Cart 🛒</a>
+                <a href="../views_customer/repairs.php" class="topnav-item">Repairs 🔧</a>
+                <a href="../views_customer/build_Item_selector.php" class="topnav-item">Builds 🔧</a>
                 
                 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
                 <!-- <a href="../pages/repairs.php" class="topnav-item">Repairs</a> -->
