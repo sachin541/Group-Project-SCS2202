@@ -11,13 +11,13 @@
 <body>
     <header class="outer-grid-container">
         <div class="logo-container">
-            <a href="../pages/home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
+            <a href="../views_staff/staff_home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px"/></a>
             <p class="name">COMPUTIFY</p>
         </div>
 
         <div class="container">
             <div id="menu" class="menu">
-                <a href="../pages/product_list.php" class="topnav-item">Products</a>
+                <a href="../views_staff/product_list.php" class="topnav-item">Products</a>
                 <a href="../views_staff/add_product.php" class="topnav-item">Add Products</a>
                 <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
                 <a href="../ultils/logout.php" class="unreg-log">Log Out</a>

@@ -113,5 +113,8 @@ CREATE TABLE Order_Items (
     order_id INT,
     product_id INT,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES Products(id)  
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
 );
+
+-- ALTER TABLE Order_Items ADD FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL;
+

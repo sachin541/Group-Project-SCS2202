@@ -16,8 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($_SESSION['role'] == 'technician'){
             header('Location: ../views_tech/technician_home.php');
         }
-        if($_SESSION['role'] == 'manager'){
+        else if($_SESSION['role'] == 'manager'){
             header('Location: ../views_manager/manager_home.php');
+        }
+        else if($_SESSION['role'] == 'staff'){
+            header('Location: ../views_staff/staff_home.php');
         }
         else{
             header('Location: ../views_main/home.php');

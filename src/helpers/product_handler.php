@@ -1,6 +1,8 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/product.php';
+ 
+require_once '../classes/Staff.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') {
 
@@ -17,9 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
         $discount = $_POST['discount'];
         $brand = $_POST['brand'];
         
-        $image1 = file_get_contents($_FILES['image1']['tmp_name']);
-        $image2 = file_get_contents($_FILES['image2']['tmp_name']);
-        $image3 = file_get_contents($_FILES['image3']['tmp_name']);
+        // $image1 = file_get_contents($_FILES['image1']['tmp_name']);
+        // $image2 = file_get_contents($_FILES['image2']['tmp_name']);
+        // $image3 = file_get_contents($_FILES['image3']['tmp_name']);
+        $image1 = isset($_FILES['image1']['tmp_name']) && is_uploaded_file($_FILES['image1']['tmp_name']) ? file_get_contents($_FILES['image1']['tmp_name']) : null;
+        $image2 = isset($_FILES['image2']['tmp_name']) && is_uploaded_file($_FILES['image2']['tmp_name']) ? file_get_contents($_FILES['image2']['tmp_name']) : null;
+        $image3 = isset($_FILES['image3']['tmp_name']) && is_uploaded_file($_FILES['image3']['tmp_name']) ? file_get_contents($_FILES['image3']['tmp_name']) : null;
+    
 
         try {
             $productId = $staff->addProduct($productName, $category, $quantity, $description, $price, $discount, $brand, $image1, $image2, $image3);
@@ -36,6 +42,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
             echo "Error: " . $e->getMessage();
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['formType'] == "delete_product") {
+        $productId = $_POST['product_id'];
+        $_SESSION["category"] = $_POST['category'];
+        $database = new Database();
+        $db = $database->getConnection(); 
+        $staffManager = new Staff();
+
+        if ($staffManager->deleteProduct($productId)) {
+            // Redirect or display success message
+            header('Location: ../views_staff/product_list.php');
+            exit;
+        } else {
+            // Error handling
+            echo "Failed to delete product.";
+        }
+    }
+
+
 
 
 ?>

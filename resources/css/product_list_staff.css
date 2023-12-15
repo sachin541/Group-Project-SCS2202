@@ -1,0 +1,223 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Main Container Styles */
+  .main-container {
+    display: grid;
+    grid-template-columns: 0.5fr 3fr; /* Adjust grid column ratio */
+    gap: 20px;
+  }
+  
+  /* Side Navigation Bar Styles */
+  .main-side-nav {
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    width: auto; /* Adjust the width as needed */
+    height: 100%; /* Full height of the grid column */
+    margin-left: 0px;
+    padding-right: 10px;
+  }
+  
+  /* Navigation Panel inside Side Nav */
+  .nav-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Full width of parent */
+  }
+  
+  /* Navigation Item Styles */
+  .nav-item {
+    width: 100%; /* Full width */
+    flex-grow: 1; /* Grow to fill space evenly */
+  }
+  
+  /* Navigation List Styles */
+  .nav-list {
+    list-style-type: none; /* No bullet points */
+    padding: 0; /* No padding */
+  }
+  
+  /* Navigation Link Styles */
+  .nav-link {
+    display: block;
+    width: 100%; /* Full width */
+    text-align: center; /* Centered text */
+    padding: 24px; /* Padding for appearance */
+    text-decoration: none; /* No underline */
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #121212; /* Background color */
+    color: rgb(255, 255, 255); /* Text color */
+    font-size: 18px; /* Font size */
+    border-radius: 10; /* No rounded corners */
+    border: none; /* No border */
+  }
+  
+  /* Navigation Link Hover Effect */
+  .nav-link:hover {
+    background-color: red; /* Background color on hover */
+  }
+  
+  /* Product Container Styles */
+  .products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Align items to start */
+  }
+  
+  /* Product Card Styles */
+  .product-card {
+    flex: 0 0 300px;
+    width: 200px;
+    max-height: 550px;
+    overflow: hidden;
+    border: 2px solid #d1cfcf;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  /* Product Card Hover Effect */
+  .product-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Enhance the shadow for depth */
+  }
+  
+  /* Product Image Styles */
+  .product-image {
+    width: 100%; /* Full width */
+    height: 290px; /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow */
+    background-color: white;
+  }
+  
+  /* Image Tag Styles within Product Image */
+  .product-image img {
+    width: auto; /* Auto width to maintain aspect ratio */
+    height: 100%; /* Full height */
+  }
+  
+  /* Product Details Styles */
+  .product-details {
+    display: grid;
+    grid-template-rows: auto auto auto; /* Three rows for title, price, and brand */
+    gap: 5px; /* Space between rows */
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .product-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .product-price {
+    margin: 10px;
+    font-size: 20px;
+    color: #555;
+    background-color: none;
+  }
+  
+  .product-brand {
+    margin: 5px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  
+  
+  /* Product Actions Styles */
+  .product-actions {
+    margin-top: auto; /* Push to bottom */
+    
+    width: 100%; /* Full width */
+  }
+  
+  /* Add to Cart Button Styles */
+  .add-to-cart-button {
+    background-color: #000000; /* Background color */
+    color: white; /* Text color */
+    padding: 10px 5px;
+    margin-top: 5px;
+    text-decoration: none; /* No underline */
+    display: block; /* Block display */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Cursor style */
+    width: 100%; /* Full width */
+    text-align: center; /* Centered text */
+    font-size: 20px;
+  }
+  
+  /* Add to Cart Button Hover Effect */
+  .add-to-cart-button:hover {
+    background-color: red; /* Background color on hover */
+  }
+  
+  
+  .product-out-of-stock {
+    position: relative;
+   
+  }
+  
+  .product-out-of-stock::after {
+    /* content: ''; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    
+  }
+  
+  .out-of-stock-ribbon {
+    position: absolute;
+    top: 150px;
+    padding: 25px 80px;
+    padding-left: 200px; 
+    filter: none;
+    background-color:red;
+   
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    z-index: 2;
+    transform-origin: 100% 0;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+    white-space: nowrap;
+    
+  }
+  
+  /* .product-out-of-stock .add-to-cart-button {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    pointer-events: none;
+  } */
+  
+  
+  
+  /* .product-out-of-stock .product-image img {
+    width: auto; 
+    height: 100%; 
+    filter: grayscale(100%);
+    z-index: 1;
+  } */
+  
