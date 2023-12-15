@@ -154,9 +154,9 @@ function formatPrice($price) {
                     <input type="submit" value="Update">
                 </form>
               </div>
-              
+              <!-- edit product -->
               <div class="product-actions">
-                  <form action="product_details.php" method="get">
+                  <form action="./edit_product.php" method="get">
                       <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                       <input type="hidden" name="formType" value="update_product">
                       <input type="submit" value="Edit" class="add-to-cart-button">
