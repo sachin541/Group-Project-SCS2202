@@ -32,7 +32,7 @@
     
 
     $productIds = [$id1,$id2,$id3,$id4,$id5,$id6,$id7]; // Include -1 in the array for demonstration
-    $items = ["CPU","GPU","Mother Board","Memory","Storage","Power Supply","Case"];
+    $items = ["CPU","GPU","MotherBoard","Memory","Storage","Power Supply","Case"];
     $i = 0;
     foreach ($productIds as $id) {
         $title = $items[$i];

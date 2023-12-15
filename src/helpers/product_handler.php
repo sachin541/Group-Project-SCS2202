@@ -3,6 +3,7 @@ require_once '../classes/database.php';
 require_once '../classes/product.php';
  
 require_once '../classes/Staff.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') {
 
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
 
             if ($productId) {
                 echo "New product added successfully.";
-                session_start();
+                
                 $_SESSION['product_adder'] = 'New product added successfully.';
                 header('Location: ../views_staff/add_product.php');
             } else {
@@ -66,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') 
         $db = $database->getConnection();
         $product = new Staff();
         
-        
+        $_SESSION["category"] = $_POST['category'];
+        echo $_SESSION["category"]; 
         $productId = $_POST['product_id'];
         $newQuantity = max(0, $_POST['quantity']); // Ensures stock is not negative
     

@@ -7,7 +7,10 @@ $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
 
+// echo $_SESSION["category"]; 
+
 $category = isset($_POST['category']) ? $_POST['category'] : 'laptop'; // Default to 'laptop' if no POST request
+
 if(isset($_SESSION["category"])){
     $category = $_SESSION["category"]; 
     unset($_SESSION["category"]); 
@@ -136,14 +139,18 @@ function formatPrice($price) {
                   <p class="product-brand">Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
                   <p class="product-qty">Stock: <?php echo htmlspecialchars($item['quantity']); ?></p>
               </div>
-
+                <!-- stock control -->
               <div class="stock-controls">
                 <form action="../helpers/product_handler.php" method="post" id="stock-form-<?php echo $item['id']; ?>">
+
                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                     <input type="hidden" name="formType" value="update_qty">
+                    <input type="hidden" name="category" value="<?php echo $category; ?>">
+
                     <button type="button" onclick="adjustStock(<?php echo $item['id']; ?>, -1)">-</button>
                     <input type="number" name="quantity" value="<?php echo htmlspecialchars($item['quantity']); ?>" min="0">
                     <button type="button" onclick="adjustStock(<?php echo $item['id']; ?>, 1)">+</button>
+                    
                     <input type="submit" value="Update">
                 </form>
               </div>
@@ -155,7 +162,7 @@ function formatPrice($price) {
                       <input type="submit" value="Edit" class="add-to-cart-button">
                   </form>
               </div>
-
+                <!-- delete product -->
               <div class="product-actions">
                 <form action="../helpers/product_handler.php" method="post">
                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">

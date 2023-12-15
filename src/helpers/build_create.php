@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'GPU':
                     $_SESSION['GPU'] = $productId;
                     break;
-                case 'Mother Board':
+                case 'MotherBoard':
                     $_SESSION['MotherBoard'] = $productId;
                     break;
                 case 'Memory':
