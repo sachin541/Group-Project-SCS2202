@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'GPU':
                     unset($_SESSION['GPU']);
                     break;
-                case 'Mother Board':
+                case 'MotherBoard':
                     unset($_SESSION['MotherBoard']);
                     break;
                 case 'Memory':
