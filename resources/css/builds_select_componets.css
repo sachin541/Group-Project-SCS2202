@@ -271,6 +271,54 @@
 }
 
 
+.heading {
+    text-align: center;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 10px; /* Add space between buttons */
+}
+
+.create-build-btn, .view-current-build-btn {
+    flex : 1 ;
+    text-align: center;
+}
+
+.create-build-btn button, .view-current-build-btn button {
+    padding: 20px 70px;
+    background-color: #16a085; /* Example: Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-build-btn button:hover, .view-current-build-btn button:hover {
+    background-color: red; /* Darker shade for hover */
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 600px) {
+    .main-container-2 {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .create-build-btn, .view-current-build-btn {
+        width: 100%;
+    }
+}
 
 
 

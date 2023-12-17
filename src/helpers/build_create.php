@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'Storage':
                     $_SESSION['Storage'] = $productId;
                     break;
-                case 'Power Supply':
+                case 'PowerSupply':
                     $_SESSION['PowerSupply'] = $productId;
                     break;
                 case 'Case':
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'Storage':
                     unset($_SESSION['Storage']);
                     break;
-                case 'Power Supply':
+                case 'PowerSupply':
                     unset($_SESSION['PowerSupply']);
                     break;
                 case 'Case':

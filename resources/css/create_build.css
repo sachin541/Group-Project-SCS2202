@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.main-container.build-page {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+/* Component Section Styles */
+.components-section {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.components-heading {
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.component-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 1;
+    border-bottom: 1px solid #16a085;
+    background-color: #f4f4f4;
+}
+
+.component-image {
+    width: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+}
+
+.component-details {
+    line-height: 0.6;
+    
+}
+
+.component-name {
+    font-size: 1.1rem;
+}
+
+.component-price {
+    font-size: 1.1rem;
+    color: #000000;
+    font-weight: 600;
+}
+
+/* Additional Info Styles */
+.info-section {
+    background: #fff;
+    padding: 20px;
+    padding-right: 50px;
+    
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-heading {
+    
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+}
+
+.form-textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.total-price {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    text-align: right;
+    font-weight: bold;
+    color: #000000;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #16a085;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: red;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container.build-page {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .component-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .component-image {
+        width: 50%;
+        max-width: 150px;
+    }
+}
+

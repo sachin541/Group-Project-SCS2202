@@ -40,6 +40,8 @@
             <option value="MotherBoard">Motherboard</option>
             <option value="PowerSupply">Power Supply</option>
             <option value="Storage">Storage</option>
+            <option value="Case">Case</option>
+            <option value="Monitor">Monitor</option>
         </select>
     </div>
     <div>

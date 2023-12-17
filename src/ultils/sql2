@@ -118,3 +118,48 @@ CREATE TABLE Order_Items (
 
 -- ALTER TABLE Order_Items ADD FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL;
 
+CREATE TABLE components_list(
+
+   id INT NOT NULL AUTO_INCREMENT,
+   CPU_id INT,
+   GPU_id INT,
+   MotherBoard_id INT,
+   Memory_id INT,
+   Storage_id INT,
+   PowerSupply_id INT,
+   Case_id INT,
+
+   PRIMARY KEY (id)
+
+);
+
+
+
+CREATE TABLE Builds (
+    build_id INT NOT NULL AUTO_INCREMENT,
+
+    customer_id INT,
+
+    customer_name VARCHAR(255),
+    contact BIGINT(10) NOT NULL,
+    
+    added_timestamp DATE DEFAULT CURRENT_DATE,
+    technician_assigned_date VARCHAR(255) DEFAULT NULL,
+    build_start_date VARCHAR(255) DEFAULT NULL,
+    build_completed_date VARCHAR(255) DEFAULT NULL,
+    build_collected_date VARCHAR(255) DEFAULT NULL, 
+    -- payment made date is same as build collected date 
+    
+    components_list_id INT, 
+    comments TEXT,
+
+    amount DECIMAL(10, 2),
+    
+    technician_id INT,
+
+    PRIMARY KEY (build_id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id) ON DELETE SET NULL, 
+    FOREIGN KEY (components_list_id) REFERENCES components_list(id) On DELETE SET NULL
+    
+);
+
