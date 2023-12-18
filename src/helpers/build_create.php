@@ -1,5 +1,16 @@
 <?php
 session_start(); // Ensure the session is started
+require_once '../classes/build.php';
+require_once '../classes/database.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$buildobj = new Build($db);
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../views_main/login.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -37,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Check if the handler type is for removing an item
+    
     if (isset($_POST['handler_type']) && $_POST['handler_type'] === 'remove_item') {
-        // Check and remove the item type from the session
+        
         if (isset($_POST['item_type'])) {
             $itemType = $_POST['item_type'];
 
-            // Map the item type to the session variable name
+           
             switch ($itemType) {
                 case 'CPU':
                     unset($_SESSION['CPU']);
@@ -66,15 +77,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'Case':
                     unset($_SESSION['Case']);
                     break;
-                // Add more cases as necessary
+                
             }
         }
     }
 
-    // Redirect back to the product display page or handle otherwise
+   
+    if (isset($_POST['handler_type']) && $_POST['handler_type'] === 'create_new_build') {
+        
+        $customer_id= $_SESSION['user_id']; 
+        $customerName = $_POST['customer_name'];
+        $contactNumber = $_POST['contact_number'];
+        $additionalNotes = $_POST['additional_notes'];
+        $totalPrice = $_POST['build_total'];
+
+        $cpuId = $_SESSION['CPU'];
+        $gpuId = $_SESSION['GPU'];
+        $motherboardId = $_SESSION['MotherBoard'];
+        $memoryId = $_SESSION['Memory'];
+        $storageId = $_SESSION['Storage'];
+        $powerSupplyId = $_SESSION['PowerSupply'];
+        $caseId = $_SESSION['Case'];
+        
+
+        $buildobj->createBuild($customer_id, $customerName, $contactNumber, 
+        $additionalNotes, $totalPrice, $cpuId, $gpuId, $motherboardId, 
+        $memoryId, $storageId, $powerSupplyId, $caseId);
+
+        foreach ($_SESSION as $key => $value) {
+            if (in_array($key, ['CPU', 'GPU', 'MotherBoard', 'Memory', 'Storage', 'PowerSupply', 'Case'])) {
+                unset($_SESSION[$key]);
+            }
+        }
+    }
+    
+
+    
     header('Location: ../views_customer/build_Item_selector.php');
     exit;
 }
 
-// If the script is accessed without a POST request, handle accordingly
-// For example, redirect to a default page or display an error
+

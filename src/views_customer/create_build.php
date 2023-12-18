@@ -10,7 +10,12 @@ $product = new Product($db);
 
 $items = ["CPU", "GPU", "MotherBoard", "Memory", "Storage", "PowerSupply", "Case"];
 $totalPrice = 0;
+function formatPrice($price) {
+    return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
+  }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +45,7 @@ $totalPrice = 0;
                             <?php } ?>
                             <div class="component-details">
                                 <p class="component-name"><?= htmlspecialchars($productDetails['product_name']) ?></p>
-                                <p class="component-price">Price: Rs.<?= htmlspecialchars($productDetails['price']) ?></p>
+                                <p class="component-price">Price: <?= htmlspecialchars(formatPrice($productDetails['price'])) ?></p>
                             </div>
                         </div>
                     <?php }
@@ -53,7 +58,7 @@ $totalPrice = 0;
     <div class="additional-info info-section">
         <h1 class="info-heading">Create New Build Request</h1>
        
-        <form action="../helpers/build.create.php" method="post" class="build-form">
+        <form action="../helpers/build_create.php" method="post" class="build-form">
             <div class="form-group">
                 <label for="customer_name" class="form-label">Your Name:</label>
                 <input type="text" id="customer_name" name="customer_name" class="form-input" required>
@@ -70,8 +75,13 @@ $totalPrice = 0;
             </div>
 
             <div class="total-price">
-                <p class="total-label">Total Price: <span class="price">Rs.<?= htmlspecialchars($totalPrice) ?></span></p>
+                <p class="total-label">Total Price: <span class="price"><?= htmlspecialchars(formatPrice($totalPrice)) ?></span></p>
             </div>  
+            <!-- hidden fields -->
+            <input type="hidden" name="handler_type" value="create_new_build">
+            <!-- :p change this later  -->
+            <input type="hidden" name="build_total" value="<?php echo $totalPrice; ?>"> 
+
 
             <div class="form-actions">
                 <input type="submit" value="Submit Build Request" class="submit-button">

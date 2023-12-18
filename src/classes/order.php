@@ -22,6 +22,7 @@ class Order {
                   JOIN Order_Items order_items ON orders.order_id = order_items.order_id
                   JOIN products ON order_items.product_id = products.id
                   WHERE orders.order_id = ?";
+                  
         $stmt = $this->db->prepare($query);
         $stmt->execute([$orderId]);
 

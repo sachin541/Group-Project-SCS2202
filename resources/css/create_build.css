@@ -9,8 +9,8 @@ body {
 
 .main-container.build-page {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 10px;
+    margin: 10px auto;
+    padding: 0px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
