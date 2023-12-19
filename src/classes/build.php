@@ -67,6 +67,33 @@ class Build {
     }
     
 
+    public function getStatus($buildId) {
+        $query = "SELECT technician_assigned_date, build_start_date,
+         build_completed_date, build_collected_date 
+         FROM Builds WHERE build_id = ?";
+         
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $buildId);
+        $stmt->execute();
+        $build = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$build) {
+            return 'Build Not Found';
+        }
+
+        if (is_null($build['technician_assigned_date'])) {
+            return 'Request Created';
+        } elseif (is_null($build['build_start_date'])) {
+            return 'Technician Assigned';
+        } elseif (is_null($build['build_completed_date'])) {
+            return 'Build in Progress';
+        } elseif (is_null($build['build_collected_date'])) {
+            return 'Build Ready for Collection';
+        } else {
+            return 'Request Completed';
+        }
+    }
+
 
 
 

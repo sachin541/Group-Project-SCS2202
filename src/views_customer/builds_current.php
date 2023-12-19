@@ -6,11 +6,15 @@ require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$build = new Build($db);
+$buildObj = new Build($db);
 $product = new Product($db);
 
 $customerId = $_SESSION['user_id']; 
-$builds = $build->getBuildsByCustomerId($customerId);
+$builds = $buildObj->getBuildsByCustomerId($customerId);
+
+function formatPrice($price) {
+    return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +26,7 @@ $builds = $build->getBuildsByCustomerId($customerId);
 <body>
     <div class="main-content">
         <div class="main-title">
-            <h2>Active Builds for Customer: <?= htmlspecialchars($customerId) ?></h2>
+            <h2>Current Build Requests</h2>
         </div>
 
         <div class="table-container">
@@ -32,7 +36,9 @@ $builds = $build->getBuildsByCustomerId($customerId);
                         <th class="header-item">Build ID</th>
                         <th class="header-item">Components</th>
                         <th class="header-item">Total Price</th>
-                        <th class="header-item">Date Added</th>
+                        <th class="header-item">Date Created</th>
+                        <th class="header-item">Actions</th>
+                        <th class="header-item">Status</th>
                     </tr>
                 </thead>
                 <tbody class="table-body">
@@ -60,7 +66,7 @@ $builds = $build->getBuildsByCustomerId($customerId);
                                                     <span class="tooltip-content">
                                                         <span class="tooltip-title"><?= htmlspecialchars($componentDetails['product_name']) ?></span>
                                                         <br>
-                                                        <span class="tooltip-price">Price: <?= htmlspecialchars($componentDetails['price']) ?></span>
+                                                        <span class="tooltip-price">Price: <?= htmlspecialchars(formatPrice($componentDetails['price'])) ?></span>
                                                     </span>
                                                 </span>
                                             </div>
@@ -68,16 +74,40 @@ $builds = $build->getBuildsByCustomerId($customerId);
                                     endforeach; ?>
                                 </div>
                             </td>
-                            <td class="row-item total-price"><?= htmlspecialchars($build['amount']) ?></td>
+                            <td class="row-item total-price"><?= formatPrice(htmlspecialchars($build['amount'])) ?></td>
                             <td class="row-item date-added"><?= htmlspecialchars($build['added_timestamp']) ?></td>
+                            <td class="row-item view-details">
+                                <form action="./build_details.php" method="post">
+                                    <input type="hidden" name="build_id" value="<?= $build['build_id'] ?>">
+                                    <input type="submit" value="View Details" class="details-button">
+                                </form>
+                            </td>
+                            <td class="row-item status"><?= $buildObj->getStatus($build['build_id']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+
+        <div class="main-container-2">
+            <div class="create-build-btn">
+                <form method="post" action="./build_create.php">
+                    <input type="hidden" name="handler_type" value="submit-build">
+                    <button type="submit" class="remove-btn">Create New Build Request!</button>
+                </form>
+            </div>  
+
+            <div class="view-current-build-btn">
+                <form method="post" action="./builds_current.php">
+                    <input type="hidden" name="handler_type" value="submit-build">
+                    <button type="submit" class="remove-btn">View Active Build Requests!</button>
+                </form>
+            </div>   
+        </div>
     </div>
 </body>
 </html>
+
 
 
 

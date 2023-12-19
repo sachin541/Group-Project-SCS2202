@@ -1,15 +1,13 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    
     color: #333;
-    line-height: 1.6;
     margin: 0;
-    padding: 0;
 }
 
 .main-title {
     margin-top: 10px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     color: #000000;
     padding: 5px;
     text-align: center;
@@ -17,43 +15,41 @@ body {
 }
 
 .main-title h2 {
-    
     font-size: 2em;
 }
 
 .table-container {
-    width: 90%;
-    margin: 30px auto;
-    overflow-x: auto; /* Allows table to be scrollable on smaller screens */
-    background: #fff;
+    background-color: #f4f4f4f4;
     padding: 20px;
-    padding-top :40px; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 95%;
 }
 
 .builds-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    font-size: 0.95em;
 }
 
-.table-header {
-    background-color: #00796b;
-    color: #ffffff;
+.table-header-row {
+    background-color: #000000;
+    color: white;
+    font-weight: bold;
 }
 
 .header-item {
     padding: 15px;
     text-align: left;
-    font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
-.row-item {
-    padding: 15px;
-    text-align: left;
-    vertical-align: middle;
-    border-bottom: 1px solid #e0e0e0;
+.table-row {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .table-row:nth-child(even) {
@@ -61,7 +57,18 @@ body {
 }
 
 .table-row:hover {
-    background-color: #e0f7fa;
+    background-color: #b4b4b4;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.row-item {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    font-size: 0.90em;
+    font-weight: bold;
 }
 
 .components-container {
@@ -87,24 +94,16 @@ body {
     border-radius: 6px;
     padding: 5px;
     transition: all 0.3s ease;
-    background-color: white;
+    
 }
-
-.component-detail:hover .component-image {
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-
 
 .component-name-tooltip {
     visibility: hidden;
-    min-width: 160px;
+    min-width: 260px;
     background-color: #333;
     color: #fff;
     text-align: left;
-    padding: 10px;
+    padding: 20px;
     border-radius: 6px;
     position: absolute;
     bottom: 125%;
@@ -114,18 +113,23 @@ body {
     opacity: 0;
     transition: visibility 0s, opacity 0.3s ease;
     z-index: 2;
+}
 
-    /* Tooltip arrow */
-    &:after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #333 transparent transparent transparent;
-    }
+.component-name-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.component-detail:hover .component-image {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .component-detail:hover .component-name-tooltip {
@@ -133,8 +137,6 @@ body {
     opacity: 1;
     transition-delay: 0.1s;
 }
-
-
 
 /* Styling for the content inside the tooltip */
 .tooltip-content {
@@ -150,4 +152,34 @@ body {
 .tooltip-price {
     font-size: 1.2em;
     color: #a0a0a0; /* Lighter color for the price */
+}
+
+.main-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 10px; /* Add space between buttons */
+}
+
+.create-build-btn, .view-current-build-btn {
+    flex : 1 ;
+    text-align: center;
+}
+
+.create-build-btn button, .view-current-build-btn button {
+    padding: 20px 70px;
+    background-color: #16a085; /* Example: Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-build-btn button:hover, .view-current-build-btn button:hover {
+    background-color: red; /* Darker shade for hover */
+    transform: scale(1.05);
 }
