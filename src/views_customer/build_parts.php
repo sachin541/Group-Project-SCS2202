@@ -3,7 +3,9 @@ require_once '../classes/database.php';
 require_once '../classes/product.php';
 
 $database = new Database();
+
 $db = $database->getConnection();
+
 $product = new Product($db);
 
 $category = isset($_POST['category']) ? $_POST['category'] : 'CPU'; // Default to 'laptop' if no POST request

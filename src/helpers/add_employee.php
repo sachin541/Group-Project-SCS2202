@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $userManager->addUser($email, $user_password, $role);
 
     if ($user_id) {
+        
         $staff_name = $_POST['staff_name'];
         $staff_address = $_POST['staff_address'];
         $mobile_no = $_POST['mobile_no'];

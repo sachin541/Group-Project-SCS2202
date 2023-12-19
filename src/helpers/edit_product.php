@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 
-// Redirect to form if not a POST request
-// header('Location: edit_product.php');
+
 exit;
 ?>

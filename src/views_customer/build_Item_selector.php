@@ -82,14 +82,14 @@ $items = ["CPU", "GPU", "MotherBoard", "Memory", "Storage", "PowerSupply", "Case
     <div class="main-container-2">
 
         <div class="create-build-btn">
-            <form method="post" action="./create_build.php">
+            <form method="post" action="./build_create.php">
                 <input type="hidden" name="handler_type" value="submit-build">
                 <button type="submit" class="remove-btn">Create New Build Request!</button>
                 </form>
         </div>  
 
         <div class="view-current-build-btn">
-            <form method="post" action="../helpers/build_create.php">
+            <form method="post" action="./builds_current.php">
                 <input type="hidden" name="handler_type" value="submit-build">
                 <button type="submit" class="remove-btn">View Active Build Requets!</button>
                 </form>
