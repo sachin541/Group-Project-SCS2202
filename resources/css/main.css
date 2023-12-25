@@ -1,0 +1,43 @@
+/* Main CSS File */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+
+/* Light mode */
+
+    --color-background: #F9F7E8;
+    
+    /* Primary Complementary */
+    --color-primary: #021F2C;
+    --color-invert: #2C0F02;
+
+    /* Primary Monochromatic */
+    --color-secondary: #05425C;
+    
+    /* Primary Analogous */
+    --color-analog-1: #020B2C;
+    --colro-analog-2: #022C24;
+
+    /* Primary Triadic */
+    --color-triadic-1: #2C021F;
+    --color-triadic-2: #1F2C02;
+
+    
+
+/* Dark mode */
+    
+
+}
+
+
+/* Poppins
+Light: 300      Regular: 400
+Medium: 500     SemiBold: 600
+Bold: 700       ExtraBold: 800
+Black: 900 */
+
+* {
+    font-family: 'poppins',serif ;
+    font-weight: 400;
+}
