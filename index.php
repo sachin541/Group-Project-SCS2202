@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <?php header("location: src/pages/home.php");
+    <?php header("location: src/views_main/home.php");
     ?>
 </body>
 
