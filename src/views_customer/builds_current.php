@@ -82,7 +82,11 @@ function formatPrice($price) {
                                     <input type="submit" value="View Details" class="details-button">
                                 </form>
                             </td>
-                            <td class="row-item status"><?= $buildObj->getStatus($build['build_id']) ?></td>
+                            <td class="row-item status">
+                                <span class="status-badge <?= $buildObj->getStatusClass($build['build_id']) ?>">
+                                    <?= $buildObj->getStatus($build['build_id']) ?>
+                                </span>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

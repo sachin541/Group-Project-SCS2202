@@ -14,10 +14,6 @@ if (isset($_POST["repair_id"])) {
     
     $repairDetails = $repair->getAllFromRepairById($_POST["repair_id"]);
 
-
-
-    
-    
     if ($repairDetails) {
         //
         $ref_number = $repairDetails['repair_id'];
@@ -52,11 +48,11 @@ if (isset($_POST["repair_id"])) {
 }
 
 if($tech_date){
-$technicianDetails = $techobj->getTechnicianByStaffId($technicianId); 
-
-$tech_mobile = $technicianDetails['mobile_no'];
-$tech_name = $technicianDetails['staff_name'];
+    $technicianDetails = $techobj->getTechnicianByStaffId($technicianId); 
+    $tech_mobile = $technicianDetails['mobile_no'];
+    $tech_name = $technicianDetails['staff_name'];
 }
+
 // echo $addedTimestamp; 
 
 if($payment_done_date){

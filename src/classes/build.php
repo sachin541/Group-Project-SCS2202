@@ -71,7 +71,7 @@ class Build {
         $query = "SELECT technician_assigned_date, build_start_date,
          build_completed_date, build_collected_date 
          FROM Builds WHERE build_id = ?";
-         
+
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $buildId);
         $stmt->execute();
@@ -94,7 +94,42 @@ class Build {
         }
     }
 
+    public function getStatusClass($buildId) {
+        $status = $this->getStatus($buildId);
+        switch ($status) {
+            case 'Request Created':
+                return 'status-request-created';
+            case 'Technician Assigned':
+                return 'status-technician-assigned';
+            case 'Build in Progress':
+                return 'status-build-in-progress';
+            case 'Build Ready for Collection':
+                return 'status-build-ready';
+            case 'Request Completed':
+                return 'status-request-completed';
+            default:
+                return '';
+        }
+    }
 
+
+    public function getAllFromBuildById($buildId) {
+        try {
+            $query = "SELECT * FROM Builds WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $buildId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return $result;
+            } else {
+                return null; 
+            }
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
 
 

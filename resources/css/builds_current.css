@@ -7,7 +7,7 @@ body {
 
 .main-title {
     margin-top: 10px;
-    /* background-color: #ffffff; */
+    
     color: #000000;
     padding: 5px;
     text-align: center;
@@ -138,7 +138,7 @@ body {
     transition-delay: 0.1s;
 }
 
-/* Styling for the content inside the tooltip */
+
 .tooltip-content {
     font-size: 0.9em;
     line-height: 1.4;
@@ -151,7 +151,7 @@ body {
 
 .tooltip-price {
     font-size: 1.2em;
-    color: #a0a0a0; /* Lighter color for the price */
+    color: #a0a0a0; 
 }
 
 .main-container-2 {
@@ -160,7 +160,7 @@ body {
     align-items: center;
     margin-top: 30px;
     margin-bottom: 50px;
-    gap: 10px; /* Add space between buttons */
+    gap: 10px; 
 }
 
 .create-build-btn, .view-current-build-btn {
@@ -170,7 +170,7 @@ body {
 
 .create-build-btn button, .view-current-build-btn button {
     padding: 20px 70px;
-    background-color: #16a085; /* Example: Blue color */
+    background-color: #16a085; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -180,6 +180,50 @@ body {
 }
 
 .create-build-btn button:hover, .view-current-build-btn button:hover {
-    background-color: red; /* Darker shade for hover */
+    background-color: red; 
     transform: scale(1.05);
+}
+
+
+.status-badge {
+    padding: 6px 8px;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin: 2px;
+}
+
+.status-request-created {
+    background-color: #007bff; /* Blue */
+}
+
+.status-technician-assigned {
+    background-color: #28a745; /* Green */
+}
+
+.status-build-in-progress {
+    background-color: #ffc107; /* Yellow */
+}
+
+.status-build-ready {
+    background-color: #dc3545; /* Red */
+}
+
+.status-request-completed {
+    background-color: #6c757d; /* Grey */
+}
+
+.details-button {
+    background-color: #000000; 
+    color: white;            
+    padding: 10px 15px;       
+    border: none;             
+    border-radius: 5px;       
+    cursor: pointer;          
+    font-size: 1em;           
+}
+
+.details-button:hover {
+    background-color: red; /* Darker green background on hover */
 }
