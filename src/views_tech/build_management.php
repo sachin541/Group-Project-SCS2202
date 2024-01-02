@@ -105,7 +105,7 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                 </table>
             <?php endif; ?>
         </div>
-
+                                     
         <!-- Your Builds Section -->
         <div class="table-container column">
             <h2>Your Builds</h2>
