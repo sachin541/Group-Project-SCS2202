@@ -5,85 +5,118 @@ require_once '../classes/repair.php';
 require_once '../components/headers/main_header.php';
 
 // Assume customer ID is stored in session or retrieved through some mechanism
-$technicianId = $_SESSION['user_id']; 
+$technicianId = $_SESSION['user_id'];
+
+// Handle the filter
+$repairFilter = isset($_GET['repair_filter']) ? $_GET['repair_filter'] : 'active';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$repair = new Repair($db);
-$allrepairs = $repair->getAllNewRepairs();
-$myrepairs = $repair->getTechnicianRepairsbyID($technicianId);
+$repairobj = new Repair($db);
+$allrepairs = $repairobj->getAllNewRepairs();
+$myrepairs = $repairobj->getTechnicianRepairsbyID($technicianId, $repairFilter); // Modified to include filter
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>All Repairs</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_tech/repair_managment.css">
-    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_tech/repair_management.css">
 </head>
+
 <body>
-<div class="req-container">
-    <div class="req-contain">
-    <div  style="text-align: center;">
-        <h1>New Requets</h1>
-    </div>
+    <h1>All Repairs</h1>
 
-    <ul>
-        <?php foreach($allrepairs as $repair) : ?>
-            <div class="repairs-list">
-                <ul>
-                    <li>
-                        <form action="repair_managment_details.php" method="post" class="details-form">
-                            <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
-                            <input type="submit" value="Details" class="details-button">
-                        </form>
-                        Repair ID: <span class="repair-id"><?php echo htmlspecialchars($repair['repair_id']); ?></span>,
-                        Item: <span class="item-name"><?php echo htmlspecialchars($repair['item_name']); ?></span>
-                        
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach; ?>
-    </ul>
-    
-    </div>
+    <!-- Flex Container for Two Columns -->
+    <div class="flex-container">
 
-    <div class="req-contain">
-    <div  style="text-align: center;">
-        <h1>Your Repairs</h1>
-    </div>
+        <!-- New Requests Section -->
+        <div class="table-container column">
+            <h2>New Requests</h2>
+            <?php if(empty($allrepairs)): ?>
+                <p>No new requests!</p>
+            <?php else: ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Repair ID</th>
+                            <th>Item Name</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($allrepairs as $repair): ?>
+                            <?php $statusData = $repairobj->getRepairStatus($repair); ?>
+                            <tr>
+                                <td><?= htmlspecialchars($repair['repair_id']) ?></td>
+                                <td><?= htmlspecialchars($repair['item_name']) ?></td>
+                                <td><span class="status-badge <?= $statusData[1] ?>"><?= $statusData[0] ?></span></td>
+                                <td class="details-button-cell">
+                                    <form action="repair_managment_details.php" method="post">
+                                        <input type="hidden" name="repair_id" value="<?= $repair['repair_id'] ?>">
+                                        <input type="submit" value="Details" class="button-like-link">
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
 
-    <ul>
-        <?php if(empty(($myrepairs))){
-            echo '<div class="repairs-list">
-            <ul>
-                <li>
-                    
-                    No active repairs!
-                    
-                </li>
-            </ul>
-        </div>';
-            }?>
-        <?php foreach($myrepairs as $repair) : ?>
-            <div class="repairs-list">
-                <ul>
-                    <li>
-                        <form action="repair_managment_details.php" method="post" class="details-form">
-                            <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
-                            <input type="submit" value="Details" class="details-button">
-                        </form>
-                        Repair ID: <span class="repair-id"><?php echo htmlspecialchars($repair['repair_id']); ?></span>,
-                        Item: <span class="item-name"><?php echo htmlspecialchars($repair['item_name']); ?></span>
-                        
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach; ?>
-    </ul>
-    
-    </div>
-</div>
+        <!-- Your Repairs Section -->
+        <div class="table-container column">
+            <h2>Your Repairs</h2>
 
- </body>
+            
+
+            <?php if(empty($myrepairs)): ?>
+                <p>No active repairs!</p>
+            <?php else: ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Repair ID</th>
+                            <th>Item Name</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($myrepairs as $repair): ?>
+                            <?php $statusData = $repairobj->getRepairStatus($repair); ?>
+                            <tr>
+                                <td><?= htmlspecialchars($repair['repair_id']) ?></td>
+                                <td><?= htmlspecialchars($repair['item_name']) ?></td>
+                                <td><span class="status-badge <?= $statusData[1] ?>"><?= $statusData[0] ?></span></td>
+                                <td class="details-button-cell">
+                                    <form action="repair_managment_details.php" method="post">
+                                        <input type="hidden" name="repair_id" value="<?= $repair['repair_id'] ?>">
+                                        <input type="submit" value="Details" class="button-like-link">
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+
+            <!-- Filter Form -->
+            <form action="" method="get" class="filter-form">
+                <select name="repair_filter">
+                    <option value="all" <?php echo ($repairFilter == 'all') ? 'selected' : ''; ?>>All Repairs</option>
+                    <option value="completed" <?php echo ($repairFilter == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                    <option value="active" <?php echo ($repairFilter == 'active') ? 'selected' : ''; ?>>Active</option>
+                </select>
+                <input type="submit" value="Filter">
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+

@@ -231,15 +231,15 @@ body {
 }
 
 .stock-controls input[type="number"] {
-    width: 60px; /* Fixed width for number input */
+    width: 60px; 
     text-align: center;
-    border: 1px solid #bdc3c7; /* Subtle border */
-    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #bdc3c7; 
+    border-radius: 4px; 
     padding: 5px;
 }
 
 .stock-controls button {
-    background-color: #16a085; /* Stylish green for buttons */
+    background-color: #16a085; 
     color: white;
     border: none;
     padding: 5px 10px;
@@ -249,15 +249,15 @@ body {
 }
 
 .stock-controls button:hover {
-    background-color: #1abc9c; /* Lighter green on hover */
+    background-color: #1abc9c; 
 }
 
 .stock-controls input[type="submit"] {
-  background-color: #000000; /* Stylish green for update action */
+  background-color: #000000; 
   color: white;
   border: none;
   padding: 8px 15px;
-  margin-left: 10px; /* Space from the quantity input */
+  margin-left: 10px; 
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
@@ -265,5 +265,5 @@ body {
 }
 
 .stock-controls input[type="submit"]:hover {
-  background-color: red; /* Lighter green on hover */
+  background-color: red; 
 }
