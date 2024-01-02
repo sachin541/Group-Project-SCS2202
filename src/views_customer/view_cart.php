@@ -26,7 +26,7 @@ $totalAmount = 0; //used in loop later to calculate total in cart
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/cartnew.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/cartnew.css" />
 </head>
 <body>
     <div class="cart-container">

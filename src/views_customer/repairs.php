@@ -18,7 +18,7 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
 <html>
 <head>
     <title>Your Repairs</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/repair_details.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/repair_details.css">
 </head>
 <body>
     <div class= "main-container">

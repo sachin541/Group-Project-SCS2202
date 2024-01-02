@@ -31,7 +31,7 @@ function formatPrice($price) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Details</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/product_detailsnew.css" />
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/product_detailsnew.css" />
 </head>
 <body>
 

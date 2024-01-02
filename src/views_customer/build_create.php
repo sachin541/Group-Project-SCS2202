@@ -21,7 +21,7 @@ function formatPrice($price) {
 <html>
 <head>
     <title>Create New Build</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/create_build.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/create_build.css">
 </head>
 <body>
 

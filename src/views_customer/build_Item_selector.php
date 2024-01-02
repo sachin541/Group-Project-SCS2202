@@ -19,7 +19,7 @@ $items = ["CPU", "GPU", "MotherBoard", "Memory", "Storage", "PowerSupply", "Case
 <html>
 <head>
     <title>Product Display</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/builds_select_componets.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/builds_select_componets.css">
 </head>
 <body>
 

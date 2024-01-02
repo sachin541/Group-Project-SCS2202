@@ -19,7 +19,7 @@ $myrepairs = $repair->getTechnicianRepairsbyID($technicianId);
 <html>
 <head>
     <title>All Repairs</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/repair_managment.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_tech/repair_managment.css">
     
 </head>
 <body>

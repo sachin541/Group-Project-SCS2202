@@ -17,7 +17,7 @@ $employees = $userManager->getAllEmployees($roleFilter);
 <head>
     <meta charset="UTF-8">
     <title>Staff Center</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/staff_center.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/staff_center.css">
 </head>
 <body>
     <h1>Staff Center</h1>

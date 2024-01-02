@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add Product</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/add_productnew.css" />
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/add_productnew.css" />
 <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/add_emp.css" /> -->
 
 </head>

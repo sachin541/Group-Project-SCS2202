@@ -24,7 +24,7 @@ if (!$product) {
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/product_edit.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/product_edit.css" />
 </head>
 <body>
     <form action="../helpers/edit_product.php" method="post" enctype="multipart/form-data" class="product-form">

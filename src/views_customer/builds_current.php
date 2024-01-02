@@ -21,7 +21,7 @@ function formatPrice($price) {
 <html>
 <head>
     <title>Active Builds</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/builds_current.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/builds_current.css" />
 </head>
 <body>
     <div class="main-content">

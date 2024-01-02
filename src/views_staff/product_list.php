@@ -35,7 +35,7 @@ function formatPrice($price) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Products</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/product_list_staff.css" />
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/product_list_staff.css" />
 <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css" /> -->
 </head>
 <body>

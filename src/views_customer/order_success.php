@@ -28,7 +28,7 @@ function formatPrice($price) {
 <html>
 <head>
     <title>Invoice</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/invoice-style.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/invoice-style.css">
 </head>
 <div class="main-header">
     <?php require_once '../components/headers/main_header.php';?>

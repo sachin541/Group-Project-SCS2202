@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login Form</title>
 <link rel="stylesheet" type="text/css" href="../../resources/css/login.css" />
-<link rel="stylesheet" type="text/css" href="../../resources/css/add_emp.css" />
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/add_emp.css" />
 </head>
 <body>
 <?php
