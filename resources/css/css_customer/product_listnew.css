@@ -1,14 +1,19 @@
 /* General Body Styles */
-body {
-  margin: 0;
+html, body {
+  height: 100%; /* Full height of the viewport */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
   font-family: Arial, sans-serif;
+  
 }
 
 /* Main Container Styles */
 .main-container {
+  
   display: grid;
   grid-template-columns: 0.5fr 3fr; /* Adjust grid column ratio */
   gap: 20px;
+  height: 100%;
 }
 
 /* Side Navigation Bar Styles */

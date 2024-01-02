@@ -8,7 +8,7 @@ class Repair {
         $this->db = $db;
     }
 
-    // Method to fetch repair requests for a specific customer
+    
     public function getCustomerRepairsbyID($customerId) {
         try {
             $query = "SELECT repair_id, item_name FROM repairs WHERE customer_id = ?";
@@ -20,19 +20,7 @@ class Repair {
             throw $e;
         }
     }
-    //future make these two functions one 
-    // public function getTechnicianRepairsbyID($technicianId) {
-    //     try {
-    //         $query = "SELECT repair_id, item_name FROM repairs WHERE technician_id = ?";
-    //         $stmt = $this->db->prepare($query);
-    //         $stmt->bindParam(1, $technicianId, PDO::PARAM_INT);
-    //         $stmt->execute();
-    //         return $stmt->fetchAll(PDO::FETCH_ASSOC); //fetching man rows
-    //     } catch(PDOException $e) {
-    //         throw $e;
-    //     }
-    // }
-
+    
     public function getTechnicianRepairsbyID($technicianId, $filter = 'all') {
         try {
             $query = "SELECT repair_id, item_name, technician_assigned_date, repair_wip_date, repair_completed_date, item_collected_date FROM repairs WHERE technician_id = ?";

@@ -1,7 +1,7 @@
 <?php
 require_once 'database.php';
 require_once 'users.php';
-// Assuming User class contains necessary properties and methods
+
 
 class Technician extends User {
 
@@ -30,12 +30,12 @@ class Technician extends User {
 
             return $result ?: [];  // Return the result or an empty array if no result
         } catch(PDOException $e) {
-            // Handle exceptions (you can log this or return a custom error message)
+            
             return [];  // Return an empty array on error
         }
     }
 
-    // Other technician-specific methods...
+    
 }
 
 

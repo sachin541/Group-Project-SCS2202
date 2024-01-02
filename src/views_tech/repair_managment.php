@@ -4,10 +4,10 @@ require_once '../classes/repair.php';
 
 require_once '../components/headers/main_header.php';
 
-// Assume customer ID is stored in session or retrieved through some mechanism
+
 $technicianId = $_SESSION['user_id'];
 
-// Handle the filter
+
 $repairFilter = isset($_GET['repair_filter']) ? $_GET['repair_filter'] : 'active';
 
 $database = new Database();

@@ -82,7 +82,7 @@ function formatPrice($price) {
             <input type="submit" value="Case" class="nav-link">
           </form>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
           <form action="build_parts.php" method="post">
             <input type="hidden" name="category" value="monitor">
             <input type="submit" value="Monitor" class="nav-link">
@@ -93,7 +93,7 @@ function formatPrice($price) {
             <input type="hidden" name="category" value="accessories">
             <input type="submit" value="Accessories" class="nav-link">
           </form>
-      </li>
+      </li> -->
 
 
       

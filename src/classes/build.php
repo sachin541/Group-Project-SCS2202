@@ -9,6 +9,7 @@ class Build {
         $this->db = $db;
     }
 
+    //for customer
     public function createBuild($customerID, $customerName, $contactNumber, $additionalNotes, $totalPrice, $cpuId, $gpuId, $motherboardId, $memoryId, $storageId, $powerSupplyId, $caseId) {
         try {
             $this->db->beginTransaction();
@@ -130,6 +131,61 @@ class Build {
             throw $e;
         }
     }
+
+    //for tech
+    public function getTechnicianBuildsbyID($technicianId, $filter = 'all') {
+        try {
+            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM Builds WHERE technician_id = :technicianId";
+            
+            if ($filter == 'completed') {
+                $query .= " AND build_collected_date IS NOT NULL";
+            } elseif ($filter == 'active') {
+                $query .= " AND build_collected_date IS NULL";
+            }
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':technicianId', $technicianId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+
+
+    
+
+    public function getAllNewBuilds(){
+            try {
+               
+                $query = "SELECT b.*, c.* FROM Builds b
+                  INNER JOIN components_list c ON b.components_list_id = c.id
+                  WHERE technician_assigned_date IS NULL";
+
+                $stmt = $this->db->prepare($query);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                throw $e;
+            }
+    }
+
+
+    public function getBuildStatus($build) {
+        if ($build['build_collected_date'] !== null && $build['build_collected_date'] !== '') {
+            return ['Collected', 'status-request-completed'];
+        } elseif ($build['build_completed_date'] !== null && $build['build_completed_date'] !== '') {
+            return ['Completed', 'status-build-ready'];
+        } elseif ($build['build_start_date'] !== null && $build['build_start_date'] !== '') {
+            return ['In Progress', 'status-build-in-progress'];
+        } elseif ($build['technician_assigned_date'] !== null && $build['technician_assigned_date'] !== '') {
+            return ['Assigned', 'status-technician-assigned'];
+        } else {
+            return ['Pending', 'status-request-created'];
+        }
+    }
+
+
 
 
 
