@@ -171,9 +171,9 @@ function formatPrice($price) {
                     <input type="submit" value="Delete" class="add-to-cart-button">
                 </form>
               </div>
-
-              <div class="product-actions">
-                <form action="../helpers/product_handler.php" method="post">
+                <!-- implement in future  -->
+              <div class="product-actions"> 
+                <form action="../helpers/nothingtoseehere" method="post">
                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                     <input type="hidden" name="formType" value="delete_product">
                     <input type="hidden" name="category" value="<?php echo $category; ?>">

@@ -42,6 +42,7 @@
             <option value="Storage">Storage</option>
             <option value="Case">Case</option>
             <option value="Monitor">Monitor</option>
+            <option value="Accessories">Accessories</option>
         </select>
     </div>
     <div>
@@ -53,9 +54,9 @@
     <div>
         <input type="text" name="price" placeholder="Price" required>
     </div>
-    <div>
+    <!-- <div>
         <input type="text" name="discount" placeholder="Discount">
-    </div>
+    </div> -->
     <div>
         <input type="text" name="brand" placeholder="Brand">
     </div>

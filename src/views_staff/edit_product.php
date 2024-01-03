@@ -18,6 +18,8 @@ if (!$product) {
     exit;
 }
 
+$_SESSION["category"]  = $product['category']; 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

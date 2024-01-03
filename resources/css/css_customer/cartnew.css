@@ -88,11 +88,11 @@ body {
 }
 
 .quantity-controls button:hover {
-    background-color: #0056b3;
+    background-color: red;
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: #16a085;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -103,7 +103,7 @@ body {
 }
 
 .delete-button:hover {
-    background-color: #000000; /* Darker shade on hover */
+    background-color: red; 
     
     
 }
@@ -112,6 +112,8 @@ body {
     text-align: right;
     margin-top: 40px;
     margin-bottom: 20px;
+    border-bottom: 10px;
+    
     
 }
 
@@ -135,7 +137,7 @@ body {
 }
 
 .checkout-button:hover {
-    background-color: rgb(43, 43, 201); /* Darker shade on hover */
+    background-color: red; /* Darker shade on hover */
     transform: translateY(-2px); /* Slightly raise the button */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
