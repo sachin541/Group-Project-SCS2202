@@ -3,7 +3,9 @@ require_once '../classes/database.php';
 require_once '../classes/cart.php';
 require_once '../components/headers/main_header.php';
 
-
+function formatPrice($price) {
+    return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
+  }
 
 $database = new Database();
 $db = $database->getConnection();
@@ -44,9 +46,9 @@ $totalAmount = 0; //used in loop later to calculate total in cart
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
                     <div class="details">
                         <div><h3><?php echo htmlspecialchars($item['product_name']); ?></h3></div>
-                        <div><p>Price: Rs.<?php echo htmlspecialchars($item['price']); ?></p></div>
+                        <div><p>Price: <?php echo htmlspecialchars(formatPrice($item['price'])); ?></p></div>
                         <div><p>Quantity: <?php echo htmlspecialchars($item['quantity']); ?></p></div>
-                        <div><p>Sub Total: Rs.<?php echo htmlspecialchars($item['price']*$item['quantity']); ?></p></div>
+                        <div><p>Sub Total: <?php echo htmlspecialchars(formatPrice($item['price']*$item['quantity'])); ?></p></div>
                     </div>
                     <!-- Update QTY -->
                     <div class="quantity-controls">
@@ -68,7 +70,7 @@ $totalAmount = 0; //used in loop later to calculate total in cart
             <?php endforeach; ?>
 
             <div class="cart-total">
-                <h2>Total: Rs.<?php echo htmlspecialchars(number_format($totalAmount, 2)); ?></h2>
+                <h2>Total: <?php echo htmlspecialchars(formatPrice($totalAmount, 2)); ?></h2>
 
                 <?php
                 if (isset($_SESSION['out_of_stock_message'])) {
