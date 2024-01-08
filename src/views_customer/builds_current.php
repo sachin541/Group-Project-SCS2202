@@ -76,12 +76,14 @@ function formatPrice($price) {
                             </td>
                             <td class="row-item total-price"><?= formatPrice(htmlspecialchars($build['amount'])) ?></td>
                             <td class="row-item date-added"><?= htmlspecialchars($build['added_timestamp']) ?></td>
+                            <!-- nav -->
                             <td class="row-item view-details">
                                 <form action="./build_details.php" method="post">
                                     <input type="hidden" name="build_id" value="<?= $build['build_id'] ?>">
                                     <input type="submit" value="View Details" class="details-button">
                                 </form>
                             </td>
+                            
                             <td class="row-item status">
                                 <span class="status-badge <?= $buildObj->getStatusClass($build['build_id']) ?>">
                                     <?= $buildObj->getStatus($build['build_id']) ?>
@@ -92,7 +94,7 @@ function formatPrice($price) {
                 </tbody>
             </table>
         </div>
-
+<!-- navigation  -->
         <div class="main-container-2">
             <div class="create-build-btn">
                 <form method="post" action="./build_create.php">

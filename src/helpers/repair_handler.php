@@ -2,6 +2,7 @@
 require_once '../classes/repair.php';
 session_start();
 
+// TODO : remove clean up this controller and merage with the otehr repair handler 
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tech_accept'])){
@@ -84,3 +85,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stage4_accept'])){
     }
 
 }
+

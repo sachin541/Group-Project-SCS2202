@@ -59,10 +59,12 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
                         
                         <span class="repair-id">Repair ID: <?php echo htmlspecialchars($repair['repair_id']); ?></span>
                         <span class="item-name">Item: <?php echo htmlspecialchars($repair['item_name']); ?></span>
+
                         <form action="repair_details.php" method="post" class="details-form">
                             <input type="hidden" name="repair_id" value="<?php echo $repair['repair_id']; ?>">
                             <input type="submit" value="Details" class="details-button">
                         </form>
+                        
                     </li>
                 <?php endforeach; ?>
             </ul>

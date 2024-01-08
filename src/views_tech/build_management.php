@@ -35,10 +35,10 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
 <body>
     <h1>All Builds</h1>
 
-    <!-- Flex Container for Two Columns -->
+    
     <div class="flex-container">
 
-        <!-- New Builds Section -->
+        
         <div class="table-container column">
             <h2>New Builds</h2>
             <?php if(empty($allBuilds)): ?>
@@ -93,12 +93,14 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                 </td>   
 
                                 <td><span class="status-badge <?= $statusData[1] ?>"><?= $statusData[0] ?></span></td>
+
                                 <td class="details-button-cell">
-                                    <form action="repair_managment_details.php" method="post">
-                                        <input type="hidden" name="repair_id" value="<?= $repair['repair_id'] ?>">
+                                    <form action="build_details.php" method="post">
+                                        <input type="hidden" name="build_id" value="<?= $build['build_id'] ?>">
                                         <input type="submit" value="Details" class="button-like-link">
                                     </form>
                                 </td>
+
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -130,7 +132,10 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                 <td><?= htmlspecialchars($build['customer_name']) ?></td>
                                 <td><span class="status-badge <?= $statusData[1] ?>"><?= $statusData[0] ?></span></td>
                                 <td class="details-button-cell">
-                                    <!-- Link or button to build details -->
+                                    <form action="build_details.php" method="post">
+                                        <input type="hidden" name="build_id" value="<?= $build['build_id'] ?>">
+                                        <input type="submit" value="Details" class="button-like-link">
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

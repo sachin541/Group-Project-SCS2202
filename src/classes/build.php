@@ -134,8 +134,9 @@ class Build {
 
     //for tech
     public function getTechnicianBuildsbyID($technicianId, $filter = 'all') {
+        // changed to * from build_id, customer_name, build_start_date, build_completed_date, build_collected_date
         try {
-            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM Builds WHERE technician_id = :technicianId";
+            $query = "SELECT * FROM Builds WHERE technician_id = :technicianId";
             
             if ($filter == 'completed') {
                 $query .= " AND build_collected_date IS NOT NULL";
@@ -184,6 +185,61 @@ class Build {
             return ['Pending', 'status-request-created'];
         }
     }
+
+
+    public function assignTechnicianToBuild($buildId, $technicianId) {
+        try {
+            $query = "UPDATE builds SET technician_id = ?, technician_assigned_date = CURDATE() WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $technicianId, PDO::PARAM_INT);
+            $stmt->bindParam(2, $buildId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+    // Function to mark build as started
+    public function startBuild($buildId) {
+        try {
+            $query = "UPDATE builds SET build_start_date = CURDATE() WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $buildId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+    // Function to mark build as completed
+    public function completeBuild($buildId) {
+        try {
+            $query = "UPDATE builds SET build_completed_date = CURDATE() WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $buildId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+    // Function to mark build as collected
+    public function collectBuild($buildId) {
+        try {
+            $query = "UPDATE builds SET build_collected_date = CURDATE() WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $buildId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch(PDOException $e) {
+            return false;
+        }
+    }
+
+
 
 
 
