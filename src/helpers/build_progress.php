@@ -6,10 +6,12 @@ $database = new Database();
 $db = $database->getConnection();
 $build = new Build($db);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $buildId = $_POST['refnumber'];
-
+    $_SESSION['current_build_tech'] = $buildId;
+    
     if (isset($_POST['tech_accept'])) {
         $technicianId = $_SESSION['user_id']; 
         $build->assignTechnicianToBuild($buildId, $technicianId);
@@ -31,15 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Redirect or handle response
     }
 
-
-    if ($build) {
-        echo "Build Updated";
-        $_SESSION['current_build_tech'] = $buildId;
-        header('Location: ../views_tech/build_managment.php');
-        
-    } else {
-        echo "Failed";
-    }
-
+    
+    
+    header('Location: ../views_tech/build_details.php');
+    
     // Redirect or response handling after each action
 }

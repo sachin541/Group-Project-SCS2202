@@ -10,15 +10,16 @@ $db = $database->getConnection();
 $build = new Build($db);
 $techobj = new Technician();
 
-echo $_POST["build_id"];
+if (isset($_POST["build_id"])){
+    $buildID = $_POST["build_id"];
+}
+else if(isset($_SESSION['current_build_tech'])) {
+    $buildID = $_SESSION['current_build_tech']; 
+    unset($_SESSION['current_build_tech']);
+}else{
+    echo "error"; 
+}
 
-if (isset($_POST["build_id"])) {
-    if (isset($_SESSION['current_build_tech'])) {
-        $buildID = $_SESSION['current_build_tech']; 
-        unset($_SESSION['current_build_tech']);
-    } else {
-        $buildID = $_POST["build_id"]; 
-    }
 
     $buildDetails = $build->getAllFromBuildById($buildID);
 
@@ -53,9 +54,7 @@ if (isset($_POST["build_id"])) {
     } else {
         echo "No details found for the given build ID.";
     }
-} else {
-    echo "Build ID is not provided.";
-}
+
 
 
 if ($build_collected_date) {

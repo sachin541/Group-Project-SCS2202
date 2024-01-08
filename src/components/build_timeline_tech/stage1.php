@@ -21,6 +21,7 @@
 
             <li style="--accent-color:#080a0d">
                 <div class="date"><?php echo "Technician will be assigned shortly!"?> </div>
+                <!-- accept button  -->
                 <div class="accept_button">
                     <form action="../helpers/build_progress.php" method="post" class="details-form">
                         <input type="hidden" name="tech_accept" value="true">
