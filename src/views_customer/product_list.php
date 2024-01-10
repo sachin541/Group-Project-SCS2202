@@ -14,7 +14,16 @@ $laptopProducts = $product->getProductsByCategory($category);
 function formatPrice($price) {
   return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
+
+
+usort($laptopProducts, function($a, $b) {
+  return $b['quantity'] <=> $a['quantity'];
+});
+
+
 ?>
+
+
 
 
 <?php require_once '../components/headers/main_header.php';?> 
@@ -113,11 +122,10 @@ function formatPrice($price) {
 
         <!-- out of stock  -->
         <?php foreach ($laptopProducts as $item): ?>
-         
-          <div class="product-card <?php echo $item['quantity'] <= 0 ? 'product-out-of-stock' : ''; ?>">
-             <?php if ($item['quantity'] <= 0): ?>
-                  <div class="out-of-stock-ribbon">Out of Stock</div>
-              <?php endif; ?>
+        <div class="product-card <?php echo $item['quantity'] <= 0 ? 'product-out-of-stock' : ''; ?>">
+            <?php if ($item['quantity'] <= 0): ?>
+                <div class="out-of-stock-ribbon">Out of Stock</div>
+            <?php endif; ?>
 
               <div class="product-image">
                   <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
