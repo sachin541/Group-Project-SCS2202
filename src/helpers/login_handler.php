@@ -22,6 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         else if($_SESSION['role'] == 'staff'){
             header('Location: ../views_staff/staff_home.php');
         }
+        else if($_SESSION['role'] == 'deliverer'){
+            header('Location: ../views_deliverer/deliverer_home.php');
+        }
         else{
             header('Location: ../views_main/home.php');
         }  

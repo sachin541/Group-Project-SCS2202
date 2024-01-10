@@ -163,3 +163,8 @@ CREATE TABLE Builds (
     
 );
 
+
+1/10/2024
+
+ALTER TABLE Orders
+ADD COLUMN delivery_status VARCHAR(255);

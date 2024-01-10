@@ -14,7 +14,10 @@ class Checkout {
             $this->db->beginTransaction();
 
             // Insert into orders table
-            $orderQuery = "INSERT INTO orders (total, created_at, payment_type, payment_status, first_name, last_name, email, phone, delivery_city_address, postalcode, province, city, customer_id) VALUES (?, NOW(), ?, 'pending', ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $orderQuery = "INSERT INTO orders (total, created_at, payment_type, payment_status, 
+            first_name, last_name, email, phone, delivery_city_address, postalcode, province, 
+            city, customer_id, delivery_status) 
+            VALUES (?, NOW(), ?, 'pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, 'not_assigned')";
             $orderStmt = $this->db->prepare($orderQuery);
 
             // Binding parameters
