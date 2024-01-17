@@ -46,7 +46,7 @@ function formatPrice($price) {
                     <?php foreach ($orderDetails as $item): ?>
                         <?php $productDetails = $product->getProductById($item['product_id']); ?>
                         <div class="component-item">
-                            <!-- Replace with actual image if available -->
+                            
                             <?php if ($productDetails['image1']) { ?>
                                 <img class="component-image" src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
                                 alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
