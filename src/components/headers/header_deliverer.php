@@ -15,7 +15,7 @@
     <header class="outer-grid-container">
 
         <div class="logo-container">
-            <a href="../views_main/home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo"
+            <a href="../views_deliverer/deliverer_home.php"><img src="../../resources/images/logo2.png" alt="logo png" id="logo"
                     height="50px" /></a>
             <p class="name">COMPUTIFY</p>
         </div>

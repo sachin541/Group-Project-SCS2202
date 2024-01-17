@@ -33,19 +33,17 @@ class Order {
     }
 }
 
+public function getUnassignedOrders() {
+    try {
+        $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
 
-
-
-
-
-
-
-
-
-
-
-
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        throw $e;
+    }
+}
 
 
 
