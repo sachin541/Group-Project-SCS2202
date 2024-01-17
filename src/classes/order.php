@@ -35,7 +35,7 @@ class Order {
 
 public function getUnassignedOrders() {
     try {
-        $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned'";
+        $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned'ORDER BY created_at DESC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 

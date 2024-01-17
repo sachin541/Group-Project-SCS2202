@@ -47,7 +47,10 @@ $unassignedOrders = $orderManager->getUnassignedOrders(); // Fetch unassigned or
                             </td>
                             <td><?= date('Y-m-d', strtotime($row['created_at'])) ?></td>
                             <td>
-                                <a href="order_details.php?order_id=<?= $row['order_id'] ?>" class="button-like-link">View Details</a>
+                                <form action="./detailsOrders.php" method="post" class="details-form">
+                                    <input type="hidden" name="order_id" value="<?= $row['order_id'] ?>">
+                                    <input type="submit" value="View Details" class="button-like-link">
+                                </form>
                             </td>
                         </tr>
                     </tbody>

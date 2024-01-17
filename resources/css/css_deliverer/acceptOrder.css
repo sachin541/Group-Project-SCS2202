@@ -98,3 +98,18 @@ h1.unassigned, h1.accpeted {
 .location-cell:hover .location-hover-text {
     display: block;
 }
+
+.details-form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.details-form input[type="submit"] {
+    width: auto; 
+    border: none;
+    margin: 0;
+    padding: 8px 10px;
+    
+}
