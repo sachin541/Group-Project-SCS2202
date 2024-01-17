@@ -16,7 +16,6 @@ function formatPrice($price) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>

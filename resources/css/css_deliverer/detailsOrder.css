@@ -1,0 +1,97 @@
+/* Existing General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Box-1: Order Items */
+.box-1 {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-items h2 {
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.component-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #16a085;
+    background-color: #f4f4f4;
+}
+
+.component-image {
+    width: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+}
+
+.component-details {
+    line-height: 1.2;
+    font-size: 1.1rem;
+}
+
+.component-name, .component-price {
+    color: #000000;
+    font-weight: 600;
+}
+
+.box-2 {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-items h2, .delivery-details h2 {
+    margin-top: 0;
+    color: #4CAF50; /* Adjust the color as needed */
+}
+
+.items-table, .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.items-table th, .details-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+.items-table td, .details-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.not-found {
+    color: red;
+    margin-top: 20px;
+}
+
+/* Additional styles */
