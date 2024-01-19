@@ -84,65 +84,142 @@
                 <button>Buy Now</button>
             </div>
         </div>
-        <div class="con-2">
-            <div class="subcon">
-                <img src="../../resources/images/main_home/con-3-img1.jpeg" alt="Avatar" class="image">
-                <button class="para">Build Your Dream PC</button>
+
+        <div class="con-4">
+            <div class="up">
+                <p class="main-p">Trending Products</p>
+                <button>See All</button>
             </div>
-            <div class="subcon">
-                <img src="../../resources/images/main_home/con-3-img2.jpg" alt="Avatar" class="image">
-                <button class="para">Buy New Laptop</button>
-            </div>
-            <div class="subcon">
-                <img src="../../resources/images/main_home/con-3-img3.jpg" alt="Avatar" class="image">
-                <button class="para">Collect Points</button>
-            </div>
-            <div class="subcon">
-                <img src="../../resources/images/main_home/con-3-img4.webp" alt="Avatar" class="image">
-                <button class="para">Delivery Your Order</button>
-            </div>
-        </div>
-        <div class="con-3">
-            <p class="main-p">New arrivals</p>
             <div class="products">
                 <div class="product-con">
                     <h2>Product Name</h2>
                     <img src="../../resources/images/products/p1.png">
                     <p>Description of the product.</p>
                     <span>Price: $19.99</span>
-                    <button>Add to Cart</button>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
                 </div>
                 <div class="product-con">
                     <h2>Product Name</h2>
-                    <img src="../../resources/images/products/p1.png">
+                    <img src="../../resources/images/products/p2.png">
                     <p>Description of the product.</p>
                     <span>Price: $19.99</span>
-                    <button>Add to Cart</button>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
                 </div>
                 <div class="product-con">
                     <h2>Product Name</h2>
-                    <img src="../../resources/images/products/p1.png">
+                    <img src="../../resources/images/products/p3.png">
                     <p>Description of the product.</p>
                     <span>Price: $19.99</span>
-                    <button>Add to Cart</button>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
                 </div>
                 <div class="product-con">
                     <h2>Product Name</h2>
-                    <img src="../../resources/images/products/p1.png">
+                    <img src="../../resources/images/products/p4.png">
                     <p>Description of the product.</p>
                     <span>Price: $19.99</span>
-                    <button>Add to Cart</button>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
                 </div>
                 <div class="product-con">
                     <h2>Product Name</h2>
-                    <img src="../../resources/images/products/p1.png">
+                    <img src="../../resources/images/products/p5.png">
                     <p>Description of the product.</p>
                     <span>Price: $19.99</span>
-                    <button>Add to Cart</button>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <?php include '../components/footer.php' ?> -->
+        <div class="con-3">
+            <div class="up">
+                <p class="main-p">New arrivals</p>
+                <button>See All</button>
+            </div>
+            <div class="products">
+                <div class="product-con">
+                    <h2>Product Name</h2>
+                    <img src="../../resources/images/products/p1.png">
+                    <p>Description of the product.</p>
+                    <span>Price: $19.99</span>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
+                </div>
+                <div class="product-con">
+                    <h2>Product Name</h2>
+                    <img src="../../resources/images/products/p2.png">
+                    <p>Description of the product.</p>
+                    <span>Price: $19.99</span>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
+                </div>
+                <div class="product-con">
+                    <h2>Product Name</h2>
+                    <img src="../../resources/images/products/p3.png">
+                    <p>Description of the product.</p>
+                    <span>Price: $19.99</span>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
+                </div>
+                <div class="product-con">
+                    <h2>Product Name</h2>
+                    <img src="../../resources/images/products/p4.png">
+                    <p>Description of the product.</p>
+                    <span>Price: $19.99</span>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
+                </div>
+                <div class="product-con">
+                    <h2>Product Name</h2>
+                    <img src="../../resources/images/products/p5.png">
+                    <p>Description of the product.</p>
+                    <span>Price: $19.99</span>
+                    <div><button><img src="../../resources/images/cart-white.png" class="but-img"></button>
+                        <button><img src="../../resources/images/heart-white.png" class="but-img"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="con-2">
+            <div class="subcon">
+                <img src="../../resources/images/main_home/con-3-img1.jpeg" alt="Avatar" class="image">
+                <p class="para">Powerful <span>processor</span>, ample <span>RAM</span>, fast
+                    <span>SSD</span>, high-end <span>GPU</span>, sleek
+                    <span>design</span>
+                </p>
+            </div>
+            <div class="subcon">
+                <img src="../../resources/images/main_home/con-3-img2.jpg" alt="Avatar" class="image">
+                <p class="para">Fast, <span>lightweight</span>, durable, <span>high-res</span> display, reliable
+                    <span>brand</span>, long <span>battery</span>
+                </p>
+            </div>
+            <div class="subcon">
+                <img src="../../resources/images/main_home/con-3-img3.jpg" alt="Avatar" class="image">
+                <p class="para"><span>Accumulate</span> points, <span>exchange</span> for products, enjoy exclusive
+                    <span>rewards and discounts</span>
+                </p>
+            </div>
+            <div class="subcon">
+                <img src="../../resources/images/main_home/con-3-img4.jpg" alt="Avatar" class="image">
+                <p class="para">Swift shipping, prompt delivery to <span>your doorstep</span> with <span>tracking
+                        updates</span></p>
+            </div>
+        </div>
+
+        <!--<?php include '../components/footer.php' ?>-->
 
 </body>
 
