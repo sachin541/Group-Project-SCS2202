@@ -1,0 +1,75 @@
+:root {
+    --progress-bar-green: #16a085; /* Replace with your preferred shade of green */
+}
+
+.progress-container {
+    width: 100%;
+    margin: 50px auto;
+}
+
+.progressbar {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progressbar li {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #7d7d7d;
+}
+
+.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #7d7d7d;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    line-height: 30px;
+    background: white;
+    color: #7d7d7d;
+    z-index: 2; /* Ensure numbers are above the lines */
+    position: relative; /* Needed for z-index to take effect */
+}
+
+.progressbar li:after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 40px); /* Adjust width to prevent overlap */
+    height: 2px;
+    background: #7d7d7d;
+    top: 15px;
+    left: 0%;
+    z-index: 1; /* Ensure lines are below the numbers */
+    transform: translateX(-50%);
+}
+
+.progressbar li:first-child:after {
+    content: none;
+}
+
+.progressbar li.completed {
+    color: var(--progress-bar-green);
+}
+
+.progressbar li.completed:before {
+    border-color: var(--progress-bar-green);
+    background: var(--progress-bar-green);
+    color: white;
+}
+
+.progressbar li.completed + li:after {
+    background: var(--progress-bar-green);
+}
+
+
+
+

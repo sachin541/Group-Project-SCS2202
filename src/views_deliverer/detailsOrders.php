@@ -11,6 +11,7 @@ $product = new Product($db);
 $orderClass = new Order($db);
 $orderDetails = [];
 
+$currentStep= 'Preparing';
 
 try {
     if (!empty($order_id)) {
@@ -23,13 +24,15 @@ try {
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Delivery Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/detailsOrder.css"> <!-- Update CSS path -->
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/detailsOrder.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/progressBar.css"> <!-- Update CSS path -->
 </head>
 <body>
 <div class="main-header">
@@ -108,20 +111,34 @@ function formatPrice($price) {
                         <td>Postal Code:</td>
                         <td><?= htmlspecialchars($firstItem['postalcode']) ?></td>
                     </tr>
-                    <!-- Add more rows as needed -->
+                    
                 </table>
 
-                <div class="accept-button-container">
+                
+            <?php else: ?>
+                <p class="not-found">Delivery details not found.</p>
+            <?php endif; ?>
+
+                
+            <div class="progress-container">
+                <ul class="progressbar">
+                    <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">Order Placed</li>
+                    <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">Preparing</li>
+                    <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">On The Way</li>
+                    <li class="<?= ($currentStep == 'Delivered') ? 'completed' : '' ?>">Delivered</li>
+                </ul>
+            </div>
+
+            <div class="accept-button-container">
                     <form action="YOUR_POST_ENDPOINT.php" method="POST">
                         
                         <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
 
                         <button type="submit" class="accept-button">Accept Delivery</button>
                     </form>
-                </div>
-            <?php else: ?>
-                <p class="not-found">Delivery details not found.</p>
-            <?php endif; ?>
+            </div>
+
+
         </div>
     </div>
 </div>
