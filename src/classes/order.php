@@ -9,12 +9,12 @@ class Order {
     public function __construct($db) {
         $this->db = $db;
     }
-
+    //TODO : CHANGE THIS FUNCTION
     public function getOrderDetails($orderId) {
     try {
         $query = "SELECT 
                     orders.order_id, orders.total, orders.created_at, orders.payment_type , orders.payment_status,
-                    orders.first_name, orders.last_name, orders.email, orders.phone,
+                    orders.first_name, orders.last_name, orders.email, orders.phone, orders.delivery_status, 
                     orders.delivery_city_address, orders.postalcode, orders.city, orders.province,
                     order_items.quantity AS item_quantity, order_items.product_id,
                     products.product_name, products.price
@@ -36,7 +36,7 @@ class Order {
 
     public function getUnassignedOrders() {
         try {
-            $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned' ORDER BY created_at DESC";
+            $query = "SELECT * FROM orders WHERE delivery_status = 'Order Placed' ORDER BY created_at DESC";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
 

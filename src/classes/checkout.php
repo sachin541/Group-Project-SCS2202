@@ -17,7 +17,8 @@ class Checkout {
             $orderQuery = "INSERT INTO orders (total, created_at, payment_type, payment_status, 
             first_name, last_name, email, phone, delivery_city_address, postalcode, province, 
             city, customer_id, delivery_status) 
-            VALUES (?, NOW(), ?, 'pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, 'not_assigned')";
+            VALUES (?, NOW(), ?, 'pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Order Placed')";
+
             $orderStmt = $this->db->prepare($orderQuery);
 
             // Binding parameters

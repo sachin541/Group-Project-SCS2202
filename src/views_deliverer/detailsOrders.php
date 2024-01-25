@@ -21,6 +21,7 @@ try {
     $errorMessage = $e->getMessage();
 }
 
+// echo '<pre>' . print_r($orderDetails, true) . '</pre>';
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
@@ -81,7 +82,10 @@ function formatPrice($price) {
         <div class="delivery-details">
             <h2 class="components-heading">Delivery Details</h2>
             <?php if (!empty($orderDetails)): ?>
-                <?php $firstItem = $orderDetails[0]; ?>
+                <?php $firstItem = $orderDetails[0]; 
+                $currentStep = $firstItem['delivery_status']; 
+                echo $currentStep ; 
+                ?>
                 <table class="details-table">
                     <tr>
                         <td>Recipient Name:</td>
