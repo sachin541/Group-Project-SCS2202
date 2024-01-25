@@ -93,9 +93,9 @@ body {
 .total-price-section {
     margin-top: 15px;
     padding: 5px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
     text-align: center;
 }
 
@@ -114,7 +114,7 @@ body {
 
 .accept-button-container {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .accept-button {

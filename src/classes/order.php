@@ -18,6 +18,7 @@ class Order {
                     orders.delivery_city_address, orders.postalcode, orders.city, orders.province,
                     order_items.quantity AS item_quantity, order_items.product_id,
                     products.product_name, products.price
+                    
                   FROM Orders orders
                   JOIN Order_Items order_items ON orders.order_id = order_items.order_id
                   JOIN products ON order_items.product_id = products.id

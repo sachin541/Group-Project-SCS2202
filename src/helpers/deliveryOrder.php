@@ -5,7 +5,7 @@ require_once '../classes/database.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$deliveryObj = new Delivery($db); // Use your actual Delivery class
+$deliveryObj = new Delivery($db); 
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views_main/login.php');
@@ -46,5 +46,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 
-// Additional code if needed (e.g., HTML form, error messages)
-?>
+
+

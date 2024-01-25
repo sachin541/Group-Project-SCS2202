@@ -11,7 +11,7 @@ $product = new Product($db);
 $orderClass = new Order($db);
 $orderDetails = [];
 
-$currentStep= 'Preparing';
+$currentStep= 'Order Placed';
 
 try {
     if (!empty($order_id)) {
@@ -122,15 +122,17 @@ function formatPrice($price) {
                 
             <div class="progress-container">
                 <ul class="progressbar">
-                    <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">Order Placed</li>
-                    <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">Preparing</li>
-                    <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Delivered') ? 'completed' : '' ?>">On The Way</li>
-                    <li class="<?= ($currentStep == 'Delivered') ? 'completed' : '' ?>">Delivered</li>
+                    <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Order Placed</li>
+                    <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Accepted</li>
+                    <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Preparing</li>
+                    <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">On The Way</li>
+                    <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">Completed</li>
                 </ul>
             </div>
 
+
             <div class="accept-button-container">
-                    <form action="YOUR_POST_ENDPOINT.php" method="POST">
+                    <form action="../helpers/deliveryOrder.php" method="POST">
                         
                         <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
 
