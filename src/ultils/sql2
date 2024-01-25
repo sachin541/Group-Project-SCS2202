@@ -182,4 +182,16 @@ CREATE TABLE deliveries (
 );
 
 
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES login_details(id) ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+
+
+
 
