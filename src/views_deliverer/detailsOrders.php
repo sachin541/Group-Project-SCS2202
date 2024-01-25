@@ -135,26 +135,30 @@ function formatPrice($price) {
             <?php endif; ?>
 
                 
-            <div class="progress-container">
-                <ul class="progressbar">
+            
+
+
+        </div>
+    </div>
+
+    <div class="action-section">
+        <!-- Accept Delivery Button --><!-- Progress Bar -->
+        <div class="progress-container">
+            <ul class="progressbar">
                     <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Order Placed</li>
                     <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Accepted</li>
                     <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Preparing</li>
                     <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">On The Way</li>
                     <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">Completed</li>
                 </ul>
-            </div>
+        </div>
 
-
-            <div class="accept-button-container">
-                    <form action="../helpers/deliveryOrder.php" method="POST">
-                        <input type="hidden" name="handler_type" value="accept_order">
-                        <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
-                        <button type="submit" class="accept-button">Accept Delivery</button>
-                    </form>
-            </div>
-
-
+        <div class="accept-button-container">
+            <form action="../helpers/deliveryOrder.php" method="POST">
+                <input type="hidden" name="handler_type" value="accept_order">
+                <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
+                <button type="submit" class="accept-button">Accept Delivery</button>
+            </form>
         </div>
     </div>
 </div>

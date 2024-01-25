@@ -1,30 +1,39 @@
-/* Existing General Styles */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
     background-color: #f8f8f8;
     color: #333;
+
 }
 
-/* Grid Container */
+
 .grid-container {
+    
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+        "orderItems deliveryDetails"
+        "fullWidth fullWidth"; 
+    gap: 8px;
+    padding: 50px;
     max-width: 90%;
+     
     margin: auto;
+    
 }
 
-/* Common Box Style for Order Items and Delivery Details */
+
 .box-style {
     background: #fff;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+   
 }
 
-/* Section Headings */
+
 .box-style h2 {
     color: black;
     margin-bottom: 20px;
@@ -33,7 +42,7 @@ body {
     font-weight: bold;
 }
 
-/* Order Items Styles */
+
 .component-item {
     display: flex;
     align-items: center;
@@ -112,23 +121,30 @@ body {
     margin-top: 10px;
 }
 
-.accept-button-container {
-    text-align: center;
-    margin-top: 10px;
+
+
+.box-style:first-child {
+    grid-area: orderItems;
 }
 
-.accept-button {
-    padding: 10px 20px;
-    background-color: #16a085;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+.box-style:nth-child(2) {
+    grid-area: deliveryDetails;
 }
 
-.accept-button:hover {
-    background-color: red;
+
+.action-section {
+    grid-area: fullWidth;
+    margin: 0px;
+    padding: 5px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    
 }
+
+
+
+
+
+
 

@@ -3,8 +3,8 @@
 }
 
 .progress-container {
-    width: 100%;
-    margin: 50px auto;
+    width: 80%;
+    margin: 20px auto;
 }
 
 .progressbar {
@@ -19,7 +19,7 @@
     position: relative;
     flex: 1;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #7d7d7d;
 }
 
@@ -69,6 +69,30 @@
 .progressbar li.completed + li:after {
     background: var(--progress-bar-green);
 }
+
+/* Styles for Accept Delivery Button */
+.accept-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accept-button {
+    padding: 10px 20px;
+    
+    background-color: #16a085;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-button:hover {
+    background-color: red;
+   
+}
+
 
 
 
