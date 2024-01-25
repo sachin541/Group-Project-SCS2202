@@ -177,8 +177,9 @@ CREATE TABLE deliveries (
     accepted_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     completed_date DATETIME, 
     status VARCHAR(255) DEFAULT 'accepted',
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (delivery_person_id) REFERENCES employees(staff_id) 
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE SET NULL,
+    FOREIGN KEY (delivery_person_id) REFERENCES employees(staff_id) ON DELETE SET NULL
 );
+
 
 

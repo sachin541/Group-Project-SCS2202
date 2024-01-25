@@ -12,7 +12,7 @@ class Delivery {
 
     public function CreateDelivery($orderid, $delivery_id, $completed_date, $status) {
         try {
-            $this->db->beginTransaction();
+            
 
             $query = "INSERT INTO deliveries (order_id, delivery_person_id, completed_date, status) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);

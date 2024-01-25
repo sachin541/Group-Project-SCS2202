@@ -14,8 +14,10 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['handler_type'])) {
+        
         switch ($_POST['handler_type']) {
             case 'accept_order':
+                
                 $orderId = $_POST['order_id'];
                 $deliveryPersonId = $_SESSION['user_id'];
                 $completedDate = NULL; 
@@ -24,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 try {
                     $result = $deliveryObj->acceptDelivery($orderId, $deliveryPersonId, $completedDate, $status);
-                    echo $result ? "Order Accepted Successfully" : "Failed to Accept Order";
+                    
 
                 } catch (Exception $e) {
                     // Handle any exceptions here
