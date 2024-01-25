@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif; /* Sets the default font for the body */
+    background-color: #fafafa; /* Light grey background for the whole page */
+    margin: 0; /* Removes default margin from the body */
+    padding: 0; /* Removes default padding from the body */
+    color: #333; /* Default text color set to dark grey */
+}
+
+/* Cart Container Styles */
+.cart-container {
+    width: 80%; /* Sets the width of the cart container to 80% of the parent element */
+    margin: 20px auto; /* Centers the container and adds margin around it */
+    background-color: #fff; /* Background color of the cart container */
+    padding: 20px; /* Padding inside the cart container */
+    border-radius: 8px; /* Rounded corners of the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around the container */
+}
+
+/* Cart Table Styles */
+.cart-table {
+    width: 100%; /* Makes the table width 100% of its parent container */
+    border-collapse: collapse; /* Collapses border to avoid double borders between cells */
+    margin-top: 20px; /* Adds margin above the table */
+}
+
+.cart-table th, .cart-table td {
+    text-align: left; /* Aligns text to the left in table headers and cells */
+    padding: 8px; /* Adds padding inside table cells */
+    border-bottom: 1px solid #ddd; /* Adds a bottom border to each cell */
+}
+
+.cart-table th {
+    background-color: #16a085; /* Background color for table headers */
+    color: white; /* Text color for table headers */
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex; /* Enables flexbox layout for product info */
+    align-items: center; /* Vertically centers items in the flex container */
+}
+
+.product-info h3 {
+    margin-right: 10px; /* Adds margin to the right of the product name */
+}
+
+.product-info img {
+    width: 50px; /* Sets width of the product image */
+    height: 50px; /* Sets height of the product image */
+    object-fit: cover; /* Ensures the image covers the set width and height */
+    border-radius: 4px; /* Rounds the corners of the image */
+}
+
+/* Cart Table Image Styles */
+.cart-table img {
+    width: 50px; /* Sets width of images in the table */
+    height: 50px; /* Sets height of images in the table */
+    object-fit: cover; /* Ensures the image covers the set width and height */
+    border-radius: 4px; /* Rounds the corners of the image */
+    margin-right: 10px; /* Adds margin to the right of the image */
+}
+
+/* Empty Cart Message Styles */
+.empty-cart-message {
+    text-align: center; /* Centers the text of the empty cart message */
+    color: #666; /* Sets the text color */
+    font-style: italic; /* Italicizes the text */
+}
+
+/* Cart Total Section Styles */
+.cart-total {
+    margin-top: 20px; /* Adds margin above the cart total section */
+    text-align: right; /* Aligns the total to the right */
+}
+
+.cart-total h2 {
+    color: #16a085; /* Sets the color of the total price text */
+    font-size: 1.4rem; /* Sets the font size of the total price text */
+}
+
+/* Button Styles */
+.checkout-button, .delete-button {
+    background-color: #16a085; /* Background color for buttons */
+    color: white; /* Text color for buttons */
+    padding: 10px 15px; /* Padding inside the buttons */
+    border: none; /* Removes border from buttons */
+    border-radius: 4px; /* Rounds the corners of the buttons */
+    cursor: pointer; /* Changes the cursor to a pointer when hovering over buttons */
+    transition: background-color 0.3s; /* Smooth transition for background color change on hover */
+}
+
+.delete-button {
+    background-color: black /* Background color for delete buttons */
+}
+
+.checkout-button:hover, .delete-button:hover {
+     /* Changes the opacity when buttons are hovered over */
+    background-color: red;
+}
+
+/* Out of Stock Message Styles */
+.out-of-stock-message {
+    color: #e74c3c; /* Text color for out of stock messages */
+    margin-top: 10px; /* Adds margin above the message */
+}
+
+
+.quantity-controls {
+    margin-left: auto;
+}
+
+.quantity-controls input[type="text"] {
+    width: 40px;
+    text-align: center;
+    margin: 0 0px;
+    border: 1px solid #ccc; /* Adds a border */
+    padding: 5px; /* Adds some padding inside the input box */
+    border-radius: 5px; /* Rounded corners to match the buttons */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for depth */
+    outline: none; /* Removes the default focus outline */
+}
+
+.quantity-controls input[type="text"]:focus {
+    border-color: #000000; /* Changes border color on focus */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 123, 255, 0.5); /* Enhances shadow on focus */
+}
+
+.quantity-controls button {
+    background-color: #515151;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners for buttons */
+    margin: 5px; /* Adding some margin for spacing */
+}
+
+.quantity-controls button:hover {
+    background-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
