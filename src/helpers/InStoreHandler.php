@@ -1,0 +1,59 @@
+<?php
+require_once '../classes/database.php'; 
+require_once '../classes/InStore.php';
+
+session_start();
+
+$database = new Database();
+$db = $database->getConnection();
+
+$inStore = new InStore($db);
+
+// Check if the user is logged in
+if (!isset($_SESSION['staff_id'])) {
+    header('Location: ../views_main/staff_login.php');
+    exit;
+}
+
+if (isset($_POST['product_id']) && isset($_POST['remove_from_instore'])) {
+    $productId = $_POST['product_id'];
+    $staffId = $_SESSION['staff_id'];
+
+    // Delete from in-store
+    $inStore->deleteFromInStore($staffId, $productId);
+
+    // Redirect back to the in-store page
+    header('Location: ../views_staff/view_instore.php');
+    exit;
+}
+
+if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['update_instore_qty'])) {
+    $productId = $_POST['product_id'];
+    $quantity = max(1, $_POST['quantity']); // Ensures quantity is at least 1
+    $staffId = $_SESSION['staff_id'];
+
+    // Update the in-store
+    $inStore->updateInStoreQuantity($staffId, $productId, $quantity);
+
+    // Redirect back to the in-store page
+    header('Location: ../views_staff/view_instore.php');
+    exit;
+}
+
+if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['add_to_cart'])) {
+    $productId = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
+    $staffId = $_SESSION['staff_id']; 
+    
+    // Add to in-store
+    $inStore->addToInStore($staffId, $productId, $quantity);
+
+    // Redirect to in-store page
+    header('Location: ../views_staff/view_instore.php');
+    exit;
+}
+
+// Redirect to product list if the required POST data isn't set
+header('Location: ../views_staff/product_list.php');
+exit;
+?>
