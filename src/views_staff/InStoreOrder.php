@@ -18,7 +18,7 @@ $cartItems = $inStore->getInStoreItemsByUserId($userId);
 $totalAmount = 0; // Used in loop later to calculate total
 
 function formatPrice($price) {
-    return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
+    return 'Rs. ' . number_format($price, 2, '.', ',') ;
 }
 ?>
 
@@ -32,7 +32,7 @@ function formatPrice($price) {
 </head>
 <body>
     <div class="cart-container">
-        <h1>My Cart</h1>
+        <h1>Create New Order</h1>
 
         <?php if (empty($cartItems)): ?>
             <p class="empty-cart-message">Your cart is empty.</p>
@@ -67,9 +67,9 @@ function formatPrice($price) {
                             <td><?php echo htmlspecialchars(formatPrice($subtotal)); ?></td>
                             <td>
                             <div class="quantity-controls"> 
-                                <form action="../helpers/cart_handler.php" method="post" id="update-form-<?php echo $item['id']; ?>">
+                                <form action="../helpers/InStoreHandler.php" method="post" id="update-form-<?php echo $item['id']; ?>">
                                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                                    <input type="hidden" name="update_cart_qty" value="True">
+                                    <input type="hidden" name="update_instore_qty" value="True">
                                     <button type="button" onclick="decreaseQuantity(<?php echo $item['id']; ?>)">-</button>
                                     <input type="text" name="quantity" value="<?php echo htmlspecialchars($item['quantity']); ?>">
                                     <button type="button" onclick="increaseQuantity(<?php echo $item['id']; ?>)">+</button>
@@ -77,9 +77,9 @@ function formatPrice($price) {
                             </div>
                             </td>
                             <td>
-                                <form action="../helpers/cart_handler.php" method="post">
+                                <form action="../helpers/InStoreHandler.php" method="post">
                                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                                    <input type="hidden" name="remove_from_cart" value="True">
+                                    <input type="hidden" name="remove_from_instore" value="True">
                                     <input type="submit" value="Remove" class="delete-button">
                                 </form>
                             </td>

@@ -24,7 +24,7 @@ if (isset($_POST['product_id']) && isset($_POST['remove_from_instore'])) {
     $inStore->deleteFromInStore($staffId, $productId);
 
     // Redirect back to the in-store page
-    header('Location: ../views_staff/view_instore.php');
+    header('Location: ../views_staff/InStoreOrder.php');
     exit;
 }
 
@@ -37,7 +37,7 @@ if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['up
     $inStore->updateInStoreQuantity($staffId, $productId, $quantity);
 
     // Redirect back to the in-store page
-    header('Location: ../views_staff/view_instore.php');
+    header('Location: ../views_staff/InStoreOrder.php');
     exit;
 }
 
