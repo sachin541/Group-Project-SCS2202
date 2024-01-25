@@ -5,7 +5,8 @@ require_once '../classes/order.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$order_id = $_POST['order_id'];
+// $order_id = $_POST['order_id'];
+$order_id = isset($_POST['order_id']) ? $_POST['order_id'] : (isset($_GET['order_id']) ? $_GET['order_id'] : '');
 
 $product = new Product($db);
 $orderClass = new Order($db);
@@ -84,7 +85,7 @@ function formatPrice($price) {
             <?php if (!empty($orderDetails)): ?>
                 <?php $firstItem = $orderDetails[0]; 
                 $currentStep = $firstItem['delivery_status']; 
-                echo $currentStep ; 
+                // echo $currentStep ; 
                 ?>
                 <table class="details-table">
                     <tr>
@@ -159,11 +160,20 @@ function formatPrice($price) {
 
         <div class="accept-button-container">
             <form action="../helpers/deliveryOrder.php" method="POST">
-                <input type="hidden" name="handler_type" value="accept_order">
+                <input type="hidden" name="handler_type" value="progress_order">
+                <input type="hidden" name="delivery_status" value="<?= htmlspecialchars($currentStep) ?>">
                 <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
-                <button type="submit" class="accept-button">Accept Delivery</button>
+                <!-- <?php echo $currentStep; ?> -->
+                <?php if ($currentStep == 'Order Placed'): ?>
+                    <button type="submit" class="accept-button">Accept Delivery</button>
+                <?php elseif ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way'): ?>
+                    <button type="submit" class="accept-button">Next Stage</button>
+                <?php elseif ($currentStep == 'On The Way'): ?>
+                    <button type="submit" class="accept-button">Complete</button>
+                <?php endif; ?>
             </form>
         </div>
+
     </div>
 </div>
 

@@ -14,37 +14,39 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['handler_type'])) {
-        
         switch ($_POST['handler_type']) {
-            case 'accept_order':
-                
+            case 'progress_order':
                 $orderId = $_POST['order_id'];
+                $currentStatus = $_POST['delivery_status']; // Get the current status
                 $deliveryPersonId = $_SESSION['user_id'];
-                $completedDate = NULL; 
-                $status = "Accepted";
+                // Determine the next status based on the current status
+                $nextStatus = '';
+                if ($currentStatus == 'Order Placed') {
+                    $nextStatus = 'Accepted';
+                    $status = "Accepted";
+                    $result = $deliveryObj->CreateDelivery($orderId, $deliveryPersonId, NULL, $status);
+                } elseif ($currentStatus == 'Accepted') {
+                    $nextStatus = 'Preparing';
+                } elseif ($currentStatus == 'Preparing') {
+                    $nextStatus = 'On The Way';
+                } elseif ($currentStatus == 'On The Way') {
+                    $nextStatus = 'Completed';
+                }
 
-                
-                try {
-                    $result = $deliveryObj->acceptDelivery($orderId, $deliveryPersonId, $completedDate, $status);
-                    
-
-                } catch (Exception $e) {
-                    // Handle any exceptions here
-                    echo $e;
+                if (!empty($nextStatus) || $currentStatus == 'Order Placed') {
+                    try {
+                        $result = $deliveryObj->progressDeliveryStage($orderId, $nextStatus);
+                        echo "Order status updated to: $nextStatus";
+                        header('Location: ../views_deliverer/detailsOrders.php?order_id=' . urlencode($orderId));
+                    } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
+                } else {
+                    echo "Invalid current status.";
                 }
                 break;
 
-            case 'update_delivery':
-                // Implementation for update_delivery
-                break;
-
-            case 'remove_delivery':
-                // Implementation for remove_delivery
-                break;
-
-            case 'create_new_delivery':
-                // Implementation for create_new_delivery
-                break;
+            // ... Other cases ...
         }
     }
     exit;
@@ -52,4 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-
+                
+                

@@ -49,6 +49,17 @@ class Delivery {
         }
     }
 
+    public function progressDeliveryStage($orderId, $newStatus) {
+        try {
+            $query = "UPDATE orders SET delivery_status = ? WHERE order_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$newStatus, $orderId]);
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
 
     public function getMyDeliveries($deliveryPersonId) {
         try {
