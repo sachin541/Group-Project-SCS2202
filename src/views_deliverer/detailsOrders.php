@@ -111,6 +111,21 @@ function formatPrice($price) {
                         <td>Postal Code:</td>
                         <td><?= htmlspecialchars($firstItem['postalcode']) ?></td>
                     </tr>
+                    <tr>
+                    <td>Payment Type:</td>
+                    <td>
+                        <?php
+                        
+                        if ($firstItem['payment_type'] === 'pay_on_delivery') {
+                            echo 'Pay on Delivery';
+                        } else if ($firstItem['payment_type'] === 'payed_online') {
+                            echo 'Paid Online';
+                        } else {
+                            echo 'Unknown'; 
+                        }
+                        ?>
+                    </td>
+                </tr>
                     
                 </table>
 
