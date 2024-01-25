@@ -13,12 +13,20 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     
     if (isset($_POST['handler_type'])) {
+        
         switch ($_POST['handler_type']) {
+
             case 'accept_order':
-                $deliveryObj->CreateDelivery()
+                
+                $order_id = $_POST['order_id']; 
+                $delivery_id = $_SESSION['user_id']; 
+                $completed_date = NULL; 
+                $status = "Accepted"; 
+                $test = $deliveryObj->CreateDelivery($order_id, $delivery_id , $completed_date , $status); 
+                echo $test; 
                 break;
 
             case 'update_delivery':
@@ -38,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     
-    header('Location: some_destination_page.php');
+    
     exit;
 }
 

@@ -133,9 +133,8 @@ function formatPrice($price) {
 
             <div class="accept-button-container">
                     <form action="../helpers/deliveryOrder.php" method="POST">
-                        
+                        <input type="hidden" name="handler_type" value="accept_order">
                         <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
-                        <input type="hidden" name="" value="<?= htmlspecialchars($order_id) ?>">
                         <button type="submit" class="accept-button">Accept Delivery</button>
                     </form>
             </div>
