@@ -18,7 +18,7 @@ $cartItems = $inStore->getInStoreItemsByUserId($userId);
 $totalAmount = 0; // Used in loop later to calculate total
 
 function formatPrice($price) {
-    return 'Rs. ' . number_format($price, 2, '.', ',') ;
+    return number_format($price, 2, '.', ',') ;
 }
 ?>
 
@@ -43,9 +43,9 @@ function formatPrice($price) {
                         <th>Product</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Sub Total</th>
                         <th>Update Quantity</th>
                         <th>Remove</th>
+                        <th>Sub Total (RS.)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,7 +64,7 @@ function formatPrice($price) {
                             </td>
                             <td><?php echo htmlspecialchars(formatPrice($item['price'])); ?></td>
                             <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                            <td><?php echo htmlspecialchars(formatPrice($subtotal)); ?></td>
+                            
                             <td>
                             <div class="quantity-controls"> 
                                 <form action="../helpers/InStoreHandler.php" method="post" id="update-form-<?php echo $item['id']; ?>">
@@ -83,13 +83,24 @@ function formatPrice($price) {
                                     <input type="submit" value="Remove" class="delete-button">
                                 </form>
                             </td>
+                            <td><?php echo htmlspecialchars(formatPrice($subtotal)); ?></td>
                         </tr>
+                        
                     <?php endforeach; ?>
+                    <tr class="last-row">
+                        <td colspan="6" class="add-more-container">
+                            <a href="./product_list.php" class="add-more-link">
+                                <img src="../../resources/images/icons/addmore.png" alt="Add More Products">
+                                <span>Add More Products</span>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
-            </table>
 
+            </table>
+            
             <div class="cart-total">
-                <h2>Total: <?php echo htmlspecialchars(formatPrice($totalAmount, 2)); ?></h2>
+                <h2>Total: <?php echo htmlspecialchars(formatPrice($totalAmount)); ?></h2>
 
                 <?php
                 if (isset($_SESSION['out_of_stock_message'])) {
@@ -107,9 +118,16 @@ function formatPrice($price) {
                 <form action="../helpers/cart_transaction_handler.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userId); ?>">
                     <input type="hidden" name="total_amount" value="<?php echo htmlspecialchars($totalAmount); ?>">
-                    <input type="submit" value="Checkout" class="checkout-button">
+                    <input type="submit" value="Create Order" class="checkout-button">
                 </form>
+
+                
+                        
+
+                        
+                
             </div>
+            
         <?php endif; ?>
     </div>
 </body>

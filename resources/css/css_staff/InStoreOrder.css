@@ -141,6 +141,49 @@ body {
 }
 
 
+.button-container {
+    margin: 20px 0; /* Adjust top and bottom margin as needed */
+    text-align: center; /* Center the button if it's not already centered */
+}
+
+
+.add-more-container {
+    align-content: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+   
+}
+
+.add-more-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333; /* Change color as needed */
+    font-weight: bold;
+}
+
+.add-more-link img {
+    width: 50px; /* Sets width of the product image */
+    height: 50px; /* Sets height of the product image */
+    object-fit: cover; /* Ensures the image covers the set width and height */
+    border-radius: 4px;
+}
+
+.add-more-link span {
+    vertical-align: middle;
+}
+
+.last-row {
+    justify-content: center; /* Example: a light grey background */
+}
+
+
+
+
+
+
+
 
 
 
