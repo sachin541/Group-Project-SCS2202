@@ -38,7 +38,7 @@ function formatPrice($price) {
 
 <div class="grid-container">
     <!-- First Column: Order Items -->
-    
+    <div class="box-style">
         <div class="components-section">
             <h2 class="components-heading">Order Items</h2>
             <div class="components-list">
@@ -46,7 +46,6 @@ function formatPrice($price) {
                     <?php foreach ($orderDetails as $item): ?>
                         <?php $productDetails = $product->getProductById($item['product_id']); ?>
                         <div class="component-item">
-                            
                             <?php if ($productDetails['image1']) { ?>
                                 <img class="component-image" src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
                                 alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
@@ -54,6 +53,8 @@ function formatPrice($price) {
                             <div class="component-details">
                                 <p class="component-name"><?= htmlspecialchars($item['product_name']) ?></p>
                                 <p class="component-price">Quantity: <?= htmlspecialchars($item['item_quantity']) ?></p>
+                                <!-- Add price for each item -->
+                                <p class="component-item-price">Unit Price: <?= formatPrice($productDetails['price']) ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -61,16 +62,36 @@ function formatPrice($price) {
                     <p class="not-found">Order items not found.</p>
                 <?php endif; ?>
             </div>
+
+            <?php if (!empty($orderDetails)): ?>
+                <div class="total-price-section">
+                    <h3>Total Price:</h3>
+                    <p><?= formatPrice($orderDetails[0]['total']) ?></p>
+                </div>
+            <?php endif; ?>
+
         </div>
-    
+    </div>
 
     <!-- Second Column: Delivery Details -->
-    <div class="box-2">
+    <div class="box-style">
         <div class="delivery-details">
             <h2 class="components-heading">Delivery Details</h2>
             <?php if (!empty($orderDetails)): ?>
                 <?php $firstItem = $orderDetails[0]; ?>
                 <table class="details-table">
+                    <tr>
+                        <td>Recipient Name:</td>
+                        <td><?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><?= htmlspecialchars($firstItem['email']) ?></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><?= htmlspecialchars($firstItem['phone']) ?></td>
+                    </tr>
                     <tr>
                         <td>Delivery Address:</td>
                         <td><?= htmlspecialchars($firstItem['delivery_city_address']) ?></td>
@@ -89,6 +110,15 @@ function formatPrice($price) {
                     </tr>
                     <!-- Add more rows as needed -->
                 </table>
+
+                <div class="accept-button-container">
+                    <form action="YOUR_POST_ENDPOINT.php" method="POST">
+                        
+                        <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
+
+                        <button type="submit" class="accept-button">Accept Delivery</button>
+                    </form>
+                </div>
             <?php else: ?>
                 <p class="not-found">Delivery details not found.</p>
             <?php endif; ?>

@@ -27,10 +27,9 @@
             </div>
             <div class="content">
 
-<a href="../views_delivery/delivery_home.php" class="topnav-item">Products</a>
-<a href="../views_delivery/view_cart.php" class="topnav-item">Cart</a>
-<a href="../views_delivery/repairs.php" class="topnav-item">Repairs</a>
-<a href="../views_delivery/build_Item_selector.php" class="topnav-item">Builds</a>
+<a href="../views_deliverer/deliverer_home.php" class="topnav-item">Home</a>
+<a href="../views_deliverer/acceptOrders.php" class="topnav-item">Orders</a>
+
 
 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
 <!-- <a href="../pages/repairs.php" class="topnav-item">Repairs</a> -->
