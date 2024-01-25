@@ -1,7 +1,7 @@
 
 <?php
 require_once 'database.php';
-
+require_once 'Order.php';
 class Delivery {
 
     private $db;
@@ -12,6 +12,8 @@ class Delivery {
 
     public function CreateDelivery($orderid, $delivery_id, $completed_date, $status) {
         try {
+            $this->db->beginTransaction();
+
             $query = "INSERT INTO deliveries (order_id, delivery_person_id, completed_date, status) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
     
@@ -27,9 +29,27 @@ class Delivery {
             return $e;
         }
     }
+
+    public function acceptDelivery($orderId, $deliveryPersonId, $completedDate, $status) {
+        try {
+            $this->db->beginTransaction();
+
+            
+            $order = new Order($this->db);
+            $order->updateDeliveryStatus($orderId, 'Accepted');
+
+            
+            $this->CreateDelivery($orderId, $deliveryPersonId, $completedDate, $status);
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
+
     
-
-
-
 }
 ?>

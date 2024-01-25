@@ -32,27 +32,30 @@ class Order {
     } catch(PDOException $e) {
         throw $e;
     }
-}
-
-public function getUnassignedOrders() {
-    try {
-        $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned'ORDER BY created_at DESC";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch(PDOException $e) {
-        throw $e;
     }
-}
 
+    public function getUnassignedOrders() {
+        try {
+            $query = "SELECT * FROM orders WHERE delivery_status = 'not_assigned'ORDER BY created_at DESC";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
-
-
-
-
-
+    public function updateDeliveryStatus($orderId, $status) {
+        try {
+            $query = "UPDATE orders SET delivery_status = ? WHERE order_id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$status, $orderId]);
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 
 
 }
