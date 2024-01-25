@@ -50,6 +50,22 @@ class Delivery {
     }
 
 
+    public function getMyDeliveries($deliveryPersonId) {
+        try {
+            $query = "SELECT d.*, o.total, o.created_at 
+                      FROM deliveries d
+                      JOIN orders o ON d.order_id = o.order_id
+                      WHERE d.delivery_person_id = ? AND d.status = 'Accepted'";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$deliveryPersonId]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+
     
 }
 ?>
