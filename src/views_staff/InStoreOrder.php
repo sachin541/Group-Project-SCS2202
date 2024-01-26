@@ -124,9 +124,14 @@ function formatPrice($price) {
                     <input type="submit" value="Create Order" class="checkout-button">
                 </form> -->
 
-                <a href="./confirmOrder.php" class="add-more-link">
+                <!-- <a href="./confirmOrder.php" class="add-more-link">
                     <span>Create Order</span>
-                </a>
+                </a> -->
+
+                <form action="../helpers/InStoreHandler.php" method="post">
+                    <input type="hidden" name="check_qty" value="true">
+                    <input type="submit" value="Create Order" class="checkout-button">
+                </form>
 
                 
                         
