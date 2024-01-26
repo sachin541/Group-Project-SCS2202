@@ -1,0 +1,95 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif; /* Sets the default font for the body */
+    background-color: #fafafa; /* Light grey background for the whole page */
+    margin: 0; /* Removes default margin from the body */
+    padding: 0; /* Removes default padding from the body */
+    color: #333; /* Default text color set to dark grey */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Box Style for Each Section */
+.box-style {
+    background-color: #fff; /* Background color of the box */
+    padding: 20px; /* Padding inside the box */
+    border-radius: 8px; /* Rounded corners of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around the box */
+    margin-bottom: 20px; /* Add spacing between sections */
+}
+
+/* Heading Style */
+.box-style h2 {
+    color: #000000; /* Text color for headings */
+     /* Space below the heading */
+    text-align: left; /* Aligns text to the left */
+    font-size: 1.5rem; /* Font size for the heading */
+    padding : 10px;
+    background-color: #ddefea;
+    border-radius: 10px;
+    
+}
+
+
+.cart-table th, .cart-table td {
+    text-align: left; /* Aligns text to the left in table headers and cells */
+    padding: 10px; /* Adds padding inside table cells */
+    border-bottom: 1px solid #ddd; /* Adds a bottom border to each cell */
+}
+
+.cart-table th {
+    background-color: #16a085; /* Background color for table headers */
+    color: white; /* Text color for table headers */
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex; /* Enables flexbox layout for product info */
+    align-items: center; /* Vertically centers items in the flex container */
+    padding: 10px;
+}
+
+.product-info img {
+    width: 50px; /* Sets width of the product image */
+    height: 50px; /* Sets height of the product image */
+    object-fit: cover; /* Ensures the image covers the set width and height */
+    border-radius: 4px; /* Rounds the corners of the image */
+    margin-right: 10px; /* Adds margin to the right of the image */
+}
+
+/* Total Price Section Styles */
+.total-price-section {
+    margin-top: 20px; /* Adds margin above the total price section */
+    text-align: right; /* Aligns the total to the right */
+}
+
+.total-price-section h3 {
+    color: #16a085; /* Sets the color of the total price text */
+    font-size: 1.4rem; /* Sets the font size of the total price text */
+}
+
+.details-table {
+    width: 100%; /* Full width of its parent container */
+    padding: 8px;
+    margin-top: 10px; /* Adds margin above the table */
+    
+}
+
+.details-table th, .details-table td {
+    text-align: left; /* Aligns text to the left in table headers and cells */
+    padding: 16px; /* Adds padding inside table cells */
+    border-bottom: 1px solid #ddd; /* Adds a bottom border to each cell */
+}
+
+.details-table th {
+    background-color: #16a085; /* Background color for table headers */
+    color: white; /* Text color for table headers */
+}
+

@@ -88,7 +88,7 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                             <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
                             <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="./ViewROrderDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <a href="./ViewRetailOrderDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

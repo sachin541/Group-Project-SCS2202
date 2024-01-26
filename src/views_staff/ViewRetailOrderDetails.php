@@ -22,6 +22,7 @@ try {
     $errorMessage = $e->getMessage();
 }
 // print_r($orderDetails);
+
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
@@ -31,7 +32,7 @@ function formatPrice($price) {
 <html>
 <head>
     <title>Delivery Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/detailsOrder.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewRetailOrderDetails.css">
     
 </head>
 <body>
@@ -44,41 +45,62 @@ function formatPrice($price) {
     <div class="box-style">
         <div class="components-section">
             <h2 class="components-heading">Order Items</h2>
-            <div class="components-list">
-                <?php if (!empty($orderDetails)): ?>
-                    <?php foreach ($orderDetails as $item): ?>
-                        <?php $productDetails = $product->getProductById($item['product_id']); ?>
-                        <div class="component-item">
-                            <?php if ($productDetails['image1']) { ?>
-                                <img class="component-image" src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
-                                alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
-                            <?php } ?>
-                            <div class="component-details">
-                                <p class="component-name"><?= htmlspecialchars($item['product_name']) ?></p>
-                                <p class="component-price">Quantity: <?= htmlspecialchars($item['item_quantity']) ?></p>
-                                <p class="component-item-price">Unit Price: <?= formatPrice($productDetails['price']) ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="not-found">Order items not found.</p>
-                <?php endif; ?>
-            </div>
+
             <?php if (!empty($orderDetails)): ?>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orderDetails as $item): ?>
+                            <?php 
+                            $productDetails = $product->getProductById($item['product_id']);
+                            $subtotal = $productDetails['price'] * $item['item_quantity'];
+                            ?>
+                            <tr>
+                                <td>
+                                    <div class="product-info">
+                                        <?php if ($productDetails['image1']) { ?>
+                                            <img src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
+                                            alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
+                                        <?php } ?>
+                                        <h3><?= htmlspecialchars($productDetails['product_name']) ?></h3>
+                                    </div>
+                                </td>
+                                <td><?= htmlspecialchars(formatPrice($productDetails['price'])) ?></td>
+                                <td><?= htmlspecialchars($item['item_quantity']) ?></td>
+                                <td><?= htmlspecialchars(formatPrice($subtotal)) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
                 <div class="total-price-section">
-                    <h3>Total Price:</h3>
-                    <p><?= formatPrice($orderDetails[0]['total']) ?></p>
+                    <h3>Total Price: <?= formatPrice($orderDetails[0]['total']) ?></h3>
                 </div>
+            <?php else: ?>
+                <p class="not-found">Order items not found.</p>
             <?php endif; ?>
         </div>
     </div>
+
+    
 
     <!-- Second Column: Delivery Details -->
     <div class="box-style">
         <div class="delivery-details">
             <h2 class="components-heading">Order Details</h2>
             <?php if (!empty($orderDetails)): ?>
-                <?php $firstItem = $orderDetails[0]; ?>
+                <?php $firstItem = $orderDetails[0]; 
+                $staffInfo = $managerobj->getStaffById($firstItem['createdby']);
+                $staffName = $staffInfo['staff_name'];
+                
+                ?>
                 <table class="details-table">
                     <tr>
                         <td>Order ID:</td>
@@ -94,7 +116,7 @@ function formatPrice($price) {
                     </tr>
                     <tr>
                         <td>Created By (User ID):</td>
-                        <td><?= htmlspecialchars($firstItem['createdby']) ?></td>
+                        <td><?= htmlspecialchars($staffName . " (". $firstItem['createdby'] . ")") ?></td>
                     </tr>
                     <tr>
                         <td>Payment Type:</td>
