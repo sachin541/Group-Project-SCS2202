@@ -82,12 +82,12 @@ $totalAmount = 0;
                 <div class="payment-options">
                     <h3>Payment Options</h3>
                     <div>
-                        <input type="radio" id="pay_delivery" name="payment_method" value="pay_on_delivery" checked>
-                        <label for="pay_delivery">Pay by Card</label>
+                        <input type="radio" id="pay_delivery" name="payment_method" value="Cash" checked>
+                        <label for="pay_delivery">Pay by Cash</label>
                     </div>
                     <div>
-                        <input type="radio" id="pay_online" name="payment_method" value="pay_online">
-                        <label for="pay_online">Pay by Cash</label>
+                        <input type="radio" id="pay_online" name="payment_method" value="Card">
+                        <label for="pay_online">Pay by Card</label>
                     </div>
                 </div>
 

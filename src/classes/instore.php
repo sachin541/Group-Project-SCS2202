@@ -137,6 +137,50 @@ class InStore  {
         }
     }
 
+    public function ConfirmInStoreOrder($userId, $data, $cartItems) {
+        try {
+            $this->db->beginTransaction();
+    
+            // Insert into InStorePurnchace table
+            $orderQuery = "INSERT INTO InStorePurnchace (total, payment_type, payment_status, 
+            NIC, first_name, last_name, phone) 
+            VALUES (?, ?, 'pending', ?, ?, ?, ?)";
+    
+            $orderStmt = $this->db->prepare($orderQuery);
+    
+            // Binding parameters
+            $orderStmt->bindParam(1, $data['total_amount']);
+            $orderStmt->bindParam(2, $data['payment_method']);
+            $orderStmt->bindParam(3, $data['NIC']); // Assuming NIC is part of $data
+            $orderStmt->bindParam(4, $data['first_name']);
+            $orderStmt->bindParam(5, $data['last_name']);
+            $orderStmt->bindParam(6, $data['phone']);
+    
+            $orderStmt->execute();
+    
+            $orderId = $this->db->lastInsertId();
+    
+            // Insert into InStorePurnchace_Items table
+            $orderItemQuery = "INSERT INTO InStorePurnchace_Items (quantity, order_id, product_id) VALUES (?, ?, ?)";
+            $orderItemStmt = $this->db->prepare($orderItemQuery);
+    
+            foreach ($cartItems as $item) {
+                // Binding parameters for each item
+                $orderItemStmt->bindParam(1, $item['quantity']);
+                $orderItemStmt->bindParam(2, $orderId);
+                $orderItemStmt->bindParam(3, $item['product_id']);
+    
+                $orderItemStmt->execute();
+            }
+    
+            $this->db->commit();
+            return $orderId;
+        } catch(PDOException $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
 
 
 

@@ -1,6 +1,6 @@
 <?php
-session_start(); // Ensure the session is started
-require_once '../classes/delivery.php'; // Adjust path and class name as per your setup
+session_start(); 
+require_once '../classes/delivery.php'; 
 require_once '../classes/database.php';
 
 $database = new Database();
