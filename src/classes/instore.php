@@ -184,16 +184,56 @@ class InStore  {
         }
     }
 
-    public function getAllOrders() {
+    public function getAllOrders($filterBy = null, $sortBy = null) {
         try {
-            $query = "SELECT * FROM InStorePurchase ORDER BY created_at DESC";
+            // Start of query
+            $query = "SELECT * FROM InStorePurchase";
+    
+            // Filtering logic
+            if ($filterBy) {
+                // Adjust the filtering logic as per your requirement
+                $query .= " WHERE payment_status = :filterBy";
+            }
+    
+            // Sorting logic
+            if ($sortBy) {
+                switch ($sortBy) {
+                    case 'date_asc':
+                        $query .= " ORDER BY created_at ASC";
+                        break;
+                    case 'date_desc':
+                        $query .= " ORDER BY created_at DESC";
+                        break;
+                    case 'total_asc':
+                        $query .= " ORDER BY total ASC";
+                        break;
+                    case 'total_desc':
+                        $query .= " ORDER BY total DESC";
+                        break;
+                    // Add more sorting options if needed
+                }
+            } else {
+                // Default sorting
+                $query .= " ORDER BY created_at DESC";
+            }
+    
+            // Preparing and executing the statement
             $stmt = $this->db->prepare($query);
+    
+            // Bind the filter parameter if it exists
+            if ($filterBy) {
+                $stmt->bindParam(':filterBy', $filterBy);
+            }
+    
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
         } catch(PDOException $e) {
             throw $e;
         }
     }
+    
+    
     
 
 

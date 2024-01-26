@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Orders Container Styles */
+.orders-container {
+    width: 80%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Orders Table Styles */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table th, .orders-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+    background-color: #16a085;
+    color: white;
+}
+
+.orders-table td {
+    padding: 15px; /* Increase this value as needed */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Remove Underline from View Details Links */
+
+
+.details-button:hover {
+    background-color: #333;
+    text-decoration: none; /* Ensures underline doesn't reappear on hover */
+}
+
+/* Orders Header */
+.orders-header {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* Empty Orders Message */
+.no-orders-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Details Button */
+.details-button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Removes the underline */
+}
+
+.details-button:hover {
+    background-color: #333;
+}
+
+/* Table Rows Hover Effect */
+.table-data-row:hover {
+    background-color: #f2f2f2;
+}
+
+/* Out-of-Stock Message */
+.out-of-stock-message {
+    background-color: #ffdddd;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.out-of-stock-message p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.filter-sort-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filter-sort-container select {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
