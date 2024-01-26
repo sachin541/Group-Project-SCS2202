@@ -8,7 +8,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : '';
-$order_id = 37;
+
 
 $product = new Product($db);
 $inStore = new Order($db);

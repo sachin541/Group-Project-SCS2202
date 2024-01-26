@@ -57,53 +57,117 @@ class Order {
         }
     }
 
-    public function getAllOrders($filterBy = null, $sortBy = null) {
-        try {
-            // Start of query using SELECT with JOIN on deliveries table
-            $query = "SELECT 
-                        Orders.*, 
-                        deliveries.id AS delivery_id, 
-                        deliveries.delivery_person_id, 
-                        deliveries.accepted_date, 
-                        deliveries.completed_date, 
-                        deliveries.status AS delivery_status
-                      FROM Orders 
-                      LEFT JOIN deliveries ON Orders.order_id = deliveries.order_id";
+    // public function getAllOrders($filterBy = null, $sortBy = null) {
+    //     try {
+    //         // Start of query using SELECT *
+    //         $query = "SELECT * FROM Orders";
 
-            // Filtering logic
-            if ($filterBy) {
-                // Example: filter by payment status. Adjust as needed.
-                $query .= " WHERE Orders.payment_status = :filterBy";
+    //         // Filtering logic
+    //         if ($filterBy) {
+    //             // Example: filter by payment status. Adjust as needed.
+    //             $query .= " WHERE payment_status = :filterBy";
+    //         }
+
+    //         // Sorting logic
+    //         if ($sortBy) {
+    //             switch ($sortBy) {
+    //                 case 'date_asc':
+    //                     $query .= " ORDER BY created_at ASC";
+    //                     break;
+    //                 case 'date_desc':
+    //                     $query .= " ORDER BY created_at DESC";
+    //                     break;
+    //                 case 'total_asc':
+    //                     $query .= " ORDER BY total ASC";
+    //                     break;
+    //                 case 'total_desc':
+    //                     $query .= " ORDER BY total DESC";
+    //                     break;
+    //                 // Add more sorting options if needed
+    //             }
+    //         } else {
+    //             // Default sorting
+    //             $query .= " ORDER BY created_at DESC";
+    //         }
+
+    //         // Preparing and executing the statement
+    //         $stmt = $this->db->prepare($query);
+
+    //         // Bind the filter parameter if it exists
+    //         if ($filterBy) {
+    //             $stmt->bindParam(':filterBy', $filterBy);
+    //         }
+
+    //         $stmt->execute();
+    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     } catch(PDOException $e) {
+    //         throw $e;
+    //     }
+    // }
+
+    public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null) {
+        try {
+            $query = "SELECT * FROM Orders";
+
+            // Where conditions array
+            $whereConditions = [];
+
+            if ($paymentType) {
+                $whereConditions[] = "payment_type = :paymentType";
+            }
+
+            if ($paymentStatus) {
+                $whereConditions[] = "payment_status = :paymentStatus";
+            }
+
+            if ($deliveryStatus) {
+                $whereConditions[] = "delivery_status = :deliveryStatus";
+            }
+
+            // Add where conditions to query if they exist
+            if (!empty($whereConditions)) {
+                $query .= " WHERE " . implode(" AND ", $whereConditions);
             }
 
             // Sorting logic
             if ($sortBy) {
                 switch ($sortBy) {
                     case 'date_asc':
-                        $query .= " ORDER BY Orders.created_at ASC";
+                        $query .= " ORDER BY created_at ASC";
                         break;
                     case 'date_desc':
-                        $query .= " ORDER BY Orders.created_at DESC";
+                        $query .= " ORDER BY created_at DESC";
+                        break;
+                    case 'id_asc':
+                        $query .= " ORDER BY order_id ASC";
+                        break;
+                    case 'id_desc':
+                        $query .= " ORDER BY order_id DESC";
                         break;
                     case 'total_asc':
-                        $query .= " ORDER BY Orders.total ASC";
+                        $query .= " ORDER BY total ASC";
                         break;
                     case 'total_desc':
-                        $query .= " ORDER BY Orders.total DESC";
+                        $query .= " ORDER BY total DESC";
                         break;
-                    // Add more sorting options if needed
                 }
-            } else {
-                // Default sorting
-                $query .= " ORDER BY Orders.created_at DESC";
             }
 
-            // Preparing and executing the statement
+            // Preparing statement
             $stmt = $this->db->prepare($query);
 
-            // Bind the filter parameter if it exists
-            if ($filterBy) {
-                $stmt->bindParam(':filterBy', $filterBy);
+            // Binding parameters
+            if ($paymentType) {
+                $stmt->bindParam(':paymentType', $paymentType);
+            }
+
+            if ($paymentStatus) {
+                $stmt->bindParam(':paymentStatus', $paymentStatus);
+            }
+
+            if ($deliveryStatus) {
+                $stmt->bindParam(':deliveryStatus', $deliveryStatus);
             }
 
             $stmt->execute();

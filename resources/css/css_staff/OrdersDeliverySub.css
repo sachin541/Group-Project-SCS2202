@@ -1,0 +1,158 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Orders Container Styles */
+.orders-container {
+    width: 80%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Orders Table Styles */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table th, .orders-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+    background-color: #16a085;
+    color: white;
+}
+
+.orders-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+
+
+/* Orders Header */
+.orders-header {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* Empty Orders Message */
+.no-orders-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Details Button */
+.details-button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    text-decoration: none;
+}
+
+.details-button:hover {
+    background-color: red;
+}
+
+.orders-table tr:nth-child(even) {
+    background-color: #f4f4f4f4; 
+}
+
+/* Table Rows Hover Effect */
+.table-data-row:hover {
+    background-color: #e4f7f4;
+    
+}
+
+.orders-table tr:nth-child(even):hover {
+    background-color: #e4f7f4;
+    
+}
+
+
+/* Filter & Sort Container */
+.filter-sort-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Styles */
+.filter-sort-container select.filter-dropdown {
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    width: auto; /* Adjusted to fit content */
+    display: inline-block;
+    min-width: 150px; /* Ensures a minimum width */
+    max-width: 300px; /* Ensures the dropdown does not become too wide */
+    overflow: hidden; /* Prevents text overflow */
+    text-overflow: ellipsis; /* Adds ellipsis for overflowed text */
+}
+
+/* Style for dropdown items */
+.filter-sort-container select.filter-dropdown option {
+    padding: 10px;
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-sort-container select.filter-dropdown:hover,
+.filter-sort-container select.filter-dropdown:focus {
+    border-color: #16a085;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for selected option */
+.filter-sort-container select.filter-dropdown option:checked {
+    background-color: #16a085;
+    color: white;
+}
+
+/* Apply Filter Button */
+.apply-filter-button {
+    background-color: #000000; /* Matching theme color */
+    color: white;
+    padding: 10px 20px; /* Sufficient padding for better appearance */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem; /* Standard font size for readability */
+    margin-left: 10px; /* Spacing from the dropdown */
+}
+
+.apply-filter-button:hover {
+    background-color: red; /* Slightly darker shade for hover effect */
+    color: #f8f8f8; /* Lighter color for text on hover */
+}
+
+
+
