@@ -1,0 +1,105 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "orderItems deliveryDetails"
+        "fullWidth fullWidth"; 
+    gap: 20px;
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+}
+
+/* Box Style */
+.box-style {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Heading Style */
+.box-style h2 {
+    color: #000000;
+    text-align: left;
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: #ddefea;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Table Styles */
+.cart-table, .details-table {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td,
+.details-table th, .details-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-table th, .details-table th {
+    background-color: #16a085;
+    color: white;
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Total Price Section Styles */
+.total-price-section {
+    margin-top: 20px;
+    text-align: right;
+    color: #16a085;
+    font-size: 1.4rem;
+}
+
+/* First Column Width in Details Table */
+.details-table td:first-child {
+    min-width: 150px;
+}
+
+/* Action Section Styles */
+.action-section {
+    grid-area: fullWidth;
+    margin: 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    
+}
+
+.delivery-status {
+    text-align: center;
+    background-color: #ddefea;
+    border-radius: 10px;
+    margin-bottom: 40px; 
+    padding: 10px ; 
+}
