@@ -51,9 +51,21 @@ class Delivery {
 
     public function progressDeliveryStage($orderId, $newStatus) {
         try {
-            $query = "UPDATE orders SET delivery_status = ? WHERE order_id = ?";
+            // Start constructing the query
+            $query = "UPDATE Orders SET delivery_status = ?";
+
+            // Only add payment_status update if the new status is 'Completed'
+            if ($newStatus === 'Completed') {
+                $query .= ", payment_status = 'Payment Completed'";
+            }
+
+            // Finalize the query
+            $query .= " WHERE order_id = ?";
+
+            // Preparing and executing the statement
             $stmt = $this->db->prepare($query);
             $stmt->execute([$newStatus, $orderId]);
+
             return true;
         } catch (PDOException $e) {
             throw $e;

@@ -37,7 +37,12 @@
 
 <a href="../views_staff/ViewAllOrders.php" class="topnav-item">Orders</a>
 
-<a href="../views_staff/ViewOrderDeliverySub.php" class="topnav-item">test</a>
+
+<a href="../views_staff/OrderDeliveryDetails.php" class="topnav-item">test</a>
+<a href="../views_staff/OrderRetailDetails.php" class="topnav-item">test</a>
+<a href="../views_staff/OrdersAll.php" class="topnav-item">test</a>
+<a href="../views_staff/OrdersDeliverySub.php" class="topnav-item">test</a>
+<a href="../views_staff/OrdersRetailSub.php" class="topnav-item">test</a>
 
 <a href="../ultils/logout.php" class="unreg-log">Log Out</a>
 

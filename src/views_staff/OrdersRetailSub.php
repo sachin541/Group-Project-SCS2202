@@ -98,4 +98,3 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
     </div>
 </body>
 </html>
-
