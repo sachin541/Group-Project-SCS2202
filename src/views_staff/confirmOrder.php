@@ -66,11 +66,12 @@ $totalAmount = 0;
 
         <div class="checkout-form-container">
             <h2>Customer Details</h2>
+            <div class="enter-details">Enter Details</div>
             <form action="../helpers/checkout_handler.php" method="post" class="checkout-form">
                 <input type="hidden" name="total_amount" value="<?php echo htmlspecialchars($totalAmount); ?>">
                 <div><input type="text" name="first_name" placeholder="First Name" required></div>
                 <div><input type="text" name="last_name" placeholder="Last Name" required></div>
-                <!-- <div><input type="email" name="email" placeholder="Email" required></div> -->
+                <div><input type="text" name="NIC" placeholder="NIC" required></div>
                 <div><input type="text" name="phone" placeholder="Phone" required></div>
                 <!-- <div><input type="text" name="delivery_address" placeholder="Delivery Address" required></div>
                 <div><input type="text" name="postalcode" placeholder="Postal Code" required></div>

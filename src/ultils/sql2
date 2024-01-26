@@ -199,6 +199,7 @@ CREATE TABLE InStorePurnchace (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     payment_type VARCHAR(255),
     payment_status VARCHAR(255),
+    NIC VARCHAR(255),
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     phone VARCHAR(255)
