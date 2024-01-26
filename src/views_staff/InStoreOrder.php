@@ -1,12 +1,13 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/InStore.php';
+require_once '../classes/product.php';
 require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
 $inStore = new InStore($db);
-
+$productobj = new Product($db); 
 // Check if the user (staff) is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views_main/staff_login.php');
@@ -42,6 +43,7 @@ function formatPrice($price) {
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
+                        <th>Stock</th>
                         <th>Quantity</th>
                         <th>Update Quantity</th>
                         <th>Remove</th>
@@ -63,6 +65,7 @@ function formatPrice($price) {
                                 </div>
                             </td>
                             <td><?php echo htmlspecialchars(formatPrice($item['price'])); ?></td>
+                            <td><?php echo htmlspecialchars($productobj->getProductStockById($item['id'])); ?></td>
                             <td><?php echo htmlspecialchars($item['quantity']); ?></td>
                             
                             <td>
@@ -88,7 +91,7 @@ function formatPrice($price) {
                         
                     <?php endforeach; ?>
                     <tr class="last-row">
-                        <td colspan="6" class="add-more-container">
+                        <td colspan="7" class="add-more-container">
                             <a href="./product_list.php" class="add-more-link">
                                 <img src="../../resources/images/icons/addmore.png" alt="Add More Products">
                                 <span>Add More Products</span>
