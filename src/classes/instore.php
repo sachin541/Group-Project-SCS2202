@@ -137,6 +137,8 @@ class InStore  {
         }
     }
 
+    
+
     public function ConfirmInStoreOrder($userId, $data, $cartItems) {
         try {
             $this->db->beginTransaction();
@@ -144,7 +146,7 @@ class InStore  {
             // Insert into InStorePurnchace table
             $orderQuery = "INSERT INTO InStorePurnchace (total, payment_type, payment_status, 
             NIC, first_name, last_name, phone) 
-            VALUES (?, ?, 'pending', ?, ?, ?, ?)";
+            VALUES (?, ?, 'completed', ?, ?, ?, ?)";
     
             $orderStmt = $this->db->prepare($orderQuery);
     

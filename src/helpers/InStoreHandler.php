@@ -54,6 +54,32 @@ if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['ad
     exit;
 }
 
+if ( isset($_POST['Instore_order']) ) {
+    try {
+        $userId = $_SESSION['user_id']; 
+
+        $cartItems = $inStore->getInStoreItemsByUserId($userId);
+
+       
+        $orderId = $inStore->ConfirmInStoreOrder($userId, $_POST, $cartItems);
+        
+        
+        $inStore->updateInStoreProductQuantities($userId);
+        
+        
+        $inStore->clearInStore($userId);
+
+        
+        header('Location: ../views_customer/order_success.php?order_id=' . $orderId);
+        exit;
+    } catch (Exception $e) {
+        
+        echo $e->getMessage();
+    }
+
+
+}
+
 // Redirect to product list if the required POST data isn't set
 header('Location: ../views_staff/product_list.php');
 exit;
