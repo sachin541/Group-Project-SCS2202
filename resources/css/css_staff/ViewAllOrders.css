@@ -101,15 +101,46 @@ body {
 }
 
 .filter-sort-container {
-    margin-bottom: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.filter-sort-container select {
-    padding: 10px;
+
+/* Dropdown Styles */
+.filter-sort-container select.filter-dropdown {
+    
+    padding: 8px 12px;
     margin-right: 10px;
-    border-radius: 4px;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 1rem;
     cursor: pointer;
+    outline: none; /* Removes the default focus outline */
+    transition: all 0.3s ease;
+    width: 150px; /* Set the desired width for the dropdowns */
 }
+
+/* Style for dropdown items */
+.filter-sort-container select.filter-dropdown option {
+    padding: 10px;
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-sort-container select.filter-dropdown:hover,
+.filter-sort-container select.filter-dropdown:focus {
+    border-color: #16a085;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for selected option */
+.filter-sort-container select.filter-dropdown option:checked {
+    background-color: #16a085;
+    color: white;
+}
+
+
 

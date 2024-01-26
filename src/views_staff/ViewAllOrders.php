@@ -38,15 +38,16 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
             <div class="filter-sort-container">
                 <form action="" method="GET">
                     <!-- Filter Dropdown -->
-                    <select name="filter_by" onchange="this.form.submit()">
-                        <option value="">Filter by Payment Status</option>
+                    <!-- Filter Dropdown -->
+                    <select name="filter_by" onchange="this.form.submit()" class="filter-dropdown">
+                        <option value="">Filter by</option>
                         <option value="paid">Paid</option>
                         <option value="unpaid">Unpaid</option>
                         <!-- Add other filter options as needed -->
                     </select>
 
                     <!-- Sort Dropdown -->
-                    <select name="sort_by" onchange="this.form.submit()">
+                    <select name="sort_by" onchange="this.form.submit()" class="filter-dropdown">
                         <option value="">Sort by</option>
                         <option value="date_asc">Date Ascending</option>
                         <option value="date_desc">Date Descending</option>
@@ -54,6 +55,7 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                         <option value="total_desc">Total Descending</option>
                         <!-- Add other sorting options as needed -->
                     </select>
+
                 </form>
             </div>
 
@@ -77,13 +79,14 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                         <tr class="table-data-row">
                             <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                             <td><?php echo htmlspecialchars($order['total']); ?></td>
-                            <td><?php echo htmlspecialchars($order['created_at']); ?></td>
+                            <td><?php echo date('Y-m-d', strtotime($order['created_at'])); ?></td>
+
                             <!-- <td><?php echo htmlspecialchars($order['createdby']); ?></td> -->
                             <td><?php echo htmlspecialchars($order['payment_type']); ?></td>
                             <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
                             <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="detailsPage.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <a href="order_details.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
