@@ -50,24 +50,28 @@ class Delivery {
     }
 
     public function progressDeliveryStage($orderId, $newStatus) {
+        $this->db->beginTransaction();
         try {
-            // Start constructing the query
-            $query = "UPDATE Orders SET delivery_status = ?";
-
-            // Only add payment_status update if the new status is 'Completed'
+            // Update Orders table
+            $queryOrders = "UPDATE Orders SET delivery_status = ?";
             if ($newStatus === 'Completed') {
-                $query .= ", payment_status = 'Payment Completed'";
+                $queryOrders .= ", payment_status = 'Payment Completed'";
+            }
+            $queryOrders .= " WHERE order_id = ?";
+            $stmtOrders = $this->db->prepare($queryOrders);
+            $stmtOrders->execute([$newStatus, $orderId]);
+
+            // Update Deliveries table if the new status is 'Completed'
+            if ($newStatus === 'Completed') {
+                $queryDeliveries = "UPDATE deliveries SET completed_date = NOW(), status = 'completed' WHERE order_id = ?";
+                $stmtDeliveries = $this->db->prepare($queryDeliveries);
+                $stmtDeliveries->execute([$orderId]);
             }
 
-            // Finalize the query
-            $query .= " WHERE order_id = ?";
-
-            // Preparing and executing the statement
-            $stmt = $this->db->prepare($query);
-            $stmt->execute([$newStatus, $orderId]);
-
+            $this->db->commit();
             return true;
         } catch (PDOException $e) {
+            $this->db->rollBack();
             throw $e;
         }
     }
