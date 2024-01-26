@@ -193,10 +193,11 @@ CREATE TABLE instore_items (
 
 
 
-CREATE TABLE InStorePurnchace (
+CREATE TABLE InStorePurchase (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     total DECIMAL(10, 2),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    createdby INT, 
     payment_type VARCHAR(255),
     payment_status VARCHAR(255),
     NIC VARCHAR(255),
@@ -207,12 +208,12 @@ CREATE TABLE InStorePurnchace (
 );
 
 
-CREATE TABLE InStorePurnchace_Items (
+CREATE TABLE InStorePurchase_Items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     quantity INT,
     order_id INT,
     product_id INT,
-    FOREIGN KEY (order_id) REFERENCES InStorePurnchace(order_id),
+    FOREIGN KEY (order_id) REFERENCES InStorePurchase(order_id),
     FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
 );
 
