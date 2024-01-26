@@ -29,10 +29,17 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
 <head>
     <!-- ...existing head elements... -->
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewAllOrders.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/toggleswitch.css" />
 </head>
 <body>
     <div class="orders-container">
-        <h1 class="orders-header">All Retail Orders</h1>
+            <h1 class="orders-header">
+                <span style="padding-right: 20px;">Retail Orders</span>
+                <label class="switch">
+                    <input type="checkbox" id="pageToggle">
+                    <span class="slider round"></span>
+                </label>
+            </h1>
 
         <?php if (empty($orders)): ?>
             <p class="no-orders-message">No orders found.</p>
@@ -88,7 +95,7 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                             <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
                             <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="./ViewRetailOrderDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <a href="./OrderRetailDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -98,3 +105,27 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
     </div>
 </body>
 </html>
+
+
+
+<script>
+    // Function to change page based on toggle state
+    function changePage() {
+        window.location.href = document.getElementById('pageToggle').checked ? 'OrdersDeliverySub.php' : 'OrdersRetailSub.php';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set the toggle state based on local storage value
+        var savedState = localStorage.getItem('toggleState') === 'true';
+        document.getElementById('pageToggle').checked = savedState;
+
+        // Add event listener to the toggle
+        document.getElementById('pageToggle').addEventListener('change', function() {
+            // Save the new state to local storage
+            localStorage.setItem('toggleState', this.checked);
+            // Change page
+            changePage();
+        });
+    });
+</script>
+

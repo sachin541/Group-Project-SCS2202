@@ -47,10 +47,20 @@ function formatString($str) {
 <head>
     <!-- ...existing head elements... -->
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/OrdersDeliverySub.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/toggleswitch.css" />
 </head>
 <body>
     <div class="orders-container">
-        <h1 class="orders-header">All Retail Orders</h1>
+
+            <h1 class="orders-header">
+                <span style="padding-right: 20px;">Online Orders</span>
+                <label class="switch">
+                    <input type="checkbox" id="pageToggle">
+                    <span class="slider round"></span>
+                </label>
+            </h1>
+
+
             <div class="filter-sort-container">
                 
                 <form action="" method="GET">
@@ -153,3 +163,26 @@ function formatString($str) {
     </div>
 </body>
 </html>
+
+
+
+<script>
+    // Function to change page based on toggle state
+    function changePage() {
+        window.location.href = document.getElementById('pageToggle').checked ? 'OrdersDeliverySub.php' : 'OrdersRetailSub.php';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set the toggle state based on local storage value
+        var savedState = localStorage.getItem('toggleState') === 'true';
+        document.getElementById('pageToggle').checked = savedState;
+
+        // Add event listener to the toggle
+        document.getElementById('pageToggle').addEventListener('change', function() {
+            // Save the new state to local storage
+            localStorage.setItem('toggleState', this.checked);
+            // Change page
+            changePage();
+        });
+    });
+</script>
