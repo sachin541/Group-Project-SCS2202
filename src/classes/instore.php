@@ -233,25 +233,27 @@ class InStore  {
         }
     }
     
+    public function getInStoreOrderDetails($orderId) {
+        try {
+            $query = "SELECT 
+                        InStorePurchase.order_id, InStorePurchase.total, InStorePurchase.created_at, InStorePurchase.createdby,InStorePurchase.payment_type, InStorePurchase.payment_status,
+                        InStorePurchase.first_name, InStorePurchase.last_name, InStorePurchase.NIC, InStorePurchase.phone, 
+                        InStorePurchase_Items.quantity AS item_quantity, InStorePurchase_Items.product_id,
+                        products.product_name, products.price
+                      FROM InStorePurchase
+                      JOIN InStorePurchase_Items ON InStorePurchase.order_id = InStorePurchase_Items.order_id
+                      JOIN products ON InStorePurchase_Items.product_id = products.id
+                      WHERE InStorePurchase.order_id = ?";
+                      
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$orderId]);
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            $orderDetails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $orderDetails;
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
 
 }

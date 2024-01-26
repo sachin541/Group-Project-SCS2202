@@ -1,12 +1,14 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/InStore.php';
+
 require_once '../components/headers/main_header.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 $inStore = new InStore($db);
+
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views_main/staff_login.php');
@@ -86,7 +88,7 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                             <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
                             <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="order_details.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <a href="./ViewROrderDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
