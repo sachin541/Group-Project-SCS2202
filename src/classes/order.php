@@ -59,35 +59,43 @@ class Order {
 
     public function getAllOrders($filterBy = null, $sortBy = null) {
         try {
-            // Start of query using SELECT *
-            $query = "SELECT * FROM Orders";
+            // Start of query using SELECT with JOIN on deliveries table
+            $query = "SELECT 
+                        Orders.*, 
+                        deliveries.id AS delivery_id, 
+                        deliveries.delivery_person_id, 
+                        deliveries.accepted_date, 
+                        deliveries.completed_date, 
+                        deliveries.status AS delivery_status
+                      FROM Orders 
+                      LEFT JOIN deliveries ON Orders.order_id = deliveries.order_id";
 
             // Filtering logic
             if ($filterBy) {
                 // Example: filter by payment status. Adjust as needed.
-                $query .= " WHERE payment_status = :filterBy";
+                $query .= " WHERE Orders.payment_status = :filterBy";
             }
 
             // Sorting logic
             if ($sortBy) {
                 switch ($sortBy) {
                     case 'date_asc':
-                        $query .= " ORDER BY created_at ASC";
+                        $query .= " ORDER BY Orders.created_at ASC";
                         break;
                     case 'date_desc':
-                        $query .= " ORDER BY created_at DESC";
+                        $query .= " ORDER BY Orders.created_at DESC";
                         break;
                     case 'total_asc':
-                        $query .= " ORDER BY total ASC";
+                        $query .= " ORDER BY Orders.total ASC";
                         break;
                     case 'total_desc':
-                        $query .= " ORDER BY total DESC";
+                        $query .= " ORDER BY Orders.total DESC";
                         break;
                     // Add more sorting options if needed
                 }
             } else {
                 // Default sorting
-                $query .= " ORDER BY created_at DESC";
+                $query .= " ORDER BY Orders.created_at DESC";
             }
 
             // Preparing and executing the statement

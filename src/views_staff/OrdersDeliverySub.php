@@ -22,6 +22,16 @@ $sortBy = isset($_GET['sort_by']) ? $_GET['sort_by'] : null;
 // Modify your getAllOrders function to accept these parameters
 $orders = $inStore->getAllOrders($filterBy, $sortBy);
 
+function formatString($str) {
+    // Replace underscores with spaces
+    $str = str_replace('_', ' ', $str);
+
+    // Capitalize the first letter of each word
+    $str = ucwords($str);
+
+    return $str;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -82,13 +92,11 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                             <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                             <td><?php echo htmlspecialchars($order['total']); ?></td>
                             <td><?php echo date('Y-m-d', strtotime($order['created_at'])); ?></td>
-
-                            <!-- <td><?php echo htmlspecialchars($order['createdby']); ?></td> -->
-                            <td><?php echo htmlspecialchars($order['payment_type']); ?></td>
-                            <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
+                            <td><?php echo htmlspecialchars(formatString($order['payment_type'])); ?></td>
+                            <td><?php echo htmlspecialchars(formatString($order['payment_status'])); ?></td>
                             <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="./OrderRetailDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <a href="./OrderDeliveryDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
