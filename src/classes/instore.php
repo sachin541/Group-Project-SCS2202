@@ -184,6 +184,18 @@ class InStore  {
         }
     }
 
+    public function getAllOrders() {
+        try {
+            $query = "SELECT * FROM InStorePurchase ORDER BY created_at DESC";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+    
+
 
 
 
