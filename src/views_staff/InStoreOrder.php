@@ -115,11 +115,15 @@ function formatPrice($price) {
                 }
                 ?>
 
-                <form action="../helpers/cart_transaction_handler.php" method="post">
+                <!-- <form action="../helpers/cart_transaction_handler.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userId); ?>">
                     <input type="hidden" name="total_amount" value="<?php echo htmlspecialchars($totalAmount); ?>">
                     <input type="submit" value="Create Order" class="checkout-button">
-                </form>
+                </form> -->
+
+                <a href="./confirmOrder.php" class="add-more-link">
+                    <span>Create Order</span>
+                </a>
 
                 
                         
