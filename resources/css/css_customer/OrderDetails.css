@@ -1,0 +1,201 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "orderItems deliveryDetails"
+        "fullWidth fullWidth"; 
+    gap: 20px;
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+}
+
+/* Box Style */
+.box-style {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Heading Style */
+.box-style h2 {
+    color: #000000;
+    text-align: left;
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: #ddefea;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Table Styles */
+.cart-table, .details-table {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td,
+.details-table th, .details-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-table th, .details-table th {
+    background-color: #16a085;
+    color: white;
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Total Price Section Styles */
+.total-price-section {
+    margin-top: 20px;
+    text-align: right;
+    color: #16a085;
+    font-size: 1.4rem;
+}
+
+/* First Column Width in Details Table */
+.details-table td:first-child {
+    min-width: 150px;
+}
+
+/* Action Section Styles */
+.action-section {
+    grid-area: fullWidth;
+    margin: 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    
+}
+
+.delivery-status {
+    text-align: center;
+    background-color: #ddefea;
+    border-radius: 10px;
+    margin-bottom: 40px; 
+    padding: 10px ; 
+}
+
+:root {
+    --progress-bar-green: #16a085; /* Replace with your preferred shade of green */
+}
+
+.progress-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.progressbar {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progressbar li {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7d7d7d;
+}
+
+.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #7d7d7d;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    line-height: 30px;
+    background: white;
+    color: #7d7d7d;
+    z-index: 2; /* Ensure numbers are above the lines */
+    position: relative; /* Needed for z-index to take effect */
+}
+
+.progressbar li:after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 40px); /* Adjust width to prevent overlap */
+    height: 2px;
+    background: #7d7d7d;
+    top: 15px;
+    left: 0%;
+    z-index: 1; /* Ensure lines are below the numbers */
+    transform: translateX(-50%);
+}
+
+.progressbar li:first-child:after {
+    content: none;
+}
+
+.progressbar li.completed {
+    color: var(--progress-bar-green);
+}
+
+.progressbar li.completed:before {
+    border-color: var(--progress-bar-green);
+    background: var(--progress-bar-green);
+    color: white;
+}
+
+.progressbar li.completed + li:after {
+    background: var(--progress-bar-green);
+}
+
+/* Styles for Accept Delivery Button */
+.accept-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accept-button {
+    padding: 10px 20px;
+    
+    background-color: #16a085;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-button:hover {
+    background-color: red;
+   
+}
+

@@ -106,30 +106,107 @@ class Order {
     //     }
     // }
 
-    public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null) {
+    // public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null) {
+    //     try {
+    //         $query = "SELECT * FROM Orders";
+
+    //         // Where conditions array
+    //         $whereConditions = [];
+
+    //         if ($paymentType) {
+    //             $whereConditions[] = "payment_type = :paymentType";
+    //         }
+
+    //         if ($paymentStatus) {
+    //             $whereConditions[] = "payment_status = :paymentStatus";
+    //         }
+
+    //         if ($deliveryStatus) {
+    //             $whereConditions[] = "delivery_status = :deliveryStatus";
+    //         }
+
+    //         // Add where conditions to query if they exist
+    //         if (!empty($whereConditions)) {
+    //             $query .= " WHERE " . implode(" AND ", $whereConditions);
+    //         }
+
+    //         // Sorting logic
+    //         if ($sortBy) {
+    //             switch ($sortBy) {
+    //                 case 'date_asc':
+    //                     $query .= " ORDER BY created_at ASC";
+    //                     break;
+    //                 case 'date_desc':
+    //                     $query .= " ORDER BY created_at DESC";
+    //                     break;
+    //                 case 'id_asc':
+    //                     $query .= " ORDER BY order_id ASC";
+    //                     break;
+    //                 case 'id_desc':
+    //                     $query .= " ORDER BY order_id DESC";
+    //                     break;
+    //                 case 'total_asc':
+    //                     $query .= " ORDER BY total ASC";
+    //                     break;
+    //                 case 'total_desc':
+    //                     $query .= " ORDER BY total DESC";
+    //                     break;
+    //             }
+    //         }
+
+    //         // Preparing statement
+    //         $stmt = $this->db->prepare($query);
+
+    //         // Binding parameters
+    //         if ($paymentType) {
+    //             $stmt->bindParam(':paymentType', $paymentType);
+    //         }
+
+    //         if ($paymentStatus) {
+    //             $stmt->bindParam(':paymentStatus', $paymentStatus);
+    //         }
+
+    //         if ($deliveryStatus) {
+    //             $stmt->bindParam(':deliveryStatus', $deliveryStatus);
+    //         }
+
+    //         $stmt->execute();
+    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     } catch(PDOException $e) {
+    //         throw $e;
+    //     }
+    // }
+
+
+    public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null,$customerId = null) {
         try {
             $query = "SELECT * FROM Orders";
-
+    
             // Where conditions array
             $whereConditions = [];
-
+    
+            if ($customerId) {
+                $whereConditions[] = "customer_id = :customerId";
+            }
+    
             if ($paymentType) {
                 $whereConditions[] = "payment_type = :paymentType";
             }
-
+    
             if ($paymentStatus) {
                 $whereConditions[] = "payment_status = :paymentStatus";
             }
-
+    
             if ($deliveryStatus) {
                 $whereConditions[] = "delivery_status = :deliveryStatus";
             }
-
+    
             // Add where conditions to query if they exist
             if (!empty($whereConditions)) {
                 $query .= " WHERE " . implode(" AND ", $whereConditions);
             }
-
+    
             // Sorting logic
             if ($sortBy) {
                 switch ($sortBy) {
@@ -153,30 +230,35 @@ class Order {
                         break;
                 }
             }
-
+    
             // Preparing statement
             $stmt = $this->db->prepare($query);
-
+    
             // Binding parameters
+            if ($customerId) {
+                $stmt->bindParam(':customerId', $customerId);
+            }
+    
             if ($paymentType) {
                 $stmt->bindParam(':paymentType', $paymentType);
             }
-
+    
             if ($paymentStatus) {
                 $stmt->bindParam(':paymentStatus', $paymentStatus);
             }
-
+    
             if ($deliveryStatus) {
                 $stmt->bindParam(':deliveryStatus', $deliveryStatus);
             }
-
+    
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    
         } catch(PDOException $e) {
             throw $e;
         }
     }
+    
 
  
 
