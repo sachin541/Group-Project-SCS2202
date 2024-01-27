@@ -36,7 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_on_
 //online payments
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_online") {
     try {
-        echo "Not done"; 
+        $orderId = $checkout->createOrderOnline($userId, $_POST, $cartItems);//creates order
+        $cart->updateProductQuantities($userId);//updates the qty of the products 
+        $cart->clearCart($userId);//clears the cart
+        
     } catch (Exception $e) {
         echo $e;
     }

@@ -17,7 +17,6 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $orderDetails = $cart->getCartItemsByUserId($userId);
 $totalAmount = 0;
-
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
     
@@ -70,7 +69,8 @@ $_SESSION['cart_total'] = $totalAmount;
                 // Payment completed. It can be a successful failure.
                 payhere.onCompleted = function onCompleted(orderId) {
                     console.log("Payment completed. OrderID:" + orderId);
-                    // Note: validate the payment and show success or failure page to the customer
+                    var form = document.querySelector('.checkout-form');
+                    form.submit();
                 };
 
                 // Payment window closed
@@ -97,11 +97,11 @@ $_SESSION['cart_total'] = $totalAmount;
                     amount: data.price,
                     currency: data.currency,
                     hash: data.hash, // *Replace with generated hash retrieved from backend
-                    first_name: "Saman",
-                    last_name: "Perera",
-                    email: "samanp@gmail.com",
+                    first_name: "test",
+                    last_name: "test",
+                    email: "test@gmail.com",
                     phone: "0771234567",
-                    address: "No.1, Galle Road",
+                    address: "test",
                     city: "Colombo",
                     country: "Sri Lanka",
                 };
