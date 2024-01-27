@@ -189,6 +189,18 @@ body {
     vertical-align: middle;
 }
 
+.noitems {
+    align-content: center;
+    padding: 10px;
+    background-color: #d6e6e2;
+    border-radius: 10px;
+}
+
+.empty-cart-message{
+    
+    padding-left : 400px;
+}
+
 
 
 

@@ -36,7 +36,14 @@ function formatPrice($price) {
         <h1>Create New Order</h1>
 
         <?php if (empty($cartItems)): ?>
-            <p class="empty-cart-message">Your cart is empty.</p>
+            <div class="noitems" >
+            
+                    <a href="./product_list.php" class="add-more-link">
+                        <img src="../../resources/images/icons/addmore.png" alt="Add More Products">
+                        <div>Select items</div>
+                        <p class="empty-cart-message">No items selected</p>
+            <div>
+            
         <?php else: ?>
             <table class="cart-table">
                 <thead>

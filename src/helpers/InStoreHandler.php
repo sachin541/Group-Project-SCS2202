@@ -101,7 +101,7 @@ if (isset($_POST['Instore_order'])) {
         $orderId = $inStore->ConfirmInStoreOrder($userId, $_POST, $cartItems);
         $inStore->updateInStoreProductQuantities($userId);
         $inStore->clearInStore($userId);
-        header('Location: ../views_customer/order_success.php?order_id=' . $orderId);
+        header('Location: ../views_staff/OrderRetailDetails.php?order_id=' . $orderId);
 
         exit;
         
