@@ -177,7 +177,7 @@ function formatPrice($price) {
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="add_to_order" value="1">
                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                    <input type="submit" value="Add to Cart" class="add-to-cart-button">
+                    <input type="submit" value="Add to Order" class="add-to-cart-button">
                 </form>
               </div>
 
