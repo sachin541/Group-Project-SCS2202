@@ -27,7 +27,7 @@ function formatPrice($price) {
 <html>
 <head>
     <title>Delivery Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/checkouttest.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/checkout.css">
     
 </head>
 <body>

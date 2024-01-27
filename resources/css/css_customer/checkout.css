@@ -80,10 +80,10 @@ body {
     
 }
 .total-price-section h3{
-    color: #000000;
+    color: #ffffff;
     font-size: 1.2rem;
     padding: 20px;
-    background-color: #ddefea;
+    background-color: #000000;
     border-radius: 10px;
     
 }
@@ -122,7 +122,7 @@ body {
 
 /* Submit Button Styles */
 .checkout-form input[type="submit"] {
-    background-color: #16a085; /* Green background */
+    background-color: #000000; /* Green background */
     color: white;
     border: none; /* Remove border */
     cursor: pointer; /* Cursor style */
