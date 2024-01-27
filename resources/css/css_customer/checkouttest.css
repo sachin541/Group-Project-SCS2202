@@ -1,0 +1,156 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "orderItems deliveryDetails"
+        "fullWidth fullWidth"; 
+    gap: 20px;
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+    
+    
+}
+
+/* Box Style */
+.box-style {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    
+}
+
+/* Heading Style */
+.box-style h2 {
+    color: #000000;
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: #ddefea;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Table Styles */
+.cart-table, .details-table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td, .details-table th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-table th, .details-table th {
+    background-color: #16a085;
+    color: white;
+    text-align: left;
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Total Price Section Styles */
+.total-price-section {
+    
+    text-align: right;
+    
+}
+.total-price-section h3{
+    color: #000000;
+    font-size: 1.2rem;
+    padding: 20px;
+    background-color: #ddefea;
+    border-radius: 10px;
+    
+}
+
+/* First Column Width in Details Table */
+.details-table td:first-child {
+    min-width: 150px;
+}
+
+
+.checkout-form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px;
+    padding-top: 0px;
+    border-radius: 8px;
+    
+}
+
+/* Form Input Styles */
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="submit"] {
+    width: 100%; /* Full width */
+    padding: 12px 10px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Box sizing */
+}
+
+/* Placeholder Styles */
+.checkout-form input::placeholder {
+    color: #aaa; /* Light grey color for placeholders */
+}
+
+/* Submit Button Styles */
+.checkout-form input[type="submit"] {
+    background-color: #16a085; /* Green background */
+    color: white;
+    border: none; /* Remove border */
+    cursor: pointer; /* Cursor style */
+    
+}
+
+.checkout-form input[type="submit"]:hover {
+    background-color: red; /* Slightly darker green on hover */
+}
+
+/* Payment Options Section */
+.payment-options {
+    margin: 20px 0; /* Spacing around payment options */
+}
+
+.payment-options h3 {
+    color: #333; /* Dark grey color */
+    margin-bottom: 15px; /* Spacing below the heading */
+}
+
+/* Radio Button Labels */
+.payment-options label {
+    margin-left: 10px; /* Spacing to the left of label */
+    font-size: 1rem; /* Font size */
+    color: #666; /* Medium grey color */
+}
+
+/* Adjust Spacing Around Form Elements */
+.checkout-form div {
+    margin-bottom: 15px; /* Spacing below each input */
+}
