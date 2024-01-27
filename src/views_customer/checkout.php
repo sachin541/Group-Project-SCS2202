@@ -20,7 +20,16 @@ $totalAmount = 0;
 
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
+    
 }
+
+foreach ($orderDetails as $item){
+    $productDetails = $product->getProductById($item['product_id']);
+    $subtotal = $productDetails['price'] * $item['quantity'];
+    $totalAmount += $subtotal;
+}
+
+$_SESSION['cart_total'] = $totalAmount; 
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +37,82 @@ function formatPrice($price) {
 <head>
     <title>Delivery Details</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/checkout.css">
-    
+    <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+    <script type="text/javascript">
+
+        function handleSubmit() {
+            var payOnline = document.getElementById('pay_online').checked;
+            if (payOnline) {
+                buyNow();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function buyNow() {
+            // var name = document.getElementById("name");
+            // var price = document.getElementById("price");
+            var name = "testing"
+            var price = 120 
+            var form = new FormData();
+            // form.append("name", name.innerHTML);
+            // form.append("price", price.innerHTML);
+            form.append("name", name);
+            form.append("price", price);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "process.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                var data = JSON.parse(xhr.responseText);
+
+                // Payment completed. It can be a successful failure.
+                payhere.onCompleted = function onCompleted(orderId) {
+                    console.log("Payment completed. OrderID:" + orderId);
+                    // Note: validate the payment and show success or failure page to the customer
+                };
+
+                // Payment window closed
+                payhere.onDismissed = function onDismissed() {
+                    // Note: Prompt user to pay again or show an error page
+                    console.log("Payment dismissed");
+                };
+
+                // Error occurred
+                payhere.onError = function onError(error) {
+                    // Note: show an error page
+                    console.log("Error:" + error);
+                };
+
+                // Put the payment variables here
+                var payment = {
+                    sandbox: true,
+                    merchant_id: data.merchant_id, // Replace your Merchant ID
+                    return_url: undefined, // Important
+                    cancel_url: undefined, // Important
+                    notify_url: "http://sample.com/notify",
+                    order_id: data.order_id,
+                    items: data.name,
+                    amount: data.price,
+                    currency: data.currency,
+                    hash: data.hash, // *Replace with generated hash retrieved from backend
+                    first_name: "Saman",
+                    last_name: "Perera",
+                    email: "samanp@gmail.com",
+                    phone: "0771234567",
+                    address: "No.1, Galle Road",
+                    city: "Colombo",
+                    country: "Sri Lanka",
+                };
+
+                // Show the payhere.js popup, when "PayHere Pay" is clicked
+                payhere.startPayment(payment);
+                }
+            };
+            xhr.send(form);
+        }
+    </script>
 </head>
 <body>
 
@@ -55,7 +139,7 @@ function formatPrice($price) {
                         <?php foreach ($orderDetails as $item): 
                             $productDetails = $product->getProductById($item['product_id']);
                             $subtotal = $productDetails['price'] * $item['quantity'];
-                            $totalAmount += $subtotal;
+                            
                         ?>
                             <tr>
                                 <td>
@@ -86,7 +170,7 @@ function formatPrice($price) {
     <!-- Second Column: Delivery Details -->
     <div class="box-style">
         <h2>Billing Details</h2>
-        <form action="../helpers/checkout_handler.php" method="post" class="checkout-form">
+        <form onsubmit="return handleSubmit()" action="../helpers/checkout_handler.php" method="post" class="checkout-form">
             <input type="hidden" name="total_amount" value="<?= htmlspecialchars($totalAmount); ?>">
             <div><input type="text" name="first_name" placeholder="First Name" required></div>
             <div><input type="text" name="last_name" placeholder="Last Name" required></div>
