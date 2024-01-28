@@ -176,15 +176,16 @@ body {
 }
 
 .add-more-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     color: #ffffff; 
     font-weight: bold;
-    background-color: rgb(0, 0, 0);
-    padding: 4px 20px;
+    background-color: #000000;
+    padding: 4px 10px;
     border-radius: 10px;
+    
     
 }
 
@@ -194,6 +195,7 @@ body {
     object-fit: cover; /* Ensures the image covers the set width and height */
     border-radius: 4px;
     padding: 0px 6px;
+    
 }
 
 .add-more-link span {
@@ -202,14 +204,23 @@ body {
 
 .noitems {
     align-content: center;
-    padding: 10px;
-    background-color: #d6e6e2;
+    
+    background-color: #ffffff;
     border-radius: 10px;
 }
 
-.empty-cart-message{
+.noitems .add-more-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff; 
+    font-weight: bold;
+    background-color: rgb(21, 20, 20);
+    padding: 4px 10px;
+    border-radius: 0px;
     
-    padding-left : 400px;
+    
 }
 
 
