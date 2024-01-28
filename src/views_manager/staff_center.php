@@ -2,6 +2,7 @@
 require_once '../classes/database.php'; 
 require_once '../classes/UserManager.php'; 
 require_once '../components/headers/main_header.php';
+require_once '../components/confirm_modal.php'; 
 $database = new Database();
 $db = $database->getConnection(); 
 
@@ -75,7 +76,8 @@ $employees = $userManager->getAllEmployees($roleFilter);
                             <form action="../helpers/employee_handler.php" method="post">
                                 <input type="hidden" name="id" value="<?= $row['staff_id'] ?>">
                                 <input type="hidden" name="handler_type" value="remove_staff">
-                                <input type="submit" class="delete-button" value="Delete" onclick="return confirm('Are you sure you want to delete this?');">
+                                
+                                <input type="submit" id="delete" class="delete-btn" value="Delete" data-message="Are you sure you want to delete this employee?">
                             </form>
                         </div>
                     </td>

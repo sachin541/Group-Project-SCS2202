@@ -58,7 +58,7 @@ td {
     gap: 10px;
 }
 
-.button-like-link, .delete-button {
+.button-like-link, .delete-btn {
     
     width: 80px;
     text-align: center;
@@ -75,7 +75,7 @@ td {
     padding: 10px 2px;
 }
 
-.delete-button {
+.delete-btn {
     background-color: black;
     padding: 10px 4px;
     text-decoration: none;
@@ -87,7 +87,7 @@ td {
     
 }
 
-.delete-button:hover {
+.delete-btn:hover {
     background-color: red;
     
 }
