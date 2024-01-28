@@ -2,6 +2,20 @@
 $category = isset($_POST['type']) ? $_POST['type'] : 'default';
 ?>
 
+<?php
+require_once '../classes/database.php';
+require_once '../classes/reports.php'; 
+
+$database = new Database();
+$db = $database->getConnection();
+$reportObj = new Report($db);
+
+$startDate = '2024-01-01'; // example start date
+$endDate = '2024-01-31';   // example end date
+
+$salesByBrandData = $reportObj->getSalesByBrand($startDate, $endDate);
+?>
+
 <?php require_once '../components/headers/main_header.php'; ?>
 
 <!DOCTYPE html>
@@ -42,14 +56,17 @@ $category = isset($_POST['type']) ? $_POST['type'] : 'default';
         }]
     };
 
-    const salesByBrandData = {
-        labels: ["Brand A", "Brand B", "Brand C"],
-        datasets: [{
-            data: [300, 50, 100],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-        }]
-    };
+    // const salesByBrandData = {
+    //     labels: ["Brand A", "Brand B", "Brand C"],
+    //     datasets: [{
+    //         data: [300, 50, 100],
+    //         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+    //         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+    //     }]
+    // };
+    
+    var salesByBrandData = <?php echo json_encode($salesByBrandData); ?>;
+
 
     const salesByCategoryData = {
         labels: ["Category X", "Category Y", "Category Z"],

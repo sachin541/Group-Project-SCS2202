@@ -22,6 +22,8 @@ html,body {
   padding: 20px; 
   background-color: #f4f4f4f4; 
   margin-bottom: 80px;
+  max-width:100vw;
+  max-height:86vh;
 }
 
 .grid-item {
