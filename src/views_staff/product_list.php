@@ -170,7 +170,7 @@ function formatPrice($price) {
                   <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                   <input type="hidden" name="formType" value="delete_product">
                   <input type="hidden" name="category" value="<?php echo $category; ?>">
-                  <input type="button" value="Delete" class="add-to-cart-button delete-btn" data-product-id="<?php echo $item['id']; ?>">
+                  <input type="button" value="Delete" class="add-to-cart-button delete-btn" data-message="Are you sure you want to remove this item?">
                 </form>
 
 

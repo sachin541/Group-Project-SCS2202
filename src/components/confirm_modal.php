@@ -75,7 +75,7 @@
 <div id="confirmModal" class="modal">
   <div class="modal-content">
     <div class="modal-message">
-      <p>Are you sure you want to delete this product?</p>
+      <p id="modalMessage">!message!</p>
     </div>
     <div class="modal-buttons">
       <button id="confirmDelete">Yes</button>
@@ -92,6 +92,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   var deleteButtons = document.querySelectorAll('.delete-btn');
   var modal = document.getElementById("confirmModal");
+  var modalMessage = document.getElementById("modalMessage");
   var confirmDelete = document.getElementById("confirmDelete");
   var cancelDelete = document.getElementById("cancelDelete");
   var formToSubmit = null;
@@ -99,6 +100,8 @@ document.addEventListener("DOMContentLoaded", function() {
   deleteButtons.forEach(function(button) {
     button.addEventListener('click', function(event) {
       event.preventDefault();
+      var message = this.getAttribute('data-message');
+      modalMessage.textContent = message ? message : "Are you sure you want to perform this action?";
       modal.style.display = "block";
       formToSubmit = this.parentElement;
     });
@@ -118,4 +121,5 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+
 </script>
