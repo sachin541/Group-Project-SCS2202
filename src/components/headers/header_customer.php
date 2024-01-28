@@ -7,7 +7,7 @@
 
 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
 <!-- <a href="../pages/repairs.php" class="topnav-item">Repairs</a> -->
-<a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
+<a href="../views_customer/OrderList.php" class="topnav-item">Orders</a>
 <a href="../ultils/logout.php" class="unreg-log">Logout</a>
 
 <?php include("header_layout_end.php");

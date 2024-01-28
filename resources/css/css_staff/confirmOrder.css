@@ -1,0 +1,138 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Checkout Container Styles */
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px; /* Space between columns */
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    
+}
+
+/* Cart Container Styles */
+.cart-container {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    
+}
+
+/* Cart Table Styles */
+.cart-summary {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-summary th, .cart-summary td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-summary th {
+    background-color: #16a085;
+    color: white;
+}
+
+/* Product Information Styles */
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Checkout Form Container Styles */
+.checkout-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    
+   
+}
+
+.checkout-form-container h2 {
+     /* Adjust this value as needed */
+}
+
+.enter-details {
+    background-color: #16a085;
+    color: white;
+    padding : 8px; /* Green color to match the theme */
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: 560;
+    margin-bottom: 10px; /* Space below the text */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Input and Button Styles */
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="submit"] {
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.checkout-form input[type="submit"] {
+    background-color: #16a085;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-form input[type="submit"]:hover {
+    background-color: #139977;
+}
+
+/* Payment Options Styles */
+.payment-options {
+    margin-top: 10px;
+}
+
+/* Total Amount Styles */
+.total-amount {
+    font-weight: bold;
+    color: #16a085;
+}
+
+.placeOrderbtn {
+    margin-top: 80px; /* Adjust this value to increase or decrease the space */
+    text-align: center;
+}
+
+.checkout-form input[type="submit"] {
+    background-color: #16a085;
+    color: white;
+    cursor: pointer;
+   
+}
+
+.checkout-form input[type="submit"]:hover {
+    background-color: red; /* Change to red on hover */
+}
+
+
+
+

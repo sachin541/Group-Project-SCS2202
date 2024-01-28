@@ -1,5 +1,6 @@
 /* General Body Styles */
 body {
+  
     margin: 0;
     font-family: Arial, sans-serif;
   }
@@ -20,6 +21,8 @@ body {
     height: 100%; /* Full height of the grid column */
     margin-left: 0px;
     padding-right: 10px;
+    width: 100%; 
+    height: 100%;
   }
   
   /* Navigation Panel inside Side Nav */

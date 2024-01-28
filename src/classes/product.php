@@ -94,6 +94,27 @@ class Product {
             throw $e;
         }
     }
+
+    public function getProductStockById($productId) {
+        try {
+            // Query to select only the quantity column
+            $query = "SELECT quantity FROM products WHERE id = ? LIMIT 1"; 
+            $stmt = $this->db->prepare($query);
+    
+            // Bind the product ID parameter
+            $stmt->bindParam(1, $productId, PDO::PARAM_INT);
+    
+            // Execute the statement
+            $stmt->execute();
+    
+            // Fetch and return only the quantity
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? $result['quantity'] : null;
+        } catch(PDOException $e) {
+            // Handle exception
+            throw $e;
+        }
+    }
     
 
 

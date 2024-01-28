@@ -1,13 +1,17 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/InStore.php';
+require_once '../classes/product.php';
 
 session_start();
 
 $database = new Database();
+
 $db = $database->getConnection();
 
+$product = new Product($db);
 $inStore = new InStore($db);
+
 echo $_POST['product_id'];
 
 // Check if the user is logged in
@@ -53,6 +57,61 @@ if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['ad
     header('Location: ../views_staff/InStoreOrder.php');
     exit;
 }
+
+if (isset($_POST['check_qty'])) {
+    $userId = $_SESSION['user_id']; 
+
+        $cartItems = $inStore->getInStoreItemsByUserId($userId);
+
+        $allItemsInStock = true;
+        $outOfStockItems = [];
+
+        foreach ($cartItems as $item) {
+            $productId = $item['id'];
+            $requestedQuantity = $item['quantity'];
+
+            // Check available stock
+            $productDetails = $product->getProductById($productId);
+            $availableStock = $productDetails['quantity'];
+
+            if ($requestedQuantity > $availableStock) {
+                $allItemsInStock = false;
+                $outOfStockItems[] = $item['product_name']; 
+            }
+        }
+
+        if (!$allItemsInStock) {
+            
+            
+            $_SESSION['out_of_stock_message'] = implode(", ", $outOfStockItems);
+            header('Location: ../views_staff/InStoreOrder.php');
+
+            exit;
+        }
+
+        header('Location: ../views_staff/confirmOrder.php');
+        exit;
+}
+
+
+if (isset($_POST['Instore_order'])) {
+    try {
+        $userId = $_SESSION['user_id']; 
+        $cartItems = $inStore->getInStoreItemsByUserId($userId);
+        $orderId = $inStore->ConfirmInStoreOrder($userId, $_POST, $cartItems);
+        $inStore->updateInStoreProductQuantities($userId);
+        $inStore->clearInStore($userId);
+        header('Location: ../views_staff/OrderRetailDetails.php?order_id=' . $orderId);
+
+        exit;
+        
+
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+
 
 // Redirect to product list if the required POST data isn't set
 header('Location: ../views_staff/product_list.php');

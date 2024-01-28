@@ -137,22 +137,123 @@ class InStore  {
         }
     }
 
+    
 
+    public function ConfirmInStoreOrder($userId, $data, $cartItems) {
+        try {
+            $this->db->beginTransaction();
+    
+            // Updated query for InStorePurchase table
+            $orderQuery = "INSERT INTO InStorePurchase (total, createdby, payment_type, payment_status, 
+            NIC, first_name, last_name, phone) 
+            VALUES (?, ?, ?, 'completed', ?, ?, ?, ?)";
+    
+            $orderStmt = $this->db->prepare($orderQuery);
+    
+            // Bind parameters
+            $orderStmt->bindParam(1, $data['total_amount']);
+            $orderStmt->bindParam(2, $userId); // Assuming createdby is the user ID
+            $orderStmt->bindParam(3, $data['payment_method']);
+            $orderStmt->bindParam(4, $data['NIC']); // Assuming NIC is part of $data
+            $orderStmt->bindParam(5, $data['first_name']);
+            $orderStmt->bindParam(6, $data['last_name']);
+            $orderStmt->bindParam(7, $data['phone']);
+    
+            $orderStmt->execute();
+    
+            $orderId = $this->db->lastInsertId();
+    
+            // Insert into InStorePurchase_Items table
+            $orderItemQuery = "INSERT INTO InStorePurchase_Items (quantity, order_id, product_id) VALUES (?, ?, ?)";
+            $orderItemStmt = $this->db->prepare($orderItemQuery);
+    
+            foreach ($cartItems as $item) {
+                // Binding parameters for each item
+                $orderItemStmt->bindParam(1, $item['quantity']);
+                $orderItemStmt->bindParam(2, $orderId);
+                $orderItemStmt->bindParam(3, $item['product_id']);
+    
+                $orderItemStmt->execute();
+            }
+    
+            $this->db->commit();
+            return $orderId;
+        } catch(PDOException $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function getAllOrders($filterBy = null, $sortBy = null) {
+        try {
+            // Start of query
+            $query = "SELECT * FROM InStorePurchase";
+    
+            // Filtering logic
+            if ($filterBy) {
+                // Adjust the filtering logic as per your requirement
+                $query .= " WHERE payment_status = :filterBy";
+            }
+    
+            // Sorting logic
+            if ($sortBy) {
+                switch ($sortBy) {
+                    case 'date_asc':
+                        $query .= " ORDER BY created_at ASC";
+                        break;
+                    case 'date_desc':
+                        $query .= " ORDER BY created_at DESC";
+                        break;
+                    case 'total_asc':
+                        $query .= " ORDER BY total ASC";
+                        break;
+                    case 'total_desc':
+                        $query .= " ORDER BY total DESC";
+                        break;
+                    // Add more sorting options if needed
+                }
+            } else {
+                // Default sorting
+                $query .= " ORDER BY created_at DESC";
+            }
+    
+            // Preparing and executing the statement
+            $stmt = $this->db->prepare($query);
+    
+            // Bind the filter parameter if it exists
+            if ($filterBy) {
+                $stmt->bindParam(':filterBy', $filterBy);
+            }
+    
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+    
+    public function getInStoreOrderDetails($orderId) {
+        try {
+            $query = "SELECT 
+                        InStorePurchase.order_id, InStorePurchase.total, InStorePurchase.created_at, InStorePurchase.createdby,InStorePurchase.payment_type, InStorePurchase.payment_status,
+                        InStorePurchase.first_name, InStorePurchase.last_name, InStorePurchase.NIC, InStorePurchase.phone, 
+                        InStorePurchase_Items.quantity AS item_quantity, InStorePurchase_Items.product_id,
+                        products.product_name, products.price
+                      FROM InStorePurchase
+                      JOIN InStorePurchase_Items ON InStorePurchase.order_id = InStorePurchase_Items.order_id
+                      JOIN products ON InStorePurchase_Items.product_id = products.id
+                      WHERE InStorePurchase.order_id = ?";
+                      
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$orderId]);
+    
+            $orderDetails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $orderDetails;
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
 
 }

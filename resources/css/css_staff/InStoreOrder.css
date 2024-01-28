@@ -99,10 +99,25 @@ body {
     background-color: red;
 }
 
-/* Out of Stock Message Styles */
 .out-of-stock-message {
-    color: #e74c3c; /* Text color for out of stock messages */
-    margin-top: 10px; /* Adds margin above the message */
+    background-color: #ffdddd; /* Light red background */
+    border: 1px solid #ff0000; /* Red border */
+    color: #ff0000; /* Red text color for emphasis */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.out-of-stock-message p {
+    margin: 0 0 10px 0; /* Spacing between the paragraph and the list */
+    font-weight: bold; /* Make the introductory text bold */
+}
+
+.out-of-stock-message ul {
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding-left: 0; 
 }
 
 
@@ -149,8 +164,8 @@ body {
 
 .add-more-container {
     align-content: center;
-    padding: 10px;
-    background-color: #f8f8f8;
+    padding: 0;
+    background-color: #d6e6e2;
    
 }
 
@@ -174,9 +189,19 @@ body {
     vertical-align: middle;
 }
 
-.last-row {
-    justify-content: center; /* Example: a light grey background */
+.noitems {
+    align-content: center;
+    padding: 10px;
+    background-color: #d6e6e2;
+    border-radius: 10px;
 }
+
+.empty-cart-message{
+    
+    padding-left : 400px;
+}
+
+
 
 
 
