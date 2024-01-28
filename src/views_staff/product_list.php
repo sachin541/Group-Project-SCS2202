@@ -2,6 +2,7 @@
 require_once '../classes/database.php'; 
 require_once '../classes/product.php';
 require_once '../components/headers/main_header.php';
+require_once '../components/confirm_modal.php'; 
 
 $database = new Database();
 $db = $database->getConnection();
@@ -164,12 +165,15 @@ function formatPrice($price) {
               </div>
                 <!-- delete product -->
               <div class="product-actions">
-                <form action="../helpers/product_handler.php" method="post">
-                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                    <input type="hidden" name="formType" value="delete_product">
-                    <input type="hidden" name="category" value="<?php echo $category; ?>">
-                    <input type="submit" value="Delete" class="add-to-cart-button">
+
+                <form action="../helpers/product_handler.php" method="post" class="delete-form">
+                  <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                  <input type="hidden" name="formType" value="delete_product">
+                  <input type="hidden" name="category" value="<?php echo $category; ?>">
+                  <input type="button" value="Delete" class="add-to-cart-button delete-btn" data-product-id="<?php echo $item['id']; ?>">
                 </form>
+
+
               </div>
                 <!-- implement in future  -->
               <div class="product-actions"> 
@@ -208,5 +212,9 @@ function adjustStock(productId, adjustment) {
     var quantityInput = form.querySelector('input[name="quantity"]');
     var newQuantity = parseInt(quantityInput.value) + adjustment;
     quantityInput.value = Math.max(0, newQuantity); // Ensures stock is not negative
+}
+
+function confirmDelete() {
+    return confirm('Are you sure you want to delete this product?');
 }
 </script>
