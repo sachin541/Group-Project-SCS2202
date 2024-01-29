@@ -61,7 +61,7 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
                 <select id="saleType" name="saleType">
                     <option value="ALL" <?php echo $saleType == 'ALL' ? 'selected' : ''; ?>>All</option>
                     <option value="InStore" <?php echo $saleType == 'InStore' ? 'selected' : ''; ?>>Instore</option>
-                    <option value="Online" <?php echo $saleType == 'Online' ? 'selected' : ''; ?>>Online</option>
+                    <option value="PayOnlineONLY" <?php echo $saleType == 'PayOnlineONLY' ? 'selected' : ''; ?>>Online</option>
                     <option value="DeliveryONLY" <?php echo $saleType == 'DeliveryONLY' ? 'selected' : ''; ?>>On Delivery</option>
                     <option value="PayOnlineAndDelivery" <?php echo $saleType == 'PayOnlineAndDelivery' ? 'selected' : ''; ?>>Online and Delivery</option>
                 </select>

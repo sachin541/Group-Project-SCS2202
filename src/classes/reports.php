@@ -215,9 +215,9 @@ class PieChart extends Report {
 
         }else if($Type == "InStore"){
             $allData= $this->fetchSalesData($startDate, $endDate, $groupBy);
-        }else if($Type == "PayOnlineAndDelviery"){
+        }else if($Type == "PayOnlineAndDelivery"){
             $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy);
-        }else if($Type == "PayOnineONLY"){
+        }else if($Type == "PayOnlineONLY"){
             $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy, "pay_online");
         }else if($Type == "DeliveryONLY"){
             $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy, "pay_on_delivery");
