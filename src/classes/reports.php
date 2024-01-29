@@ -1,7 +1,84 @@
 <?php
 require_once 'database.php';
+
 class Report {
 
+    public function mergeAndSumSalesData($onlineData, $inStoreData) {
+        $mergedData = [];
+    
+        // Add all online sales data to mergedData
+        foreach ($onlineData as $data) {
+            $saleDate = $data['sale_date'];
+            if (!isset($mergedData[$saleDate])) {
+                $mergedData[$saleDate] = [
+                    'sale_date' => $saleDate,
+                    'total_sales' => 0
+                ];
+            }
+            $mergedData[$saleDate]['total_sales'] += $data['total_sales'];
+        }
+    
+        // Add all in-store sales data to mergedData
+        foreach ($inStoreData as $data) {
+            $saleDate = $data['sale_date'];
+            if (!isset($mergedData[$saleDate])) {
+                $mergedData[$saleDate] = [
+                    'sale_date' => $saleDate,
+                    'total_sales' => 0
+                ];
+            }
+            $mergedData[$saleDate]['total_sales'] += $data['total_sales'];
+        }
+    
+        // Sort the merged data by sale date
+        ksort($mergedData);
+    
+        // Optional: Convert the associative array back to an indexed array
+        return array_values($mergedData);
+    }
+
+
+    public function mergeAndSumByGroup($onlineData, $inStoreData, $groupBy) {
+        $mergedData = [];
+    
+        // Process online sales data
+        foreach ($onlineData as $data) {
+            $groupValue = $data[$groupBy];
+            if (!isset($mergedData[$groupValue])) {
+                $mergedData[$groupValue] = [
+                    $groupBy => $groupValue,
+                    'total_sales' => 0
+                ];
+            }
+            $mergedData[$groupValue]['total_sales'] += $data['total_sales'];
+        }
+    
+        // Process in-store sales data
+        foreach ($inStoreData as $data) {
+            $groupValue = $data[$groupBy];
+            if (!isset($mergedData[$groupValue])) {
+                $mergedData[$groupValue] = [
+                    $groupBy => $groupValue,
+                    'total_sales' => 0
+                ];
+            }
+            $mergedData[$groupValue]['total_sales'] += $data['total_sales'];
+        }
+    
+        // Convert associative array to indexed array
+        return array_values($mergedData);
+    }
+    
+
+
+
+    
+    
+    
+
+
+}
+class PieChart extends Report {
     private $db;
     private $colorPalette = [
         'rgb(236, 244, 214)', 'rgb(154, 208, 194)', 'rgb(45, 149, 150)',
@@ -27,64 +104,6 @@ class Report {
         return $selectedColors;
     }
 
-    // public function getSalesByBrand($startDate, $endDate) {
-    //     try {
-    //         // Database query to fetch sales data
-    //         $query = "SELECT p.brand, SUM(ip.quantity * p.price) AS total_sales 
-    //                   FROM InStorePurchase isp 
-    //                   JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id 
-    //                   JOIN Products p ON ip.product_id = p.id 
-    //                   WHERE isp.created_at BETWEEN ? AND ? 
-    //                   GROUP BY p.brand";
-    //         $stmt = $this->db->prepare($query);
-    //         $stmt->bindParam(1, $startDate);
-    //         $stmt->bindParam(2, $endDate);
-    //         $stmt->execute();
-    
-    //         $brands = [];
-    //         $sales = [];
-    
-    //         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    //             $brands[] = $row['brand'];
-    //             $sales[] = $row['total_sales'];
-    //         }
-    
-    //         // Create an array to store the data and labels
-    //         $dataWithLabels = [];
-    
-    //         foreach ($brands as $key => $brand) {
-    //             $dataWithLabels[] = [
-    //                 'brand' => $brand,
-    //                 'total_sales' => $sales[$key],
-    //             ];
-    //         }
-    
-    //         // Sort the data by total sales (area taken) in descending order
-    //         usort($dataWithLabels, function ($a, $b) {
-    //             return $b['total_sales'] - $a['total_sales'];
-    //         });
-    
-    //         // Extract the sorted labels and sales data
-    //         $brands = array_column($dataWithLabels, 'brand');
-    //         $sales = array_column($dataWithLabels, 'total_sales');
-    
-    //         // Generate colors based on the number of brands
-    //         $generatedColors = $this->generateColors(count($brands));
-    
-    //         return [
-    //             'labels' => $brands,
-    //             'datasets' => [[
-    //                 'data' => $sales,
-    //                 'backgroundColor' => $generatedColors,
-    //                 'hoverBackgroundColor' => $generatedColors,
-    //                 'borderWidth' => 0,
-    //             ]]
-    //         ];
-    //     } catch (PDOException $e) {
-    //         throw $e;
-    //     }
-    // }
-
     public function fetchSalesData($startDate, $endDate, $groupBy) {
         $groupByColumn = $groupBy;
     
@@ -102,13 +121,11 @@ class Report {
     
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function fetchOnlineSalesData($startDate, $endDate, $groupBy, $paymentType = null) {
         
         $groupByColumn = $groupBy;
 
-        
-    
         $query = "SELECT $groupByColumn, SUM(oi.quantity * p.price) AS total_sales 
                   FROM Orders o 
                   JOIN Order_Items oi ON o.order_id = oi.order_id 
@@ -137,8 +154,6 @@ class Report {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    
-
     public function processSalesData($rawData, $groupBy) {
         $brands = [];
         $sales = [];
@@ -196,7 +211,7 @@ class Report {
         if($Type == "ALL"){
             $OnlineData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy); 
             $InStoreData= $this->fetchSalesData($startDate, $endDate, $groupBy);
-
+            $allData = $this->mergeAndSumByGroup($OnlineData, $InStoreData, $groupBy);;
 
         }else if($Type == "InStore"){
             $allData= $this->fetchSalesData($startDate, $endDate, $groupBy);
@@ -205,7 +220,7 @@ class Report {
         }else if($Type == "PayOnineONLY"){
             $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy, "pay_online");
         }else if($Type == "DeliveryONLY"){
-            $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy, "pay_on_delive");
+            $allData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy, "pay_on_delivery");
         }else{
             return "error";
         }
@@ -214,10 +229,114 @@ class Report {
 
     }
 
+}
 
+
+class LineChart extends Report{
+    private $db;
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function fetchSalesDataLineChart($startDate, $endDate) {
+        $query = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) AS total_sales 
+                  FROM InStorePurchase isp 
+                  JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id 
+                  JOIN Products p ON ip.product_id = p.id 
+                  WHERE isp.created_at BETWEEN ? AND ? 
+                  GROUP BY sale_date";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function fetchOnlineSalesDataLineChart($startDate, $endDate, $paymentType = null) {
+        $query = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) AS total_sales 
+                  FROM Orders o 
+                  JOIN Order_Items oi ON o.order_id = oi.order_id 
+                  JOIN Products p ON oi.product_id = p.id 
+                  WHERE o.payment_status = 'Payment Completed' 
+                  AND o.created_at BETWEEN ? AND ? ";
+    
+        if ($paymentType !== null) {
+            $query .= "AND o.payment_type = ? ";
+        }
+    
+        $query .= "GROUP BY sale_date";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+    
+        if ($paymentType !== null) {
+            $stmt->bindParam(3, $paymentType);
+        }
+    
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function prepareLineChartData($salesData) {
+        $labels = array();
+        $dataPoints = array();
+    
+        foreach ($salesData as $row) {
+            $labels[] = $row['sale_date'];
+            $dataPoints[] = $row['total_sales'];
+        }
+    
+        return array(
+            'labels' => $labels,
+            'datasets' => array(
+                array(
+                    'label' => 'Total Sales',
+                    'data' => $dataPoints,
+                    'backgroundColor' => 'rgba(0, 123, 255, 0.5)',
+                    'borderColor' => 'rgba(0, 123, 255, 1)',
+                    'borderWidth' => 1
+                )
+            )
+        );
+    }
+    
+    
+
+    public function getSalesDataForLineChart($startDate, $endDate, $Type) {
+        
+        if ($Type == "ALL") {
+            $OnlineData = $this->fetchOnlineSalesDataLineChart($startDate, $endDate);
+            $InStoreData = $this->fetchSalesDataLineChart($startDate, $endDate);
+            $allData = $this->mergeAndSumSalesData($OnlineData, $InStoreData); // Merge data from both sources
+
+        } else if ($Type == "InStore") {
+            $allData = $this->fetchSalesDataLineChart($startDate, $endDate);
+        } else if ($Type == "PayOnlineAndDelivery") {
+            $allData = $this->fetchOnlineSalesDataLineChart($startDate, $endDate);
+        } else if ($Type == "PayOnlineONLY") {
+            $allData = $this->fetchOnlineSalesDataLineChart($startDate, $endDate ,"pay_online");
+        } else if ($Type == "DeliveryONLY") {
+            $allData = $this->fetchOnlineSalesDataLineChart($startDate, $endDate, "pay_on_delivery");
+        } else {
+            return "error"; // Error handling for unsupported types
+        }
+    
+        // Process and format the data for the line chart
+
+        
+        
+        return $this->prepareLineChartData($allData);
+    }
     
     
     
-    
+
+
+
+
 
 }

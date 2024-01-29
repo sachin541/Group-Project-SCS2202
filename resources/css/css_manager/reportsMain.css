@@ -41,7 +41,7 @@ html,body {
   
 .grid-item-1 {
   grid-column: 1 / 10; 
-  grid-row: 1 / 5; 
+  grid-row: 1 / 7; 
 }
 
 .grid-item-2 {
@@ -51,7 +51,7 @@ html,body {
 
 .grid-item-3 {
   grid-column: 1 / 10; 
-  grid-row: 5 / 17; 
+  grid-row: 7 / 17; 
 }
 
 .grid-item-4 {

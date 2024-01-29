@@ -8,18 +8,25 @@ require_once '../classes/reportsLineChart.php'; // Include the LineChart class
 $database = new Database();
 $db = $database->getConnection();
 
-$reportObj = new Report($db);
+$reportObj = new PieChart($db);
 $lineChartObj = new LineChart($db); // Create an instance of LineChart
 
-$startDate = '2024-01-01'; // example start date
-$endDate = '2024-01-31';   // example end date
+$today = date('Y-m-d');
 
-$salesByBrandData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "brand", "InStore");
-$salesByCategoryData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "category", "InStore");
-$lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test");
+$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : '2024-01-01'; // Default start date
+$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : '2024-01-31';   // Default end date
+$saleType = isset($_GET['saleType']) ? $_GET['saleType'] : 'ALL';        // Default sale type
+
+$salesByBrandData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "brand", $saleType);
+$salesByCategoryData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "category", $saleType);
+$lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $saleType);
+
+
+
+
 // $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, "InStore"); // Get line chart data
 // $lineChartData = $lineChartObj->fetchSalesData($startDate, $endDate); 
-print_r($lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test")); 
+// print_r($lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test")); 
 // print_r($lineChartObj->processSalesDataForLineChart($lineChartData));
 ?>
 
@@ -41,7 +48,29 @@ print_r($lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test"));
     </aside>
 
     <div class="main-reports-section">
-        <div class="grid-item grid-item-1">Item 1</div>
+        <div class="grid-item grid-item-1">
+            
+            <form action="" method="get">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" value="<?php echo htmlspecialchars($startDate); ?>" required>
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" value="<?php echo htmlspecialchars($endDate); ?>" required>
+
+                <label for="saleType">Sale Type:</label>
+                <select id="saleType" name="saleType">
+                    <option value="ALL" <?php echo $saleType == 'ALL' ? 'selected' : ''; ?>>All</option>
+                    <option value="InStore" <?php echo $saleType == 'InStore' ? 'selected' : ''; ?>>Instore</option>
+                    <option value="Online" <?php echo $saleType == 'Online' ? 'selected' : ''; ?>>Online</option>
+                    <option value="DeliveryONLY" <?php echo $saleType == 'DeliveryONLY' ? 'selected' : ''; ?>>On Delivery</option>
+                    <option value="PayOnlineAndDelivery" <?php echo $saleType == 'PayOnlineAndDelivery' ? 'selected' : ''; ?>>Online and Delivery</option>
+                </select>
+
+
+                <button type="submit">Apply Filters</button>
+            </form>
+
+        </div>
         <div class="grid-item grid-item-2"><canvas id="brandPieChart"></canvas></div>
         <div class="grid-item grid-item-3"><canvas id="salesLineChart"></canvas></div>
         <div class="grid-item grid-item-4"><canvas id="categoryDoughnutChart"></canvas></div>
