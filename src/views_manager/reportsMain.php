@@ -13,7 +13,8 @@ $reportObj = new Report($db);
 $startDate = '2024-01-01'; // example start date
 $endDate = '2024-01-31';   // example end date
 
-$salesByBrandData = $reportObj->getSalesByBrand($startDate, $endDate);
+$salesByBrandData = $reportObj->getSalesData($startDate, $endDate, "brand", "InStore");
+$salesByCategoryData = $reportObj->getSalesData($startDate, $endDate, "category", "InStore");
 ?>
 
 <?php require_once '../components/headers/main_header.php'; ?>
@@ -66,16 +67,16 @@ $salesByBrandData = $reportObj->getSalesByBrand($startDate, $endDate);
     // };
     
     var salesByBrandData = <?php echo json_encode($salesByBrandData); ?>;
+    var salesByCategoryData = <?php echo json_encode($salesByCategoryData); ?>;
 
-
-    const salesByCategoryData = {
-        labels: ["Category X", "Category Y", "Category Z"],
-        datasets: [{
-            data: [55, 30, 15],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-        }]
-    };
+    // const salesByCategoryData = {
+    //     labels: ["Category X", "Category Y", "Category Z"],
+    //     datasets: [{
+    //         data: [55, 30, 15],
+    //         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+    //         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+    //     }]
+    // };
 
     document.addEventListener('DOMContentLoaded', function() {
         // Bar Chart - Sales Over Time

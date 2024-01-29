@@ -32,7 +32,7 @@ body {
 .cart-table td {
     text-align: left;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e0dede;
     
 }
 
@@ -159,6 +159,7 @@ body {
 }
 
 .checkout-button:hover {
+    background-color: rgb(130, 209, 209);
     background-color: red;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
