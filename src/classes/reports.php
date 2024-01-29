@@ -1,4 +1,5 @@
 <?php
+require_once 'database.php';
 class Report {
 
     private $db;
@@ -9,8 +10,6 @@ class Report {
         'rgb(245, 255, 250)', 'rgb(216, 191, 216)'
     ];
     
-    
-
     public function __construct($db) {
         $this->db = $db;
     }
@@ -105,7 +104,10 @@ class Report {
     }
     
     public function fetchOnlineSalesData($startDate, $endDate, $groupBy, $paymentType = null) {
+        
         $groupByColumn = $groupBy;
+
+        
     
         $query = "SELECT $groupByColumn, SUM(oi.quantity * p.price) AS total_sales 
                   FROM Orders o 
@@ -189,8 +191,8 @@ class Report {
         ];
     }
 
-    public function getSalesData($startDate, $endDate, $groupBy, $Type) {
-
+    public function getSalesDataForPieChart($startDate, $endDate, $groupBy, $Type) {
+         
         if($Type == "ALL"){
             $OnlineData = $this->fetchOnlineSalesData($startDate, $endDate, $groupBy); 
             $InStoreData= $this->fetchSalesData($startDate, $endDate, $groupBy);
@@ -207,27 +209,15 @@ class Report {
         }else{
             return "error";
         }
-        $processedData = $this->processSalesData($allData, $groupBy);
+        $processedData = $this->processSalesData($allData, $groupBy); // processSalesData needs the column names 
         return $this->generateChartData($processedData);
 
     }
+
+
     
     
     
     
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

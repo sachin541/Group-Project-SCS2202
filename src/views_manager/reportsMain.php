@@ -1,20 +1,26 @@
 <?php
 $category = isset($_POST['type']) ? $_POST['type'] : 'default';
-?>
 
-<?php
 require_once '../classes/database.php';
 require_once '../classes/reports.php'; 
+require_once '../classes/reportsLineChart.php'; // Include the LineChart class
 
 $database = new Database();
 $db = $database->getConnection();
+
 $reportObj = new Report($db);
+$lineChartObj = new LineChart($db); // Create an instance of LineChart
 
 $startDate = '2024-01-01'; // example start date
 $endDate = '2024-01-31';   // example end date
 
-$salesByBrandData = $reportObj->getSalesData($startDate, $endDate, "brand", "InStore");
-$salesByCategoryData = $reportObj->getSalesData($startDate, $endDate, "category", "InStore");
+$salesByBrandData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "brand", "InStore");
+$salesByCategoryData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "category", "InStore");
+$lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test");
+// $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, "InStore"); // Get line chart data
+// $lineChartData = $lineChartObj->fetchSalesData($startDate, $endDate); 
+print_r($lineChartObj->getSalesDataForLineChart($startDate, $endDate, "test")); 
+// print_r($lineChartObj->processSalesDataForLineChart($lineChartData));
 ?>
 
 <?php require_once '../components/headers/main_header.php'; ?>
@@ -30,7 +36,6 @@ $salesByCategoryData = $reportObj->getSalesData($startDate, $endDate, "category"
 <body>
 
 <div class="main-container">
-
     <aside class="main-side-nav">
         <?php require_once './reportsSideBar.php'; ?>
     </aside>
@@ -38,71 +43,46 @@ $salesByCategoryData = $reportObj->getSalesData($startDate, $endDate, "category"
     <div class="main-reports-section">
         <div class="grid-item grid-item-1">Item 1</div>
         <div class="grid-item grid-item-2"><canvas id="brandPieChart"></canvas></div>
-        <div class="grid-item grid-item-3"><canvas id="salesBarChart"></canvas></div>
+        <div class="grid-item grid-item-3"><canvas id="salesLineChart"></canvas></div>
         <div class="grid-item grid-item-4"><canvas id="categoryDoughnutChart"></canvas></div>
     </div>
-
 </div>
 
 <script>
-    // Sample data for the charts
-    const salesOverTimeData = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-        datasets: [{
-            label: 'Total Revenue',
-            data: [12000, 19000, 3000, 5000, 2000, 3000],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    };
-
-    // const salesByBrandData = {
-    //     labels: ["Brand A", "Brand B", "Brand C"],
-    //     datasets: [{
-    //         data: [300, 50, 100],
-    //         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-    //         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-    //     }]
-    // };
-    
     var salesByBrandData = <?php echo json_encode($salesByBrandData); ?>;
     var salesByCategoryData = <?php echo json_encode($salesByCategoryData); ?>;
-
-    // const salesByCategoryData = {
-    //     labels: ["Category X", "Category Y", "Category Z"],
-    //     datasets: [{
-    //         data: [55, 30, 15],
-    //         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-    //         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-    //     }]
+    var salesLineChartData = <?php echo json_encode($lineChartData); ?>;
+    //   var salesLineChartData = {
+    //     "labels": ["2024-01-26", "2024-01-27", "2024-01-28", "2024-01-29"],
+    //     "datasets": [
+    //         {
+    //             "label": "Total Sales",
+    //             "data": [6958500, 2554000, 3993500, 595100],
+    //             "fill": false,
+    //             "borderColor": "rgb(75, 192, 192)",
+    //             "tension": 0.1
+    //         }
+    //     ]
     // };
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Bar Chart - Sales Over Time
-        var ctx1 = document.getElementById('salesBarChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: salesOverTimeData,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
         // Pie Chart - Sales % by Brand
-        var ctx2 = document.getElementById('brandPieChart').getContext('2d');
-        new Chart(ctx2, {
+        var ctxBrandPieChart = document.getElementById('brandPieChart').getContext('2d');
+        new Chart(ctxBrandPieChart, {
             type: 'pie',
             data: salesByBrandData
         });
 
+        // Line Chart - Sales Over Time
+        var ctxLineChart = document.getElementById('salesLineChart').getContext('2d');
+        new Chart(ctxLineChart, {
+            type: 'line',
+            data: salesLineChartData
+        });
+
         // Doughnut Chart - Sales % by Category
-        var ctx3 = document.getElementById('categoryDoughnutChart').getContext('2d');
-        new Chart(ctx3, {
+        var ctxCategoryDoughnutChart = document.getElementById('categoryDoughnutChart').getContext('2d');
+        new Chart(ctxCategoryDoughnutChart, {
             type: 'doughnut',
             data: salesByCategoryData
         });
@@ -111,6 +91,7 @@ $salesByCategoryData = $reportObj->getSalesData($startDate, $endDate, "category"
 
 </body>
 </html>
+
 
 
 
