@@ -18,30 +18,35 @@ html,body {
   display: grid;
   grid-template-columns: repeat(16, 1fr); 
   grid-template-rows: repeat(16, 1fr);
-  gap: 10px; 
+  gap: 20px; 
   padding: 20px; 
   background-color: #f4f4f4f4; 
   margin-bottom: 80px;
   max-width:100vw;
-  max-height:86vh;
+  max-height:86%;
+  
 }
 
 .grid-item {
   background-color: #ffffff; 
-  color: #ffffff; 
+  color: #333;
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
   display: flex; 
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Align children to the start */
+  align-items: center; /* Stretch children to fill the width */
+  
   
 }
-
   
 .grid-item-1 {
   grid-column: 1 / 10; 
   grid-row: 1 / 7; 
+  background-color: #ffffff ;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
 
 .grid-item-2 {
@@ -58,10 +63,78 @@ html,body {
   grid-column: 10 / 17; 
   grid-row: 9 / 17; 
 }
+
+
+.main-filter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.filter-heading h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-options {
+  width: 60%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  
+  
+  
+  
+}
+
+.filter-options label {
+  display: inline;
+  margin: 0;
+  padding: 0; /* Ensures no additional space inside the label */
+  font-weight: bold;
+  font-size: 14px; /* Adjust as needed */
+}
+
+.filter-options input,
+.filter-options select {
+  width: 100%;
+  padding: 10px;
+  padding-left: 0px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.filter-confirm button {
+  padding: 10px 20px;
+  background-color: #16a085;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.filter-confirm button:hover {
+  background-color: red;
+}
+
+.date-label {
+  display: inline-block;
+  margin-right: 5px; /* Adjust the space to the right of the label */
+  vertical-align: middle; /* Align the label with the input field */
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+
+
   
 
 
-  
+
+
+
+
+
   
 
   
