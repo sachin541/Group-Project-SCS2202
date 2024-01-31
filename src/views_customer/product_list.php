@@ -147,7 +147,7 @@ usort($laptopProducts, function($a, $b) {
 
         
         
-           </div>
+          </div>
     
 
     

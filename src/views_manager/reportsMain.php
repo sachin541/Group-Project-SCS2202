@@ -118,9 +118,20 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
         // Pie Chart - Sales % by Brand
         var ctxBrandPieChart = document.getElementById('brandPieChart').getContext('2d');
         new Chart(ctxBrandPieChart, {
-            type: 'pie',
-            data: salesByBrandData
-        });
+        type: 'pie',
+        data: salesByBrandData,
+        options: {
+            plugins: {
+                legend: {
+                    position: 'left',
+                    labels: {
+                        boxWidth: 20,
+                        padding: 15
+                    }
+                }
+            }
+        }
+    });
 
         // Line Chart - Sales Over Time
         var ctxLineChart = document.getElementById('salesLineChart').getContext('2d');
@@ -133,8 +144,19 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
         var ctxCategoryDoughnutChart = document.getElementById('categoryDoughnutChart').getContext('2d');
         new Chart(ctxCategoryDoughnutChart, {
             type: 'doughnut',
-            data: salesByCategoryData
-        });
+            data: salesByCategoryData,
+            options: {
+            plugins: {
+                legend: {
+                    position: 'left',
+                    labels: {
+                        boxWidth: 20,
+                        padding: 15
+                    }
+                }
+            }
+        }
+    });
     });
 </script>
 
