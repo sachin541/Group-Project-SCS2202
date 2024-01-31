@@ -134,6 +134,7 @@ usort($laptopProducts, function($a, $b) {
                   <h3 class="product-title"><?php echo htmlspecialchars($item['product_name']); ?></h3>
                   <p class="product-price">Price: Rs <?php echo htmlspecialchars(number_format($item['price'])); ?></p>
                   <p class="product-brand">Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
+                  <p class="product-stock">In Stock: <?php echo htmlspecialchars($item['quantity']); ?></p>
               </div>
               <div class="product-actions">
                   <form action="product_details.php" method="get">
@@ -146,7 +147,7 @@ usort($laptopProducts, function($a, $b) {
 
         
         
-           </div>
+          </div>
     
 
     

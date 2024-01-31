@@ -37,11 +37,12 @@ function formatPrice($price) {
 
         <?php if (empty($cartItems)): ?>
             <div class="noitems" >
-            
+                    <p class="empty-cart-message">No items selected</p>
+                    <div>
                     <a href="./product_list.php" class="add-more-link">
                         <img src="../../resources/images/icons/addmore.png" alt="Add More Products">
-                        <div>Select items</div>
-                        <p class="empty-cart-message">No items selected</p>
+                        Select items
+                    </div>
             <div>
             
         <?php else: ?>

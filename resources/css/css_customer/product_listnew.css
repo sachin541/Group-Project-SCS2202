@@ -127,6 +127,7 @@ html, body {
 
 .product-title {
   font-size: 20px;
+  
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -141,6 +142,13 @@ html, body {
 .product-brand {
   margin: 5px;
   font-size: 16px;
+  color: #555;
+}
+
+.product-stock {
+  margin: 5px;
+  font-size: 16px;
+  font-weight: bold;
   color: #555;
 }
 

@@ -10,13 +10,20 @@ body {
 /* Orders Container Styles */
 .orders-container {
     width: 80%;
-    margin: 40px auto;
+    margin: 10px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
+.orders-header{
+    background-color: #ddefea;
+    padding: 12px;
+   
+
+}
 /* Orders Table Styles */
 .orders-table {
     width: 100%;
@@ -31,8 +38,8 @@ body {
 }
 
 .orders-table th {
-    background-color: #16a085;
-    color: white;
+    background-color: #e3e1e1;
+    color: black;
 }
 
 .orders-table td {
@@ -61,9 +68,9 @@ body {
 
 /* Details Button */
 .details-button {
-    background-color: #000000;
+    background-color: black;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -139,7 +146,7 @@ body {
 
 /* Apply Filter Button */
 .apply-filter-button {
-    background-color: #000000; /* Matching theme color */
+    background-color: #16a085; /* Matching theme color */
     color: white;
     padding: 10px 20px; /* Sufficient padding for better appearance */
     border: none;

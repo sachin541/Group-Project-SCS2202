@@ -55,7 +55,7 @@ function formatString($str) {
     <div class="orders-container">
 
             <h1 class="orders-header">
-                <span style="padding-right: 20px;">Your Orders</span>
+                <span style="padding-right: 20px;">YOUR ORDERS</span>
                 
             </h1>
 
@@ -67,7 +67,7 @@ function formatString($str) {
                     <select name="paymentType" class="filter-dropdown">
                         <option value="">Payment Type</option>
                         <option value="pay_on_delivery" <?php echo $paymentType == 'Pay On Delivery' ? 'selected' : ''; ?>>Pay On Delivery</option>
-                        <option value="Online" <?php echo $paymentType == 'Online' ? 'selected' : ''; ?>>Online</option>
+                        <option value="pay_online" <?php echo $paymentType == 'Online' ? 'selected' : ''; ?>>Online</option>
                     </select>
 
                     <!-- Payment Status Dropdown -->

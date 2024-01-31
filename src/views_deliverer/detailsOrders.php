@@ -123,7 +123,7 @@ function formatPrice($price) {
                         
                         if ($firstItem['payment_type'] === 'pay_on_delivery') {
                             echo 'Pay on Delivery';
-                        } else if ($firstItem['payment_type'] === 'payed_online') {
+                        } else if ($firstItem['payment_type'] === 'pay_online') {
                             echo 'Paid Online';
                         } else {
                             echo 'Unknown'; 

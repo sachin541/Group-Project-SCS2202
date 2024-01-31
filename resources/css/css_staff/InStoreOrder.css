@@ -17,6 +17,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around the container */
 }
 
+.cart-container h1{
+    background-color: #ddefea;
+    padding: 6px 20px;
+    border-radius: 10px;
+}
+
 /* Cart Table Styles */
 .cart-table {
     width: 100%; /* Makes the table width 100% of its parent container */
@@ -31,7 +37,7 @@ body {
 }
 
 .cart-table th {
-    background-color: #16a085; /* Background color for table headers */
+    background-color: #515151; /* Background color for table headers */
     color: white; /* Text color for table headers */
 }
 
@@ -91,7 +97,7 @@ body {
 }
 
 .delete-button {
-    background-color: black /* Background color for delete buttons */
+    background-color: 16a085 /* Background color for delete buttons */
 }
 
 .checkout-button:hover, .delete-button:hover {
@@ -165,17 +171,22 @@ body {
 .add-more-container {
     align-content: center;
     padding: 0;
-    background-color: #d6e6e2;
+    
    
 }
 
 .add-more-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #333; /* Change color as needed */
+    color: #ffffff; 
     font-weight: bold;
+    background-color: #000000;
+    padding: 4px 10px;
+    border-radius: 10px;
+    
+    
 }
 
 .add-more-link img {
@@ -183,6 +194,8 @@ body {
     height: 50px; /* Sets height of the product image */
     object-fit: cover; /* Ensures the image covers the set width and height */
     border-radius: 4px;
+    padding: 0px 6px;
+    
 }
 
 .add-more-link span {
@@ -191,14 +204,23 @@ body {
 
 .noitems {
     align-content: center;
-    padding: 10px;
-    background-color: #d6e6e2;
+    
+    background-color: #ffffff;
     border-radius: 10px;
 }
 
-.empty-cart-message{
+.noitems .add-more-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff; 
+    font-weight: bold;
+    background-color: rgb(21, 20, 20);
+    padding: 4px 10px;
+    border-radius: 0px;
     
-    padding-left : 400px;
+    
 }
 
 

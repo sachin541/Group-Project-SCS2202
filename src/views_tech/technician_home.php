@@ -36,6 +36,8 @@ require_once '../components/headers/main_header.php';
             </header>
         </div>
         </a> 
+
+        
     </div>
 </div>
 </html>
