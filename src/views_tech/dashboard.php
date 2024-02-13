@@ -23,10 +23,10 @@ require_once '../components/headers/main_header.php';
 </head>
 
 <body>
-    <div class="grid-container">
+    <!-- <div class="grid-container"> -->
 
-        <!-- Header -->
-        <header class="header">
+    <!-- Header -->
+    <!-- <header class="header">
             <div class="menu-icon" onclick="openSidebar()">
                 <span class="material-icons-outlined">menu</span>
             </div>
@@ -38,11 +38,11 @@ require_once '../components/headers/main_header.php';
                 <span class="material-icons-outlined">email</span>
                 <span class="material-icons-outlined">account_circle</span>
             </div>
-        </header>
-        <!-- End Header -->
+        </header> -->
+    <!-- End Header -->
 
-        <!-- Sidebar -->
-        <aside id="sidebar">
+    <!-- Sidebar -->
+    <!-- <aside id="sidebar">
             <div class="sidebar-title">
                 <div class="sidebar-brand">
                     <span class="material-icons-outlined">shopping_cart</span> STORE
@@ -87,68 +87,68 @@ require_once '../components/headers/main_header.php';
                     </a>
                 </li>
             </ul>
-        </aside>
-        <!-- End Sidebar -->
+        </aside> -->
+    <!-- End Sidebar -->
 
-        <!-- Main -->
-        <main class="main-container">
-            <div class="main-title">
+    <!-- Main -->
+    <main class="main-container">
+        <!-- <div class="main-title">
                 <h2>DASHBOARD</h2>
+            </div> -->
+
+        <div class="main-cards">
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>PRODUCTS</h3>
+                    <span class="material-icons-outlined">inventory_2</span>
+                </div>
+                <h1>249</h1>
             </div>
 
-            <div class="main-cards">
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h3>PRODUCTS</h3>
-                        <span class="material-icons-outlined">inventory_2</span>
-                    </div>
-                    <h1>249</h1>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>CATEGORIES</h3>
+                    <span class="material-icons-outlined">category</span>
                 </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h3>CATEGORIES</h3>
-                        <span class="material-icons-outlined">category</span>
-                    </div>
-                    <h1>25</h1>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h3>CUSTOMERS</h3>
-                        <span class="material-icons-outlined">groups</span>
-                    </div>
-                    <h1>1500</h1>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h3>ALERTS</h3>
-                        <span class="material-icons-outlined">notification_important</span>
-                    </div>
-                    <h1>56</h1>
-                </div>
-
+                <h1>25</h1>
             </div>
 
-            <div class="charts">
-
-                <div class="charts-card">
-                    <h2 class="chart-title">Top 5 Products</h2>
-                    <div id="bar-chart"></div>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>CUSTOMERS</h3>
+                    <span class="material-icons-outlined">groups</span>
                 </div>
-
-                <div class="charts-card">
-                    <h2 class="chart-title">Purchase and Sales Orders</h2>
-                    <div id="area-chart"></div>
-                </div>
-
+                <h1>1500</h1>
             </div>
-        </main>
-        <!-- End Main -->
 
-    </div>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>ALERTS</h3>
+                    <span class="material-icons-outlined">notification_important</span>
+                </div>
+                <h1>56</h1>
+            </div>
+
+        </div>
+
+        <div class="charts">
+
+            <div class="charts-card">
+                <h2 class="chart-title">Top 5 Products</h2>
+                <div id="bar-chart"></div>
+            </div>
+
+            <div class="charts-card">
+                <h2 class="chart-title">Purchase and Sales Orders</h2>
+                <div id="area-chart"></div>
+            </div>
+
+        </div>
+    </main>
+    <!-- End Main -->
+
+    <!-- </div> -->
 
     <!-- Scripts -->
     <!-- ApexCharts -->
