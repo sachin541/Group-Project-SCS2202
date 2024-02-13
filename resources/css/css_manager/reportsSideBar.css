@@ -1,53 +1,45 @@
-/* Side Navigation Bar Styles */
 .main-side-nav {
-    background-color: #000000; /* Sidebar background color */
-    display: flex;
-    flex-direction: column;
-    width: auto; /* Adjust the width as needed */
-    margin-left: 0px;
-    padding: 0px;
-    width: 100%;
-  }
-  
-  /* Navigation Panel inside Side Nav */
-  .nav-panel {
-    display: flex;
-    flex-direction: column;
-    width: 100%; /* Full width of parent */
-    
-  }
-  
-  /* Navigation List Styles */
-  .nav-list {
-    list-style-type: none; /* No bullet points */
-    padding: 0; /* No padding */
-    
-  }
-  
-  /* Navigation Item Styles */
-  .nav-item {
-    width: 100%; /* Full width */
-    flex-grow: 1; /* Grow to fill space evenly */
-    
-  }
-  
-  /* Navigation Link Styles */
-  .nav-link {
-    display: block;
-    width: 100%; /* Full width */
-    text-align: center; /* Centered text */
-    padding: 18px 24px; /* Padding for appearance */
-    text-decoration: none; /* No underline */
-    background-color: #121212; /* Button background color */
-    color: rgb(255, 255, 255); /* Button text color */
-    font-size: 20px; /* Font size */
-    border-radius: 0px; /* Rounded corners */
-    border: none; /* No border */
-    
-  }
-  
-  /* Navigation Link Hover Effect */
-  .nav-link:hover {
-    background-color: red; /* Background color on hover */
-  }
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.nav-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  width: 80%;
+  flex-grow: 1;
+}
+
+.nav-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 28px 18px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  background-color: #121212;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 0;
+  border: none;
+}
+
+.nav-link:hover {
+  background-color: red;
+}
+
   
