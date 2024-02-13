@@ -341,29 +341,31 @@ class LineChart extends Report{
 
 }
 
-
-class ItemSales extends Report{
+    
+class ItemSales extends Report {
     private $db;
+
     public function __construct($db) {
         $this->db = $db;
     }
 
     public function getProductSalesFromRange($startDate, $endDate) {
-        // Include times in your date strings if not already (e.g., '2024-02-10 00:00:00' and '2024-02-15 23:59:59')
-        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(oi.quantity) as total_units 
+        // Modified queries to include unit price and product image
+        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(oi.quantity) as total_units 
                              FROM Orders o
                              JOIN Order_Items oi ON o.order_id = oi.order_id
                              JOIN Products p ON oi.product_id = p.id
                              WHERE o.created_at BETWEEN ? AND ?
-                             GROUP BY p.id, p.product_name";
+                             GROUP BY p.id, p.product_name, p.price, p.image1";
 
-        $inStoreSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(ip.quantity) as total_units
+        $inStoreSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(ip.quantity) as total_units
                               FROM InStorePurchase isp
                               JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
                               JOIN Products p ON ip.product_id = p.id
                               WHERE isp.created_at BETWEEN ? AND ?
-                              GROUP BY p.id, p.product_name";
+                              GROUP BY p.id, p.product_name, p.price, p.image1";
 
+        // Execute queries and fetch results
         $stmt = $this->db->prepare($onlineSalesQuery);
         $stmt->execute([$startDate, $endDate]);
         $onlineSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -372,11 +374,18 @@ class ItemSales extends Report{
         $stmt->execute([$startDate, $endDate]);
         $inStoreSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // Merge and process online and in-store sales data
         $mergedData = [];
         foreach (array_merge($onlineSales, $inStoreSales) as $sale) {
             $key = $sale['product_id'] . '_' . $sale['product_name'];
             if (!isset($mergedData[$key])) {
-                $mergedData[$key] = ['product_id' => $sale['product_id'], 'product_name' => $sale['product_name'], 'total_units' => 0];
+                $mergedData[$key] = [
+                    'product_id' => $sale['product_id'], 
+                    'product_name' => $sale['product_name'], 
+                    'unit_price' => $sale['unit_price'], // Added unit price
+                    'image' => base64_encode($sale['image1']), // Added product image, encoded for display
+                    'total_units' => 0
+                ];
             }
             $mergedData[$key]['total_units'] += $sale['total_units'];
         }
@@ -388,8 +397,6 @@ class ItemSales extends Report{
 
         return $mergedData;
     }
-
-
-
-
 }
+ 
+    
