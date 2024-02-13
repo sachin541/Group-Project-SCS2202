@@ -340,3 +340,56 @@ class LineChart extends Report{
 
 
 }
+
+
+class ItemSales extends Report{
+    private $db;
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function getProductSalesFromRange($startDate, $endDate) {
+        // Include times in your date strings if not already (e.g., '2024-02-10 00:00:00' and '2024-02-15 23:59:59')
+        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(oi.quantity) as total_units
+                             FROM Orders o
+                             JOIN Order_Items oi ON o.order_id = oi.order_id
+                             JOIN Products p ON oi.product_id = p.id
+                             WHERE o.created_at BETWEEN ? AND ?
+                             GROUP BY p.id, p.product_name";
+
+        $inStoreSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(ip.quantity) as total_units
+                              FROM InStorePurchase isp
+                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                              JOIN Products p ON ip.product_id = p.id
+                              WHERE isp.created_at BETWEEN ? AND ?
+                              GROUP BY p.id, p.product_name";
+
+        $stmt = $this->db->prepare($onlineSalesQuery);
+        $stmt->execute([$startDate, $endDate]);
+        $onlineSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->db->prepare($inStoreSalesQuery);
+        $stmt->execute([$startDate, $endDate]);
+        $inStoreSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $mergedData = [];
+        foreach (array_merge($onlineSales, $inStoreSales) as $sale) {
+            $key = $sale['product_id'] . '_' . $sale['product_name'];
+            if (!isset($mergedData[$key])) {
+                $mergedData[$key] = ['product_id' => $sale['product_id'], 'product_name' => $sale['product_name'], 'total_units' => 0];
+            }
+            $mergedData[$key]['total_units'] += $sale['total_units'];
+        }
+
+        // Sort the merged data by total units sold in descending order
+        usort($mergedData, function ($a, $b) {
+            return $b['total_units'] - $a['total_units'];
+        });
+
+        return $mergedData;
+    }
+
+
+
+
+}
