@@ -1,6 +1,7 @@
 <?php
 require_once '../classes/database.php';
 require_once '../classes/reports.php';
+require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -19,9 +20,12 @@ $searchTerm = isset($_GET['productSearch']) ? $_GET['productSearch'] : '';
 
 // Fetch the sales data, modified to potentially include search term filtering
 $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59", $searchTerm);
+
+
+echo $_SESSION['selectedProductId'];
 ?>
 
-<?php require_once '../components/headers/main_header.php'; ?>
+<?php  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -119,38 +123,19 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     var salesData = <?php echo json_encode($salesData); ?>;
     var currentPage = 0;
     var itemsPerPage = 10;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        renderTable(); // Render the initial table
-
-        document.getElementById('productSearch').addEventListener('input', filterData);
-        document.getElementById('prevPage').addEventListener('click', function() {
-            if (currentPage > 0) {
-                currentPage--;
-                renderTable();
-            }
-        });
-        document.getElementById('nextPage').addEventListener('click', function() {
-            var maxPage = Math.ceil(filteredData.length / itemsPerPage) - 1;
-            if (currentPage < maxPage) {
-                currentPage++;
-                renderTable();
-            }
-        });
-    });
-
+    var searchKeyword = new URL(window.location.href).searchParams.get('productSearch');
     var filteredData = salesData; // Initialize with all data
 
-    function filterData() {
-        var searchKeyword = document.getElementById('productSearch').value.toLowerCase();
+    // Update the search input field if a search term exists
+    if (searchKeyword) {
+        document.getElementById('productSearch').value = searchKeyword;
         filteredData = salesData.filter(function(item) {
-            return item.product_name.toLowerCase().includes(searchKeyword);
+            return item.product_name.toLowerCase().includes(searchKeyword.toLowerCase());
         });
-        currentPage = 0; // Reset to the first page
-        renderTable();
     }
 
     function renderTable() {
@@ -162,7 +147,7 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
         var paginatedItems = filteredData.slice(startItem, endItem);
 
         paginatedItems.forEach(function(item) {
-            var row = `<tr>
+            var row = `<tr id="row-${item.product_id}">
                 <td>${item.product_id}</td>
                 <td><img src="data:image/jpeg;base64,${item.image}" height="50" loading="lazy" /></td>
                 <td>${item.product_name}</td>
@@ -171,16 +156,62 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
             </tr>`;
             tableBody.innerHTML += row;
         });
+
+        // Attach click event listeners to each row
+        paginatedItems.forEach(function(item) {
+            document.getElementById(`row-${item.product_id}`).addEventListener('click', function() {
+                setSessionProductId(item.product_id);
+            });
+        });
     }
 
-    // Update the URL with the search keyword
-    document.getElementById('productSearch').addEventListener('input', function(e) {
-        var searchKeyword = e.target.value;
+    renderTable(); // Render the initial table with filter if applicable
+
+    // Attach event listeners for pagination
+    document.getElementById('prevPage').addEventListener('click', function() {
+        if (currentPage > 0) {
+            currentPage--;
+            renderTable();
+        }
+    });
+    document.getElementById('nextPage').addEventListener('click', function() {
+        var maxPage = Math.ceil(filteredData.length / itemsPerPage) - 1;
+        if (currentPage < maxPage) {
+            currentPage++;
+            renderTable();
+        }
+    });
+
+    // Filtering functionality
+    document.getElementById('productSearch').addEventListener('input', function() {
+        var inputKeyword = document.getElementById('productSearch').value.toLowerCase();
+        filteredData = salesData.filter(function(item) {
+            return item.product_name.toLowerCase().includes(inputKeyword);
+        });
+        currentPage = 0; // Reset to the first page
+        renderTable();
+
+        // Update the URL without reloading
         var currentUrl = new URL(window.location);
-        currentUrl.searchParams.set('productSearch', searchKeyword);
+        currentUrl.searchParams.set('productSearch', inputKeyword);
         window.history.pushState({path:currentUrl.toString()}, '', currentUrl.toString());
     });
+});
+
+function setSessionProductId(productId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "set_session.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log("Session set for product ID: " + productId);
+            window.location.reload();
+        }
+    };
+    xhr.send("productId=" + productId);
+}
 </script>
+
 
 
 </body>

@@ -67,7 +67,7 @@ th, td {
 }
 
 th {
-    background-color: #007BFF;
+    background-color: #000000;
     color: white;
 }
 
@@ -99,7 +99,7 @@ input[type=date], input[type=text], input[type=submit], button {
 }
 
 input[type=submit], button {
-    background-color: #007BFF;
+    background-color: #000000;
     color: white;
     cursor: pointer;
 }
