@@ -97,12 +97,12 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
 <script>
     var salesData = <?php echo json_encode($salesData); ?>;
     document.addEventListener('DOMContentLoaded', function() {
-        renderTable(salesData.slice(0, 25));
+        renderTable(salesData.slice(0, 20));
         document.getElementById('productSearch').addEventListener('input', function(e) {
             var searchKeyword = e.target.value.toLowerCase();
             var filteredData = salesData.filter(function(item) {
                 return item.product_name.toLowerCase().includes(searchKeyword);
-            }).slice(0, 25); // Limit results to 25 items
+            }).slice(0, 20); // Limit results to 25 items
 
             renderTable(filteredData);
         });

@@ -350,7 +350,7 @@ class ItemSales extends Report{
 
     public function getProductSalesFromRange($startDate, $endDate) {
         // Include times in your date strings if not already (e.g., '2024-02-10 00:00:00' and '2024-02-15 23:59:59')
-        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(oi.quantity) as total_units
+        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, SUM(oi.quantity) as total_units 
                              FROM Orders o
                              JOIN Order_Items oi ON o.order_id = oi.order_id
                              JOIN Products p ON oi.product_id = p.id
