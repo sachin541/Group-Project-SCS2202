@@ -134,7 +134,9 @@ $salesRevenueByItem = $report->getDailyRevenueByProductId($startDate . " 00:00:0
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var salesData = <?php echo json_encode($salesData); ?>;
-    var currentPage = 0;
+    var urlParams = new URLSearchParams(window.location.search);
+    var pageFromUrl = urlParams.get('page');
+    currentPage = pageFromUrl ? parseInt(pageFromUrl) : 0;
     var itemsPerPage = 7;
     var searchKeyword = new URL(window.location.href).searchParams.get('productSearch');
     var filteredData = salesData; // Initialize with all data
@@ -178,18 +180,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Attach event listeners for pagination
     document.getElementById('prevPage').addEventListener('click', function() {
-        if (currentPage > 0) {
-            currentPage--;
-            renderTable();
-        }
+    if (currentPage > 0) {
+        currentPage--;
+        updatePageInUrl(currentPage);
+        renderTable();
+    }
     });
+
     document.getElementById('nextPage').addEventListener('click', function() {
         var maxPage = Math.ceil(filteredData.length / itemsPerPage) - 1;
         if (currentPage < maxPage) {
             currentPage++;
+            updatePageInUrl(currentPage);
             renderTable();
         }
     });
+
+    function updatePageInUrl(currentPage) {
+    var currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('page', currentPage);
+    window.history.pushState({path:currentUrl.toString()}, '', currentUrl.toString());
+    }
+
+
 
     // Filtering functionality
     document.getElementById('productSearch').addEventListener('input', function() {
