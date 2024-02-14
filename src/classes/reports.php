@@ -451,6 +451,64 @@ class ItemSales extends Report {
     
         return $completeSalesData;
     }
+
+
+    public function getDailyRevenueByProductId($startDate, $endDate, $productId) {
+        // Query to get daily revenue from online orders
+        $onlineRevenueQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) as daily_revenue
+                                FROM Orders o
+                                JOIN Order_Items oi ON o.order_id = oi.order_id
+                                JOIN Products p ON oi.product_id = p.id
+                                WHERE oi.product_id = ?
+                                AND o.created_at BETWEEN ? AND ?
+                                GROUP BY DATE(o.created_at)";
+    
+        // Query to get daily revenue from in-store purchases
+        $inStoreRevenueQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) as daily_revenue
+                                FROM InStorePurchase isp
+                                JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                                JOIN Products p ON ip.product_id = p.id
+                                WHERE ip.product_id = ?
+                                AND isp.created_at BETWEEN ? AND ?
+                                GROUP BY DATE(isp.created_at)";
+    
+        // Execute online revenue query and fetch results
+        $stmt = $this->db->prepare($onlineRevenueQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $onlineRevenue = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Execute in-store revenue query and fetch results
+        $stmt = $this->db->prepare($inStoreRevenueQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $inStoreRevenue = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Merge and process revenue data
+        $revenueData = array_merge($onlineRevenue, $inStoreRevenue);
+        $dailyRevenue = [];
+        foreach ($revenueData as $revenue) {
+            $saleDate = $revenue['sale_date'];
+            if (!isset($dailyRevenue[$saleDate])) {
+                $dailyRevenue[$saleDate] = 0;
+            }
+            $dailyRevenue[$saleDate] += $revenue['daily_revenue'];
+        }
+    
+        // Ensure every date in the range is represented, even if no revenue was generated
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            new DateTime($endDate)
+        );
+    
+        $completeRevenueData = [];
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $completeRevenueData[$formattedDate] = isset($dailyRevenue[$formattedDate]) ? $dailyRevenue[$formattedDate] : 0;
+        }
+    
+        return $completeRevenueData;
+    }
+    
     
 }
  

@@ -23,6 +23,7 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
 
 $selectedProductId = isset($_SESSION['selectedProductId']) ? $_SESSION['selectedProductId'] : null;
 $salesDataByItem = $report->getDailySalesByProductId($startDate . " 00:00:00", $endDate . " 23:59:59", $selectedProductId);
+$salesRevenueByItem = $report->getDailyRevenueByProductId($startDate . " 00:00:00", $endDate . " 23:59:59", $selectedProductId);
 ?>
 
 <?php  ?>
@@ -119,7 +120,10 @@ $salesDataByItem = $report->getDailySalesByProductId($startDate . " 00:00:00", $
         </div>
 
         <div class="grid-item grid-item-3">
-            <!-- Potentially for more details or other reports -->
+            <div class="chart-container" style="width:100%;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+
         </div>
     
 
@@ -297,6 +301,78 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    <?php if ($selectedProductId && !empty($salesRevenueByItem)): ?>
+    // Assuming $salesDataByItem now contains daily revenue data
+    var ctxRevenue = document.getElementById('revenueChart').getContext('2d'); // Ensure you have a canvas with id="revenueChart"
+    var revenueData = <?php echo json_encode(array_values($salesRevenueByItem)); ?>;
+    var revenueLabels = <?php echo json_encode(array_keys($salesRevenueByItem)); ?>;
+
+    var revenueChart = new Chart(ctxRevenue, {
+        type: 'line',
+        data: {
+            labels: revenueLabels,
+            datasets: [{
+                label: 'Daily Revenue',
+                data: revenueData,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Light red background
+                borderColor: 'rgba(255, 99, 132, 1)', // Darker red border
+                borderWidth: 1,
+                fill: false,
+                pointRadius: revenueData.map(value => value === 0 ? 1 : 2), // Smaller radius for 0 values
+                pointHoverRadius: revenueData.map(value => value === 0 ? 3 : 7),
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Daily Revenue for Product ID: <?php echo $selectedProductId; ?>'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    },
+                    gridLines: {
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Revenue ($)'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                position: 'top'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+        }
+    });
+    <?php endif; ?>
+});
+</script>
 
 
 
