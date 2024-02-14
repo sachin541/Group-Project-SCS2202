@@ -397,6 +397,61 @@ class ItemSales extends Report {
 
         return $mergedData;
     }
+
+    public function getDailySalesByProductId($startDate, $endDate, $productId) {
+        // Query to get daily sales from online orders
+        $onlineSalesQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity) as quantity_sold
+                             FROM Orders o
+                             JOIN Order_Items oi ON o.order_id = oi.order_id
+                             WHERE oi.product_id = ?
+                             AND o.created_at BETWEEN ? AND ?
+                             GROUP BY DATE(o.created_at)";
+    
+        // Query to get daily sales from in-store purchases
+        $inStoreSalesQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity) as quantity_sold
+                              FROM InStorePurchase isp
+                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                              WHERE ip.product_id = ?
+                              AND isp.created_at BETWEEN ? AND ?
+                              GROUP BY DATE(isp.created_at)";
+    
+        // Execute online sales query and fetch results
+        $stmt = $this->db->prepare($onlineSalesQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $onlineSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Execute in-store sales query and fetch results
+        $stmt = $this->db->prepare($inStoreSalesQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $inStoreSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Merge and process sales data
+        $salesData = array_merge($onlineSales, $inStoreSales);
+        $dailySales = [];
+        foreach ($salesData as $sale) {
+            $saleDate = $sale['sale_date'];
+            if (!isset($dailySales[$saleDate])) {
+                $dailySales[$saleDate] = 0;
+            }
+            $dailySales[$saleDate] += $sale['quantity_sold'];
+        }
+    
+        // Ensure every date in the range is represented, even if no sales occurred
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            new DateTime($endDate)
+        );
+    
+        $completeSalesData = [];
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $completeSalesData[$formattedDate] = isset($dailySales[$formattedDate]) ? $dailySales[$formattedDate] : 0;
+        }
+    
+        return $completeSalesData;
+    }
+    
 }
  
     

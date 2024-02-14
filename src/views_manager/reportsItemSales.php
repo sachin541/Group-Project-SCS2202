@@ -22,7 +22,7 @@ $searchTerm = isset($_GET['productSearch']) ? $_GET['productSearch'] : '';
 $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59", $searchTerm);
 
 
-echo $_SESSION['selectedProductId'];
+
 ?>
 
 <?php  ?>
@@ -110,6 +110,7 @@ echo $_SESSION['selectedProductId'];
         </div>
         
         <div class="grid-item grid-item-2">
+           SELECTED ITEM <?php echo $_SESSION['selectedProductId'];?>
             <!-- Potentially for more details or other reports -->
         </div>
 
@@ -126,7 +127,7 @@ echo $_SESSION['selectedProductId'];
 document.addEventListener('DOMContentLoaded', function() {
     var salesData = <?php echo json_encode($salesData); ?>;
     var currentPage = 0;
-    var itemsPerPage = 10;
+    var itemsPerPage = 7;
     var searchKeyword = new URL(window.location.href).searchParams.get('productSearch');
     var filteredData = salesData; // Initialize with all data
 
