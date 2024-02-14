@@ -59,6 +59,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
+    
 }
 
 th, td {
@@ -130,6 +131,21 @@ tr:hover {
     background-color: #ddefea; /* Light grey on hover */
     cursor: pointer;
 }
+
+tbody .selected-item {
+    background-color: #b6dfe0; /* Adjust the color as needed */
+    /* Other styles */
+}
+
+
+.chart-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 90%; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+}
+
 
 
 
