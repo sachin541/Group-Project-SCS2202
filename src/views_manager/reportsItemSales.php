@@ -8,7 +8,7 @@ $db = $database->getConnection();
 $report = new ItemSales($db);
 
 // Calculate the start date as 6 months back from today
-$defaultStartDate = date('Y-m-d', strtotime('-6 months'));
+$defaultStartDate = date('Y-m-d', strtotime('-2 months'));
 $defaultEndDate = date('Y-m-d'); // Current date as the default end date
 
 // Check if the dates are set in the GET parameters; otherwise, use calculated default dates
@@ -21,8 +21,8 @@ $searchTerm = isset($_GET['productSearch']) ? $_GET['productSearch'] : '';
 // Fetch the sales data, modified to potentially include search term filtering
 $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59", $searchTerm);
 
-
-
+$selectedProductId = isset($_SESSION['selectedProductId']) ? $_SESSION['selectedProductId'] : null;
+$salesDataByItem = $report->getDailySalesByProductId($startDate . " 00:00:00", $endDate . " 23:59:59", $selectedProductId);
 ?>
 
 <?php  ?>
@@ -91,7 +91,7 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
                                     <tr>
                                         <td><?php echo htmlspecialchars($productSale['product_id']); ?></td>
                                         <td>
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($productSale['image']); ?>" height="50" loading="lazy" />
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($productSale['image']); ?>" height="50"  />
                                         </td>
                                         <td><?php echo htmlspecialchars($productSale['product_name']); ?></td>
                                         <td><?php echo htmlspecialchars($productSale['total_units']); ?></td>
@@ -112,6 +112,10 @@ $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDat
         <div class="grid-item grid-item-2">
            SELECTED ITEM <?php echo $_SESSION['selectedProductId'];?>
             <!-- Potentially for more details or other reports -->
+            <div class="chart-container" style="width:100%;">
+                <canvas id="salesChart"></canvas>
+            </div>
+
         </div>
 
         <div class="grid-item grid-item-3">
@@ -150,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         paginatedItems.forEach(function(item) {
             var row = `<tr id="row-${item.product_id}">
                 <td>${item.product_id}</td>
-                <td><img src="data:image/jpeg;base64,${item.image}" height="50" loading="lazy" /></td>
+                <td><img src="data:image/jpeg;base64,${item.image}" height="50"  /></td>
                 <td>${item.product_name}</td>
                 <td>${item.total_units}</td>
                 <td>${item.unit_price}</td>
@@ -199,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
 function setSessionProductId(productId) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "set_session.php", true);
@@ -212,6 +217,87 @@ function setSessionProductId(productId) {
     xhr.send("productId=" + productId);
 }
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    <?php if ($selectedProductId && !empty($salesDataByItem)): ?>
+    var ctx = document.getElementById('salesChart').getContext('2d');
+    var salesData = <?php echo json_encode(array_values($salesDataByItem)); ?>;
+    var salesLabels = <?php echo json_encode(array_keys($salesDataByItem)); ?>;
+    
+    // For a bar chart, you might not need to customize point colors as in the line chart.
+    // However, if you want to customize the bar colors based on the value, you can do so here.
+
+    var chart = new Chart(ctx, {
+        type: 'bar', // Changed from 'line' to 'bar'
+        data: {
+            labels: salesLabels,
+            datasets: [{
+                label: 'Total Sales',
+                data: salesData,
+                backgroundColor: salesData.map(value => value === 0 ? 'transparent' : 'rgba(0, 123, 255, 0.5)'), // Optional: make 0 value bars transparent
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Daily Sales for Product ID: <?php echo $selectedProductId; ?>'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    },
+                    gridLines: {
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Units Sold'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                labels: {
+                    // Set font color for the legend text
+                    fontColor: '#r', // Example: dark gray
+                    // Customize the legend box color
+                    usePointStyle: true, // Use point style for a cleaner look
+                    // To set box color, you typically adjust the dataset's backgroundColor
+                },
+                // Optionally, set the legend position
+                position: 'top'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+        }
+    });
+    <?php endif; ?>
+});
+</script>
+
+
 
 
 

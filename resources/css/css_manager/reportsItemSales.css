@@ -125,6 +125,12 @@ input[type=submit]:hover, button:hover {
     font-size: 16px;
 }
 
+/* Add this CSS to your existing styles */
+tr:hover {
+    background-color: #ddefea; /* Light grey on hover */
+    cursor: pointer;
+}
+
 
 
 @media (max-width: 768px) {
