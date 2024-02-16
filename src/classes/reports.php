@@ -513,3 +513,116 @@ class ItemSales extends Report {
 }
  
     
+class BuildReport extends Report{
+
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function getBuildRequestCountByDateRange($startDate, $endDate) {
+        $query = "SELECT DATE(added_timestamp) as request_date, COUNT(*) as request_count 
+                  FROM Builds 
+                  WHERE added_timestamp BETWEEN ? AND ? 
+                  GROUP BY DATE(added_timestamp)
+                  ORDER BY DATE(added_timestamp)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dailyCounts = [];
+
+        // Initialize all dates in the range with a count of 0
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day') // Include end date in the period
+        );
+
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $dailyCounts[$formattedDate] = 0; // Initialize with 0
+        }
+
+        // Populate the array with actual counts
+        foreach ($results as $result) {
+            if (array_key_exists($result['request_date'], $dailyCounts)) {
+                $dailyCounts[$result['request_date']] = (int)$result['request_count'];
+            }
+        }
+
+        return $dailyCounts;
+    }
+
+    public function getBuildsCompletedByDateRange($startDate, $endDate) {
+        $query = "SELECT DATE(build_completed_date) as completed_date, COUNT(*) as completed_count
+                  FROM Builds
+                  WHERE build_completed_date BETWEEN ? AND ?
+                  GROUP BY DATE(build_completed_date)
+                  ORDER BY DATE(build_completed_date)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dailyCompletedCounts = [];
+
+        // Initialize all dates in the range with a count of 0 to ensure continuity
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day') // Include the end date
+        );
+
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $dailyCompletedCounts[$formattedDate] = 0; // Initialize with 0
+        }
+
+        // Populate the array with actual counts
+        foreach ($results as $result) {
+            if (array_key_exists($result['completed_date'], $dailyCompletedCounts)) {
+                $dailyCompletedCounts[$result['completed_date']] = (int)$result['completed_count'];
+            }
+        }
+
+        return $dailyCompletedCounts;
+    }
+
+    public function getBuildsCompletedByTechnician($startDate, $endDate) {
+        $query = "SELECT ld.id AS technicianID, e.staff_name AS technicianName, COUNT(*) AS completedBuilds
+                  FROM Builds b
+                  INNER JOIN login_details ld ON b.technician_id = ld.id
+                  INNER JOIN employees e ON ld.id = e.id
+                  WHERE b.build_completed_date BETWEEN ? AND ?
+                  AND ld.role = 'technician' -- Assuming role column exists and technician role is identifiable
+                  GROUP BY ld.id, e.staff_name
+                  ORDER BY completedBuilds DESC";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate, PDO::PARAM_STR);
+        $stmt->bindParam(2, $endDate, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $buildsCompletedByTechnician = [];
+
+        foreach ($results as $result) {
+            $buildsCompletedByTechnician[$result['technicianID']] = [
+                'name' => $result['technicianName'],
+                'completedBuilds' => $result['completedBuilds']
+            ];
+        }
+
+        return $buildsCompletedByTechnician;
+    }
+
+
+
+}

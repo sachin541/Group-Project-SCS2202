@@ -14,10 +14,9 @@
     </li>
     <li class="nav-item">
       <!-- Replace with a link to the echo page -->
-      <a href="echoPage.html" class="nav-link">Echo</a>
+      <a href="reportsBuilds.php" class="nav-link">Builds Data</a>
     </li>
     <li class="nav-item">
-      
       <a href="./reportsItemSales.php" class="nav-link">Item Sales</a>
     </li>
   </ul>
