@@ -21,7 +21,13 @@ $searchTerm = isset($_GET['productSearch']) ? $_GET['productSearch'] : '';
 // Fetch the sales data, modified to potentially include search term filtering
 $salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59", $searchTerm);
 
-$selectedProductId = isset($_SESSION['selectedProductId']) ? $_SESSION['selectedProductId'] : null;
+
+if (!empty($salesData)) {
+    // Set $_SESSION['selectedProductId'] to the first item's product_id if not already set or if $salesData is not empty
+    $_SESSION['selectedProductId'] = isset($_SESSION['selectedProductId']) ? $_SESSION['selectedProductId'] : $salesData[0]['product_id'];
+}
+
+$selectedProductId = isset($_SESSION['selectedProductId']) ? $_SESSION['selectedProductId'] :  null;
 $salesDataByItem = $report->getDailySalesByProductId($startDate . " 00:00:00", $endDate . " 23:59:59", $selectedProductId);
 $salesRevenueByItem = $report->getDailyRevenueByProductId($startDate . " 00:00:00", $endDate . " 23:59:59", $selectedProductId);
 ?>
