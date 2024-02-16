@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Template Header -->
+<?php require_once("../templates/main_top.php"); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/home.css">
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/home.css">
 
 </head>
 
 <body>
 
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
 
-
-    <?php require_once '../components/headers/main_header.php'; ?>
 
     <div class="main-container">
 
