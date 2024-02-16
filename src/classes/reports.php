@@ -340,3 +340,176 @@ class LineChart extends Report{
 
 
 }
+
+    
+class ItemSales extends Report {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function getProductSalesFromRange($startDate, $endDate) {
+        // Modified queries to include unit price and product image
+        $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(oi.quantity) as total_units 
+                             FROM Orders o
+                             JOIN Order_Items oi ON o.order_id = oi.order_id
+                             JOIN Products p ON oi.product_id = p.id
+                             WHERE o.created_at BETWEEN ? AND ?
+                             GROUP BY p.id, p.product_name, p.price, p.image1";
+
+        $inStoreSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(ip.quantity) as total_units
+                              FROM InStorePurchase isp
+                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                              JOIN Products p ON ip.product_id = p.id
+                              WHERE isp.created_at BETWEEN ? AND ?
+                              GROUP BY p.id, p.product_name, p.price, p.image1";
+
+        // Execute queries and fetch results
+        $stmt = $this->db->prepare($onlineSalesQuery);
+        $stmt->execute([$startDate, $endDate]);
+        $onlineSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->db->prepare($inStoreSalesQuery);
+        $stmt->execute([$startDate, $endDate]);
+        $inStoreSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Merge and process online and in-store sales data
+        $mergedData = [];
+        foreach (array_merge($onlineSales, $inStoreSales) as $sale) {
+            $key = $sale['product_id'] . '_' . $sale['product_name'];
+            if (!isset($mergedData[$key])) {
+                $mergedData[$key] = [
+                    'product_id' => $sale['product_id'], 
+                    'product_name' => $sale['product_name'], 
+                    'unit_price' => $sale['unit_price'], // Added unit price
+                    'image' => base64_encode($sale['image1']), // Added product image, encoded for display
+                    'total_units' => 0
+                ];
+            }
+            $mergedData[$key]['total_units'] += $sale['total_units'];
+        }
+
+        // Sort the merged data by total units sold in descending order
+        usort($mergedData, function ($a, $b) {
+            return $b['total_units'] - $a['total_units'];
+        });
+
+        return $mergedData;
+    }
+
+    public function getDailySalesByProductId($startDate, $endDate, $productId) {
+        // Query to get daily sales from online orders
+        $onlineSalesQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity) as quantity_sold
+                             FROM Orders o
+                             JOIN Order_Items oi ON o.order_id = oi.order_id
+                             WHERE oi.product_id = ?
+                             AND o.created_at BETWEEN ? AND ?
+                             GROUP BY DATE(o.created_at)";
+    
+        // Query to get daily sales from in-store purchases
+        $inStoreSalesQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity) as quantity_sold
+                              FROM InStorePurchase isp
+                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                              WHERE ip.product_id = ?
+                              AND isp.created_at BETWEEN ? AND ?
+                              GROUP BY DATE(isp.created_at)";
+    
+        // Execute online sales query and fetch results
+        $stmt = $this->db->prepare($onlineSalesQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $onlineSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Execute in-store sales query and fetch results
+        $stmt = $this->db->prepare($inStoreSalesQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $inStoreSales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Merge and process sales data
+        $salesData = array_merge($onlineSales, $inStoreSales);
+        $dailySales = [];
+        foreach ($salesData as $sale) {
+            $saleDate = $sale['sale_date'];
+            if (!isset($dailySales[$saleDate])) {
+                $dailySales[$saleDate] = 0;
+            }
+            $dailySales[$saleDate] += $sale['quantity_sold'];
+        }
+    
+        // Ensure every date in the range is represented, even if no sales occurred
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            new DateTime($endDate)
+        );
+    
+        $completeSalesData = [];
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $completeSalesData[$formattedDate] = isset($dailySales[$formattedDate]) ? $dailySales[$formattedDate] : 0;
+        }
+    
+        return $completeSalesData;
+    }
+
+
+    public function getDailyRevenueByProductId($startDate, $endDate, $productId) {
+        // Query to get daily revenue from online orders
+        $onlineRevenueQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) as daily_revenue
+                                FROM Orders o
+                                JOIN Order_Items oi ON o.order_id = oi.order_id
+                                JOIN Products p ON oi.product_id = p.id
+                                WHERE oi.product_id = ?
+                                AND o.created_at BETWEEN ? AND ?
+                                GROUP BY DATE(o.created_at)";
+    
+        // Query to get daily revenue from in-store purchases
+        $inStoreRevenueQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) as daily_revenue
+                                FROM InStorePurchase isp
+                                JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                                JOIN Products p ON ip.product_id = p.id
+                                WHERE ip.product_id = ?
+                                AND isp.created_at BETWEEN ? AND ?
+                                GROUP BY DATE(isp.created_at)";
+    
+        // Execute online revenue query and fetch results
+        $stmt = $this->db->prepare($onlineRevenueQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $onlineRevenue = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Execute in-store revenue query and fetch results
+        $stmt = $this->db->prepare($inStoreRevenueQuery);
+        $stmt->execute([$productId, $startDate, $endDate]);
+        $inStoreRevenue = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Merge and process revenue data
+        $revenueData = array_merge($onlineRevenue, $inStoreRevenue);
+        $dailyRevenue = [];
+        foreach ($revenueData as $revenue) {
+            $saleDate = $revenue['sale_date'];
+            if (!isset($dailyRevenue[$saleDate])) {
+                $dailyRevenue[$saleDate] = 0;
+            }
+            $dailyRevenue[$saleDate] += $revenue['daily_revenue'];
+        }
+    
+        // Ensure every date in the range is represented, even if no revenue was generated
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            new DateTime($endDate)
+        );
+    
+        $completeRevenueData = [];
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $completeRevenueData[$formattedDate] = isset($dailyRevenue[$formattedDate]) ? $dailyRevenue[$formattedDate] : 0;
+        }
+    
+        return $completeRevenueData;
+    }
+    
+    
+}
+ 
+    

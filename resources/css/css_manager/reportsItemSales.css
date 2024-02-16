@@ -1,0 +1,165 @@
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    height: 100%;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 0.4fr 3fr;
+    gap: 0px;
+    height: 100%;
+}
+
+.main-reports-section {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-bottom: 80px;
+    max-width: 100vw;
+    max-height: 86%;
+}
+
+.grid-item {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.grid-item-1 {
+    grid-column: 1 / 10;
+    grid-row: 1 / 17;
+    position: relative;
+}
+
+.grid-item-2, .grid-item-3 {
+    grid-column: 10 / 17;
+}
+
+.grid-item-2 {
+    grid-row: 1 / 9;
+}
+
+.grid-item-3 {
+    grid-row: 9 / 17;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #000000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.scrollable-table-body-container {
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.table-wrapper {
+    display: block;
+    max-width: 100%;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+input[type=date], input[type=text], input[type=submit], button {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type=submit], button {
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, button:hover {
+    opacity: 0.8;
+}
+
+/* Pagination Styles */
+.pagination {
+    position: absolute; /* Position the pagination absolutely within its parent */
+    bottom: 0; /* Anchor to the bottom */
+    left: 0; /* Align to the left */
+    width: 100%; /* Stretch across the entire width of the container */
+    display: flex;
+    justify-content: center; /* Center the pagination buttons */
+    padding: 20px 0; /* Add some padding around the buttons for spacing */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+.pagination button {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+/* Add this CSS to your existing styles */
+tr:hover {
+    background-color: #ddefea; /* Light grey on hover */
+    cursor: pointer;
+}
+
+tbody .selected-item {
+    background-color: #b6dfe0; /* Adjust the color as needed */
+    /* Other styles */
+}
+
+
+.chart-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 90%; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+}
+
+
+
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-item-1, .grid-item-2, .grid-item-3 {
+        grid-column: 1 / -1;
+    }
+}
+
+
+
+  
+  
