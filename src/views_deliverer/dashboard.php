@@ -34,7 +34,7 @@
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>PRODUCTS</h3>
+                    <h3>ONGOING DELEVERIES</h3>
                     <span class="material-icons-outlined">inventory_2</span>
                 </div>
                 <h1>249</h1>
@@ -42,7 +42,7 @@
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>CATEGORIES</h3>
+                    <h3>COMPLETED DELIVERIES</h3>
                     <span class="material-icons-outlined">category</span>
                 </div>
                 <h1>25</h1>
@@ -50,7 +50,7 @@
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>CUSTOMERS</h3>
+                    <h3>ALL DELEVERIES</h3>
                     <span class="material-icons-outlined">groups</span>
                 </div>
                 <h1>1500</h1>
@@ -58,10 +58,18 @@
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>ALERTS</h3>
+                    <h3>REJECTED DELIVERIES</h3>
                     <span class="material-icons-outlined">notification_important</span>
                 </div>
                 <h1>56</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>DELIVERY HISTORY</h3>
+                    <span class="material-icons-outlined">notification_important</span>
+                </div>
+                <h1>456</h1>
             </div>
 
         </div>
@@ -69,13 +77,13 @@
         <div class="charts">
 
             <div class="charts-card">
-                <h2 class="chart-title">Top 5 Products</h2>
-                <div id="bar-chart"></div>
+                <h2 class="chart-title">Timeline</h2>
+                <!-- <div id="bar-chart"></div> -->
             </div>
 
             <div class="charts-card">
-                <h2 class="chart-title">Purchase and Sales Orders</h2>
-                <div id="area-chart"></div>
+                <h2 class="chart-title">Location Map</h2>
+                <!-- <div id="area-chart"></div> -->
             </div>
 
         </div>

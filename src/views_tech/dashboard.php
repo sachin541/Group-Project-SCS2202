@@ -23,103 +23,38 @@ require_once '../components/headers/main_header.php';
 </head>
 
 <body>
-    <!-- <div class="grid-container"> -->
-
-    <!-- Header -->
-    <!-- <header class="header">
-            <div class="menu-icon" onclick="openSidebar()">
-                <span class="material-icons-outlined">menu</span>
-            </div>
-            <div class="header-left">
-                <span class="material-icons-outlined">search</span>
-            </div>
-            <div class="header-right">
-                <span class="material-icons-outlined">notifications</span>
-                <span class="material-icons-outlined">email</span>
-                <span class="material-icons-outlined">account_circle</span>
-            </div>
-        </header> -->
-    <!-- End Header -->
-
-    <!-- Sidebar -->
-    <!-- <aside id="sidebar">
-            <div class="sidebar-title">
-                <div class="sidebar-brand">
-                    <span class="material-icons-outlined">shopping_cart</span> STORE
-                </div>
-                <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
-            </div>
-
-            <ul class="sidebar-list">
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">dashboard</span> Dashboard
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">inventory_2</span> Products
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">category</span> Categories
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">groups</span> Customers
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">fact_check</span> Inventory
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">poll</span> Reports
-                    </a>
-                </li>
-                <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
-                        <span class="material-icons-outlined">settings</span> Settings
-                    </a>
-                </li>
-            </ul>
-        </aside> -->
-    <!-- End Sidebar -->
 
     <!-- Main -->
     <main class="main-container">
-        <!-- <div class="main-title">
-                <h2>DASHBOARD</h2>
-            </div> -->
 
         <div class="main-cards">
 
             <div class="card">
-                <div class="card-inner">
-                    <h3>PRODUCTS</h3>
-                    <span class="material-icons-outlined">inventory_2</span>
-                </div>
-                <h1>249</h1>
+                <a href="./build_management.php">
+                    <div class="card-inner">
+                        <h3>ONGOING BUILDS</h3>
+                        <span class="material-icons-outlined">build</span>
+                    </div>
+                    <h1>2</h1>
+                </a>
+            </div>
+
+            <div class="card">
+                <a href="./repair_management.php">
+                    <div class="card-inner">
+                        <h3>ONGOING REPAIRS</h3>
+                        <span class="material-icons-outlined">construction</span>
+                    </div>
+                    <h1>4</h1>
+                </a>
             </div>
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>CATEGORIES</h3>
-                    <span class="material-icons-outlined">category</span>
+                    <h3>ALL REQUESTS</h3>
+                    <span class="material-icons-outlined">toc</span>
                 </div>
-                <h1>25</h1>
-            </div>
-
-            <div class="card">
-                <div class="card-inner">
-                    <h3>CUSTOMERS</h3>
-                    <span class="material-icons-outlined">groups</span>
-                </div>
-                <h1>1500</h1>
+                <h1>12</h1>
             </div>
 
             <div class="card">
@@ -127,7 +62,7 @@ require_once '../components/headers/main_header.php';
                     <h3>ALERTS</h3>
                     <span class="material-icons-outlined">notification_important</span>
                 </div>
-                <h1>56</h1>
+                <h1>3</h1>
             </div>
 
         </div>
@@ -135,13 +70,13 @@ require_once '../components/headers/main_header.php';
         <div class="charts">
 
             <div class="charts-card">
-                <h2 class="chart-title">Top 5 Products</h2>
-                <div id="bar-chart"></div>
+                <h2 class="chart-title">Timeline</h2>
+                <!-- <div id="bar-chart"></div> -->
             </div>
 
             <div class="charts-card">
-                <h2 class="chart-title">Purchase and Sales Orders</h2>
-                <div id="area-chart"></div>
+                <h2 class="chart-title">Messages</h2>
+                <!-- <div id="area-chart"></div> -->
             </div>
 
         </div>
