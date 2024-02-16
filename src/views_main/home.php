@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/home.css">
-    <!-- <link href="https://fonts.cdnfonts.com/css/hero-new" rel="stylesheet" type="text/css"> -->
 
 </head>
 
