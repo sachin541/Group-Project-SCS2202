@@ -149,7 +149,31 @@ class UserManager {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
+    public function getNumberOfStaff() {
+        try {
+            $query = "SELECT COUNT(*) AS total FROM login_details WHERE role IN ('technician', 'staff', 'deliverer')";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw $e; // Handle any exceptions
+        }
+    }
 
+    public function getNumberOfCustomers() {
+        try {
+            $query = "SELECT COUNT(*) AS total FROM login_details WHERE role = 'customer'";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw $e; // Handle any exceptions
+        }
+    }
+    
+    
 
    
     

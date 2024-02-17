@@ -3,7 +3,7 @@ $category = isset($_POST['type']) ? $_POST['type'] : 'default';
 
 require_once '../classes/database.php';
 require_once '../classes/reports.php'; 
-require_once '../classes/reportsLineChart.php'; // Include the LineChart class
+
 
 $database = new Database();
 $db = $database->getConnection();

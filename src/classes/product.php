@@ -117,6 +117,18 @@ class Product {
     }
     
 
+    public function getTotalNumberOfProducts() {
+        try {
+            $query = "SELECT COUNT(*) AS total FROM products"; // SQL query to count all products
+            $stmt = $this->db->prepare($query); // Prepare the query
+            $stmt->execute(); // Execute the query
+            $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result
+            return $result['total']; // Return the total count
+        } catch(PDOException $e) {
+            throw $e; // Handle any exceptions
+        }
+    }
+    
 
 
 }

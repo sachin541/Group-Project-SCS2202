@@ -1,5 +1,37 @@
 <?php
 require_once '../components/headers/main_header.php';
+require_once '../classes/product.php';
+require_once '../classes/UserManager.php'; 
+require_once '../classes/reports.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$productobj = new Product($db);
+$userManager= new UserManager($db);
+$numberOfStaff = $userManager->getNumberOfStaff();
+$numberOfCustomers = $userManager->getNumberOfCustomers();
+
+
+$endDate = date('Y-m-d'); // Today's date
+$startDate = date('Y-m-d', strtotime('-30 days')); // 30 days ago
+
+// Fetch the top 5 products sold in the last 30 days
+$report = new ItemSales($db);
+$topProducts = $report->getProductSalesFromRange($startDate, $endDate);
+// Ensure we only get the top 5 products
+$topProducts = array_slice($topProducts, 0, 5);
+
+// Prepare data for the chart
+$productNames = [];
+$productSales = [];
+
+
+foreach ($topProducts as $product) {
+    $productNames[] = $product['product_name'];
+    $productSales[] = $product['total_units'];
+    
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,15 +66,15 @@ require_once '../components/headers/main_header.php';
                     <h3>PRODUCTS</h3>
                     <span class="material-icons-outlined">inventory_2</span>
                 </div>
-                <h1>249</h1>
+                <h1><?php echo $productobj->getTotalNumberOfProducts(); ?></h1>
             </div>
 
             <div class="card">
                 <div class="card-inner">
-                    <h3>SALE</h3>
+                    <h3>STAFF</h3>
                     <span class="material-icons-outlined">category</span>
                 </div>
-                <h1>25</h1>
+                <h1><?php echo $numberOfStaff; ?></h1>
             </div>
 
             <div class="card">
@@ -50,7 +82,7 @@ require_once '../components/headers/main_header.php';
                     <h3>CUSTOMERS</h3>
                     <span class="material-icons-outlined">groups</span>
                 </div>
-                <h1>1500</h1>
+                <h1><?php echo $numberOfCustomers; ?></h1>
             </div>
 
             <div class="card">
@@ -80,10 +112,15 @@ require_once '../components/headers/main_header.php';
     <!-- End Main -->
 
     <!-- </div> -->
-
+    <script>
+        let productNames = <?php echo json_encode($productNames); ?>;
+        let productSales = <?php echo json_encode($productSales); ?>;
+        // Assuming you have images data prepared
+        let productImages = <?php echo json_encode($productImages ?? []); ?>;
+    </script>
     <!-- Scripts -->
     <!-- ApexCharts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Custom JS -->
     <script src="../../resources/js/js_manager/dashboard.js"></script>
 </body>

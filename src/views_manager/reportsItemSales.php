@@ -19,7 +19,7 @@ $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : $defaultEndDate;
 $searchTerm = isset($_GET['productSearch']) ? $_GET['productSearch'] : '';
 
 // Fetch the sales data, modified to potentially include search term filtering
-$salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59", $searchTerm);
+$salesData = $report->getProductSalesFromRange($startDate . " 00:00:00", $endDate . " 23:59:59");
 
 
 if (!empty($salesData)) {

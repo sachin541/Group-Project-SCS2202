@@ -1,30 +1,13 @@
 // SIDEBAR TOGGLE
 
-let sidebarOpen = false;
-const sidebar = document.getElementById('sidebar');
-
-function openSidebar() {
-  if (!sidebarOpen) {
-    sidebar.classList.add('sidebar-responsive');
-    sidebarOpen = true;
-  }
-}
-
-function closeSidebar() {
-  if (sidebarOpen) {
-    sidebar.classList.remove('sidebar-responsive');
-    sidebarOpen = false;
-  }
-}
 
 // ---------- CHARTS ----------
 
-// BAR CHART
 const barChartOptions = {
   series: [
     {
-      data: [10, 8, 6, 4, 2],
-      name: 'Products',
+      data: productSales,
+      name: 'Units Sold',
     },
   ],
   chart: {
@@ -81,7 +64,10 @@ const barChartOptions = {
     theme: 'dark',
   },
   xaxis: {
-    categories: ['Laptop', 'Phone', 'Monitor', 'Headphones', 'Camera'],
+    categories: productNames,
+    labels: {
+      show: false, // This line hides the x-axis labels
+    },
     title: {
       style: {
         color: '#f5f7ff',
@@ -94,11 +80,6 @@ const barChartOptions = {
     axisTicks: {
       show: true,
       color: '#55596e',
-    },
-    labels: {
-      style: {
-        colors: '#f5f7ff',
-      },
     },
   },
   yaxis: {
@@ -123,6 +104,7 @@ const barChartOptions = {
     },
   },
 };
+
 
 const barChart = new ApexCharts(
   document.querySelector('#bar-chart'),
