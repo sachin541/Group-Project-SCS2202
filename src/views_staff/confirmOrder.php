@@ -1,7 +1,6 @@
 <?php
-require_once '../classes/database.php'; 
+require_once '../classes/database.php';
 require_once '../classes/InStore.php';
-require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -15,23 +14,24 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 $cartItems = $inStore->getInStoreItemsByUserId($userId);
-$totalAmount = 0; 
+$totalAmount = 0;
 ?>
 
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
 
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/confirmOrder.css" />
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/confirmOrder.css" /> 
 </head>
+
 <body>
+
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
+
     <div class="checkout-container">
-        
+
 
         <div class="cart-container">
             <h2>Order Details</h2>
@@ -49,17 +49,28 @@ $totalAmount = 0;
                     ?>
                     <tr>
                         <td class="product-info">
-                            <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
-                            <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>"
+                                alt="<?php echo htmlspecialchars($item['product_name']); ?>">
+                            <h3>
+                                <?php echo htmlspecialchars($item['product_name']); ?>
+                            </h3>
                         </td>
-                        <td><?php echo htmlspecialchars(number_format($item['price'],2)); ?></td>
-                        <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                        <td><?php echo htmlspecialchars(number_format($subtotal,2)); ?></td>
+                        <td>
+                            <?php echo htmlspecialchars(number_format($item['price'], 2)); ?>
+                        </td>
+                        <td>
+                            <?php echo htmlspecialchars($item['quantity']); ?>
+                        </td>
+                        <td>
+                            <?php echo htmlspecialchars(number_format($subtotal, 2)); ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 <tr>
                     <td colspan="3" class="total-label">Total:</td>
-                    <td class="total-amount">Rs.<?php echo htmlspecialchars(number_format($totalAmount, 2)); ?></td>
+                    <td class="total-amount">Rs.
+                        <?php echo htmlspecialchars(number_format($totalAmount, 2)); ?>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -78,8 +89,8 @@ $totalAmount = 0;
                 <div><input type="text" name="postalcode" placeholder="Postal Code" required></div>
                 <div><input type="text" name="province" placeholder="Province" required></div>
                 <div><input type="text" name="city" placeholder="City" required></div> -->
-                
-            
+
+
                 <div class="payment-options">
                     <h3>Payment Options</h3>
                     <div>
@@ -96,5 +107,9 @@ $totalAmount = 0;
             </form>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
+
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>

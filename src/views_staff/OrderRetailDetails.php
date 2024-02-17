@@ -23,131 +23,167 @@ try {
 }
 // print_r($orderDetails);
 
-function formatPrice($price) {
+function formatPrice($price)
+{
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delivery Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewRetailOrderDetails.css">
-    
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewRetailOrderDetails.css">
+
 </head>
+
 <body>
-<div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
-</div>
 
-<div class="grid-container">
-    <!-- First Column: Order Items -->
-    <div class="box-style">
-        <div class="components-section">
-            <h2 class="components-heading">Order Items</h2>
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
 
-            <?php if (!empty($orderDetails)): ?>
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Unit Price</th>
-                            <th>Quantity</th>
-                            <th>Sub Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($orderDetails as $item): ?>
-                            <?php 
-                            $productDetails = $product->getProductById($item['product_id']);
-                            $subtotal = $productDetails['price'] * $item['item_quantity'];
-                            ?>
+    <div class="main-header">
+        <?php require_once '../components/headers/main_header.php'; ?>
+    </div>
+
+    <div class="grid-container">
+
+        <!-- First Column: Order Items -->
+        <div class="box-style">
+            <div class="components-section">
+                <h2 class="components-heading">Order Items</h2>
+
+                <?php if (!empty($orderDetails)): ?>
+                    <table class="cart-table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <div class="product-info">
-                                        <?php if ($productDetails['image1']) { ?>
-                                            <img src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
-                                            alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
-                                        <?php } ?>
-                                        <h3><?= htmlspecialchars($productDetails['product_name']) ?></h3>
-                                    </div>
-                                </td>
-                                <td><?= htmlspecialchars(formatPrice($productDetails['price'])) ?></td>
-                                <td><?= htmlspecialchars($item['item_quantity']) ?></td>
-                                <td><?= htmlspecialchars(formatPrice($subtotal)) ?></td>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Sub Total</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($orderDetails as $item): ?>
+                                <?php
+                                $productDetails = $product->getProductById($item['product_id']);
+                                $subtotal = $productDetails['price'] * $item['item_quantity'];
+                                ?>
+                                <tr>
+                                    <td>
+                                        <div class="product-info">
+                                            <?php if ($productDetails['image1']) { ?>
+                                                <img src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>"
+                                                    alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
+                                            <?php } ?>
+                                            <h3>
+                                                <?= htmlspecialchars($productDetails['product_name']) ?>
+                                            </h3>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars(formatPrice($productDetails['price'])) ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($item['item_quantity']) ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars(formatPrice($subtotal)) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
-                <div class="total-price-section">
-                    <h3>Total Price: <?= formatPrice($orderDetails[0]['total']) ?></h3>
-                </div>
-            <?php else: ?>
-                <p class="not-found">Order items not found.</p>
-            <?php endif; ?>
+                    <div class="total-price-section">
+                        <h3>Total Price:
+                            <?= formatPrice($orderDetails[0]['total']) ?>
+                        </h3>
+                    </div>
+                <?php else: ?>
+                    <p class="not-found">Order items not found.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+
+
+
+        <!-- Second Column: Delivery Details -->
+        <div class="box-style">
+            <div class="delivery-details">
+                <h2 class="components-heading">Order Details</h2>
+                <?php if (!empty($orderDetails)): ?>
+                    <?php $firstItem = $orderDetails[0];
+                    $staffInfo = $managerobj->getStaffById($firstItem['createdby']);
+                    $staffName = $staffInfo['staff_name'];
+
+                    ?>
+                    <table class="details-table">
+                        <tr>
+                            <td>Order ID:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['order_id']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total:</td>
+                            <td>
+                                <?= htmlspecialchars(formatPrice($firstItem['total'])) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Order Date:</td>
+                            <td>
+                                <?= htmlspecialchars(date("d-m-Y", strtotime($firstItem['created_at']))) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Created By (User ID):</td>
+                            <td>
+                                <?= htmlspecialchars($staffName . " (" . $firstItem['createdby'] . ")") ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Payment Type:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['payment_type']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Payment Status:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['payment_status'] . " (In Store)") ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NIC:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['NIC']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Recipient Name:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>
+                                <?= htmlspecialchars($firstItem['phone']) ?>
+                            </td>
+                        </tr>
+                    </table>
+
+                <?php else: ?>
+                    <p class="not-found">Delivery details not found.</p>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
-    
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
 
-    <!-- Second Column: Delivery Details -->
-    <div class="box-style">
-        <div class="delivery-details">
-            <h2 class="components-heading">Order Details</h2>
-            <?php if (!empty($orderDetails)): ?>
-                <?php $firstItem = $orderDetails[0]; 
-                $staffInfo = $managerobj->getStaffById($firstItem['createdby']);
-                $staffName = $staffInfo['staff_name'];
-                
-                ?>
-                <table class="details-table">
-                    <tr>
-                        <td>Order ID:</td>
-                        <td><?= htmlspecialchars($firstItem['order_id']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Total:</td>
-                        <td><?= htmlspecialchars(formatPrice($firstItem['total'])) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Order Date:</td>
-                        <td><?= htmlspecialchars(date("d-m-Y", strtotime($firstItem['created_at']))) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Created By (User ID):</td>
-                        <td><?= htmlspecialchars($staffName . " (". $firstItem['createdby'] . ")") ?></td>
-                    </tr>
-                    <tr>
-                        <td>Payment Type:</td>
-                        <td><?= htmlspecialchars($firstItem['payment_type']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Payment Status:</td>
-                        <td><?= htmlspecialchars($firstItem['payment_status'] . " (In Store)") ?></td>
-                    </tr>
-                    <tr>
-                        <td>NIC:</td>
-                        <td><?= htmlspecialchars($firstItem['NIC']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Recipient Name:</td>
-                        <td><?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td><?= htmlspecialchars($firstItem['phone']) ?></td>
-                    </tr>
-                </table>
-
-            <?php else: ?>
-                <p class="not-found">Delivery details not found.</p>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>
-</body>
-</html>
-
-
-
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>

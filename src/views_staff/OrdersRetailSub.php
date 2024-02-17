@@ -1,9 +1,6 @@
 <?php
-require_once '../classes/database.php'; 
+require_once '../classes/database.php';
 require_once '../classes/InStore.php';
-
-require_once '../components/headers/main_header.php';
-
 
 $database = new Database();
 $db = $database->getConnection();
@@ -24,22 +21,28 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ...existing head elements... -->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewAllOrders.css" />
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/toggleswitch.css" />
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
+
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewAllOrders.css" />
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/toggleswitch.css" />
+
 </head>
+
 <body>
+
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
+
     <div class="orders-container">
-            <h1 class="orders-header">
-                <span style="padding-right: 20px;">Retail Orders</span>
-                <label class="switch">
-                    <input type="checkbox" id="pageToggle">
-                    <span class="slider round"></span>
-                </label>
-            </h1>
+        <h1 class="orders-header">
+            <span style="padding-right: 20px;">Retail Orders</span>
+            <label class="switch">
+                <input type="checkbox" id="pageToggle">
+                <span class="slider round"></span>
+            </label>
+        </h1>
 
         <?php if (empty($orders)): ?>
             <p class="no-orders-message">No orders found.</p>
@@ -86,16 +89,29 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
                 <tbody>
                     <?php foreach ($orders as $order): ?>
                         <tr class="table-data-row">
-                            <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                            <td><?php echo htmlspecialchars($order['total']); ?></td>
-                            <td><?php echo date('Y-m-d', strtotime($order['created_at'])); ?></td>
+                            <td>
+                                <?php echo htmlspecialchars($order['order_id']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($order['total']); ?>
+                            </td>
+                            <td>
+                                <?php echo date('Y-m-d', strtotime($order['created_at'])); ?>
+                            </td>
 
                             <!-- <td><?php echo htmlspecialchars($order['createdby']); ?></td> -->
-                            <td><?php echo htmlspecialchars($order['payment_type']); ?></td>
-                            <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
-                            <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
                             <td>
-                                <a href="./OrderRetailDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
+                                <?php echo htmlspecialchars($order['payment_type']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($order['payment_status']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?>
+                            </td>
+                            <td>
+                                <a href="./OrderRetailDetails.php?order_id=<?php echo $order['order_id']; ?>"
+                                    class="details-button">View Details</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -103,29 +119,31 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
             </table>
         <?php endif; ?>
     </div>
-</body>
-</html>
 
 
+    <script>
+        // Function to change page based on toggle state
+        function changePage() {
+            window.location.href = document.getElementById('pageToggle').checked ? 'OrdersDeliverySub.php' : 'OrdersRetailSub.php';
+        }
 
-<script>
-    // Function to change page based on toggle state
-    function changePage() {
-        window.location.href = document.getElementById('pageToggle').checked ? 'OrdersDeliverySub.php' : 'OrdersRetailSub.php';
-    }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set the toggle state based on local storage value
+            var savedState = localStorage.getItem('toggleState') === 'true';
+            document.getElementById('pageToggle').checked = savedState;
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Set the toggle state based on local storage value
-        var savedState = localStorage.getItem('toggleState') === 'true';
-        document.getElementById('pageToggle').checked = savedState;
-
-        // Add event listener to the toggle
-        document.getElementById('pageToggle').addEventListener('change', function() {
-            // Save the new state to local storage
-            localStorage.setItem('toggleState', this.checked);
-            // Change page
-            changePage();
+            // Add event listener to the toggle
+            document.getElementById('pageToggle').addEventListener('change', function () {
+                // Save the new state to local storage
+                localStorage.setItem('toggleState', this.checked);
+                // Change page
+                changePage();
+            });
         });
-    });
-</script>
+    </script>
 
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
+
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>
