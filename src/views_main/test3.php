@@ -1,37 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Product Display</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/builds.css"> <!-- Update the href with correct path -->
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../../resources/css/builds.css">
+
 </head>
+
 <body>
-<div class="main-container">
-    <?php 
-    require_once '../classes/product.php';
-    require_once '../classes/database.php';
-    require_once '../components/headers/main_header.php';
-    $database = new Database();
-    $db = $database->getConnection();
-    $product = new Product($db);
 
-    $productIds = [-1, 17, 18, 19, 20]; // Example product IDs. Replace with actual IDs or GET request
+    <!-- Heaeder -->
+    <?php require_once '../templates/main_header.php'; ?>
 
-    $id1= 17;
+    <div class="main-container">
+        <?php
+        require_once '../classes/product.php';
+        require_once '../classes/database.php';
+        require_once '../components/headers/main_header.php';
+        $database = new Database();
+        $db = $database->getConnection();
+        $product = new Product($db);
+
+        $productIds = [-1, 17, 18, 19, 20]; // Example product IDs. Replace with actual IDs or GET request
+        
+        $id1 = 17;
         if ($id1 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id1) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -40,7 +46,7 @@
             $productDetails = $product->getProductById($id1);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -49,7 +55,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -63,22 +69,22 @@
         }
 
 
-    $id2= -1;
+        $id2 = -1;
         if ($id2 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id2) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -87,7 +93,7 @@
             $productDetails = $product->getProductById($id1);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -96,7 +102,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -110,22 +116,22 @@
         }
 
 
-    $id3= 17;
+        $id3 = 17;
         if ($id3 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id3) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -134,7 +140,7 @@
             $productDetails = $product->getProductById($id3);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -143,7 +149,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -157,22 +163,22 @@
         }
 
 
-        $id4= 17;
+        $id4 = 17;
         if ($id4 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id4) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -181,7 +187,7 @@
             $productDetails = $product->getProductById($id4);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -190,7 +196,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -204,22 +210,22 @@
         }
 
 
-        $id5= 17;
+        $id5 = 17;
         if ($id5 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id5) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -228,7 +234,7 @@
             $productDetails = $product->getProductById($id5);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -237,7 +243,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -251,22 +257,22 @@
         }
 
 
-        $id6= 17;
+        $id6 = 17;
         if ($id6 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id6) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -275,7 +281,7 @@
             $productDetails = $product->getProductById($id6);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -284,7 +290,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -298,22 +304,22 @@
         }
 
 
-        $id7= 17;
+        $id7 = 17;
         if ($id7 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id7) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -322,7 +328,7 @@
             $productDetails = $product->getProductById($id7);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -331,7 +337,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -345,22 +351,22 @@
         }
 
 
-        $id8= 17;
+        $id8 = 17;
         if ($id1 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id8) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -369,7 +375,7 @@
             $productDetails = $product->getProductById($id8);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -378,7 +384,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -392,22 +398,22 @@
         }
 
 
-        $id9= 17;
+        $id9 = 17;
         if ($id9 == -1) {
             echo '<div class="product-title">Title</div>';
-            echo '<div class="main-row2">'; 
+            echo '<div class="main-row2">';
             echo '<div class="product-row2">';
-             // Hardcoded title
+            // Hardcoded title
             echo '<img src="../../resources/images/plus.png"/>';
             echo '<div class="product-info2">';
             echo '<span>SELECT GPU</span>';
             echo '</div>'; // product-info
-            
+        
             echo '<div class="product-actions">';
             // echo '<span>ITEM</span>';
             echo '<form method="post" action="your_post_handler.php">';
             echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($id9) . '"/>';
-            
+
             echo '</form>';
             echo '</div>'; // product-actions
             echo '</div>'; // product-row
@@ -416,7 +422,7 @@
             $productDetails = $product->getProductById($id9);
             echo '<div class="product-title">Special Offer</div>';
             if ($productDetails) {
-                echo '<div class="main-row">'; 
+                echo '<div class="main-row">';
                 echo '<div class="product-row">';
                 // Hardcoded title
                 if ($productDetails['image1']) {
@@ -425,7 +431,7 @@
                 echo '<div class="product-info">';
                 echo '<span>' . htmlspecialchars($productDetails['product_name']) . '</span>';
                 echo '</div>'; // product-info
-                
+        
                 echo '<div class="product-actions">';
                 echo '<span>Price: $' . htmlspecialchars($productDetails['price']) . '</span>';
                 echo '<form method="post" action="your_post_handler.php">';
@@ -439,11 +445,12 @@
         }
 
 
-        
 
+        ?>
+    </div>
 
-    
-    ?>
-</div>
-</body>
-</html>
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
+
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>

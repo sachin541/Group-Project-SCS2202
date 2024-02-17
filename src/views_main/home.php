@@ -1,5 +1,5 @@
-<!-- Template Header -->
-<?php require_once("../templates/main_top.php"); ?>
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
 
 <!-- Stylesheets -->
 <link rel="stylesheet" type="text/css" href="../../resources/css/home.css">
@@ -13,10 +13,8 @@
 
 
     <div class="main-container">
-
-
-
     </div>
+
     <?php include '../components/carousel.php'; ?>
     <div class="secondary-container">
         <div class="arrivals">
@@ -215,8 +213,8 @@
             </div>
         </div>
 
-        <!--<?php include '../components/footer.php' ?>-->
+        <!-- Footer -->
+        <!--<?php include '../templates/main_footer.php' ?>-->
 
-</body>
-
-</html>
+        <!-- Template Bottom -->
+        <?php require_once '../templates/main_bottom.php'; ?>

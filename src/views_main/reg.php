@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/login.css" />
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../../resources/css/login.css" />
+
 </head>
+
 <body>
-    <?php require_once '../components/headers/main_header.php';?>
+
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
+
 
     <?php
     if (isset($_SESSION['registration_error'])) {
@@ -21,7 +24,7 @@
         <div class="outer-container">
             <form action="../helpers/register_handler.php" method="post" class="form-container">
                 <h1 class="title">Sign-Up</h1>
-                
+
                 <div class="form-group">
                     <label for="email" class="form-label">Your Email</label>
                     <input type="text" id="email" name="email" placeholder="Enter e-mail" class="field" />
@@ -34,7 +37,8 @@
 
                 <div class="form-group">
                     <label for="password2" class="form-label">Confirm Password</label>
-                    <input type="password" id="password2" name="password_confirmation" placeholder="Confirm Password" class="field" />
+                    <input type="password" id="password2" name="password_confirmation" placeholder="Confirm Password"
+                        class="field" />
                 </div>
 
                 <?php
@@ -50,7 +54,9 @@
             <img class="image" src="../../resources/images/complogo.png" alt="profile icon.png" />
         </div>
     </div>
-</body>
-</html>
 
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
 
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>
