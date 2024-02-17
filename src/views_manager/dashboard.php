@@ -1,28 +1,21 @@
-<?php
-require_once '../components/headers/main_header.php';
-?>
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- Montserrat Font -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../../resources/css/css_manager/dashboard.css">
 
-    <!-- Montserrat Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../../resources/css/css_manager/dashboard.css">
 </head>
 
 <body>
+
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
 
     <!-- Main -->
     <main class="main-container">
@@ -79,13 +72,13 @@ require_once '../components/headers/main_header.php';
     </main>
     <!-- End Main -->
 
-    <!-- </div> -->
-
     <!-- Scripts -->
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
-    <!-- Custom JS -->
     <script src="../../resources/js/js_manager/dashboard.js"></script>
-</body>
 
-</html>
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
+
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>
