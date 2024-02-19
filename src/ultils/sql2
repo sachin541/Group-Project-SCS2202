@@ -217,6 +217,11 @@ CREATE TABLE InStorePurchase_Items (
     FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
 );
 
+ALTER TABLE employees
+ADD COLUMN nic VARCHAR(255),
+ADD COLUMN profile_picture BLOB;
+
+
 
 
 

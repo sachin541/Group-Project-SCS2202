@@ -16,7 +16,7 @@
             }
 ?>
 
-<form action="../helpers/add_employee.php" method="post">
+<form action="../helpers/add_employee.php" method="post" enctype="multipart/form-data">
     <div>
         <input type="email" name="email" placeholder="Email" required>
         
@@ -55,6 +55,12 @@
     </div>
     <div>
         <input type="number" name="sal" placeholder="Salary">
+    </div>
+    <div>
+        <input type="text" name="nic" placeholder="NIC">
+    </div>
+    <div>
+        <input type="file" name="profile_picture">
     </div>
     
     <div>

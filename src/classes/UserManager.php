@@ -39,8 +39,11 @@ class UserManager {
 
     
 
-    public function addEmployee($emp_role , $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id) {
-        $stmt = $this->db->prepare("INSERT INTO employees (emp_role, staff_name, staff_address, mobile_no, alternative_mobile_no, date_of_birth, sal, staff_id) VALUES (:emp_role , :name, :address, :mobile_no, :alternative_mobile_no, :date_of_birth, :sal, :staff_id)");
+    public function addEmployee($emp_role, $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $staff_id, $nic, $profile_picture) {
+        // Prepare the SQL statement with placeholders
+        $stmt = $this->db->prepare("INSERT INTO employees (emp_role, staff_name, staff_address, mobile_no, alternative_mobile_no, date_of_birth, sal, staff_id, nic, profile_picture) VALUES (:emp_role, :name, :address, :mobile_no, :alternative_mobile_no, :date_of_birth, :sal, :staff_id, :nic, :profile_picture)");
+        
+        // Bind the parameters to the SQL statement
         $stmt->bindParam(':emp_role', $emp_role);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':address', $address);
@@ -49,9 +52,21 @@ class UserManager {
         $stmt->bindParam(':date_of_birth', $date_of_birth);
         $stmt->bindParam(':sal', $sal);
         $stmt->bindParam(':staff_id', $staff_id);
-
+        $stmt->bindParam(':nic', $nic);
+    
+        // Check if profile picture is not null, which means an image was uploaded
+        if ($profile_picture !== null) {
+            // PDO::PARAM_LOB instructs PDO to send the data as a stream
+            $stmt->bindParam(':profile_picture', $profile_picture, PDO::PARAM_LOB);
+        } else {
+            // Bind NULL if no image was uploaded
+            $stmt->bindValue(':profile_picture', null, PDO::PARAM_NULL);
+        }
+    
+        // Execute the statement and return the result
         return $stmt->execute();
     }
+    
 
 
     public function getDistinctRoles() {
