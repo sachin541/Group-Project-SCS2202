@@ -18,6 +18,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 $orderDetails = $cart->getCartItemsByUserId($userId);
+
+if (empty($orderDetails)) {
+    header('Location: view_cart.php'); 
+    exit;
+}
+
 $totalAmount = 0;
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
@@ -69,7 +75,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
         function handleSubmit() {
             var payOnline = document.getElementById('pay_online').checked;
             var numberOfPendingPayments = <?= json_encode($numberOfPendingPayments); ?>; // Convert PHP variable to JS
-            if (!payOnline && numberOfPendingPayments > 1) {
+            if (!payOnline && numberOfPendingPayments > 100) {
                 showModal();
                 return false; // Prevent form submission
             }
