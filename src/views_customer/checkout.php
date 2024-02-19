@@ -49,6 +49,31 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/checkout.css">
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
     <script type="text/javascript">
+        
+        function showConfirmationModal() {
+            var modal = document.getElementById("confirmationModal");
+            var noBtn = document.getElementById("confirmNo");
+            var yesBtn = document.getElementById("confirmYes");
+
+            modal.style.display = "block";
+            
+            noBtn.onclick = function() {
+                modal.style.display = "none";
+            };
+            
+            yesBtn.onclick = function() {
+                modal.style.display = "none";
+                document.querySelector('.checkout-form').submit(); // Submit form on "Yes"
+            };
+            
+            // This handler closes the modal if the user clicks outside of it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        }
+
 
         function showModal() {
             var modal = document.getElementById("paymentPendingModal");
@@ -80,12 +105,18 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                 return false; // Prevent form submission
             }
             
+            if (!payOnline) {
+                // Show confirmation dialog for Pay on Delivery
+                showConfirmationModal();
+                return false;
+            }
+            
             if (payOnline) {
                 buyNow();
                 return false;
-            } else {
-                return true;
             }
+            
+            return true; // Proceed with form submission if all checks pass
         }
 
         function buyNow() {
@@ -151,6 +182,8 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
             };
             xhr.send(form);
         }
+
+        document.querySelector('.checkout-form').addEventListener('submit', handleSubmit);
     </script>
 </head>
 <body>
@@ -283,7 +316,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
     
 </div>
 
-<!-- Payment Pending Modal -->
+<!-- Payment Pending Check Modal -->
 <div id="paymentPendingModal" class="modal">
     <div class="modal-content">
         <span class="close-button">&times;</span>
@@ -292,6 +325,21 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
         <button id="closeModal">Ok</button>
     </div>
 </div>
+
+
+<!-- Confirmation Modal for Pay on Delivery -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        
+        <h2>Confirm Payment Method</h2>
+        <p>Are you sure you want to proceed with Pay on Delivery?</p>
+        <div style="text-align: center;">
+            <button id="confirmYes" class="modal-button">Yes</button>
+            <button id="confirmNo" class="modal-button">No</button>
+        </div>
+    </div>
+</div>
+
 
 
 </body>

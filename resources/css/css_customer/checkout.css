@@ -259,3 +259,33 @@ body {
     }
 }
 
+.modal-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: black; /* Green */
+    color: white;
+}
+
+.modal-button:hover {
+    background-color: red;
+}
+
+/* Styles for Close Button in Payment Pending Modal */
+.close-button {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000; /* Change color on hover */
+}
+
+
+
+
