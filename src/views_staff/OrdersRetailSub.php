@@ -21,7 +21,7 @@ $sortBy = isset($_GET['sort_by']) ? $_GET['sort_by'] : null;
 
 // Modify your getAllOrders function to accept these parameters
 $orders = $inStore->getAllOrders($filterBy, $sortBy);
-
+$pageType = "Retail"; 
 ?>
 
 <!DOCTYPE html>
@@ -33,13 +33,12 @@ $orders = $inStore->getAllOrders($filterBy, $sortBy);
 </head>
 <body>
     <div class="orders-container">
-            <h1 class="orders-header">
-                <span style="padding-right: 20px;">Retail Orders</span>
-                <label class="switch">
-                    <input type="checkbox" id="pageToggle">
-                    <span class="slider round"></span>
-                </label>
-            </h1>
+            
+    <div class="orders-header">
+    <a href="./OrdersDeliverySub.php" class="<?php echo $pageType == "Delivery" ? 'active' : ''; ?>">Online Orders</a>
+    <a href="./OrdersRetailSub.php" class="<?php echo $pageType == "Retail" ? 'active' : ''; ?>">InStore Orders</a>
+    </div>
+
 
         <?php if (empty($orders)): ?>
             <p class="no-orders-message">No orders found.</p>

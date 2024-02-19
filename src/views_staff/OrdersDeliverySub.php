@@ -39,6 +39,8 @@ function formatString($str) {
 
     return $str;
 }
+
+$pageType = "Delivery"; 
 // print_r($orders);
 ?>
 
@@ -52,13 +54,11 @@ function formatString($str) {
 <body>
     <div class="orders-container">
 
-            <h1 class="orders-header">
-                <span style="padding-right: 20px;">Online Orders</span>
-                <label class="switch">
-                    <input type="checkbox" id="pageToggle">
-                    <span class="slider round"></span>
-                </label>
-            </h1>
+            <div class="orders-header">
+                <a href="./OrdersDeliverySub.php" class="<?php echo $pageType == "Delivery" ? 'active' : ''; ?>">Online Orders</a>
+                <a href="./OrdersRetailSub.php" class="<?php echo $pageType == "Retail" ? 'active' : ''; ?>">InStore Orders</a>
+            </div>
+
 
 
             <div class="filter-sort-container">
