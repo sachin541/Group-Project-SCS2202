@@ -139,6 +139,25 @@ class Order {
             throw $e;
         }
     }
+
+
+    public function countPendingPaymentsByCustomerId($customerId) {
+        try {
+            $query = "SELECT COUNT(*) AS pending_payments 
+                      FROM Orders 
+                      WHERE customer_id = :customerId 
+                      AND payment_status = 'pending'";
+                      
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':customerId', $customerId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['pending_payments'];
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
     
 
  

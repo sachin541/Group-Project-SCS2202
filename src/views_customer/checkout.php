@@ -2,12 +2,14 @@
 require_once '../classes/database.php';
 require_once '../classes/cart.php';
 require_once '../classes/product.php';
+require_once '../classes/order.php';
 require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
 $cart = new Cart($db);
 $product = new Product($db);
+$orderobj = new Order($db);
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -29,6 +31,9 @@ foreach ($orderDetails as $item){
 }
 
 $_SESSION['cart_total'] = $totalAmount; 
+
+$numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSION['user_id']));
+// echo($numberOfPendingPayments); 
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +44,36 @@ $_SESSION['cart_total'] = $totalAmount;
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
     <script type="text/javascript">
 
+        function showModal() {
+            var modal = document.getElementById("paymentPendingModal");
+            var closeButton = document.getElementsByClassName("close-button")[0];
+            var closeModalButton = document.getElementById("closeModal");
+
+            modal.style.display = "block";
+            
+            closeButton.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            closeModalButton.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
         function handleSubmit() {
             var payOnline = document.getElementById('pay_online').checked;
+            var numberOfPendingPayments = <?= json_encode($numberOfPendingPayments); ?>; // Convert PHP variable to JS
+            if (!payOnline && numberOfPendingPayments > 1) {
+                showModal();
+                return false; // Prevent form submission
+            }
+            
             if (payOnline) {
                 buyNow();
                 return false;
@@ -235,9 +268,27 @@ $_SESSION['cart_total'] = $totalAmount;
         </div>
     </div>
 
+
+    <!-- Payment Pending Modal -->
+  
+
+
     <!-- Second Column: Delivery Details -->
     
 </div>
 
+<!-- Payment Pending Modal -->
+<div id="paymentPendingModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Payment Pending Alert</h2>
+        <p>You have more than one pending payment. Please clear your pending payments before proceeding with Pay on Delivery.</p>
+        <button id="closeModal">Ok</button>
+    </div>
+</div>
+
+
 </body>
 </html>
+
+
