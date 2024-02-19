@@ -53,7 +53,7 @@ body {
 }
 
 .cart-table th, .details-table th {
-    background-color: #16a085;
+    background-color: #ccc;
     color: white;
     text-align: left;
 }
@@ -123,6 +123,8 @@ body {
 /* Submit Button Styles */
 .checkout-form input[type="submit"] {
     background-color: #000000; /* Green background */
+    font-size: 18px;
+    font-weight: bold;
     color: white;
     border: none; /* Remove border */
     cursor: pointer; /* Cursor style */
@@ -153,4 +155,33 @@ body {
 /* Adjust Spacing Around Form Elements */
 .checkout-form div {
     margin-bottom: 15px; /* Spacing below each input */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Adjusted spacing */
+}
+
+.row > div {
+    flex: 1; /* Make each div take up equal space */
+    margin-right: 10px; /* Add some spacing between the fields */
+}
+
+.row > div:last-child {
+    margin-right: 0; /* Remove margin from the last element in the row */
+}
+
+.checkout-form label {
+    
+    margin-bottom: 8px; /* Space between label and input */
+    font-weight: bold; /* Highlight label text */
+    color: #333; /* Dark text for better readability */
+}
+
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="submit"] {
+    width: 100%; /* This will now be 100% of the flex container (div) */
+    /* Other styles remain unchanged */
 }

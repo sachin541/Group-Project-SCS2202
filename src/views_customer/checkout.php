@@ -121,6 +121,74 @@ $_SESSION['cart_total'] = $totalAmount;
 </div>
 
 <div class="grid-container">
+
+<div class="box-style">
+        <h2>Billing Details</h2>
+        <form onsubmit="return handleSubmit()" action="../helpers/checkout_handler.php" method="post" class="checkout-form">
+            <input type="hidden" name="total_amount" value="<?= htmlspecialchars($totalAmount); ?>">
+            
+            <div class="row">
+                <div>
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+                </div>
+                <div>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div>
+                    <label for="province">Province</label>
+                    <input type="text" id="province" name="province" placeholder="Province" required>
+                </div>
+                <div>
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="City" required>
+                </div>
+            </div>
+            
+            <div>
+                <label for="delivery_address">Delivery Address</label>
+                <input type="text" id="delivery_address" name="delivery_address" placeholder="Delivery Address" required>
+            </div>
+            
+            <div>
+                <label for="postalcode">Postal Code</label>
+                <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" required>
+            </div>
+            
+            <div class="payment-options">
+                <h3>Payment Options</h3>
+                <div>
+                    <input type="radio" id="pay_delivery" name="payment_method" value="pay_on_delivery" checked>
+                    <label for="pay_delivery">Pay on Delivery</label>
+                </div>
+                <div>
+                    <input type="radio" id="pay_online" name="payment_method" value="pay_online">
+                    <label for="pay_online">Pay Online</label>
+                </div>
+            </div>
+            
+            <div>
+                <input type="submit" value="Place Order" class="place-order-button">
+            </div>
+        </form>
+
+
+    </div>
     <!-- First Column: Order Items -->
     <div class="box-style">
         <div class="components-section">
@@ -168,35 +236,7 @@ $_SESSION['cart_total'] = $totalAmount;
     </div>
 
     <!-- Second Column: Delivery Details -->
-    <div class="box-style">
-        <h2>Billing Details</h2>
-        <form onsubmit="return handleSubmit()" action="../helpers/checkout_handler.php" method="post" class="checkout-form">
-            <input type="hidden" name="total_amount" value="<?= htmlspecialchars($totalAmount); ?>">
-            <div><input type="text" name="first_name" placeholder="First Name" required></div>
-            <div><input type="text" name="last_name" placeholder="Last Name" required></div>
-            <div><input type="email" name="email" placeholder="Email" required></div>
-            <div><input type="text" name="phone" placeholder="Phone" required></div>
-            <div><input type="text" name="province" placeholder="Province" required></div>
-            <div><input type="text" name="city" placeholder="City" required></div>
-            <div><input type="text" name="delivery_address" placeholder="Delivery Address" required></div>
-            <div><input type="text" name="postalcode" placeholder="Postal Code" required></div>
-            
-            
-            <div class="payment-options">
-                <h3>Payment Options</h3>
-                <div>
-                    <input type="radio" id="pay_delivery" name="payment_method" value="pay_on_delivery" checked>
-                    <label for="pay_delivery">Pay on Delivery</label>
-                </div>
-                <div>
-                    <input type="radio" id="pay_online" name="payment_method" value="pay_online">
-                    <label for="pay_online">Pay Online</label>
-                </div>
-            </div>
-            <div><input type="submit" value="Place Order" class="place-order-button"></div>
-        </form>
-
-    </div>
+    
 </div>
 
 </body>
