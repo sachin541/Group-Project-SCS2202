@@ -25,6 +25,7 @@ $employee = $userManager->getStaffById($employeeId);
     <title>Staff Center</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/staff_center.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/staffProfile.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/staff_center_modal.css">
 </head>
 <body>
     <h1>Staff Center</h1>
@@ -107,15 +108,22 @@ $employee = $userManager->getStaffById($employeeId);
 <div id="employeeProfileModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2 id="modalName"></h2>
-        <!-- The rest of the employee details will go here -->
-        <p id="modalRole"></p>
-        <p id="modalAddress"></p>
-        <p id="modalMobile"></p>
-        <!-- Add more fields as necessary -->
-        <img id="modalImage" src="" alt="Profile Picture" style="max-width: 100px; height: auto; display: none;">
+        <div class="profile-pic-container">
+            <img id="modalProfilePicture" src="" alt="Profile Picture" class="profile-pic">
+        </div>
+        <div class="info-section">
+            <h2 id="modalName"></h2>
+            <div class="info-item"><label>Role: </label><span id="modalRole"></span></div>
+            <div class="info-item"><label>Address: </label><span id="modalAddress"></span></div>
+            <div class="info-item"><label>Mobile: </label><span id="modalMobile"></span></div>
+            <div class="info-item"><label>NIC: </label><span id="modalNIC">NIC: </span></div>
+            <div class="info-item"><label>Staff ID: </label><span id="modalStaffID"></span></div>
+        </div>
+
     </div>
 </div>
+
+
 
 </body>
 
@@ -127,8 +135,17 @@ window.addEventListener('load', () => {
         document.getElementById('modalRole').textContent = '<?= htmlspecialchars($employee['emp_role']) ?>';
         document.getElementById('modalAddress').textContent = '<?= htmlspecialchars($employee['staff_address']) ?>';
         document.getElementById('modalMobile').textContent = '<?= htmlspecialchars($employee['mobile_no']) ?>';
-        // Add more fields as necessary
-        document.getElementById('employeeProfileModal').style.display = 'block';
+        // Populate new fields
+        document.getElementById('modalNIC').textContent += '<?= htmlspecialchars($employee['nic']) ?>';
+        document.getElementById('modalStaffID').textContent += '<?= $employee['staff_id'] ?>';
+
+        // Assuming 'profile_picture' is base64-encoded string
+        <?php if (!empty($employee['profile_picture'])): ?>
+        document.getElementById('modalProfilePicture').src = 'data:image/jpeg;base64,<?= base64_encode($employee['profile_picture']) ?>';
+        document.getElementById('modalProfilePicture').style.display = 'inline';
+        <?php endif; ?>
+
+        document.getElementById('employeeProfileModal').style.display = 'inline';
     <?php endif; ?>
 
     // Close modal script
