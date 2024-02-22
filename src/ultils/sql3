@@ -1,0 +1,223 @@
+CREATE TABLE login_details (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    email VARCHAR(30) NOT NULL,
+    user_password VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_role VARCHAR(255) NOT NULL, 
+    staff_name VARCHAR(255) NOT NULL,
+    staff_address VARCHAR(255) NOT NULL,
+    mobile_no VARCHAR(20),
+    alternative_mobile_no VARCHAR(20),
+    date_of_birth DATE,
+    sal INT,
+    staff_id INT(11) NOT NULL, 
+    FOREIGN KEY (staff_id) REFERENCES login_details(id)
+    
+);
+
+
+CREATE TABLE products (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(255) NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL DEFAULT 0,
+  product_description VARCHAR(255) NOT NULL,
+  price DECIMAL(10, 0) NOT NULL,
+  discount DECIMAL(10, 0) DEFAULT 0,
+  brand VARCHAR(255),
+  image1 LONGBLOB,
+  image2 LONGBLOB,
+  image3 LONGBLOB,
+  added_timestamp DATE DEFAULT CURRENT_DATE,
+  PRIMARY KEY (id) 
+);
+
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES login_details(id) ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+
+CREATE TABLE cusomer_details (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    customer_name VARCHAR(255) NOT NULL,
+    customer_address VARCHAR(255) NOT NULL,
+    mobile_no BIGINT(10) NOT NULL,
+    date_of_birth DATE,
+    loyalty_points INT(255),
+    customer_id INT(255) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id)
+    
+);
+
+
+CREATE TABLE repairs (
+    repair_id INT NOT NULL AUTO_INCREMENT,
+
+    customer_id INT NOT NULL,
+
+    customer_name VARCHAR(255),
+    contact BIGINT(10) NOT NULL,
+    
+    added_timestamp DATE DEFAULT CURRENT_DATE,
+    technician_assigned_date VARCHAR(255) DEFAULT NULL,
+    repair_wip_date VARCHAR(255) DEFAULT NULL,
+    repair_completed_date VARCHAR(255) DEFAULT NULL,
+    item_collected_date VARCHAR(255) DEFAULT NULL,
+    
+    item_name VARCHAR(255),
+    repair_description TEXT,
+
+    amount DECIMAL(10, 2),
+    
+    technician_id INT,
+
+    PRIMARY KEY (repair_id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id)
+    
+    
+);
+
+
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    total DECIMAL(10, 2),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    payment_type VARCHAR(255),
+    payment_status VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(255),
+    delivery_city_address VARCHAR(255),
+    postalcode VARCHAR(255),
+    city VARCHAR(255),
+    province VARCHAR(255),  -- Added province column
+    delivery_id INT,
+    customer_id INT
+);
+
+
+CREATE TABLE Order_Items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    quantity INT,
+    order_id INT,
+    product_id INT,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
+);
+
+-- ALTER TABLE Order_Items ADD FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL;
+
+CREATE TABLE components_list(
+
+   id INT NOT NULL AUTO_INCREMENT,
+   CPU_id INT,
+   GPU_id INT,
+   MotherBoard_id INT,
+   Memory_id INT,
+   Storage_id INT,
+   PowerSupply_id INT,
+   Case_id INT,
+
+   PRIMARY KEY (id)
+
+);
+
+
+
+CREATE TABLE Builds (
+    build_id INT NOT NULL AUTO_INCREMENT,
+
+    customer_id INT,
+
+    customer_name VARCHAR(255),
+    contact BIGINT(10) NOT NULL,
+    
+    added_timestamp DATE DEFAULT CURRENT_DATE,
+    technician_assigned_date VARCHAR(255) DEFAULT NULL,
+    build_start_date VARCHAR(255) DEFAULT NULL,
+    build_completed_date VARCHAR(255) DEFAULT NULL,
+    build_collected_date VARCHAR(255) DEFAULT NULL, 
+    -- payment made date is same as build collected date 
+    
+    components_list_id INT, 
+    comments TEXT,
+
+    amount DECIMAL(10, 2),
+    
+    technician_id INT,
+
+    PRIMARY KEY (build_id),
+    FOREIGN KEY (customer_id) REFERENCES login_details(id) ON DELETE SET NULL, 
+    FOREIGN KEY (components_list_id) REFERENCES components_list(id) On DELETE SET NULL
+    
+);
+
+
+1/10/2024
+
+ALTER TABLE Orders
+ADD COLUMN delivery_status VARCHAR(255);
+
+
+CREATE TABLE deliveries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    delivery_person_id INT,
+    accepted_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    completed_date DATETIME, 
+    status VARCHAR(255) DEFAULT 'accepted',
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE SET NULL,
+    FOREIGN KEY (delivery_person_id) REFERENCES employees(staff_id) ON DELETE SET NULL
+);
+
+
+CREATE TABLE instore_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES login_details(id) ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+
+
+CREATE TABLE InStorePurchase (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    total DECIMAL(10, 2),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    createdby INT, 
+    payment_type VARCHAR(255),
+    payment_status VARCHAR(255),
+    NIC VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone VARCHAR(255)
+
+);
+
+
+CREATE TABLE InStorePurchase_Items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    quantity INT,
+    order_id INT,
+    product_id INT,
+    FOREIGN KEY (order_id) REFERENCES InStorePurchase(order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
+);
+
+ALTER TABLE employees
+ADD COLUMN nic VARCHAR(255),
+ADD COLUMN profile_picture BLOB;

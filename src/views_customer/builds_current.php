@@ -2,28 +2,34 @@
 require_once '../classes/database.php';
 require_once '../classes/build.php';
 require_once '../classes/product.php';
-require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
 $buildObj = new Build($db);
 $product = new Product($db);
 
-$customerId = $_SESSION['user_id']; 
+$customerId = $_SESSION['user_id'];
 $builds = $buildObj->getBuildsByCustomerId($customerId);
 
-function formatPrice($price) {
+function formatPrice($price)
+{
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Active Builds</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/builds_current.css" />
+<!-- Template Top -->
+<?php require_once '../templates/main_top.php'; ?>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/builds_current.css" />
+
 </head>
+
 <body>
+
+    <!-- Header -->
+    <?php require_once '../templates/main_header.php'; ?>
+
     <div class="main-content">
         <div class="main-title">
             <h2>Current Build Requests</h2>
@@ -44,7 +50,9 @@ function formatPrice($price) {
                 <tbody class="table-body">
                     <?php foreach ($builds as $build): ?>
                         <tr class="table-row">
-                            <td class="row-item build-id"><?= htmlspecialchars($build['build_id']) ?></td>
+                            <td class="row-item build-id">
+                                <?= htmlspecialchars($build['build_id']) ?>
+                            </td>
                             <td class="row-item components-cell">
                                 <div class="components-wrapper">
                                     <?php
@@ -61,12 +69,18 @@ function formatPrice($price) {
                                         $componentDetails = $product->getProductById($id);
                                         if ($componentDetails): ?>
                                             <div class="component-detail">
-                                                <img class="component-image" src="data:image/jpeg;base64,<?= base64_encode($componentDetails['image1']) ?>" alt="<?= htmlspecialchars($componentDetails['product_name']) ?>">
+                                                <img class="component-image"
+                                                    src="data:image/jpeg;base64,<?= base64_encode($componentDetails['image1']) ?>"
+                                                    alt="<?= htmlspecialchars($componentDetails['product_name']) ?>">
                                                 <span class="component-name-tooltip">
                                                     <span class="tooltip-content">
-                                                        <span class="tooltip-title"><?= htmlspecialchars($componentDetails['product_name']) ?></span>
+                                                        <span class="tooltip-title">
+                                                            <?= htmlspecialchars($componentDetails['product_name']) ?>
+                                                        </span>
                                                         <br>
-                                                        <span class="tooltip-price">Price: <?= htmlspecialchars(formatPrice($componentDetails['price'])) ?></span>
+                                                        <span class="tooltip-price">Price:
+                                                            <?= htmlspecialchars(formatPrice($componentDetails['price'])) ?>
+                                                        </span>
                                                     </span>
                                                 </span>
                                             </div>
@@ -74,8 +88,12 @@ function formatPrice($price) {
                                     endforeach; ?>
                                 </div>
                             </td>
-                            <td class="row-item total-price"><?= formatPrice(htmlspecialchars($build['amount'])) ?></td>
-                            <td class="row-item date-added"><?= htmlspecialchars($build['added_timestamp']) ?></td>
+                            <td class="row-item total-price">
+                                <?= formatPrice(htmlspecialchars($build['amount'])) ?>
+                            </td>
+                            <td class="row-item date-added">
+                                <?= htmlspecialchars($build['added_timestamp']) ?>
+                            </td>
                             <!-- nav -->
                             <td class="row-item view-details">
                                 <form action="./build_details.php" method="post">
@@ -83,7 +101,7 @@ function formatPrice($price) {
                                     <input type="submit" value="View Details" class="details-button">
                                 </form>
                             </td>
-                            
+
                             <td class="row-item status">
                                 <span class="status-badge <?= $buildObj->getStatusClass($build['build_id']) ?>">
                                     <?= $buildObj->getStatus($build['build_id']) ?>
@@ -94,26 +112,26 @@ function formatPrice($price) {
                 </tbody>
             </table>
         </div>
-<!-- navigation  -->
+        <!-- navigation  -->
         <div class="main-container-2">
             <div class="create-build-btn">
                 <form method="post" action="./build_create.php">
                     <input type="hidden" name="handler_type" value="submit-build">
                     <button type="submit" class="remove-btn">Create New Build Request!</button>
                 </form>
-            </div>  
+            </div>
 
             <div class="view-current-build-btn">
                 <form method="post" action="./builds_current.php">
                     <input type="hidden" name="handler_type" value="submit-build">
                     <button type="submit" class="remove-btn">View Active Build Requests!</button>
                 </form>
-            </div>   
+            </div>
         </div>
     </div>
-</body>
-</html>
 
+    <!-- Footer -->
+    <?php require_once '../templates/main_footer.php'; ?>
 
-
-
+    <!-- Template Bottom -->
+    <?php require_once '../templates/main_bottom.php'; ?>

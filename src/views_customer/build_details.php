@@ -1,7 +1,7 @@
 <?php
 
-require_once '../components/headers/main_header.php'; 
-require_once '../classes/database.php'; 
+require_once '../components/headers/main_header.php';
+require_once '../classes/database.php';
 require_once '../classes/build.php';
 require_once '../classes/technician.php';
 
@@ -14,10 +14,10 @@ echo $_POST["build_id"];
 
 if (isset($_POST["build_id"])) {
     if (isset($_SESSION['current_build_tech'])) {
-        $buildID = $_SESSION['current_build_tech']; 
+        $buildID = $_SESSION['current_build_tech'];
         unset($_SESSION['current_build_tech']);
     } else {
-        $buildID = $_POST["build_id"]; 
+        $buildID = $_POST["build_id"];
     }
 
     $buildDetails = $build->getAllFromBuildById($buildID);
@@ -35,14 +35,14 @@ if (isset($_POST["build_id"])) {
         $build_collected_date = $buildDetails['build_collected_date'];
         $components_list_id = $buildDetails['components_list_id'];
         // comments 
-        $buildDescription = $buildDetails['comments']; 
-        
+        $buildDescription = $buildDetails['comments'];
+
         $amount = $buildDetails['amount'];
         $technicianId = $buildDetails['technician_id'];
 
         // Technician details
         if ($technicianId) {
-            $technicianDetails = $techobj->getTechnicianByStaffId($technicianId); 
+            $technicianDetails = $techobj->getTechnicianByStaffId($technicianId);
             $tech_name = $technicianDetails['staff_name'];
             $tech_mobile = $technicianDetails['mobile_no'];
         }
@@ -59,16 +59,16 @@ if (isset($_POST["build_id"])) {
 
 // echo $addedTimestamp; 
 
-if($build_collected_date){
+if ($build_collected_date) {
     require_once '../components/build_timeline/stage5.php';
-}else if($build_completed_date){
+} else if ($build_completed_date) {
     require_once '../components/build_timeline/stage4.php';
-}else if($build_start_date){
+} else if ($build_start_date) {
     require_once '../components/build_timeline/stage3.php';
 
-}else if($tech_assigned_date){
+} else if ($tech_assigned_date) {
     require_once '../components/build_timeline/stage2.php';
-}else{
+} else {
     require_once '../components/build_timeline/stage1.php';
 }
 
