@@ -1,3 +1,4 @@
+<?php require_once 'Base.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +11,7 @@
     <div>
         <h1>Build Request Progress</h1>
         <ul>
-            <li style="--accent-color:#080a0d">
-                <div class="date"><?php echo "✔️ Build request created!"?></div>
-                <div class="title">
-                    <div style="margin-bottom: 20px;">REF No : <?php echo $ref_number?></div>
-                    <div style="margin-bottom: 20px;">Date : <?php echo $added_timestamp?></div>
-                    <div style= "word-wrap: break-word;" class="descr">Comments: <?php echo htmlspecialchars($buildDescription); ?></div>
-                </div>
-            </li>
+            <?php echoBuildRequestCreated($ref_number, $added_timestamp, $buildDescription)?>
 
             <li style="--accent-color:#080a0d">
                 <div class="date"><?php echo "✔️ Technician assigned!"?></div>

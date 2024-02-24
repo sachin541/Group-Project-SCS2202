@@ -1,3 +1,4 @@
+<?php require_once 'Base.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,37 +11,11 @@
     <div>
         <h1>Build Request Progress</h1>
         <ul>
-            <li style="--accent-color:#080a0d">
-                <div class="date"><?php echo "✔️ Build request created!"?></div>
-                <div class="title">
-                    <div style="margin-bottom: 20px;">REF No : <?php echo $ref_number?></div>
-                    <div style="margin-bottom: 20px;">Date : <?php echo $added_timestamp?></div>
-                    <div style= "word-wrap: break-word;" class="descr">Comments: <?php echo htmlspecialchars($buildDescription); ?></div>
-                </div>
-            </li>
+            <?php echoBuildRequestCreated($ref_number, $added_timestamp, $buildDescription)?>
+            <?php echoTechnicianAssigned($tech_name, $tech_mobile, $tech_assigned_date)?>
+            <?php echoBuildCompleted($build_start_date, $build_completed_date)?>
 
-            <li style="--accent-color:#080a0d">
-                <div class="date"><?php echo "✔️ Technician assigned!"?></div>
-                <div style="margin-bottom: 20px;"></div>
-                <div style="margin-bottom: 20px;">Technician Name : <?php echo $tech_name?></div>
-                <div style="margin-bottom: 20px;">Technician Mobile : <?php echo $tech_mobile?></div>
-                <div style="margin-bottom: 20px;">Date : <?php echo $tech_assigned_date?></div>
-                <div class="descr">A Technician has been assinged to the Job. Please get into contact</div>
-            </li>
-            
-            <li style="--accent-color:#080a0d">
-                <div class="date"><?php echo "✔️ Build started!"?></div>
-                <div style="margin-bottom: 20px;"></div>
-                <div style="margin-bottom: 20px;">Date : <?php echo $build_start_date?></div>
-                <div class="descr">Build is in progress.</div>
-            </li>
-            <li style="--accent-color:#080a0d">
-                <div class="date"><?php echo "✔️ Build completed!"?></div>
-                <div style="margin-bottom: 20px;"></div>
-                <div style="margin-bottom: 20px;">Date : <?php echo $build_completed_date?></div>
-                <div class="descr">Build has been completed item is ready for collection.</div>
-            </li>
-            <li style="--accent-color:#29ab4c">
+            <li style="--accent-color:grey">
                 <div class="date"><?php echo "Payment and collection pending!"?></div>
                 <div style="margin-bottom: 20px;"></div>
                 <div class="accept_button">
