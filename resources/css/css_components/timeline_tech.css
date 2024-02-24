@@ -22,9 +22,12 @@ body {
   
 }
 
-h1 {    
+h1 {  
+  
   padding: 20px;
   text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
 ul {
@@ -46,7 +49,7 @@ ul::before {
   grid-column: 1;
   grid-row: 1 / span 20;
   background: rgb(225, 225, 225);
-  border-radius: calc(var(--line-w) / 2);
+  
 }
 
 /* columns*/
@@ -54,6 +57,7 @@ ul::before {
 /* row gaps */
 ul li:not(:last-child) {
   margin-bottom: var(--row-gap);
+ 
 }
 
 /* card */
@@ -64,9 +68,10 @@ ul li {
   grid-row: span 2;
   display: grid;
   grid-template-rows: min-content min-content min-content;
+  
 }
 
-/* date */
+/* title */
 ul li .date {
   --dateH: 3rem;
   height: var(--dateH);
@@ -82,8 +87,8 @@ ul li .date {
   display: grid;
   place-content: center;
   position: relative;
-
-  border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+  
+  border-radius: 40px ;
 }
 
 /* circle */
@@ -96,7 +101,6 @@ ul li .date::after {
   border: 0.3rem solid var(--accent-color);
   border-radius: 50%;
   top: 50%;
-
   transform: translate(50%, -50%);
   right: calc(100% + var(--col-gap) + var(--line-w) / 2);
 }
@@ -104,53 +108,72 @@ ul li .date::after {
 /* title descr */
 ul li .title,
 ul li .descr {
+ 
   background: var(--bgColor);
   position: relative;
-  /* padding-inline: 1.5rem; */
+  
 }
+
 ul li .title {
-  overflow: hidden;
+  
+  
   padding-block-start: 1.5rem;
   padding-block-end: 1rem;
   font-weight: 500;
+  
 }
+
 ul li .descr {
   padding-block-end: 1.5rem;
   font-weight: 300;
+  
 }
 
-/* shadows */
-ul li .title::before,
-ul li .descr::before {
-  content: "";
-  position: absolute;
-  width: 90%;
-  height: 0.5rem;
-  background: rgba(0, 0, 0, 0.5);
-  left: 50%;
-  border-radius: 50%;
-  filter: blur(4px);
-  transform: translate(-50%, 50%);
-}
-ul li .title::before {
-  bottom: calc(100% + 0.125rem);
-}
 
-ul li .descr::before {
-  z-index: -1;
-  bottom: 0.25rem;
-}
-
+/* white text box  */
 .descr {
-    width: 80%; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width as needed */
     padding: 10px; /* Adds space inside the div */
-    margin: 0 auto; /* Centers the div if its width is less than 100% */
+    max-height: 80px;
     text-align: justify; /* Centers the text inside the div */
     border: 1px solid #ccc; /* Adds a border around the div */
-    background-color: #f9f9f9; /* Adds a background color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
     border-radius: 5px; /* Optional: Rounds the corners */
 }
+
+@media (min-width: 40rem) {
+
+  h1{
+    background-color: #ddefea;  
+    margin: 30px 300px;
+  }
+  ul {
+    grid-template-columns: 1fr var(--line-w) 1fr;
+  }
+  ul::before {
+    grid-column: 2;
+  }
+  ul li:nth-child(odd) {
+    grid-column: 1;
+  }
+  ul li:nth-child(even) {
+    grid-column: 3;
+  }
+
+  /* start second card */
+  ul li:nth-child(2) {
+    grid-row: 2/4;
+  }
+
+  
+
+  ul li:nth-child(odd) .date::after {
+    transform: translate(-50%, -50%);
+    left: calc(100% + var(--col-gap) + var(--line-w) / 2);
+  }
+  
+}
+
+
 
 .accept_button {
   display: flex;
@@ -179,38 +202,4 @@ ul li .descr::before {
   color:white;  
   border:0;   
     
-}
-
-
-@media (min-width: 40rem) {
-  ul {
-    grid-template-columns: 1fr var(--line-w) 1fr;
-  }
-  ul::before {
-    grid-column: 2;
-  }
-  ul li:nth-child(odd) {
-    grid-column: 1;
-  }
-  ul li:nth-child(even) {
-    grid-column: 3;
-  }
-
-  /* start second card */
-  ul li:nth-child(2) {
-    grid-row: 2/4;
-  }
-
-  ul li:nth-child(odd) .date::before {
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    left: 0;
-  }
-
-  ul li:nth-child(odd) .date::after {
-    transform: translate(-50%, -50%);
-    left: calc(100% + var(--col-gap) + var(--line-w) / 2);
-  }
-  ul li:nth-child(odd) .date {
-    border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
-  }
 }

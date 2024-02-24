@@ -72,14 +72,15 @@ html, body {
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
   justify-content: flex-start; /* Align items to start */
+  
 }
 
 /* Product Card Styles */
 .product-card {
-  flex: 0 0 300px;
-  width: 200px;
+  flex: 0 0 250px;
+  
   max-height: 550px;
   overflow: hidden;
   border: 2px solid #d1cfcf;
@@ -101,18 +102,20 @@ html, body {
 
 /* Product Image Styles */
 .product-image {
-  width: 100%; /* Full width */
-  height: 290px; /* Fixed height */
+  width: auto; /* Full width */
+  height: 200px; /* Fixed height */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden; /* Hide overflow */
   background-color: white;
+  border-radius: 20px;
+  padding: 0px 20px;
 }
 
 /* Image Tag Styles within Product Image */
 .product-image img {
-  width: auto; /* Auto width to maintain aspect ratio */
+  width: 100%; /* Auto width to maintain aspect ratio */
   height: 100%; /* Full height */
 }
 
@@ -121,13 +124,13 @@ html, body {
   display: grid;
   grid-template-rows: auto auto auto; /* Three rows for title, price, and brand */
   gap: 5px; /* Space between rows */
-  padding: 10px;
+  
   text-align: center;
 }
 
 .product-title {
   font-size: 20px;
-  
+  padding: 0px 10px;
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -165,11 +168,11 @@ html, body {
 .add-to-cart-button {
   background-color: #000000; /* Background color */
   color: white; /* Text color */
-  padding: 30px 20px;
+  padding: 25px 20px;
   text-decoration: none; /* No underline */
   display: block; /* Block display */
   border: none; /* No border */
-  border-radius: 4px; /* Rounded corners */
+  
   cursor: pointer; /* Cursor style */
   width: 100%; /* Full width */
   text-align: center; /* Centered text */
