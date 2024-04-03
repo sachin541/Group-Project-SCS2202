@@ -10,11 +10,13 @@
 
 </head>
 
+<?php require_once '../components/headers/main_header.php'; ?>
+
 <body>
 
 
 
-    <?php require_once '../components/headers/main_header.php'; ?>
+    
 
     <div class="main-container">
 
@@ -28,50 +30,6 @@
         </div>
 
 
-        <!--<div class="treasury-inner">
-            <div class="grid2-item-1">
-                <div class="grid2-inner-item-1">
-                    <h3>News</h3>
-                    <div class="news-content">
-                        
-                        <p>Winner of the Top-Notch website Award at TopWeb.LK</p>
-                        <p>Winner of the Most Popular Award at BestWeb.lk</p>
-                        <p>In case of faulty products, we have an upstanding warranty and claim procedures to make sure that your requirements are met in minimum time loss as possible</p>
-                        <p>In case your requirements supersedes what the local market has to offer, we will provide you with assistance to meet these requirements.</p>
-                        <p>To further facilitate your access to your needs, we offer to deliver to meet your requirements straight to where you live within Sri Lankan borders.</p>
-                    </div>
-                </div>-->
-        <!-- <div class="grid2-inner-item-2">
-                    <div class='slider-img-container'>
-                            <img src='../../resources/images/map.png' alt='item img' class='img' />
-                        </div>
-                </div> -->
-        <!--</div>
-    <div class="grid2-item-2">
-        <h3>Trending Builds</h3>
-        <div class="trending-builds-container">
-            <div class='items-trending'>
-                <div class='slider-img-container'>
-                    <img src='../../resources/images/trending_builds/image1.png' alt='item img' class='img' />
-                </div>
-                <div class='info-container'>
-                    <p>Nano-X Creator PRO V2 (AMD RYZEN™ 7000 SERIES)</p>
-                    <p>Rs. 1,130,000</p>
-                </div>
-            </div>
-            <div class='items-trending'>
-                <div class='slider-img-container'>
-                    <img src='../../resources/images/trending_builds/image2.png' alt='item img' class='img' />
-                </div>
-                <div class='info-container'>
-                    <p>Nano-X Creator Lite (12th gen & DDR5)</p>
-                    <p>Rs. 505,500</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>-->
 
         <div class="con-1">
             <img src="../../resources/images/main_home/pnew.png" alt="">

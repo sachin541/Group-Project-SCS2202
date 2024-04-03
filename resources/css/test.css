@@ -1,0 +1,107 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100%;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap; /* Allows boxes to wrap in smaller screens */
+    align-items: stretch;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width for smaller screens */
+    color: #fff;
+    flex: 1; /* Allows boxes to grow and fill the available space, useful for when they wrap */
+}
+
+.hero-box {
+    background-image: url('../../resources/images/newhomepage/hero9.jpg'); /* Path to your hero image */
+    background-size: cover; /* Ensure the image covers the box */
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+    position: relative; /* Ensure positioning context for child elements */
+    padding: 20px; /* Add some padding around the content */
+    text-align: center; /* Center the text */
+    overflow: hidden; /* Ensures the pseudo-element doesn't exceed the box bounds */
+}
+
+.hero-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* Inherits the background of the hero-box */
+    filter: brightness(45%); /* Applies the filter only to this pseudo-element */
+    z-index: 1; /* Ensures this layer is behind the content */
+}
+
+.hero-text {
+    position: relative; /* Correct positioning within hero-box */
+    color: #ffffff; /* White text color for better contrast */
+    z-index: 2; /* Ensures text is above the pseudo-element */
+}
+
+.hero-title {
+    font-size: 2.5em; /* Large text for the main title */
+    margin-bottom: 0.5em; /* Space between title and subtitle */
+    font-weight: bold; /* Emphasize the title */
+}
+
+.hero-subtitle {
+    font-size: 1.5em; /* Smaller than the title, but still prominent */
+    margin-bottom: 1em; /* Space before the call to action */
+}
+
+.hero-cta { /* Call to action styling */
+    background-color: #16a085; /* Eye-catching button color */
+    color: #ffffff; /* White text for the button */
+    padding: 10px 20px; /* Padding inside the button */
+    text-decoration: none; /* Remove underline from the link */
+    border-radius: 5px; /* Rounded corners for the button */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    position: relative; /* Ensures CTA is above the pseudo-element */
+    z-index: 2;
+}
+
+.hero-cta:hover {
+    background-color: red; /* Darker shade on hover */
+}
+
+
+
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack the boxes vertically in smaller screens */
+    }
+
+    .small-box, .large-box {
+        width: 100%; /* Ensure boxes fill the container */
+    }
+}
+
+
+/* Additional styles remain unchanged */
+
+
+

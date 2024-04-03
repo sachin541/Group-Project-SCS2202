@@ -28,7 +28,7 @@
             <div class="content">
 
                 <a href="../views_tech/technician_home.php" class="topnav-item">Home</a>
-                <a href="../views_tech/dashboard.php" class="topnav-item">Dashboard</a>
+                <!-- <a href="../views_tech/dashboard.php" class="topnav-item">Dashboard</a> -->
                 <a href="../views_tech/build_management.php" class="topnav-item">Builds</a>
                 <a href="../views_tech/repair_managment.php" class="topnav-item">Repairs</a>
                 <!-- <a href="../pages/contact_us.php" class="topnav-item"></a> -->

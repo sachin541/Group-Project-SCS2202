@@ -28,7 +28,7 @@
             <div class="content">
 
                 <a href="../views_deliverer/deliverer_home.php" class="topnav-item">Home</a>
-                <a href="../views_deliverer/dashboard.php" class="topnav-item">Dashboard</a>
+                <!-- <a href="../views_deliverer/dashboard.php" class="topnav-item">Dashboard</a> -->
                 <a href="../views_deliverer/acceptOrders.php" class="topnav-item">Orders</a>
 
                 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
