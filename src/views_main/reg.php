@@ -1,4 +1,5 @@
 <script>
+    
 function showOtpModal() {
     // Get the modal
     var modal = document.getElementById('otpModal');
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 <?php unset($_SESSION['show_otp_modal']); // Make sure to unset the flag ?>
 <?php endif; ?>
+
 </script>
 
 
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // echo $_SESSION['show_otp_modal'];
     // $_SESSION['otp_error'] = 'Invalid OTP. Please try again.';
     // $_SESSION['registration_error'] = 'Invalid OTP. Please try again.';
+    
     if (isset($_SESSION['registration_error'])) {
         $email_already_in_use_err = htmlspecialchars($_SESSION['registration_error']);
         unset($_SESSION['registration_error']);
@@ -135,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <?php unset($_SESSION['show_otp_modal']); // Make sure to unset the flag ?>
     <?php endif; ?>
     </script>
+
+
 </body>
 </html>
 

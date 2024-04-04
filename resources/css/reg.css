@@ -87,15 +87,73 @@
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
-  padding: 15px;
-  max-width: 90%;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin: 10px;
+  
+  
   border: 1px solid transparent;
   border-radius: 4px;
 }
 
 .blur {
   filter: blur(8px);
+}
+
+.btn-primary {
+  background-color: #4CAF50; /* Adjust the color to fit your site's theme */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none; /* Remove underline from links styled as buttons */
+  border-radius: 5px; /* Match the modal's border-radius */
+  display: inline-block; /* Needed for links styled as buttons */
+}
+
+
+
+/* Enhanced Modal Content Styles with Flexbox */
+#successModal.modal {
+  
+}
+
+/* Modal Header Adjustments for Flexbox */
+
+
+/* Modal Body Adjustments for Flexbox */
+.modal-body {
+  text-align: center; /* Center text for consistency */
+  width: 100%; /* Ensure the body takes up full width */
+}
+
+/* Ensuring the Modal Footer is Centered */
+.modal-footer {
+  display: flex; /* Enable Flexbox */
+  justify-content: center; /* Center-align items horizontally */
+  width: 100%; /* Ensure the footer takes up full width */
+  padding: 10px 0; /* Add some padding */
+}
+
+/* Image within Modal Body */
+.modal-body img {
+  width: 80%; /* Adjust width as needed, keeping it responsive */
+  max-width: 200px; /* Maximum width to ensure the image is not too large */
+  height: auto; /* Maintain aspect ratio */
+  margin: 20px 0; /* Add margin on top and bottom */
+}
+
+/* Close Button Adjustment for Flexbox */
+.close {
+  margin-left: auto; /* Push the close button to the right */
+  top: -10px; /* Adjust top positioning if needed */
+  right: 15px; /* Adjust right positioning for consistency */
+  border: none;
+  padding: 10px 20px;
+}
+
+/* Adjust button within modal footer for better aesthetics */
+.modal-footer .btn-primary {
+  padding: 20px 40px; /* Adequate padding */
+  font-size: 20px; /* Readable font size */
+  
 }
 
 
