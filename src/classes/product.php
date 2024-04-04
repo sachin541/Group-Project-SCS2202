@@ -129,6 +129,22 @@ class Product {
         }
     }
     
+    public function getLatestProducts($limit = 10) {
+        try {
+            $query = "SELECT * FROM products ORDER BY added_timestamp DESC LIMIT ?";
+            $stmt = $this->db->prepare($query);
+            
+            // Bind the limit parameter
+            $stmt->bindParam(1, $limit, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+    
 
 
 }

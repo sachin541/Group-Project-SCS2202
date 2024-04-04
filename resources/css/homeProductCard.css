@@ -3,7 +3,7 @@
     overflow-x: auto; /* Enable horizontal scrolling */
     padding: 10px 0px;
     justify-content: space-around;
-    background-color: #ffffff;
+    background-color: #eae8e8;
     /* background-color: red; */
     overflow-y: hidden;
     height: 90%;
@@ -15,11 +15,11 @@
   .product-card {
     /* background-color: yellow; */
     flex: 0 0 240px; /* Flex basis set to 250px to maintain width */
-    margin: 0px 20px;
+    margin: 0px 0px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     max-height: 55vh;
     z-index: 2; /* Higher than the green stripe's z-index */
-    
+    background-color: white;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
     display: flex;
     flex-direction: column;
@@ -69,10 +69,12 @@
     border: none;
     cursor: pointer;
     margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
     /* Removed align-self and margin-top; not needed with the new layout approach */
 }   
 
 .btn-add-to-cart:hover {
-    background-color: #13876f; /* A darker shade for hover effect */
+    background-color: red; /* A darker shade for hover effect */
 }
   

@@ -1,4 +1,24 @@
-<?php require_once '../components/headers/main_header.php'; ?>
+<?php 
+require_once '../components/headers/main_header.php'; 
+require_once '../classes/product.php';
+require_once '../classes/database.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$product = new Product($db);
+
+// Fetch the latest 5 products
+$latestProducts = $product->getLatestProducts(5);
+
+function truncateText($text, $maxLength = 100) {
+    if (strlen($text) > $maxLength) {
+        return substr($text, 0, $maxLength) . "...";
+    } else {
+        return $text;
+    }
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -42,8 +62,30 @@
     <!-- Row with Large Box -->
     <div class="row-products" style="height: 60vh; background-color: white; position: relative;">
         <div class="box large-box-items" style="background-color: black;">
-            
-            <div class="products-scroll-container"></div>
+                
+        <div class="products-scroll-container">
+            <?php foreach ($latestProducts as $product): ?>
+                <div class="product-card">
+                    <img src="data:image/jpeg;base64,<?= base64_encode($product['image1']) ?>" alt="<?= htmlspecialchars($product['product_name']) ?>" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title"><?= htmlspecialchars($product['product_name']) ?></h3>
+                        <p class="product-description"><?= htmlspecialchars(truncateText($product['product_description'], 80)) ?></p> <!-- Adjusted -->
+                        <div class="product-price-rating">
+                            <span class="product-price">Rs <?= htmlspecialchars($product['price']) ?>/-</span>
+                        </div>
+
+                        <div class="product-actions">
+                            <form action="../views_customer/product_details.php" method="get">
+                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                                <button type="submit" class="btn-add-to-cart">View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+
         </div>
     </div>
 
@@ -115,27 +157,4 @@
 
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const productsContainer = document.querySelector('.products-scroll-container');
 
-    for (let i = 1; i <= 10; i++) {
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-
-        productCard.innerHTML = `
-            <img src="../../resources/images/newhomepage/6.jpg" alt="Product ${i}" class="product-image">
-            <div class="product-info">
-                <h3 class="product-title">Product Name ${i}</h3>
-                <p class="product-description">Short description of product ${i} highlighting its key features.</p>
-                <div class="product-price-rating">
-                    <span class="product-price">$99.99</span>
-                </div>
-                <button class="btn-add-to-cart">View</button>
-            </div>
-        `;
-        
-        productsContainer.appendChild(productCard);
-    }
-});
-</script>
