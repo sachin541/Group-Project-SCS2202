@@ -22,11 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Handle case where registration fails
                 $_SESSION['registration_error'] = 'Registration failed. Please try again.';
+                header('Location: ../views_main/reg.php');
             }
         } else {
-            $_SESSION['registration_error'] = 'Invalid OTP. Please try again.';
+            
+                $_SESSION['registration_error'] = 'Invalid OTP. Please try again.';
+                $_SESSION['otp_error'] = 'Invalid OTP. Please try again.'; // Additional line
+                $_SESSION['show_otp_modal'] = 1; 
+                header('Location: ../views_main/reg.php');
+            
+            
+
         }
     } 
+
+
     else {
     // Check if all fields are filled
     if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password_confirmation'])) {
@@ -66,8 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Send OTP via email
     // Send OTP via email
-    $sendStatus = sendOtpEmail($_POST['email'], $otp);
 
+    // $sendStatus = sendOtpEmail($_POST['email'], $otp);
+        $sendStatus = true; 
     if ($sendStatus === true) {
         // Store OTP and email in session for verification
         $_SESSION['otp'] = $otp;

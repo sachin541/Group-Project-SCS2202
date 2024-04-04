@@ -1,121 +1,104 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(216, 216, 216);
-}
-
-.flexbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  
-  
-}
-
-.outer-container {
-  display: flex;
-  width: 70%;
-  margin: 50px;
-  margin-top: 0px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-}
-
-.outer-container::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
-  background-color: #16a085;
-}
-
-.image {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
-  position: relative;
-}
-
-.image::after {
-  content: '';
-  position: absolute;
-  right: 0;
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
   top: 0;
-  bottom: 0;
-  width: 2px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.form-container {
-  width: 50%;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10vh auto; /* 10% of the viewport height from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Adapt to the screen size */
+  max-width: 500px; /* Maximum width */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for depth */
+  border-radius: 8px; /* Rounded corners */
 }
 
-.form-container .label {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 8px;
-  display: block;
-  font-weight: bold;
-}
-
-.field {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 12px 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: calc(100% - 30px);
-  box-sizing: border-box;
-}
-
-.field:focus {
-  border-color: #16a085;
-  box-shadow: 0 0 8px rgba(22, 160, 133, 0.2);
-  outline: none;
-}
-
-input[type="submit"] {
-  background-color: #16a085;
-  color: white;
-  border: none;
-  padding: 10px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 18px;
-  width: 95%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-}
-
-input[type="submit"]:hover {
-  background-color: red;
-}
-
-
-.form-container .title {
-  font-size: 44px;
-  color: #000000;
-  margin-bottom: 70px;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* Label Styling */
-.form-container .form-label {
-  font-size: 20px;
-  color: #000000;
-  margin-bottom: 20px;
+/* Modal Header */
+.modal-header {
+  position: relative; /* Add this to ensure the close button's positioning is relative to this container */
   
+ 
+}
+
+/* The Close Button */
+.close {
+  position: absolute; /* Absolutely position the close button within the .modal-header */
+  top: -20px; /* Align to the top of the .modal-header */
+  right: 0px; /* Right align within the .modal-header with some padding */
+  color: #aaa;
+  font-size: 25px; /* Adjust size as needed */
   font-weight: bold;
 }
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Input Field Styles */
+.modal input[type="text"],
+.modal input[type="password"] {
+  width: calc(100% - 20px); /* Full width minus padding */
+  padding: 12px 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Slightly rounded corners for the input fields */
+}
+
+/* Button Styles */
+/* Button Styles */
+.modal .btn-primary {
+  background-color: #16a085; /* Green */
+  color: white;
+  padding: 10px 30px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.9;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.modal .btn-primary:hover {
+  background-color: red; /* Darker shade of green for hover effect */
+  opacity: 1; /* Full opacity on hover */
+}
+
+
+.modal .btn-primary:hover {
+  opacity: 1;
+}
+
+.alert-otp {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px;
+  max-width: 90%;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.blur {
+  filter: blur(8px);
+}
+
+
+
+
+
