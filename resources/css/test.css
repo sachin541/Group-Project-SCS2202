@@ -5,6 +5,10 @@ body, html {
     min-height: 100%;
 }
 
+body {
+    /* font-family: 'Merriweather', serif; */
+}
+
 .flex-container {
     display: flex;
     flex-direction: column;
@@ -13,6 +17,7 @@ body, html {
 .row {
     display: flex;
     width: 100%;
+    
     flex-wrap: wrap; /* Allows boxes to wrap in smaller screens */
     align-items: stretch;
 }
@@ -22,11 +27,15 @@ body, html {
     align-items: center;
     justify-content: center;
     width: 100%; /* Full width for smaller screens */
+    
     color: #fff;
     flex: 1; /* Allows boxes to grow and fill the available space, useful for when they wrap */
+    overflow-x: hidden;
+    
 }
 
 .hero-box {
+    
     background-image: url('../../resources/images/newhomepage/hero9.jpg'); /* Path to your hero image */
     background-size: cover; /* Ensure the image covers the box */
     background-position: center;
@@ -34,9 +43,9 @@ body, html {
     align-items: center;
     justify-content: center;
     width: 100%;
-    color: #fff;
+    
     position: relative; /* Ensure positioning context for child elements */
-    padding: 20px; /* Add some padding around the content */
+    
     text-align: center; /* Center the text */
     overflow: hidden; /* Ensures the pseudo-element doesn't exceed the box bounds */
 }
@@ -49,8 +58,9 @@ body, html {
     right: 0;
     bottom: 0;
     background: inherit; /* Inherits the background of the hero-box */
-    filter: brightness(45%); /* Applies the filter only to this pseudo-element */
+    filter: brightness(40%); /* Applies the filter only to this pseudo-element */
     z-index: 1; /* Ensures this layer is behind the content */
+    
 }
 
 .hero-text {
@@ -60,23 +70,25 @@ body, html {
 }
 
 .hero-title {
-    font-size: 2.5em; /* Large text for the main title */
+    margin-top: 0px;
+    font-size: 3.5em; /* Large text for the main title */
     margin-bottom: 0.5em; /* Space between title and subtitle */
     font-weight: bold; /* Emphasize the title */
+    
 }
 
 .hero-subtitle {
-    font-size: 1.5em; /* Smaller than the title, but still prominent */
-    margin-bottom: 1em; /* Space before the call to action */
+    font-size: 2em; /* Smaller than the title, but still prominent */
+    margin-bottom: 2.5em; /* Space before the call to action */
 }
 
 .hero-cta { /* Call to action styling */
     background-color: #16a085; /* Eye-catching button color */
     color: #ffffff; /* White text for the button */
-    padding: 10px 20px; /* Padding inside the button */
+    padding: 20px 60px; /* Padding inside the button */
+    font-size: 1.5em;
     text-decoration: none; /* Remove underline from the link */
-    border-radius: 5px; /* Rounded corners for the button */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    border-radius: 0px; /* Rounded corners for the button */
     position: relative; /* Ensures CTA is above the pseudo-element */
     z-index: 2;
 }
@@ -84,6 +96,19 @@ body, html {
 .hero-cta:hover {
     background-color: red; /* Darker shade on hover */
 }
+
+.box.large-box.brands{
+    height: 100%;
+    overflow-x: auto;
+}
+
+.box.large-box.brands img {
+    max-width: 100%; /* Ensure images don't exceed the width of their container */
+    height: 60%; /* Maintain the aspect ratio of the images */
+    margin-left: 50px; /* Add some space between the images */
+    
+}
+
 
 
 
