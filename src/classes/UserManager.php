@@ -4,7 +4,7 @@ require_once 'database.php';
 class UserManager {
     protected $db;
 
-    private function emailExists($email) {
+    public function emailExists($email) {
         $stmt = $this->db->prepare("SELECT id FROM login_details WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
