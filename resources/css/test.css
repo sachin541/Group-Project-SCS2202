@@ -43,7 +43,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    
+    background-color: black;
     position: relative; /* Ensure positioning context for child elements */
     
     text-align: center; /* Center the text */
@@ -98,8 +98,9 @@ body {
 }
 
 .box.large-box.brands{
-    height: 100%;
+    
     overflow-x: auto;
+    background-color: black;
 }
 
 .box.large-box.brands img {
@@ -108,6 +109,114 @@ body {
     margin-left: 50px; /* Add some space between the images */
     
 }
+
+.row-products{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap; /* Allows boxes to wrap in smaller screens */
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.service {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    width: 100%; /* Take full width of the parent container */
+    text-align: center; /* Center text */
+    
+    background-color: black;
+}
+
+
+.service img {
+    padding-top: 10px;
+    max-width: 20%;
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 10px; /* Space between image and text */
+}
+
+.service p {
+    font-size: 30px;
+    color: white; /* Text color for black background */
+    text-align: center; /* Center the text */
+    margin: 10px 40px; /* Space around paragraphs */
+    font-weight: bold;
+}
+
+.service-cta {
+    display: inline-block;
+    background-color: #16a085; /* Button color */
+    color: white; /* Button text color for black background */
+    padding: 10px 30px;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.service-cta:hover {
+    background-color: red; /* Darker shade on hover */
+}
+
+/* New styles for content on white background */
+.service-white p {
+    color: black; /* Text color for white background */
+    
+}
+
+#break {
+    position: relative;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center #services-box horizontally */
+    align-items: center; /* Center #services-box vertically */
+    
+}
+
+#break::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../resources/images/newhomepage/breaks.jpg');
+    background-size: cover; /* Ensure the background covers the entire element */
+    filter: brightness(30%);
+    z-index: 2; /* Ensure it stays behind the content */
+}
+
+#services-box {
+    position: relative; /* Adjust if necessary for layout */
+
+   
+    
+    padding: 20px 100px; /* Adjust padding as needed */
+    text-align: center;
+    z-index: 3; /* Higher than the pseudo-element to ensure visibility */
+    /* background-color: red; */
+    border: 1px solid #FFFFFF; /* Adding a white border */
+    color: #ffffff; /* Ensures text is white for contrast */
+}
+
+#services-box h2 {
+    margin: 0;
+    padding: 20px 40px;
+    color: #ffffff; /* Ensures text color is white */
+    font-size: 90px; /* Adjusted for readability, change as needed */
+    font-weight: 600;
+    margin: 0px;
+}
+
+
+
+
 
 
 
@@ -123,6 +232,22 @@ body {
     .small-box, .large-box {
         width: 100%; /* Ensure boxes fill the container */
     }
+
+    #services-box {
+        border: none;
+        padding : 20px 20px;
+    }
+
+
+    #services-box h2 {
+        margin: 0;
+        padding: 20px 40px;
+        color: #ffffff; /* Ensures text color is white */
+        font-size: 40px; /* Adjusted for readability, change as needed */
+        font-weight: 600;
+        
+    }
+    
 }
 
 

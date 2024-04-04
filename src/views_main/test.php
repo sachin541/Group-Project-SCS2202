@@ -40,29 +40,71 @@
     </div>
 
     <!-- Row with Large Box -->
-    <div class="row products" style="height: 60vh; background-color: white; position: relative;">
-        <div class="box large-box-items">
-            <div class="green-box" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100px; background-color: black;"></div>
+    <div class="row-products" style="height: 60vh; background-color: white; position: relative;">
+        <div class="box large-box-items" style="background-color: black;">
+            
             <div class="products-scroll-container"></div>
         </div>
     </div>
 
+    <div class="row" id="break" style="height: 30vh">
+        <div id="services-box">
+            <h2>Our Services</h2>
+        </div>
+    </div>
 
     
     <!-- Row with Small Boxes, each having a unique color -->
-    <div class="row" style="height: 80vh;">
-        <div class="box small-box" style="background-color: #2ecc71;">Small Box 1</div>
-        <div class="box small-box" style="background-color: #f1c40f;">Small Box 2</div>
-    </div>
-    
-    <!-- Another Row with Small Boxes, each having a unique color -->
-    <div class="row" style="height: 80vh;">
-        <div class="box small-box" style="background-color: #1abc9c;">Small Box 3</div>
-        <div class="box small-box" style="background-color: #9b59b6;">Small Box 4</div>
+    <div class="row" style="height: 50vh;">
+        <div class="box small-box" style="background-color: black;">
+            <div class="service">
+                <!-- Make image smaller by adjusting the style or through CSS class -->
+                <img src="../../resources/images/newhomepage/builds.png" alt="Custom PC Builds" style="width:50%; height:auto;">
+                <p>Custom PC Builds</p>
+                
+                <!-- Button linking to a different page -->
+                <a href="path/to/your/page" class="service-cta">View More</a>
+            </div>
+        </div>
+
+        <div class="box small-box" style="background-color: white;">
+            <div class="service service-white" style="background-color: white;">
+                
+                <img src="../../resources/images/newhomepage/repairs.png" alt="Custom PC Builds" style="width:50%; height:auto;">
+                <p>PC Repairs</p>
+                
+                <!-- Button linking to a different page -->
+                <a href="path/to/your/page" class="service-cta">View More</a>
+            </div>
+        </div>
     </div>
 
-    <div class="row" style="height: 40vh; background-color: #3498db;">
-        <div class="box large-box">Large Box 1</div>
+   
+    <div class="row" style="height: 50vh;">
+
+        <div class="box small-box" style="background-color: white;">
+            <div class="service service-white" style="background-color: white;">
+                
+                <img src="../../resources/images/newhomepage/delivery.png" alt="Custom PC Builds" style="width:50%; height:auto;">
+                <p>Home Delivery</p>
+                
+                <!-- Button linking to a different page -->
+                <a href="path/to/your/page" class="service-cta">View More</a>
+            </div>
+        </div>
+
+        <div class="box small-box" style="background-color: black;">
+            <div class="service">
+                <!-- Make image smaller by adjusting the style or through CSS class -->
+                <img src="../../resources/images/newhomepage/products.png" alt="Custom PC Builds" style="width:50%; height:auto;">
+                <p>Newest Products</p>
+                
+                <!-- Button linking to a different page -->
+                <a href="path/to/your/page" class="service-cta">View More</a>
+            </div>
+        </div>
+
+        
     </div>
     
     <!-- More rows can be added as needed, adjusting the inline styles for height and background color -->
@@ -77,7 +119,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const productsContainer = document.querySelector('.products-scroll-container');
 
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 10; i++) {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
 
