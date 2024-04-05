@@ -18,10 +18,9 @@ h1 {
 
 .table-container {
     padding: 20px;
-    
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    width: 95%;
+    width: 80%;
 }
 
 table {
@@ -139,6 +138,17 @@ td {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-
-
+.details{
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    background-color: rgb(161, 160, 160);
+    text-decoration: none;
+    padding: 10px 2px;
+    
+}
 

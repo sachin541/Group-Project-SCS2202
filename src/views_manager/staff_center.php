@@ -16,6 +16,18 @@ $employees = $userManager->getAllEmployees($roleFilter);
 
 $employeeId = isset($_GET['id']) ? $_GET['id'] : 16;
 $employee = $userManager->getStaffById($employeeId);
+
+function formatSalary($salary) {
+    // Assuming USD for simplicity; adjust as necessary
+    return 'Rs ' . number_format($salary, 2);
+}
+
+function formatMobileNumber($number) {
+    // Simple formatting: XXX-XXX-XXXX for a 10-digit number
+    // Adapt the logic based on your specific needs and mobile number format
+    return preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $number);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,14 +61,14 @@ $employee = $userManager->getStaffById($employeeId);
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Staff ID</th>
                     <th>Role</th>
                     <th>Name</th>
-                    <th>Address</th>
+                    <!-- <th>Address</th> -->
                     <th>Mobile No</th>
-                    <th>Alternative Mobile No</th>
-                    <th>Date of Birth</th>
+                    <!-- <th>Alternative Mobile No</th> -->
+                    <!-- <th>Date of Birth</th> -->
                     <th>Salary</th>
-                    <th>Staff ID</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -64,14 +76,12 @@ $employee = $userManager->getStaffById($employeeId);
                 <tbody>
                     <tr>
                         <td><?= htmlspecialchars($row['id']) ?></td>
-                        <td><?= htmlspecialchars($row['emp_role']) ?></td>
-                        <td><?= htmlspecialchars($row['staff_name']) ?></td>
-                        <td><?= htmlspecialchars($row['staff_address']) ?></td>
-                        <td><?= htmlspecialchars($row['mobile_no']) ?></td>
-                        <td><?= htmlspecialchars($row['alternative_mobile_no']) ?></td>
-                        <td><?= htmlspecialchars($row['date_of_birth']) ?></td>
-                        <td><?= htmlspecialchars($row['sal']) ?></td>
                         <td><?= htmlspecialchars($row['staff_id']) ?></td>
+                        <td><?= ucwords(htmlspecialchars($row['emp_role'])) ?></td> <!-- Capitalize each word of the role -->
+                        <td><?= htmlspecialchars($row['staff_name']) ?></td>
+                        <td><?= formatMobileNumber($row['mobile_no']) ?></td> <!-- Format mobile number -->
+                        <td><?= htmlspecialchars(formatSalary($row['sal'])) ?></td> <!-- Format salary -->
+                        
                         
                         <td>
                         <div class="action-buttons">
@@ -80,7 +90,7 @@ $employee = $userManager->getStaffById($employeeId);
                                 
                                 <input type="submit" class="edit-button" value="Edit">
                             </form> -->
-                            <a href="?id=<?= $row['staff_id'] ?>&show_modal=1" class="details-btn">Details</a>
+                            <a href="?id=<?= $row['staff_id'] ?>&show_modal=1" class="details">Details</a>
 
 
                             <a href="edit_staff.php?id=<?= $row['staff_id'] ?>" class="button-like-link">Edit</a>
@@ -113,11 +123,13 @@ $employee = $userManager->getStaffById($employeeId);
         </div>
         <div class="info-section">
             <h2 id="modalName"></h2>
+            <div class="info-item"><label>Staff ID: </label><span id="modalStaffID"></span></div>
             <div class="info-item"><label>Role: </label><span id="modalRole"></span></div>
             <div class="info-item"><label>Address: </label><span id="modalAddress"></span></div>
             <div class="info-item"><label>Mobile: </label><span id="modalMobile"></span></div>
-            <div class="info-item"><label>NIC: </label><span id="modalNIC">NIC: </span></div>
-            <div class="info-item"><label>Staff ID: </label><span id="modalStaffID"></span></div>
+            <div class="info-item"><label>NIC: </label><span id="modalNIC"></span></div>
+            <div class="info-item"><label>Date Of Birth: </label><span id="dob"></span></div>
+            
         </div>
 
     </div>
@@ -135,6 +147,7 @@ window.addEventListener('load', () => {
         document.getElementById('modalRole').textContent = '<?= htmlspecialchars($employee['emp_role']) ?>';
         document.getElementById('modalAddress').textContent = '<?= htmlspecialchars($employee['staff_address']) ?>';
         document.getElementById('modalMobile').textContent = '<?= htmlspecialchars($employee['mobile_no']) ?>';
+        document.getElementById('dob').textContent = '<?= htmlspecialchars($employee['date_of_birth']) ?>';
         // Populate new fields
         document.getElementById('modalNIC').textContent += '<?= htmlspecialchars($employee['nic']) ?>';
         document.getElementById('modalStaffID').textContent += '<?= $employee['staff_id'] ?>';
