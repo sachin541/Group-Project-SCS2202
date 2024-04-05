@@ -1,13 +1,21 @@
 /* Style for the form */
 form {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
+.form-heading{
+    text-align: center;
+    background-color: #ddefea;
+    padding: 10px 20px ;
+    margin: 0px;
+    border-radius: 10px;
+}
 /* Style for each form element container */
 form div {
     margin-bottom: 10px;
@@ -29,21 +37,44 @@ select {
 
 /* Style for the submit button */
 input[type=submit] {
-    background-color: #4CAF50;
+    background-color: #16a085;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 0px;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    width: 100%;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: red;
 }
 
-/* Style for error message */
 .alert-danger {
-    color: red;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    
+    color: #e74c3c;
+    background-color: #f5dbdb;
+    padding: 10px;
+    width: 96%;
+    border-radius: 4px;
+    border: 1px solid #e74c3c;
 }
+
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: black;
+    padding: 10px 30px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background: red;
+  }

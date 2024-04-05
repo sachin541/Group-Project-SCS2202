@@ -16,7 +16,6 @@
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* Center horizontally and vertically */
-    
     border: 1px solid #888;
     width: 30%; /* Could be more or less, depending on screen size */
     max-width: 300px; /* Maximum width */
