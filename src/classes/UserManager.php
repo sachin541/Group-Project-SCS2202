@@ -121,38 +121,67 @@ class UserManager {
     }
 
 
-    public function updateEmployee($staff_id, $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal) {
+    public function updateEmployee($staff_id, $name, $address, $mobile_no, $alternative_mobile_no, $date_of_birth, $sal, $role, $nic, $profile_picture) {
         try {
-            $stmt = $this->db->prepare("UPDATE employees SET staff_name = :name, staff_address = :address, mobile_no = :mobile_no, alternative_mobile_no = :alternative_mobile_no, date_of_birth = :date_of_birth, sal = :sal WHERE staff_id = :staff_id");
-            
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':address', $address);
-            $stmt->bindParam(':mobile_no', $mobile_no);
-            $stmt->bindParam(':alternative_mobile_no', $alternative_mobile_no);
-            $stmt->bindParam(':date_of_birth', $date_of_birth);
-            $stmt->bindParam(':sal', $sal);
-            $stmt->bindParam(':staff_id', $staff_id);
-            
-            $stmt->execute();
+            // Begin a transaction
+            $this->db->beginTransaction();
     
-            // Check for SQL execution errors
-            if ($stmt->errorCode() != '00000') {
-                $errorInfo = $stmt->errorInfo();
-                throw new Exception("SQL Error: {$errorInfo[2]}");
+            // Update employee details in the 'employees' table, including the NIC, role, and possibly the profile picture
+            $query = "UPDATE employees SET emp_role = :role, staff_name = :name, staff_address = :address, mobile_no = :mobile_no, alternative_mobile_no = :alternative_mobile_no, date_of_birth = :date_of_birth, sal = :sal, nic = :nic";
+            
+            // If a profile picture is provided, add it to the update query
+            if ($profile_picture !== null) {
+                $query .= ", profile_picture = :profile_picture";
+            }
+            
+            $query .= " WHERE staff_id = :staff_id";
+            
+            $stmt1 = $this->db->prepare($query);
+    
+            // Bind common parameters
+            $stmt1->bindParam(':role', $role);
+            $stmt1->bindParam(':name', $name);
+            $stmt1->bindParam(':address', $address);
+            $stmt1->bindParam(':mobile_no', $mobile_no);
+            $stmt1->bindParam(':alternative_mobile_no', $alternative_mobile_no);
+            $stmt1->bindParam(':date_of_birth', $date_of_birth);
+            $stmt1->bindParam(':sal', $sal);
+            $stmt1->bindParam(':nic', $nic);
+            $stmt1->bindParam(':staff_id', $staff_id);
+            
+            // Bind the profile picture if it's provided
+            if ($profile_picture !== null) {
+                $stmt1->bindParam(':profile_picture', $profile_picture, PDO::PARAM_LOB);
             }
     
-            return true;
-        } catch (Exception $e) {
-            // Handle the exception
-            error_log("Update Employee Error: " . $e->getMessage());
-            return false;
-        }
+            $stmt1->execute();
+
+        // Update role in the 'login_details' table
+        $stmt2 = $this->db->prepare("UPDATE login_details SET role = :role WHERE id = :staff_id");
+        $stmt2->bindParam(':role', $role);
+        $stmt2->bindParam(':staff_id', $staff_id);
+        
+        $stmt2->execute();
+
+        // Commit the transaction
+        $this->db->commit();
+
+        return true;
+    } catch (Exception $e) {
+        // Roll back the transaction in case of an error
+        $this->db->rollback();
+        // Optionally log the error message: error_log("Update Employee Error: " . $e->getMessage());
+        return false; 
     }
+}
+
+    
+    
     
 
     public function getStaffById($staff_id) {
         // Prepare a SQL statement to select the staff member by their staff_id
-        $stmt = $this->db->prepare("SELECT * FROM employees WHERE staff_id = :staff_id");
+        $stmt = $this->db->prepare("SELECT * FROM employees e  JOIN login_details l  ON e.staff_id = l.id WHERE staff_id = :staff_id");
         
         // Bind the staff_id parameter to the prepared statement
         $stmt->bindParam(':staff_id', $staff_id, PDO::PARAM_INT);
