@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/login.css" />
-    <link rel="stylesheet" type="text/css" href="../../resources/css/reg.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/reg.css" /> -->
 </head>
 <body>
 
@@ -63,7 +63,7 @@
 
                     <input type="submit" name="submit" value="Log in" />
 
-                    <p>Don't have an account? <a href="reg.php">Sign-up</a> and create an account</p>
+                    <p class="end-p">Don't have an account? <a href="reg.php">Sign-up</a> and create an account</p>
                 </form>
             </div>
         </div>
@@ -72,12 +72,6 @@
     <div id="successModal" class="modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    
-                    <button type="button" class="close" onclick="closeSuccessModal()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
                     <!-- Replace "path/to/success-image.png" with the actual path to your image -->
                     <img src="../../resources/images/newhomepage/blackcheckmark.jpg" alt="Success" >
@@ -85,7 +79,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- Update this link to point to your login page -->
-                    <a href="" class="btn btn-primary" onclick="closeSuccessModal()">Proceed to Login</a>
+                    <p  class="btn btn-primary" onclick="closeSuccessModal()">Close</a>
                 </div>
             </div>
         </div>

@@ -1,86 +1,141 @@
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(216, 216, 216);
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: 10vh auto; /* 10% of the viewport height from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Adapt to the screen size */
-  max-width: 500px; /* Maximum width */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for depth */
-  border-radius: 8px; /* Rounded corners */
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
 
-/* Modal Header */
-.modal-header {
-  position: relative; /* Add this to ensure the close button's positioning is relative to this container */
-  
- 
+.outer-container {
+  display: flex;
+  width: 80%;
+  margin: 50px;
+  margin-top: 0px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* The Close Button */
-.close {
-  position: absolute; /* Absolutely position the close button within the .modal-header */
-  top: -20px; /* Align to the top of the .modal-header */
-  right: 0px; /* Right align within the .modal-header with some padding */
-  color: #aaa;
-  font-size: 25px; /* Adjust size as needed */
+/* .outer-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background-color: #16a085;
+} */
+
+.image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  position: relative;
+}
+
+.form-container {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-container .label, .form-container .title, .form-container .form-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.form-container .title {
+  font-size: 44px;
+  color: #000000;
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.field, .modal input[type="text"], .modal input[type="password"] {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: calc(100% - 30px);
+  
+}
+
+input[type="submit"], .btn-primary {
+  background-color: #16a085;
+  color: white;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  width: 95%;
+  margin-top: 10px;
+  border: none;
+  text-decoration: none;
+  
+}
+
+input[type="submit"]:hover, .modal .btn-primary:hover {
+  background-color: red;
+  opacity: 1;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  padding-top: 100px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10vh auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.modal-header {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  color: #aaa;
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: auto;
+  top: -10px;
+  right: 15px;
+  border: none;
+  padding: 10px 16px;
+}
+
+.close:hover, .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-
-/* Input Field Styles */
-.modal input[type="text"],
-.modal input[type="password"] {
-  width: calc(100% - 20px); /* Full width minus padding */
-  padding: 12px 10px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px; /* Slightly rounded corners for the input fields */
-}
-
-/* Button Styles */
-/* Button Styles */
-.modal .btn-primary {
-  background-color: #16a085; /* Green */
-  color: white;
-  padding: 10px 30px;
-  margin: 10px 0;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  opacity: 0.9;
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
-}
-
-.modal .btn-primary:hover {
-  background-color: red; /* Darker shade of green for hover effect */
-  opacity: 1; /* Full opacity on hover */
-}
-
-
-.modal .btn-primary:hover {
-  opacity: 1;
 }
 
 .alert-otp {
@@ -88,9 +143,7 @@
   background-color: #f2dede;
   border-color: #ebccd1;
   padding: 10px;
-  margin: 10px;
-  
-  
+  width: 90%;
   border: 1px solid transparent;
   border-radius: 4px;
 }
@@ -99,64 +152,46 @@
   filter: blur(8px);
 }
 
-.btn-primary {
-  background-color: #4CAF50; /* Adjust the color to fit your site's theme */
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none; /* Remove underline from links styled as buttons */
-  border-radius: 5px; /* Match the modal's border-radius */
-  display: inline-block; /* Needed for links styled as buttons */
-}
 
 
+@media (max-width: 768px) {
+  .image {
+    display: none; /* Hide the image on smaller screens */
+  }
 
-/* Enhanced Modal Content Styles with Flexbox */
-#successModal.modal {
+  .form-container, .outer-container {
+    width: 90%; /* Take full width when the image is hidden */
+    padding: 10px
+  }
+
+  .flexbox, .outer-container {
+    flex-direction: column; /* Stack the elements vertically on smaller screens */
+  }
+  
+  input[type="submit"] {
+    
+    width: 90%;
+    
+  }
+
+  .end-p{
+    width: 95%;
+  }
+
+  .alert-otp {
+    
+    width: 84%;
+    
+  }
+
+  input[type="submit"], .btn-primary {
+   
+    width: 90%;
+   
+    
+  }
   
 }
-
-/* Modal Header Adjustments for Flexbox */
-
-
-/* Modal Body Adjustments for Flexbox */
-.modal-body {
-  text-align: center; /* Center text for consistency */
-  width: 100%; /* Ensure the body takes up full width */
-}
-
-/* Ensuring the Modal Footer is Centered */
-.modal-footer {
-  display: flex; /* Enable Flexbox */
-  justify-content: center; /* Center-align items horizontally */
-  width: 100%; /* Ensure the footer takes up full width */
-  padding: 10px 0; /* Add some padding */
-}
-
-/* Image within Modal Body */
-.modal-body img {
-  width: 80%; /* Adjust width as needed, keeping it responsive */
-  max-width: 200px; /* Maximum width to ensure the image is not too large */
-  height: auto; /* Maintain aspect ratio */
-  margin: 20px 0; /* Add margin on top and bottom */
-}
-
-/* Close Button Adjustment for Flexbox */
-.close {
-  margin-left: auto; /* Push the close button to the right */
-  top: -10px; /* Adjust top positioning if needed */
-  right: 15px; /* Adjust right positioning for consistency */
-  border: none;
-  padding: 10px 20px;
-}
-
-/* Adjust button within modal footer for better aesthetics */
-.modal-footer .btn-primary {
-  padding: 20px 40px; /* Adequate padding */
-  font-size: 20px; /* Readable font size */
-  
-}
-
-
 
 
 

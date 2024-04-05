@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/login.css" />
+    
     <link rel="stylesheet" type="text/css" href="../../resources/css/reg.css" />
 </head>
 <body>
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Registration Form -->
     <div class="flexbox">
         <div class="outer-container">
+            <img class="image" src="../../resources/images/complogo.png" alt="profile icon.png" />
             <form action="../helpers/register_handler.php" method="post" class="form-container">
                 <h1 class="title">Sign-Up</h1>
                 
@@ -126,9 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 <input type="submit" name="submit" value="Sign up" />
 
-                <p>Already have an account? <a href="login.php">Login</a> to the existing account</p>
+                <p class="end-p">Already have an account? <a href="login.php">Login</a> to the existing account</p>
             </form>
-            <img class="image" src="../../resources/images/complogo.png" alt="profile icon.png" />
+            
         </div>
     </div>
     </div>

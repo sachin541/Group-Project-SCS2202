@@ -9,14 +9,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  
-  
+  margin-top: 6vh;
 }
 
 .outer-container {
   display: flex;
-  width: 70%;
+  width: 80%;
   margin: 50px;
   margin-top: 0px;
   background-color: white;
@@ -26,30 +24,11 @@ body {
   position: relative;
 }
 
-.outer-container::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
-  background-color: #16a085;
-}
-
 .image {
   width: 50%;
   height: auto;
   object-fit: cover;
   position: relative;
-}
-
-.image::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
 }
 
 .form-container {
@@ -60,12 +39,19 @@ body {
   justify-content: center;
 }
 
-.form-container .label {
+.form-container .title, .form-container .form-label {
   font-size: 16px;
   color: #333;
   margin-bottom: 8px;
   display: block;
   font-weight: bold;
+}
+
+.form-container .title {
+  font-size: 44px;
+  color: #000000;
+  margin-bottom: 70px;
+  text-align: center;
 }
 
 .field {
@@ -102,23 +88,91 @@ input[type="submit"]:hover {
   background-color: red;
 }
 
-
-.form-container .title {
-  font-size: 44px;
-  color: #000000;
-  margin-bottom: 70px;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* Label Styling */
-.form-container .form-label {
-  font-size: 20px;
-  color: #000000;
-  margin-bottom: 20px;
+.modal {
+  display: none; /* Adjusted for hidden by default */
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 20vh;
+  width: 100%;
+  height: 100%;
   
-  font-weight: bold;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10vh auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 20%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.modal-body {
+  text-align: center; /* Center text for consistency */
+  width: 100%; /* Ensure the body takes up full width */
+}
+
+.modal-footer {
+  display: flex; /* Enable Flexbox */
+  justify-content: center; /* Center-align items horizontally */
+  width: 100%; /* Ensure the footer takes up full width */
+  padding: 10px 0; /* Add some padding */
 }
 
 
+.modal-body img {
+  width: 80%; /* Adjust width as needed, keeping it responsive */
+  max-width: 200px; /* Maximum width to ensure the image is not too large */
+  height: auto; /* Maintain aspect ratio */
+  margin: 20px 0; /* Add margin on top and bottom */
+}
 
+.modal .btn-primary {
+  background-color: #16a085;
+  color: white;
+  padding: 10px 30px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.modal .btn-primary:hover {
+  background-color: red;
+  opacity: 1;
+}
+
+.blur {
+  filter: blur(8px);
+}
+
+@media (max-width: 768px) {
+  .image {
+    display: none; /* Hide the image on smaller screens */
+  }
+
+  .form-container, .outer-container {
+    width: 90%; /* Take full width when the image is hidden */
+    padding: 10px
+  }
+
+  .flexbox, .outer-container {
+    flex-direction: column; /* Stack the elements vertically on smaller screens */
+  }
+  
+  input[type="submit"] {
+    
+    width: 90%;
+    
+  }
+
+  .end-p{
+    width: 95%;
+  }
+  
+  .modal-content {
+    
+    min-width: 24vh;
+   
+  }
+}

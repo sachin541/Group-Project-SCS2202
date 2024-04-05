@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Send OTP via email
 
     // $sendStatus = sendOtpEmail($_POST['email'], $otp);
-    //for testing
+    // for testing
     $otp= 102; 
     $sendStatus = true; 
 
