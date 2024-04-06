@@ -33,6 +33,7 @@ function formatPrice($price) {
   return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 
+//sort based on quantity 
 usort($laptopProducts, function($a, $b) {
   return $b['quantity'] <=> $a['quantity'];
 });

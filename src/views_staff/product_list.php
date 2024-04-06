@@ -8,6 +8,15 @@ $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
 
+$categories = $product->getAllCategories();
+
+$orderArray = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "PowerSupply", "Storage", "Case", "Accessories"];
+usort($categories, function ($a, $b) use ($orderArray) {
+  $indexA = array_search($a['category'], $orderArray);
+  $indexB = array_search($b['category'], $orderArray);
+
+  return $indexA - $indexB;
+});
 // echo $_SESSION["category"]; 
 
 $category = isset($_POST['category']) ? $_POST['category'] : 'laptop'; // Default to 'laptop' if no POST request
@@ -20,7 +29,9 @@ if(isset($_SESSION["category"])){
 
 $laptopProducts = $product->getProductsByCategory($category);
 
-
+usort($laptopProducts, function($a, $b) {
+  return $b['quantity'] <=> $a['quantity'];
+});
 
 function formatPrice($price) {
   return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
@@ -43,78 +54,20 @@ function formatPrice($price) {
 
 <div class="main-container">
 
-  <aside class="main-side-nav">
+<aside class="main-side-nav">
     <nav class="nav-panel">
-      <ul class="nav-list">
-
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="laptop">
-            <input type="submit" value="     LAPTOPS     " class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="CPU">
-            <input type="submit" value="CPU" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="GPU">
-            <input type="submit" value="GPU" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="Memory">
-            <input type="submit" value="Memory" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="MotherBoard">
-            <input type="submit" value="Motherboard" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="PowerSupply">
-            <input type="submit" value="PowerSupply" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="Storage">
-            <input type="submit" value="Storage" class="nav-link">
-          </form>
-      </li>
-
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="Case">
-            <input type="submit" value="Case" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="monitor">
-            <input type="submit" value="Monitor" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="product_list.php" method="post">
-            <input type="hidden" name="category" value="accessories">
-            <input type="submit" value="Accessories" class="nav-link">
-          </form>
-      </li>
-
-
-      
-        
-      </ul>
+        <ul class="nav-list">
+            <?php foreach ($categories as $cat): ?>
+            <li class="nav-item <?php if (strtolower($cat['category']) == strtolower($category)) echo 'selected-category'; ?>">
+                <form action="product_list.php" method="post">
+                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($cat['category']); ?>">
+                    <input type="submit" value="<?php echo htmlspecialchars($cat['category']); ?>" class="nav-link <?php if (strtolower($cat['category']) == strtolower($category)) echo 'selected-category'; ?>">
+                </form>
+            </li>
+            <?php endforeach; ?>
+        </ul>
     </nav>
-  </aside>
+</aside> 
 
 
 
