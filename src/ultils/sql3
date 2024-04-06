@@ -221,3 +221,11 @@ CREATE TABLE InStorePurchase_Items (
 ALTER TABLE employees
 ADD COLUMN nic VARCHAR(255),
 ADD COLUMN profile_picture BLOB;
+
+
+CREATE TABLE ProductCategories (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(255) NOT NULL,
+    added_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+);
