@@ -24,15 +24,11 @@ html, body {
   width: auto; /* Adjust the width as needed */
   height: 100%; /* Full height of the grid column */
   margin-left: 0px;
-  padding-right: 10px;
+
 }
 
 /* Navigation Panel inside Side Nav */
-.nav-panel {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Full width of parent */
-}
+
 
 /* Navigation Item Styles */
 .nav-item {
@@ -272,4 +268,9 @@ html, body {
 
 .stock-controls input[type="submit"]:hover {
   background-color: red; 
+}
+
+.selected-category .nav-link {
+  background-color: #16a085; /* Blue background */
+  color: white; /* White text for better readability */
 }

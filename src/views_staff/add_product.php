@@ -1,3 +1,18 @@
+<?php 
+require_once '../classes/database.php'; 
+require_once '../classes/product.php'; 
+
+
+
+    $database = new Database();
+    $db = $database->getConnection();
+    $product = new Product($db);
+
+    // Fetch categories
+    $categories = $product->getAllCategories();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,26 +38,18 @@
     
     
 <form action="../helpers/product_handler.php" method="post" enctype="multipart/form-data">
-    <?php
-            if (!empty($product_adder)) {
-                echo '<div style="color: Blue; class="alert alert-danger">' . $product_adder . '</div>';
-                }?>  
+    <?php if (!empty($product_adder)): ?>
+        <div style="color: Blue;" class="alert alert-danger"><?= $product_adder ?></div>
+    <?php endif; ?>  
     <div>
         <input type="text" name="product_name" placeholder="Product Name" required>
     </div>
     <div>
         <select name="category" required>
             <option value="">Select Category</option>
-            <option value="Laptop">Laptops</option>
-            <option value="CPU">CPU</option>
-            <option value="GPU">GPU</option>
-            <option value="Memory">Memory</option>
-            <option value="MotherBoard">Motherboard</option>
-            <option value="PowerSupply">Power Supply</option>
-            <option value="Storage">Storage</option>
-            <option value="Case">Case</option>
-            <option value="Monitor">Monitor</option>
-            <option value="Accessories">Accessories</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= htmlspecialchars($category['category']) ?>"><?= htmlspecialchars($category['category']) ?></option>
+            <?php endforeach; ?>
         </select>
     </div>
     <div>
