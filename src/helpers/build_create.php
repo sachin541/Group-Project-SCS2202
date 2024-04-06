@@ -43,6 +43,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'Case':
                     $_SESSION['Case'] = $productId;
                     break;
+                case 'CPU Coolers':
+                    $_SESSION['CPU Coolers'] = $productId;
+                    break;
+                case 'Monitor': // Corrected from "Monitors" to "Monitor"
+                    $_SESSION['Monitor'] = $productId;
+                    break;
+                case 'Mouse':
+                    $_SESSION['Mouse'] = $productId;
+                    break;
+                 case 'Keyboard':
+                    $_SESSION['Keyboard'] = $productId;
+                    break;
                 // Add more cases as necessary
             }
         }
@@ -77,6 +89,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'Case':
                     unset($_SESSION['Case']);
                     break;
+                case 'CPU Coolers':
+                    unset($_SESSION['CPU Coolers']);
+                    break;
+                case 'Monitor': // Corrected from "Monitors" to "Monitor"
+                    unset($_SESSION['Monitor']);
+                    break;
+                case 'Mouse':
+                    unset($_SESSION['Mouse']);
+                    break;
+                case 'Keyboard':
+                    unset($_SESSION['Keyboard']);
+                    break;
                 
             }
         }
@@ -98,17 +122,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $storageId = $_SESSION['Storage'];
         $powerSupplyId = $_SESSION['PowerSupply'];
         $caseId = $_SESSION['Case'];
-        
+        $cpuCoolerId = isset($_SESSION['CPU Coolers']) ? $_SESSION['CPU Coolers'] : null;
+        $monitorId = isset($_SESSION['Monitor']) ? $_SESSION['Monitor'] : null; // Corrected
+        $mouseId = isset($_SESSION['Mouse']) ? $_SESSION['Mouse'] : null;
+        $keyboardId = isset($_SESSION['Keyboard']) ? $_SESSION['Keyboard'] : null;
 
-        $buildobj->createBuild($customer_id, $customerName, $contactNumber, 
-        $additionalNotes, $totalPrice, $cpuId, $gpuId, $motherboardId, 
-        $memoryId, $storageId, $powerSupplyId, $caseId);
+        $buildobj->createBuild($customer_id, $customerName, $contactNumber, $additionalNotes, 
+        $totalPrice, $cpuId, $gpuId, $motherboardId, $memoryId, $storageId, 
+        $powerSupplyId, $caseId, $cpuCoolerId, $monitorId, $mouseId, $keyboardId);
+
 
         foreach ($_SESSION as $key => $value) {
-            if (in_array($key, ['CPU', 'GPU', 'MotherBoard', 'Memory', 'Storage', 'PowerSupply', 'Case'])) {
+            if (in_array($key, ['CPU', 'GPU', 'MotherBoard', 'Memory', 'Storage', 'PowerSupply', 'Case', 'CPU Coolers', 'Monitor', 'Mouse', 'Keyboard'])) {
                 unset($_SESSION[$key]);
             }
         }
+        
     }
     
 

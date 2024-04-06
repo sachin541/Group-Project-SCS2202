@@ -119,20 +119,38 @@ CREATE TABLE Order_Items (
 
 -- ALTER TABLE Order_Items ADD FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL;
 
+-- CREATE TABLE components_list(
+
+--    id INT NOT NULL AUTO_INCREMENT,
+--    CPU_id INT,
+--    GPU_id INT,
+--    MotherBoard_id INT,
+--    Memory_id INT,
+--    Storage_id INT,
+--    PowerSupply_id INT,
+--    Case_id INT,
+
+--    PRIMARY KEY (id)
+
+-- );
+
+
 CREATE TABLE components_list(
-
-   id INT NOT NULL AUTO_INCREMENT,
-   CPU_id INT,
-   GPU_id INT,
-   MotherBoard_id INT,
-   Memory_id INT,
-   Storage_id INT,
-   PowerSupply_id INT,
-   Case_id INT,
-
-   PRIMARY KEY (id)
-
+    id INT NOT NULL AUTO_INCREMENT,
+    CPU_id INT,
+    GPU_id INT,
+    MotherBoard_id INT,
+    Memory_id INT,
+    Storage_id INT,
+    PowerSupply_id INT,
+    Case_id INT,
+    CPU_Coolers_id INT,
+    Monitor_id INT,
+    Mouse_id INT,
+    Keyboard_id INT,
+    PRIMARY KEY (id)
 );
+
 
 
 

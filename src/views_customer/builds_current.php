@@ -55,8 +55,13 @@ function formatPrice($price) {
                                         'Memory' => $build['Memory_id'],
                                         'Storage' => $build['Storage_id'],
                                         'PowerSupply' => $build['PowerSupply_id'],
-                                        'Case' => $build['Case_id']
+                                        'Case' => $build['Case_id'],
+                                        'CPU Coolers' => $build['CPU_Coolers_id'],
+                                        'Monitor' => $build['Monitor_id'],
+                                        'Mouse' => $build['Mouse_id'],
+                                        'Keyboard' => $build['Keyboard_id']
                                     ];
+                                    
                                     foreach ($componentIds as $component => $id):
                                         $componentDetails = $product->getProductById($id);
                                         if ($componentDetails): ?>

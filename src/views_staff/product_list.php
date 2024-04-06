@@ -10,7 +10,8 @@ $product = new Product($db);
 
 $categories = $product->getAllCategories();
 
-$orderArray = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "PowerSupply", "Storage", "Case", "Accessories"];
+$orderArray = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "CPU Coolers", "PowerSupply", "Storage", "Case", "Monitor", "Keyboard" , "Mouse", "Accessories"];
+
 usort($categories, function ($a, $b) use ($orderArray) {
   $indexA = array_search($a['category'], $orderArray);
   $indexB = array_search($b['category'], $orderArray);

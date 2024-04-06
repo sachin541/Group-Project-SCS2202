@@ -10,18 +10,18 @@ class Build {
     }
 
     //for customer
-    public function createBuild($customerID, $customerName, $contactNumber, $additionalNotes, $totalPrice, $cpuId, $gpuId, $motherboardId, $memoryId, $storageId, $powerSupplyId, $caseId) {
+    public function createBuild($customerID, $customerName, $contactNumber, $additionalNotes, $totalPrice, $cpuId, $gpuId, $motherboardId, $memoryId, $storageId, $powerSupplyId, $caseId, $cpuCoolersId, $monitorId, $mouseId, $keyboardId) {
         try {
             $this->db->beginTransaction();
-
-            
+    
+            // Updated query to include new components
             $componentQuery = "INSERT INTO components_list 
-            (CPU_id, GPU_id, MotherBoard_id, Memory_id, Storage_id, PowerSupply_id, Case_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+            (CPU_id, GPU_id, MotherBoard_id, Memory_id, Storage_id, PowerSupply_id, Case_id, CPU_Coolers_id, Monitor_id, Mouse_id, Keyboard_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
             $componentStmt = $this->db->prepare($componentQuery);
-
-            
+    
+            // Bind the new parameters
             $componentStmt->bindParam(1, $cpuId);
             $componentStmt->bindParam(2, $gpuId);
             $componentStmt->bindParam(3, $motherboardId);
@@ -29,33 +29,37 @@ class Build {
             $componentStmt->bindParam(5, $storageId);
             $componentStmt->bindParam(6, $powerSupplyId);
             $componentStmt->bindParam(7, $caseId);
-
+            $componentStmt->bindParam(8, $cpuCoolersId);
+            $componentStmt->bindParam(9, $monitorId);
+            $componentStmt->bindParam(10, $mouseId);
+            $componentStmt->bindParam(11, $keyboardId);
+    
             $componentStmt->execute();
             $componentsListId = $this->db->lastInsertId();
-
-            
+    
+            // The rest of the build creation logic remains unchanged
             $buildQuery = "INSERT INTO Builds 
             (customer_id, customer_name, contact, components_list_id, comments, amount) 
             VALUES (?, ?, ?, ?, ?, ?)";
-            
+    
             $buildStmt = $this->db->prepare($buildQuery);
-
-            
+    
             $buildStmt->bindParam(1, $customerID);
             $buildStmt->bindParam(2, $customerName);
             $buildStmt->bindParam(3, $contactNumber);
             $buildStmt->bindParam(4, $componentsListId);
             $buildStmt->bindParam(5, $additionalNotes);
             $buildStmt->bindParam(6, $totalPrice);
-
+    
             $buildStmt->execute();
-
+    
             $this->db->commit();
         } catch (PDOException $e) {
             $this->db->rollback();
-            throw $e; 
+            throw $e;
         }
     }
+    
 
     public function getBuildsByCustomerId($customerId) {
         $query = "SELECT b.*, c.* FROM Builds b

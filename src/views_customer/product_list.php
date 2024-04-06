@@ -10,7 +10,7 @@ $categories = $product->getDistincCategoriesFromProduct();
 
 // print_r($categories);
 
-$orderArray = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "PowerSupply", "Storage", "Case", "Accessories"];
+$orderArray = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "CPU Coolers", "PowerSupply", "Storage", "Case", "Monitor", "Keyboard" , "Mouse", "Accessories"];
 
 // Sort the $categories array based on the order defined in $orderArray
 usort($categories, function ($a, $b) use ($orderArray) {

@@ -9,12 +9,29 @@ $db = $database->getConnection();
 $product = new Product($db);
 
 $category = isset($_POST['category']) ? $_POST['category'] : 'CPU'; 
+
 $laptopProducts = $product->getProductsByCategory($category);
 
 
 function formatPrice($price) {
   return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
+
+
+$sidebarItems = [
+  'CPU' => ['name' => 'CPU', 'optional' => false],
+  'GPU' => ['name' => 'GPU', 'optional' => false],
+  'Memory' => ['name' => 'Memory', 'optional' => false],
+  'MotherBoard' => ['name' => 'MotherBoard', 'optional' => false],
+  'PowerSupply' => ['name' => 'PowerSupply', 'optional' => false],
+  'Storage' => ['name' => 'Storage', 'optional' => false],
+  'Case' => ['name' => 'Case', 'optional' => false],
+  'CPU Coolers' => ['name' => 'CPU Coolers', 'optional' => false],
+  'Monitor' => ['name' => 'Monitor', 'optional' => true],
+  'Mouse' => ['name' => 'Mouse', 'optional' => true],
+  'Keyboard' => ['name' => 'Keyboard', 'optional' => true]
+];
+
 ?>
 
 
@@ -33,78 +50,22 @@ function formatPrice($price) {
 
 <div class="main-container">
 
-  <aside class="main-side-nav">
-    <nav class="nav-panel">
-      <ul class="nav-list">
+  <div class="main-side-nav">
+      <nav class="nav-panel">
+          <ul class="nav-list">
+              <?php foreach ($sidebarItems as $key => $item): ?>
+                  <li class="nav-item">
+                      <form action="build_parts.php" method="post">
+                          <input type="hidden" name="category" value="<?php echo $key; ?>">
+                          <input type="submit" value="<?php echo $item['name'] . ($item['optional'] ? ' (Optional)' : ''); ?>" class="nav-link<?php echo $item['optional'] ? ' optional' : ''; ?>">
+                      </form>
+                  </li>
+              <?php endforeach; ?>
+          </ul>
+      </nav>
+  </div>
 
-    
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="CPU">
-            <input type="submit" value="CPU" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="GPU">
-            <input type="submit" value="GPU" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="Memory">
-            <input type="submit" value="Memory" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="MotherBoard">
-            <input type="submit" value="Motherboard" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="PowerSupply">
-            <input type="submit" value="PowerSupply" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="Storage">
-            <input type="submit" value="Storage" class="nav-link">
-          </form>
-      </li>
-
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="Case">
-            <input type="submit" value="Case" class="nav-link">
-          </form>
-      </li>
-      <!-- <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="monitor">
-            <input type="submit" value="Monitor" class="nav-link">
-          </form>
-      </li>
-      <li class="nav-item">
-          <form action="build_parts.php" method="post">
-            <input type="hidden" name="category" value="accessories">
-            <input type="submit" value="Accessories" class="nav-link">
-          </form>
-      </li> -->
-
-
-      
-        
-      </ul>
-    </nav>
-  </aside>
-
-
-
-
-    <div class="products-container">
+  <div class="products-container">
         
 
         <!-- out of stock  -->
@@ -136,14 +97,10 @@ function formatPrice($price) {
 
         
         
-           </div>
+    </div>
     
 
-    
-
-
-
-
+  
 </div>
 
 

@@ -8,7 +8,8 @@ $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
 
-$items = ["CPU", "GPU", "MotherBoard", "Memory", "Storage", "PowerSupply", "Case"];
+$items = ["CPU", "GPU", "MotherBoard", "Memory", "Storage", "PowerSupply", "Case", "CPU Coolers", "Monitor", "Mouse", "Keyboard"];
+
 $totalPrice = 0;
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
