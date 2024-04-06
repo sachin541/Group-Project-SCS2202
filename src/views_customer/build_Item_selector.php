@@ -101,11 +101,9 @@ $items = [
         </div>  
 
         <div class="view-current-build-btn">
-            <form method="post" action="./builds_current.php">
-                <input type="hidden" name="handler_type" value="submit-build">
-                <button type="submit" class="remove-btn">View Active Build Requets!</button>
-                </form>
-        </div>   
+            <a href="./builds_current.php" class="remove-btn">View Active Build Requests!</a>
+        </div>
+ 
     </div>
 
 
@@ -122,9 +120,4 @@ $items = [
 </script>
 
 
-INSERT INTO productcategories (category)
-VALUES 
-("CPU Coolers"),
-("Mouse"),
-("Keyboard")
-;
+

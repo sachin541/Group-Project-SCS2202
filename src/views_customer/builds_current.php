@@ -101,19 +101,24 @@ function formatPrice($price) {
         </div>
 <!-- navigation  -->
         <div class="main-container-2">
-            <div class="create-build-btn">
+            <!-- <div class="create-build-btn">
                 <form method="post" action="./build_create.php">
                     <input type="hidden" name="handler_type" value="submit-build">
                     <button type="submit" class="remove-btn">Create New Build Request!</button>
                 </form>
-            </div>  
+            </div>   -->
 
-            <div class="view-current-build-btn">
+            <!-- <div class="view-current-build-btn">
                 <form method="post" action="./builds_current.php">
                     <input type="hidden" name="handler_type" value="submit-build">
                     <button type="submit" class="remove-btn">View Active Build Requests!</button>
                 </form>
-            </div>   
+            </div>    -->
+
+            <div class="view-current-build-btn">
+                <a href="./build_item_selector.php" class="remove-btn">View Active Build Requests!</a>
+            </div>
+
         </div>
     </div>
 </body>

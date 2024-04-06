@@ -10,7 +10,7 @@ $db = $database->getConnection();
 $build = new Build($db);
 $techobj = new Technician();
 
-echo $_POST["build_id"];
+// echo $_POST["build_id"];
 
 if (isset($_POST["build_id"])) {
     if (isset($_SESSION['current_build_tech'])) {
