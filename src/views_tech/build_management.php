@@ -72,8 +72,14 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                             'Memory' => $build['Memory_id'],
                                             'Storage' => $build['Storage_id'],
                                             'PowerSupply' => $build['PowerSupply_id'],
-                                            'Case' => $build['Case_id']
+                                            'Case' => $build['Case_id'],
+                                            // Add new components here
+                                            'CPU Coolers' => $build['CPU_Coolers_id'] ?? null,
+                                            'Monitor' => $build['Monitor_id'] ?? null,
+                                            'Mouse' => $build['Mouse_id'] ?? null,
+                                            'Keyboard' => $build['Keyboard_id'] ?? null,
                                         ];
+                                        
                                         foreach ($componentIds as $component => $id):
                                             $componentDetails = $product->getProductById($id);
                                             if ($componentDetails): ?>
