@@ -108,7 +108,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    
     if (isset($_POST['handler_type']) && $_POST['handler_type'] === 'create_new_build') {
-        
+
+        $requiredComponents = ['CPU', 'GPU', 'MotherBoard', 'CPU Coolers' , 'Memory', 'Storage', 'PowerSupply', 'Case'];
+        $missingComponents = [];
+    
+        // Check each required component is selected
+        foreach ($requiredComponents as $component) {
+            if (empty($_SESSION[$component])) {
+                $missingComponents[] = $component;
+            }
+        }
+    
+        // If there are missing components, set an error message
+        if (!empty($missingComponents)) {
+            $_SESSION['error'] = "Missing required components: " . implode(", ", $missingComponents);
+            header('Location: ../views_customer/build_create.php');
+            exit;
+        }
+
         $customer_id= $_SESSION['user_id']; 
         $customerName = $_POST['customer_name'];
         $contactNumber = $_POST['contact_number'];

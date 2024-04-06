@@ -116,7 +116,7 @@ function formatPrice($price) {
             </div>    -->
 
             <div class="view-current-build-btn">
-                <a href="./build_item_selector.php" class="remove-btn">View Active Build Requests!</a>
+                <a href="./build_item_selector.php" class="active-build-btn">View Active Build Requests!</a>
             </div>
 
         </div>

@@ -107,12 +107,12 @@
 
 .change-btn:hover {
     background-color: red; /* Darker shade for hover effect */
-    transform: scale(1.05); /* Slightly enlarge button on hover */
+
 }
 
 .remove-btn:hover {
     background-color: red; /* Darker shade for hover effect */
-    transform: scale(1.05); /* Slightly enlarge button on hover */
+   
 }
 
 .product-row form {
@@ -172,6 +172,56 @@
     font-size: 1.9rem; /* Slightly larger font size for item name */
     font-weight: bold; /* Make the item name bold */
     color: white; /* Space between elements */
+}
+
+.active-build-btn {
+    padding: 20px 60px;
+    background-color: #16a085; /* Example: Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    
+    text-decoration: none;   
+}
+
+.active-build-btn:hover {
+    background-color: red; /* Darker shade for hover */
+    
+}
+
+.create-build-btn button, .view-current-build-btn button {
+    padding: 18px 60px;
+    background-color: #16a085; /* Example: Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    
+}
+
+.create-build-btn button:hover, .view-current-build-btn button:hover {
+    background-color: red; /* Darker shade for hover */
+    
+}
+.error-box{
+
+    text-align: center;
+}
+.error-message {
+    color: #D8000C;
+    display: inline-flex; /* Changed from flex to inline-flex */
+    background-color: #fcdede;
+    border: 1px solid #D8000C;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: center;
+    max-width: 80%; /* Example max-width, adjust as needed */
+    margin-left: auto; /* Center the div horizontally */
+    margin-right: auto;
 }
 
 
@@ -293,21 +343,7 @@
     text-align: center;
 }
 
-.create-build-btn button, .view-current-build-btn button {
-    padding: 20px 70px;
-    background-color: #16a085; /* Example: Blue color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.create-build-btn button:hover, .view-current-build-btn button:hover {
-    background-color: red; /* Darker shade for hover */
-    transform: scale(1.05);
-}
 
 @media screen and (max-width: 600px) {
     .main-container-2 {

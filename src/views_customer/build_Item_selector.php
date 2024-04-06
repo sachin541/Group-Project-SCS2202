@@ -34,7 +34,15 @@ $items = [
     <div class="heading">
     <p>Create Your Own PC Build!</p>
     </div>
-
+    <div class="error-box">
+    <?php if (isset($_SESSION['error'])): ?>
+    <div class="error-message">
+        <?= $_SESSION['error']; ?>
+        <?php unset($_SESSION['error']); // Clear the error message after displaying it ?>
+    </div>
+    <?php endif; ?>
+    </div>   
+    
     <div class="main-container">
         <?php foreach ($items as $item) {
             // Check if item is an array to determine if it's marked optional
@@ -101,7 +109,7 @@ $items = [
         </div>  
 
         <div class="view-current-build-btn">
-            <a href="./builds_current.php" class="remove-btn">View Active Build Requests!</a>
+            <a href="./builds_current.php" class="active-build-btn">View Active Build Requests!</a>
         </div>
  
     </div>

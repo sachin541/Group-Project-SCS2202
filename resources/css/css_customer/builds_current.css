@@ -227,3 +227,21 @@ body {
 .details-button:hover {
     background-color: red; /* Darker green background on hover */
 }
+
+
+.active-build-btn {
+    padding: 20px 60px;
+    background-color: #16a085; /* Example: Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    
+    text-decoration: none;   
+}
+
+.active-build-btn:hover {
+    background-color: red; /* Darker shade for hover */
+    
+}

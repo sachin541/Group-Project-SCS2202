@@ -14,6 +14,50 @@ $totalPrice = 0;
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
   }
+
+
+  // Validation
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['handler_type']) && $_POST['handler_type'] == 'submit-build') {
+      
+      // Define required components
+      $requiredComponents = ['CPU', 'GPU', 'MotherBoard', 'CPU Coolers' , 'Memory', 'Storage', 'PowerSupply', 'Case'];
+      $missingComponents = [];
+  
+      foreach ($requiredComponents as $component) {
+          if (!isset($_SESSION[$component]) || empty($_SESSION[$component])) {
+              $missingComponents[] = $component;
+          }
+      }
+
+      
+      if (!empty($missingComponents)) {
+          // Set error message in session
+          $_SESSION['error'] = "Missing required components: " . implode(", ", $missingComponents);
+          header('Location: ../views_customer/build_item_selector.php'); // Adjust the path as necessary
+          exit;
+      }
+
+
+      foreach ($items as $component) {
+        if (isset($_SESSION[$component]) && !empty($_SESSION[$component])) {
+            $productId = $_SESSION[$component];
+            $stockQuantity = $product->getProductStockById($productId);
+            if ($stockQuantity <= 0) {
+                // Component is out of stock
+                $OutOfStockComponents[] = $component;
+            }
+        }
+    }
+
+    if (!empty($OutOfStockComponents)) {
+        $errorMessage .= "out of stock components: " . implode(", ", $OutOfStockComponents) . ".";
+        $_SESSION['error'] = $errorMessage;
+        header('Location: ../views_customer/build_item_selector.php');
+        exit;
+    }
+  
+      
+  }
 ?>
 
 
@@ -82,6 +126,12 @@ function formatPrice($price) {
             <!-- :p change this later  -->
             <input type="hidden" name="build_total" value="<?php echo $totalPrice; ?>"> 
 
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="error-message">
+                    <?= $_SESSION['error']; ?>
+                    <?php unset($_SESSION['error']); // Clear the error message after displaying ?>
+                </div>
+            <?php endif; ?>
 
             <div class="form-actions">
                 <input type="submit" value="Submit Build Request" class="submit-button">
