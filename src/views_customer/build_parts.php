@@ -8,9 +8,8 @@ $db = $database->getConnection();
 
 $product = new Product($db);
 
-$category = isset($_POST['category']) ? $_POST['category'] : 'CPU'; // Default to 'laptop' if no POST request
+$category = isset($_POST['category']) ? $_POST['category'] : 'CPU'; 
 $laptopProducts = $product->getProductsByCategory($category);
-
 
 
 function formatPrice($price) {

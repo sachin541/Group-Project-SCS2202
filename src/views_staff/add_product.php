@@ -33,7 +33,7 @@
     <div>
         <select name="category" required>
             <option value="">Select Category</option>
-            <option value="laptop">Laptops</option>
+            <option value="Laptop">Laptops</option>
             <option value="CPU">CPU</option>
             <option value="GPU">GPU</option>
             <option value="Memory">Memory</option>

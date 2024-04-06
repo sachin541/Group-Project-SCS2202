@@ -1,15 +1,11 @@
-/* General Body Styles */
+
 html, body {
   height: 100%; /* Full height of the viewport */
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
-  font-family: Arial, sans-serif;
-  
 }
 
-/* Main Container Styles */
 .main-container {
-  
   display: grid;
   grid-template-columns: 0.5fr 3fr; /* Adjust grid column ratio */
   gap: 20px;
@@ -23,24 +19,8 @@ html, body {
   flex-direction: column;
   width: auto; /* Adjust the width as needed */
   height: 100%; /* Full height of the grid column */
-  margin-left: 0px;
-  padding-right: 10px;
 }
 
-/* Navigation Panel inside Side Nav */
-.nav-panel {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Full width of parent */
-}
-
-/* Navigation Item Styles */
-.nav-item {
-  width: 100%; /* Full width */
-  flex-grow: 1; /* Grow to fill space evenly */
-}
-
-/* Navigation List Styles */
 .nav-list {
   list-style-type: none; /* No bullet points */
   padding: 0; /* No padding */
@@ -80,8 +60,7 @@ html, body {
 /* Product Card Styles */
 .product-card {
   flex: 0 0 250px;
-  
-  max-height: 550px;
+  max-height: 500px;
   overflow: hidden;
   border: 2px solid #d1cfcf;
   margin: 10px;
@@ -124,7 +103,6 @@ html, body {
   display: grid;
   grid-template-rows: auto auto auto; /* Three rows for title, price, and brand */
   gap: 5px; /* Space between rows */
-  
   text-align: center;
 }
 
@@ -160,7 +138,6 @@ html, body {
 /* Product Actions Styles */
 .product-actions {
   margin-top: auto; /* Push to bottom */
-  
   width: 100%; /* Full width */
 }
 
@@ -228,7 +205,6 @@ html, body {
 }
 
 
-
 .product-out-of-stock .product-image img {
   width: auto; /* Auto width to maintain aspect ratio */
   height: 100%; /* Full height */
@@ -236,3 +212,7 @@ html, body {
   z-index: 1;
 }
 
+.selected-category .nav-link {
+  background-color: #16a085; /* Blue background */
+  color: white; /* White text for better readability */
+}

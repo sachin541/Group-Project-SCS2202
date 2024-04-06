@@ -145,7 +145,28 @@ class Product {
         }
     }
     
+    public function getAllCategories() {
+        try {
+            $query = "SELECT category FROM productCategories ORDER BY category";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
-
+    public function getDistincCategoriesFromProduct() {
+        try {
+            // Adjusted query to select unique categories from the products table
+            $query = "SELECT DISTINCT category FROM products ORDER BY category";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
+    
 }
 ?>
