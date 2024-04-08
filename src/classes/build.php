@@ -204,6 +204,34 @@ class Build {
         }
     }
 
+
+    public function rejectBuild($buildId, $technicianId, $reason) {
+        try {
+            $query = "UPDATE builds 
+                      SET rejected = 1, 
+                          rejected_reason = ?, 
+                          technician_id = ?, 
+                          technician_assigned_date = CURDATE() 
+                      WHERE build_id = ?";
+            $stmt = $this->db->prepare($query);
+            
+            // Bind parameters
+            $stmt->bindParam(1, $reason, PDO::PARAM_STR);
+            $stmt->bindParam(2, $technicianId, PDO::PARAM_INT);
+            $stmt->bindParam(3, $buildId, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            
+            return true;
+        } catch(PDOException $e) {
+            echo $e ;
+            return false;
+        }
+    }
+    
+    
+    
+
     // Function to mark build as started
     public function startBuild($buildId) {
         try {

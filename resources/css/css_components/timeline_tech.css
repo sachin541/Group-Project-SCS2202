@@ -173,33 +173,65 @@ ul li .descr {
   
 }
 
-
-
 .accept_button {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
+  justify-content: center; 
+  align-items: center;     
   height: 100px; 
-   
-            /* Set a height for the div */
+            
 }
 
 .details-button {
-  font-size: 20px;         /* Larger font size */
-  padding: 10px 100px;      /* Padding around the text */
+  font-size: 20px;        
+  padding: 10px 30px;
+  margin: 10px;     
   cursor: pointer; 
-  background-color: red;
+  background-color: #16a085;
   color:white;  
-  border:0;   
-    
+  border:0;  
 }
 
-.details-button:hover {
-  font-size: 20px;         /* Larger font size */
-  padding: 10px 100px;      /* Padding around the text */
+.details-button:hover {   
   cursor: pointer; 
-  background-color: lightskyblue;
-  color:white;  
-  border:0;   
-    
+  background-color: lightskyblue; 
+}
+
+.details-button.reject {
+  background-color: rgb(73, 73, 73); /* Green background for accept */
+}
+
+.details-button.reject:hover {
+  background-color: lightskyblue; /* Darker green on hover */
+}
+
+
+/* Styling for the hidden rejection reason form */
+
+
+
+#rejectReasonSection textarea {
+  width: 100%; /* Full width of the form */
+  padding: 10px;
+  margin-top: 80px; /* Space between textarea and submit button */
+  font-family: "Poppins", sans-serif; /* Consistent font */
+  font-size: 1rem;
+  border: 1px solid #ccc; /* Subtle border */
+
+}
+
+/* Submit button within the rejection reason form */
+#rejectReasonSection input[type="submit"] {
+  
+  font-size: 1.2rem;
+  color: white;
+  background-color: red; /* Theme color */
+  
+  margin-left: 100px;
+  padding: 10px 30px;
+  cursor: pointer;
+  
+}
+
+#rejectReasonSection input[type="submit"]:hover {
+  background-color: rgb(145, 0, 0); 
 }
