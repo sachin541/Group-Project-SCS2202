@@ -99,9 +99,6 @@ tbody tr:hover {
   background-color: #20ac90; 
 }
 
-
-
-
 /* Filter Form Styles */
 .filter-form {
   text-align: center;
@@ -110,11 +107,11 @@ tbody tr:hover {
 
 .filter-form select,
 .filter-form input[type="submit"] {
-  padding: 8px;
+  padding: 4px;
   margin-right: 10px;
   border-radius: 4px;
   border: 1px solid #ddd;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
 .filter-form input[type="submit"] {
@@ -139,21 +136,25 @@ tbody tr:hover {
 }
 
 .status-request-created {
-  background-color: #54a8a7; /* Spearmint */
+  background-color: #007bff; /* Blue */
 }
 
 .status-technician-assigned {
-  background-color: #335120; /* Green */
+  background-color: #16a085; /* Green */
 }
 
 .status-build-in-progress {
-  background-color: #6c9734; /* Lime Green */
+  background-color: #ffc107; /* Yellow */
 }
 
 .status-build-ready {
-  background-color: #0D5F8A; /* Midnight Blue */
+  background-color: #0bb2be; /* Red */
 }
 
 .status-request-completed {
-  background-color: #933e3e; 
+  background-color: #6c757d; /* Grey */
+}
+
+.status-request-rejected {
+  background-color: red; /* Grey */
 }

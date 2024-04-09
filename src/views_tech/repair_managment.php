@@ -68,7 +68,15 @@ $myrepairs = $repairobj->getTechnicianRepairsbyID($technicianId, $repairFilter);
 
         <!-- Your Repairs Section -->
         <div class="table-container column">
-            <h2>Your Repairs</h2>
+            <h2>Your Repairs<form action="" method="get" class="filter-form">
+                <select name="repair_filter">
+                    <option value="all" <?php echo ($repairFilter == 'all') ? 'selected' : ''; ?>>All Repairs</option>
+                    <option value="completed" <?php echo ($repairFilter == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                    <option value="active" <?php echo ($repairFilter == 'active') ? 'selected' : ''; ?>>Active</option>
+                    <option value="rejected" <?php echo ($repairFilter == 'rejected') ? 'selected' : ''; ?>>Rejected</option>
+                </select>
+                <input type="submit" value="Filter">
+            </form></h2>
 
             
 
@@ -104,14 +112,7 @@ $myrepairs = $repairobj->getTechnicianRepairsbyID($technicianId, $repairFilter);
             <?php endif; ?>
 
             <!-- Filter Form -->
-            <form action="" method="get" class="filter-form">
-                <select name="repair_filter">
-                    <option value="all" <?php echo ($repairFilter == 'all') ? 'selected' : ''; ?>>All Repairs</option>
-                    <option value="completed" <?php echo ($repairFilter == 'completed') ? 'selected' : ''; ?>>Completed</option>
-                    <option value="active" <?php echo ($repairFilter == 'active') ? 'selected' : ''; ?>>Active</option>
-                </select>
-                <input type="submit" value="Filter">
-            </form>
+            
 
         </div>
     </div>

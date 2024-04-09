@@ -38,6 +38,9 @@ if (isset($_POST["repair_id"])) {
         $repairDescription = $repairDetails['repair_description'];
         $amount = $repairDetails['amount'];
         $technicianId = $repairDetails['technician_id'];
+
+        $rejected = $repairDetails['rejected'];
+        $rejected_reson = $repairDetails['rejected_reason'];
         
     } else {
         
@@ -55,8 +58,10 @@ if($tech_date){
 }
 
 // echo $addedTimestamp; 
-
-if($payment_done_date){
+if($rejected){
+    require_once '../components/repair_timeline/stage3rejected.php';
+}
+else if($payment_done_date){
     require_once '../components/repair_timeline/stage5.php';
 }else if($repair_completed_date){
     require_once '../components/repair_timeline/stage4.php';

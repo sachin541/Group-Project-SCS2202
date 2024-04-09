@@ -23,12 +23,15 @@ class Repair {
     
     public function getTechnicianRepairsbyID($technicianId, $filter = 'all') {
         try {
-            $query = "SELECT repair_id, item_name, technician_assigned_date, repair_wip_date, repair_completed_date, item_collected_date FROM repairs WHERE technician_id = ?";
-            
-            if ($filter == 'completed') {
+            $query = "SELECT repair_id, item_name, technician_assigned_date, repair_wip_date, repair_completed_date, item_collected_date , rejected , rejected_reason FROM repairs WHERE technician_id = ?";
+
+            if ($filter == 'rejected'){
+                $query.= " AND rejected IS NOT NULL";
+            }
+            else if ($filter == 'completed') {
                 $query .= " AND item_collected_date IS NOT NULL";
             } elseif ($filter == 'active') {
-                $query .= " AND item_collected_date IS NULL";
+                $query .= " AND item_collected_date IS NULL AND rejected IS NULL";
             }
     
             $stmt = $this->db->prepare($query);
@@ -178,7 +181,11 @@ class Repair {
 
 
     public function getRepairStatus($repair) {
-        if ($repair['item_collected_date'] !== null && $repair['item_collected_date'] !== '') {
+
+        if($repair['rejected'] == 1){
+            return ['Rejected', 'status-request-rejected'];
+        }
+        else if ($repair['item_collected_date'] !== null && $repair['item_collected_date'] !== '') {
             return ['Completed', 'status-request-completed'];
         } elseif ($repair['repair_completed_date'] !== null && $repair['repair_completed_date'] !== '') {
             return ['Ready for Collection', 'status-build-ready'];
