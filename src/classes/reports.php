@@ -69,14 +69,6 @@ class Report {
         return array_values($mergedData);
     }
     
-
-
-
-    
-    
-    
-
-
 }
 class PieChart extends Report {
     private $db;
@@ -91,18 +83,18 @@ class PieChart extends Report {
         $this->db = $db;
     }
 
-    public function generateColors($numColors) {
-        $totalColors = count($this->colorPalette);
-        $selectedColors = [];
+    // public function generateColors($numColors){
+    //     $totalColors = count($this->colorPalette);
+    //     $selectedColors = [];
 
-        for ($i = 0; $i < $numColors; $i++) {
-            // Select colors deterministically from the color palette
-            $colorIndex = $i % $totalColors;
-            $selectedColors[] = $this->colorPalette[$colorIndex];
-        }
+    //     for ($i = 0; $i < $numColors; $i++) {
+    //         // Select colors deterministically from the color palette
+    //         $colorIndex = $i % $totalColors;
+    //         $selectedColors[] = $this->colorPalette[$colorIndex];
+    //     }
 
-        return $selectedColors;
-    }
+    //     return $selectedColors;
+    // }
 
     public function fetchSalesData($startDate, $endDate, $groupBy) {
         $groupByColumn = $groupBy;
@@ -193,14 +185,14 @@ class PieChart extends Report {
         $brands = array_column($processedData, 'brand');
         $sales = array_column($processedData, 'total_sales');
     
-        $generatedColors = $this->generateColors(count($brands));
+        // $generatedColors = $this->generateColors(count($brands));
     
         return [
             'labels' => $brands,
             'datasets' => [[
                 'data' => $sales,
-                'backgroundColor' => $generatedColors,
-                'hoverBackgroundColor' => $generatedColors,
+                // 'backgroundColor' => $generatedColors,
+                // 'hoverBackgroundColor' => $generatedColors,
                 'borderWidth' => 0,
             ]]
         ];
@@ -332,13 +324,6 @@ class LineChart extends Report{
         return $this->prepareLineChartData($allData);
     }
     
-    
-    
-
-
-
-
-
 }
 
     
@@ -599,7 +584,7 @@ class BuildReport extends Report{
         $query = "SELECT ld.id AS technicianID, e.staff_name AS technicianName, COUNT(*) AS completedBuilds
                   FROM Builds b
                   INNER JOIN login_details ld ON b.technician_id = ld.id
-                  INNER JOIN employees e ON ld.id = e.id
+                  INNER JOIN employees e ON ld.id = e.staff_id
                   WHERE b.build_completed_date BETWEEN ? AND ?
                   AND ld.role = 'technician' -- Assuming role column exists and technician role is identifiable
                   GROUP BY ld.id, e.staff_name

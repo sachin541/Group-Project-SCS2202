@@ -8,7 +8,7 @@ $db = $database->getConnection();
 
 $buildReport = new BuildReport($db);
 
-$defaultStartDate = date('Y-m-d', strtotime('-2 months'));
+$defaultStartDate = date('Y-m-d', strtotime('-2 weeks'));
 $defaultEndDate = date('Y-m-d');
 
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : $defaultStartDate;
@@ -18,6 +18,7 @@ $buildRequestsCount = $buildReport->getBuildRequestCountByDateRange($startDate, 
 $buildsCompletedCount = $buildReport->getBuildsCompletedByDateRange($startDate, $endDate);
 
 $buildsCompletedByTechnician = $buildReport->getBuildsCompletedByTechnician($startDate, $endDate);
+print_r($buildsCompletedByTechnician)  ;
 $technicianNames = array_column($buildsCompletedByTechnician, 'name');
 $completedBuilds = array_column($buildsCompletedByTechnician, 'completedBuilds');
 

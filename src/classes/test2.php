@@ -1,6 +1,6 @@
 <?php
 require_once 'database.php';
-
+//TODO: REMOVE CLASS NOT USED
 class Report {
 
     private $db;
