@@ -113,6 +113,32 @@ class Repair {
         }
     }
 
+    public function rejectRepair($repairId, $technicianId, $reason) {
+        try {
+            $query = "UPDATE repairs 
+                      SET rejected = 1, 
+                          rejected_reason = ?, 
+                          technician_id = ?, 
+                          technician_assigned_date = CURDATE() 
+                      WHERE repair_id = ?";
+            $stmt = $this->db->prepare($query);
+            
+            // Bind parameters
+            $stmt->bindParam(1, $reason, PDO::PARAM_STR);
+            $stmt->bindParam(2, $technicianId, PDO::PARAM_INT);
+            $stmt->bindParam(3, $repairId, PDO::PARAM_INT);
+            
+            $stmt->execute();
+            
+            return true;
+        } catch(PDOException $e) {
+            // Consider logging the error message to a file or a database
+            error_log('Error in rejectRepair: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
+
     public function progress_repair_stage2($repairId) {
         try {
             $query = "UPDATE repairs SET repair_wip_date = CURDATE() WHERE repair_id = ?";

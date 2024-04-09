@@ -27,16 +27,47 @@ require 'Base.php';
         <li style="--accent-color:grey">
             <div class="date"><?php echo "Technician will be assigned shortly!"?> </div>
             <div class="accept_button">
-            <form action="../helpers/repair_handler.php" method="post" class="details-form">
-                    <input type="hidden" name="tech_accept" value="true">
-                    <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
-                    <input type="submit" value="Accept" class="details-button">
-            </form>
-            </div>
+                <form action="../helpers/repair_handler.php" method="post" class="details-form">
+                        <input type="hidden" name="tech_accept" value="true">
+                        <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                        <input type="submit" value="Accept" id="acceptbtn" class="details-button">
+                </form>
+                        
+                        <input type="checkbox" id="rejectToggle" style="display:none;" />
+                        <label for="rejectToggle" id="rejectTogglebtn" class="details-button reject">Reject</label>
+
+                    <form action="../helpers/repair_handler.php" method="post" class="details-form"> 
+                        <div id="rejectReasonSection" style="display:none;">
+                            <textarea name="rejectReason" rows="4" placeholder="Please enter the reason for rejection" required></textarea>
+                            <div class="reject-box"> 
+                                <input type="hidden" name="tech_accept" value="true">
+                                <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                                <input type="submit" value="Submit" class="details-button">
+                                <button type="button" id="cancelButton" class="details-button">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
         </li>
     
         
     </ul>
 </div>
 </body>
+<script>
+        document.getElementById('rejectToggle').addEventListener('change', function() {
+            document.getElementById('rejectReasonSection').style.display = this.checked ? 'block' : 'none';
+            document.getElementById('rejectTogglebtn').style.display = 'none';
+            document.getElementById('acceptbtn').style.display = 'none';
+            document.getElementById('state').value = 'reject';
+        });
+
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            document.getElementById('rejectReasonSection').style.display = 'none';
+            document.getElementById('rejectToggle').checked = false;
+            document.getElementById('rejectTogglebtn').style.display = 'inline';
+            document.getElementById('acceptbtn').style.display = 'inline';
+            document.getElementById('state').value = 'true'; // Reset to default state value if cancel is clicked
+        });
+    </script>
 </html>

@@ -50,6 +50,9 @@ if (isset($_POST["repair_id"])|| $_SESSION['current_repair_tech']) {
         $amount = $repairDetails['amount'];
         $technicianId = $repairDetails['technician_id'];
         
+        $rejected = $repairDetails['rejected'];
+        $rejected_reson = $repairDetails['rejected_reason'];
+
     } else {
         
         echo "No details found for the given repair ID.";
@@ -68,9 +71,10 @@ if($tech_date){
     $tech_name = $technicianDetails['staff_name'];
 }
 
-
-
-if($payment_done_date){
+if($rejected){
+    require_once '../components/repair_timeline_tech/stage3rejected.php';
+}
+else if($payment_done_date){
     require_once '../components/repair_timeline_tech/stage5.php';
 }else if($repair_completed_date){
     require_once '../components/repair_timeline_tech/stage4.php';

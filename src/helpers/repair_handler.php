@@ -13,15 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tech_accept'])){
 
     $technicianId=$_SESSION['user_id']; 
     $repair_id=$_POST['refnumber'];
-    $repair->assignTechnicianToRepair($repair_id,$technicianId);
 
-    if ($repair) {
+    
+    if (isset($_POST['rejectReason']) && !empty($_POST['rejectReason'])) {
+        echo $_POST['rejectReason'] . $repair_id . $_SESSION['user_id'];
+        $reason = $_POST['rejectReason'];
+        $technicianId = $_SESSION['user_id'];
+        $repair->rejectrepair($repair_id, $technicianId, $reason);
+    }
+    else{
+        $repair->assignTechnicianToRepair($repair_id,$technicianId);
+    }
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        header('Location: ../views_tech/repair_managment_details.php');
-    } else {
-        echo "Failed to accept";
-    }
+        // header('Location: ../views_tech/repair_managment_details.php');
+    
 
 }
 
