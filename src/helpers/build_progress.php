@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     
     
-    // header('Location: ../views_tech/build_details.php');
+    header('Location: ../views_tech/build_details.php');
     
     // Redirect or response handling after each action
 }

@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: #f8f8f8;
     color: #333;
     margin: 0;
@@ -11,12 +10,12 @@ body {
     align-items: flex-start;
     flex-wrap: wrap;
     margin: 0 auto;
-    width: 95%;
-    gap: 20px; /* Spacing between columns */
+    width: 100%;
+    gap: 8px; /* Spacing between columns */
   }
   
   .column {
-    flex-basis: 45%; /* Each column takes up 45% of the flex-container width */
+    flex-basis: 48%; /* Each column takes up 45% of the flex-container width */
     /* Adjust the width as necessary for your design */
   }
   
@@ -46,8 +45,7 @@ body {
   
   table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 15px;
+    border-spacing: 0 10px;
     font-size: 0.95em;
   }
   
@@ -59,12 +57,10 @@ body {
   td, th {
     border: 1px solid #ddd;
     padding: 1px 1px;
-    text-align: left;
+    text-align: center;
     font-size: 0.90em;
     font-weight: bold;
-    white-space: normal; /* Allow text to wrap */
     
-
   }
 
   th {
@@ -72,13 +68,13 @@ body {
     color: white;
     font-weight: bold;
     padding: 5px;
-    font-size: 1em;
+    font-size: 1.2em;
   }
   
   td {
     border: 1px solid #ddd;
     padding: 10px 15px;
-    text-align: left; 
+    text-align: center; 
     font-size: 0.90em;
     font-weight: bold;
   }
@@ -110,29 +106,26 @@ body {
     background-color: #20ac90; 
   }
   
-  
-  
-  
   /* Filter Form Styles */
   .filter-form {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   
   .filter-form select,
   .filter-form input[type="submit"] {
-    padding: 8px;
+    padding: 4px 10px;
     margin-right: 10px;
     border-radius: 4px;
     border: 1px solid #ddd;
-    font-size: 0.9em;
+    font-size: 0.8em;
   }
   
   .filter-form input[type="submit"] {
     background-color: #20ac90;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    
   }
   
   .filter-form input[type="submit"]:hover {
@@ -145,30 +138,34 @@ body {
     color: white;
     border-radius: 4px;
     font-size: 0.9em;
-    display: inline-block;
     margin: 2px;
-  }
-  
-  .status-request-created {
-    background-color: #54a8a7; /* Spearmint */
-  }
-  
-  .status-technician-assigned {
-    background-color: #335120; /* Green */
-  }
-  
-  .status-build-in-progress {
-    background-color: #6c9734; /* Lime Green */
-  }
-  
-  .status-build-ready {
-    background-color: #0D5F8A; /* Midnight Blue */
-  }
-  
-  .status-request-completed {
-    background-color: #933e3e; 
+    display: inline-block;
+    
   }
 
+  .status-request-created {
+    background-color: #007bff; /* Blue */
+}
+
+.status-technician-assigned {
+    background-color: #16a085; /* Green */
+}
+
+.status-build-in-progress {
+    background-color: #ffc107; /* Yellow */
+}
+
+.status-build-ready {
+    background-color: #dc3545; /* Red */
+}
+
+.status-request-completed {
+    background-color: #6c757d; /* Grey */
+}
+
+.status-request-rejected {
+    background-color: red; /* Grey */
+}
 
 
   .components-wrapper {

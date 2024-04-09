@@ -6,16 +6,18 @@ body {
 }
 
 .main-title {
-    margin-top: 10px;
     
     color: #000000;
-    padding: 5px;
+    padding: 0px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 }
 
 .main-title h2 {
     font-size: 2em;
+    background-color: #ddefea;
+    max-width: 100%;
+    padding: 10px 0px;
 }
 
 
@@ -36,8 +38,8 @@ body {
 }
 
 .table-header-row {
-    background-color: #000000;
-    color: white;
+    background-color: lightgray;
+    color: black;
     font-weight: bold;
 }
 

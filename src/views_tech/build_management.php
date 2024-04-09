@@ -73,7 +73,6 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                             'Storage' => $build['Storage_id'],
                                             'PowerSupply' => $build['PowerSupply_id'],
                                             'Case' => $build['Case_id'],
-                                            // Add new components here
                                             'CPU Coolers' => $build['CPU_Coolers_id'] ?? null,
                                             'Monitor' => $build['Monitor_id'] ?? null,
                                             'Mouse' => $build['Mouse_id'] ?? null,
@@ -116,7 +115,20 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                      
         <!-- Your Builds Section -->
         <div class="table-container column">
-            <h2>Your Builds</h2>
+            
+            <h2 class="heading">Your Builds 
+                <form action="" method="get" class="filter-form">
+                <select name="build_filter">
+                    <option value="all" <?php echo ($buildFilter == 'all') ? 'selected' : ''; ?>>All Builds</option>
+                    <option value="completed" <?php echo ($buildFilter == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                    <option value="active" <?php echo ($buildFilter == 'active') ? 'selected' : ''; ?>>Active</option>
+                    <option value="rejected" <?php echo ($buildFilter == 'rejected') ? 'selected' : ''; ?>>Rejected</option>
+                </select>
+                <input type="submit" value="Filter">
+                </form>
+            </h2>
+            
+            
 
             <?php if(empty($myBuilds)): ?>
                 <p>No builds assigned to you!</p>
@@ -134,7 +146,7 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                         <?php foreach($myBuilds as $build): ?>
                             <?php $statusData = $buildobj->getBuildStatus($build); ?>
                             <tr>
-                                <td><?= htmlspecialchars($build['build_id']) ?></td>
+                                <td><?= htmlspecialchars($build['build_id']) ?> </td>
                                 <td><?= htmlspecialchars($build['customer_name']) ?></td>
                                 <td><span class="status-badge <?= $statusData[1] ?>"><?= $statusData[0] ?></span></td>
                                 <td class="details-button-cell">
@@ -150,14 +162,7 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
             <?php endif; ?>
 
             <!-- Filter Form -->
-            <form action="" method="get" class="filter-form">
-                <select name="build_filter">
-                    <option value="all" <?php echo ($buildFilter == 'all') ? 'selected' : ''; ?>>All Builds</option>
-                    <option value="completed" <?php echo ($buildFilter == 'completed') ? 'selected' : ''; ?>>Completed</option>
-                    <option value="active" <?php echo ($buildFilter == 'active') ? 'selected' : ''; ?>>Active</option>
-                </select>
-                <input type="submit" value="Filter">
-            </form>
+            
         </div>
     </div>
 </body>

@@ -145,11 +145,14 @@ class Build {
         // changed to * from build_id, customer_name, build_start_date, build_completed_date, build_collected_date
         try {
             $query = "SELECT * FROM Builds WHERE technician_id = :technicianId";
-            
-            if ($filter == 'completed') {
+
+            if ($filter == 'rejected'){
+                $query.= " AND rejected IS NOT NULL";
+            }
+            else if ($filter == 'completed') {
                 $query .= " AND build_collected_date IS NOT NULL";
             } elseif ($filter == 'active') {
-                $query .= " AND build_collected_date IS NULL";
+                $query .= " AND build_collected_date IS NULL AND rejected IS NULL";
             }
 
             $stmt = $this->db->prepare($query);
@@ -181,7 +184,10 @@ class Build {
 
 
     public function getBuildStatus($build) {
-        if ($build['build_collected_date'] !== null && $build['build_collected_date'] !== '') {
+        if($build['rejected'] == 1){
+            return ['Rejected', 'status-request-rejected'];
+        }
+        else if ($build['build_collected_date'] !== null && $build['build_collected_date'] !== '') {
             return ['Collected', 'status-request-completed'];
         } elseif ($build['build_completed_date'] !== null && $build['build_completed_date'] !== '') {
             return ['Completed', 'status-build-ready'];
