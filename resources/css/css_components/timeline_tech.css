@@ -206,12 +206,16 @@ ul li .descr {
 
 
 /* Styling for the hidden rejection reason form */
-
+.reject-box {
+  display: flex;
+  justify-content: space-between; /* Adjust this as needed, maybe 'space-around' or 'space-between' */
+  
+}
 
 
 #rejectReasonSection textarea {
   width: 100%; /* Full width of the form */
-  padding: 10px;
+  padding: 10px ;
   margin-top: 80px; /* Space between textarea and submit button */
   font-family: "Poppins", sans-serif; /* Consistent font */
   font-size: 1rem;
@@ -225,8 +229,15 @@ ul li .descr {
   font-size: 1.2rem;
   color: white;
   background-color: red; /* Theme color */
+  cursor: pointer;
   
-  margin-left: 100px;
+}
+
+#cancelButton {
+  
+  font-size: 1.2rem;
+  color: white;
+  background-color: red; /* Theme color */
   padding: 10px 30px;
   cursor: pointer;
   
@@ -234,4 +245,13 @@ ul li .descr {
 
 #rejectReasonSection input[type="submit"]:hover {
   background-color: rgb(145, 0, 0); 
+}
+
+.error-message {
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #ffdddd;
+  color: red;
+  width: 80%;
+  text-align: center;
 }

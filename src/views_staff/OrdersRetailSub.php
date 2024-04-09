@@ -47,12 +47,12 @@ $pageType = "Retail";
                 <form action="" method="GET">
                     <!-- Filter Dropdown -->
                     <!-- Filter Dropdown -->
-                    <select name="filter_by" onchange="this.form.submit()" class="filter-dropdown">
+                    <!-- <select name="filter_by" onchange="this.form.submit()" class="filter-dropdown">
                         <option value="">Filter by</option>
                         <option value="paid">Paid</option>
                         <option value="unpaid">Unpaid</option>
-                        <!-- Add other filter options as needed -->
-                    </select>
+                        
+                    </select> -->
 
                     <!-- Sort Dropdown -->
                     <select name="sort_by" onchange="this.form.submit()" class="filter-dropdown">

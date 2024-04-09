@@ -282,9 +282,81 @@ class Build {
     }
 
 
+    public function checkComponentStock($buildId) {
+        $outOfStockItems = [];
 
+        // Step 1: Retrieve the components list for the given build ID
+        $query = "SELECT components_list_id FROM builds WHERE build_id = :buildId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':buildId', $buildId);
+        $stmt->execute();
+        $componentsListId = $stmt->fetch(PDO::FETCH_COLUMN);
 
+        // Assuming components_list_id links to specific components in another table, e.g., build_components
+        $query = "SELECT CPU_id, GPU_id, MotherBoard_id, Memory_id, Storage_id, PowerSupply_id, Case_id, CPU_Coolers_id, Monitor_id, Mouse_id, Keyboard_id FROM components_list WHERE id = :componentsListId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':componentsListId', $componentsListId);
+        $stmt->execute();
+        $components = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // Step 2: Check the current stock quantity for each of those components
+        foreach ($components as $componentId) {
+            if (!empty($componentId)) { // Ensure the componentId is not null
+                $query = "SELECT product_name, quantity FROM products WHERE id = :componentId";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(':componentId', $componentId);
+                $stmt->execute();
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($product['quantity'] <= 0) {
+                    // Add out of stock item to the list
+                    $outOfStockItems[] = $product['product_name'];
+                }
+            }
+        }
+
+        // Step 3: Return the list of components that are out of stock
+        return $outOfStockItems;
+    }
+
+    public function reduceComponentStock($buildId) {
+
+        $query = "SELECT components_list_id FROM builds WHERE build_id = :buildId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':buildId', $buildId);
+        $stmt->execute();
+        $componentsListId = $stmt->fetch(PDO::FETCH_COLUMN);
+
+        try {
+            // Assuming components_list_id links to specific components in another table, e.g., build_components
+            $query = "SELECT CPU_id, GPU_id, MotherBoard_id, Memory_id, Storage_id, PowerSupply_id, Case_id, CPU_Coolers_id, Monitor_id, Mouse_id, Keyboard_id FROM components_list WHERE id = :componentsListId";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':componentsListId', $componentsListId);
+            $stmt->execute();
+            $components = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            foreach ($components as $componentId) {
+                if (!empty($componentId)) { // Ensure the componentId is not null
+                    // Decrement stock quantity by 1 (or another value based on your logic)
+                    $updateQuery = "UPDATE products SET quantity = quantity - 1 WHERE id = :componentId AND quantity > 0";
+                    $updateStmt = $this->db->prepare($updateQuery);
+                    $updateStmt->bindParam(':componentId', $componentId);
+                    $updateStmt->execute();
+                    
+                    // Check if the update was successful, this is optional and can be customized based on your needs
+                    if ($updateStmt->rowCount() == 0) {
+                        // Handle the case where the product could not be decremented, maybe because it's already at 0
+                        throw new Exception("Failed to decrement product stock for component ID: " . $componentId);
+                    }
+                }
+            }
+        } catch(PDOException $e) {
+            throw $e;
+        } catch(Exception $e) {
+            throw $e;
+        }
+    }
+    
 
 
 
