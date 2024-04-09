@@ -609,5 +609,40 @@ class BuildReport extends Report{
     }
 
 
+    public function getBuildCountsByStageAndDateRange($startDate, $endDate) {
+        $query = "SELECT 
+                    CASE 
+                        WHEN rejected = 1 THEN 'Request Rejected'
+                        WHEN technician_assigned_date IS NOT NULL AND build_start_date IS NULL THEN 'Technician Assigned'
+                        WHEN build_start_date IS NOT NULL AND build_completed_date IS NULL THEN 'In Progress'
+                        WHEN build_completed_date IS NOT NULL AND build_collected_date IS NULL THEN 'Collection Pending'
+                        WHEN build_collected_date IS NOT NULL THEN 'Request Completed'
+                        ELSE 'Request Created' 
+                    END AS build_stage,
+                    COUNT(*) AS stage_count
+                  FROM Builds
+                  WHERE added_timestamp BETWEEN ? AND ?
+                  GROUP BY build_stage
+                  ORDER BY build_stage";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+    
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $buildsByStage = [];
+    
+        foreach ($results as $result) {
+            $buildsByStage[$result['build_stage']] = $result['stage_count'];
+        }
+    
+        return $buildsByStage;
+    }
+    
+    
+    
+
+
 
 }
