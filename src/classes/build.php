@@ -74,7 +74,7 @@ class Build {
 
     public function getStatus($buildId) {
         $query = "SELECT technician_assigned_date, build_start_date,
-         build_completed_date, build_collected_date 
+         build_completed_date, build_collected_date , rejected 
          FROM Builds WHERE build_id = ?";
 
         $stmt = $this->db->prepare($query);
@@ -85,8 +85,10 @@ class Build {
         if (!$build) {
             return 'Build Not Found';
         }
-
-        if (is_null($build['technician_assigned_date'])) {
+        if($build['rejected'] == 1){
+            return 'Request Rejected'; 
+        }
+        elseif (is_null($build['technician_assigned_date'])) {
             return 'Request Created';
         } elseif (is_null($build['build_start_date'])) {
             return 'Technician Assigned';
@@ -102,6 +104,8 @@ class Build {
     public function getStatusClass($buildId) {
         $status = $this->getStatus($buildId);
         switch ($status) {
+            case 'Request Rejected':
+                return 'status-request-rejected';
             case 'Request Created':
                 return 'status-request-created';
             case 'Technician Assigned':

@@ -18,6 +18,7 @@ body {
     font-size: 2em;
 }
 
+
 .table-container {
     background-color: #f4f4f4f4;
     padding: 20px;
@@ -50,6 +51,7 @@ body {
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    
 }
 
 .table-row:nth-child(even) {
@@ -76,8 +78,12 @@ body {
     flex-wrap: wrap;
     align-items: center;
     gap: 15px;
+    
 }
 
+.components-cell{
+   max-width: 10%;
+}
 /* Component Detail Styling */
 .component-detail {
     position: relative;
@@ -88,8 +94,8 @@ body {
 }
 
 .component-image {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 5px;
@@ -192,6 +198,7 @@ body {
     font-size: 0.9em;
     display: inline-block;
     margin: 2px;
+    text-align: center;
 }
 
 .status-request-created {
@@ -199,7 +206,7 @@ body {
 }
 
 .status-technician-assigned {
-    background-color: #28a745; /* Green */
+    background-color: #16a085; /* Green */
 }
 
 .status-build-in-progress {
@@ -212,6 +219,10 @@ body {
 
 .status-request-completed {
     background-color: #6c757d; /* Grey */
+}
+
+.status-request-rejected {
+    background-color: red; /* Grey */
 }
 
 .details-button {

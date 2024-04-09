@@ -34,12 +34,11 @@ if (isset($_POST["build_id"])) {
         $build_completed_date = $buildDetails['build_completed_date'];
         $build_collected_date = $buildDetails['build_collected_date'];
         $components_list_id = $buildDetails['components_list_id'];
-        // comments 
         $buildDescription = $buildDetails['comments']; 
-        
         $amount = $buildDetails['amount'];
         $technicianId = $buildDetails['technician_id'];
-
+        $rejected = $buildDetails['rejected'];
+        $rejected_reson = $buildDetails['rejected_reason'];
         // Technician details
         if ($technicianId) {
             $technicianDetails = $techobj->getTechnicianByStaffId($technicianId); 
@@ -58,8 +57,10 @@ if (isset($_POST["build_id"])) {
 }
 
 // echo $addedTimestamp; 
-
-if($build_collected_date){
+if($rejected){
+    require_once '../components/build_timeline_tech/stage3rejected.php';
+}
+else if($build_collected_date){
     require_once '../components/build_timeline/stage5.php';
 }else if($build_completed_date){
     require_once '../components/build_timeline/stage4.php';

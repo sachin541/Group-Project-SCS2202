@@ -22,6 +22,7 @@ function echoTechnicianAssigned($tech_name, $tech_mobile, $tech_assigned_date) {
     echo '</li>';
 }
 
+
 function echoBuildCompleted($build_start_date, $build_completed_date) {
     echo '<li style="--accent-color:#080a0d">';
     echo '    <div class="date">✔️ Build completed!</div>';

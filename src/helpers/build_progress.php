@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $build->rejectBuild($buildId, $technicianId, $reason);
     } elseif (isset($_POST['tech_accept']) && $_POST['tech_accept'] == 'true') {
         echo "test2";
-        // This is an acceptance
-        // $technicianId = $_SESSION['user_id'];
-        // $build->assignTechnicianToBuild($buildId, $technicianId);
+        
+        $technicianId = $_SESSION['user_id'];
+        $build->assignTechnicianToBuild($buildId, $technicianId);
     }
 
     if (isset($_POST['start_build'])) {
