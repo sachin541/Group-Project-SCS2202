@@ -4,6 +4,8 @@ require_once '../classes/build.php'; // Change to the Build class
 require_once '../classes/product.php'; 
 require_once '../components/headers/main_header.php';
 
+
+
 $technicianId = $_SESSION['user_id'];
 
 $buildFilter = isset($_GET['build_filter']) ? $_GET['build_filter'] : 'active'; // Use build_filter

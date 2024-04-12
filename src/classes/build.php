@@ -142,9 +142,9 @@ class Build {
 
     //for tech
     public function getTechnicianBuildsbyID($technicianId, $filter = 'all') {
-        // changed to * from build_id, customer_name, build_start_date, build_completed_date, build_collected_date
+        
         try {
-            $query = "SELECT * FROM Builds WHERE technician_id = :technicianId";
+            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM Builds WHERE technician_id = :technicianId";
 
             if ($filter == 'rejected'){
                 $query.= " AND rejected IS NOT NULL";
