@@ -178,7 +178,7 @@ class Build {
             }
     }
 
-
+    //eror here
     public function getBuildStatus($build) {
         if($build['rejected'] == 1){
             return ['Rejected', 'status-request-rejected'];

@@ -67,7 +67,7 @@ $totalAmount = 0;
         <div class="checkout-form-container">
             <h2>Customer Details</h2>
             <div class="enter-details">Enter Details</div>
-            <form action="../helpers/inStoreHandler.php" method="post" class="checkout-form">
+            <form action="../helpers/InStoreHandler.php" method="post" class="checkout-form">
                 <input type="hidden" name="Instore_order" value="true">
                 <input type="hidden" name="total_amount" value="<?php echo htmlspecialchars($totalAmount); ?>">
                 <div><input type="text" name="first_name" placeholder="First Name" required></div>

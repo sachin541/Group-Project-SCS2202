@@ -234,7 +234,7 @@ class LineChart extends Report{
         $query = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) AS total_sales 
                   FROM instorepurchase isp 
                   JOIN instorepurchase_items ip ON isp.order_id = ip.order_id 
-                  JOIN Products p ON ip.product_id = p.id 
+                  JOIN products p ON ip.product_id = p.id 
                   WHERE isp.created_at BETWEEN ? AND ? 
                   GROUP BY sale_date";
     
@@ -249,7 +249,7 @@ class LineChart extends Report{
     public function fetchOnlineSalesDataLineChart($startDate, $endDate, $paymentType = null) {
         $query = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) AS total_sales 
                   FROM orders o 
-                  JOIN order_Items oi ON o.order_id = oi.order_id 
+                  JOIN order_items oi ON o.order_id = oi.order_id 
                   JOIN products p ON oi.product_id = p.id 
                   WHERE o.payment_status = 'Payment Completed' 
                   AND o.created_at BETWEEN ? AND ? ";
@@ -338,7 +338,7 @@ class ItemSales extends Report {
         // Modified queries to include unit price and product image
         $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(oi.quantity) as total_units 
                              FROM orders o
-                             JOIN order_Items oi ON o.order_id = oi.order_id
+                             JOIN order_items oi ON o.order_id = oi.order_id
                              JOIN products p ON oi.product_id = p.id
                              WHERE o.created_at BETWEEN ? AND ?
                              GROUP BY p.id, p.product_name, p.price, p.image1";
@@ -387,7 +387,7 @@ class ItemSales extends Report {
         // Query to get daily sales from online orders
         $onlineSalesQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity) as quantity_sold
                              FROM orders o
-                             JOIN order_Items oi ON o.order_id = oi.order_id
+                             JOIN order_items oi ON o.order_id = oi.order_id
                              WHERE oi.product_id = ?
                              AND o.created_at BETWEEN ? AND ?
                              GROUP BY DATE(o.created_at)";
@@ -442,7 +442,7 @@ class ItemSales extends Report {
         // Query to get daily revenue from online orders
         $onlineRevenueQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) as daily_revenue
                                 FROM orders o
-                                JOIN order_Items oi ON o.order_id = oi.order_id
+                                JOIN order_items oi ON o.order_id = oi.order_id
                                 JOIN products p ON oi.product_id = p.id
                                 WHERE oi.product_id = ?
                                 AND o.created_at BETWEEN ? AND ?
@@ -451,7 +451,7 @@ class ItemSales extends Report {
         // Query to get daily revenue from in-store purchases
         $inStoreRevenueQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) as daily_revenue
                                 FROM instorepurchase isp
-                                JOIN instorepurchase_Items ip ON isp.order_id = ip.order_id
+                                JOIN instorepurchase_items ip ON isp.order_id = ip.order_id
                                 JOIN products p ON ip.product_id = p.id
                                 WHERE ip.product_id = ?
                                 AND isp.created_at BETWEEN ? AND ?

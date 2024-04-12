@@ -164,7 +164,7 @@ class InStore  {
             $orderId = $this->db->lastInsertId();
     
             // Insert into InStorePurchase_Items table
-            $orderItemQuery = "INSERT INTO instorepurchase_Items (quantity, order_id, product_id) VALUES (?, ?, ?)";
+            $orderItemQuery = "INSERT INTO instorepurchase_items (quantity, order_id, product_id) VALUES (?, ?, ?)";
             $orderItemStmt = $this->db->prepare($orderItemQuery);
     
             foreach ($cartItems as $item) {

@@ -2,7 +2,7 @@
 require_once '../classes/database.php'; 
 require_once '../classes/product.php';
  
-require_once '../classes/Staff.php';
+require_once '../classes/staff.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['formType'] == 'addProduct') {
