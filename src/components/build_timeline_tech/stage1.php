@@ -41,6 +41,7 @@
                     <form action="../helpers/build_progress.php" method="post" class="details-form"> 
                         <div id="rejectReasonSection" style="display:none;">
                             <textarea name="rejectReason" rows="4" placeholder="Please enter the reason for rejection" required></textarea>
+                            <input type="hidden" name="refnumber" value="<?php echo htmlspecialchars($ref_number); ?>">
                             <div class="reject-box"> 
                                 <input type="submit" value="Submit" class="details-button">
                                 <button type="button" id="cancelButton" class="details-button">Cancel</button>

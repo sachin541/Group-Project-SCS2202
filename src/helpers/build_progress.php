@@ -17,15 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $reason = $_POST['rejectReason'];
         $technicianId = $_SESSION['user_id'];
         $build->rejectBuild($buildId, $technicianId, $reason);
-    } elseif(isset($_POST['tech_accept']) && $_POST['tech_accept'] == 'true') {
+
+    } else if(isset($_POST['tech_accept']) && $_POST['tech_accept'] == 'true') {
         $buildId = $_POST['refnumber'];
         $outOfStockItems = $build->checkComponentStock($buildId);
     
         if (!empty($outOfStockItems)) {
             // Items are out of stock, set session variable and redirect
             $_SESSION['error'] = "The following items are out of stock: " . implode(", ", $outOfStockItems);
-            header('Location: ../views_tech/build_details.php');
-            exit;
+            // header('Location: ../views_tech/build_details.php');
+            // exit;
         } else {
             // Proceed with technician assignment
             unset($_SESSION['error']);
@@ -54,6 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     
     header('Location: ../views_tech/build_details.php');
-    
+    exit ; 
     // Redirect or response handling after each action
 }

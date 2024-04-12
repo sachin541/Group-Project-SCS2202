@@ -12,6 +12,7 @@ $techobj = new Technician();
 
 if (isset($_POST["build_id"])){
     $buildID = $_POST["build_id"];
+    echo $buildID; 
 }
 else if(isset($_SESSION['current_build_tech'])) {
     $buildID = $_SESSION['current_build_tech']; 
