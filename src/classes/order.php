@@ -19,7 +19,7 @@ class Order {
                     order_items.quantity AS item_quantity, order_items.product_id,
                     products.product_name, products.price
                     
-                  FROM Orders orders
+                  FROM orders orders
                   JOIN Order_Items order_items ON orders.order_id = order_items.order_id
                   JOIN products ON order_items.product_id = products.id
                   WHERE orders.order_id = ?";
@@ -61,7 +61,7 @@ class Order {
 
     public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null,$customerId = null) {
         try {
-            $query = "SELECT * FROM Orders";
+            $query = "SELECT * FROM orders";
     
             // Where conditions array
             $whereConditions = [];
@@ -143,7 +143,7 @@ class Order {
     public function countPendingPaymentsByCustomerId($customerId) {
         try {
             $query = "SELECT COUNT(*) AS pending_payments 
-                      FROM Orders 
+                      FROM orders 
                       WHERE customer_id = :customerId 
                       AND payment_status = 'pending'";
                       

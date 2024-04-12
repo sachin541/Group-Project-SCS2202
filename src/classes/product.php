@@ -126,7 +126,7 @@ class Product {
     
     public function getAllCategories() {
         try {
-            $query = "SELECT category FROM productCategories ORDER BY category";
+            $query = "SELECT category FROM productcategories ORDER BY category";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

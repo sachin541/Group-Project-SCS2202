@@ -37,7 +37,7 @@ class Build {
             $componentsListId = $this->db->lastInsertId();
     
             
-            $buildQuery = "INSERT INTO Builds 
+            $buildQuery = "INSERT INTO builds 
             (customer_id, customer_name, contact, components_list_id, comments, amount) 
             VALUES (?, ?, ?, ?, ?, ?)";
     
@@ -61,7 +61,7 @@ class Build {
     
 
     public function getBuildsByCustomerId($customerId) {
-        $query = "SELECT b.*, c.* FROM Builds b
+        $query = "SELECT b.*, c.* FROM builds b
                   INNER JOIN components_list c ON b.components_list_id = c.id
                   WHERE b.customer_id = ?";
         $stmt = $this->db->prepare($query);
@@ -74,7 +74,7 @@ class Build {
     public function getStatus($buildId) {
         $query = "SELECT technician_assigned_date, build_start_date,
          build_completed_date, build_collected_date , rejected 
-         FROM Builds WHERE build_id = ?";
+         FROM builds WHERE build_id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $buildId);
@@ -123,7 +123,7 @@ class Build {
 
     public function getAllFromBuildById($buildId) {
         try {
-            $query = "SELECT * FROM Builds WHERE build_id = ?";
+            $query = "SELECT * FROM builds WHERE build_id = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $buildId, PDO::PARAM_INT);
             $stmt->execute();
@@ -143,7 +143,7 @@ class Build {
     public function getTechnicianBuildsbyID($technicianId, $filter = 'all') {
         
         try {
-            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM Builds WHERE technician_id = :technicianId";
+            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM builds WHERE technician_id = :technicianId";
 
             if ($filter == 'rejected'){
                 $query.= " AND rejected IS NOT NULL";
@@ -166,7 +166,7 @@ class Build {
     public function getAllNewBuilds(){
             try {
                
-                $query = "SELECT b.*, c.* FROM Builds b
+                $query = "SELECT b.*, c.* FROM builds b
                   INNER JOIN components_list c ON b.components_list_id = c.id
                   WHERE technician_assigned_date IS NULL";
 
@@ -235,9 +235,6 @@ class Build {
         }
     }
     
-    
-    
-
     // Function to mark build as started
     public function startBuild($buildId) {
         try {

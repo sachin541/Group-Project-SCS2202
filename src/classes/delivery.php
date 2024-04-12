@@ -53,7 +53,7 @@ class Delivery {
         $this->db->beginTransaction();
         try {
             // Update Orders table
-            $queryOrders = "UPDATE Orders SET delivery_status = ?";
+            $queryOrders = "UPDATE orders SET delivery_status = ?";
             if ($newStatus === 'Completed') {
                 $queryOrders .= ", payment_status = 'Payment Completed'";
             }

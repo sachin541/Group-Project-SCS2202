@@ -144,7 +144,7 @@ class InStore  {
             $this->db->beginTransaction();
     
             // Updated query for InStorePurchase table
-            $orderQuery = "INSERT INTO InStorePurchase (total, createdby, payment_type, payment_status, 
+            $orderQuery = "INSERT INTO instorepurchase (total, createdby, payment_type, payment_status, 
             NIC, first_name, last_name, phone) 
             VALUES (?, ?, ?, 'completed', ?, ?, ?, ?)";
     
@@ -164,7 +164,7 @@ class InStore  {
             $orderId = $this->db->lastInsertId();
     
             // Insert into InStorePurchase_Items table
-            $orderItemQuery = "INSERT INTO InStorePurchase_Items (quantity, order_id, product_id) VALUES (?, ?, ?)";
+            $orderItemQuery = "INSERT INTO instorepurchase_Items (quantity, order_id, product_id) VALUES (?, ?, ?)";
             $orderItemStmt = $this->db->prepare($orderItemQuery);
     
             foreach ($cartItems as $item) {
@@ -187,7 +187,7 @@ class InStore  {
     public function getAllOrders($filterBy = null, $sortBy = null) {
         try {
             // Start of query
-            $query = "SELECT * FROM InStorePurchase";
+            $query = "SELECT * FROM instorepurchase";
     
             // Filtering logic
             if ($filterBy) {
@@ -236,14 +236,14 @@ class InStore  {
     public function getInStoreOrderDetails($orderId) {
         try {
             $query = "SELECT 
-                        InStorePurchase.order_id, InStorePurchase.total, InStorePurchase.created_at, InStorePurchase.createdby,InStorePurchase.payment_type, InStorePurchase.payment_status,
-                        InStorePurchase.first_name, InStorePurchase.last_name, InStorePurchase.NIC, InStorePurchase.phone, 
-                        InStorePurchase_Items.quantity AS item_quantity, InStorePurchase_Items.product_id,
-                        products.product_name, products.price
-                      FROM InStorePurchase
-                      JOIN InStorePurchase_Items ON InStorePurchase.order_id = InStorePurchase_Items.order_id
-                      JOIN products ON InStorePurchase_Items.product_id = products.id
-                      WHERE InStorePurchase.order_id = ?";
+            instorepurchase.order_id, instorepurchase.total, instorepurchase.created_at, instorepurchase.createdby, instorepurchase.payment_type, instorepurchase.payment_status,
+            instorepurchase.first_name, instorepurchase.last_name, instorepurchase.NIC, instorepurchase.phone, 
+            instorepurchase_items.quantity AS item_quantity, instorepurchase_items.product_id,
+            products.product_name, products.price
+            FROM instorepurchase
+            JOIN instorepurchase_items ON instorepurchase.order_id = instorepurchase_items.order_id
+            JOIN products ON instorepurchase_items.product_id = products.id
+            WHERE instorepurchase.order_id = ?";
                       
             $stmt = $this->db->prepare($query);
             $stmt->execute([$orderId]);

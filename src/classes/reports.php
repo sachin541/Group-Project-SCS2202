@@ -100,9 +100,9 @@ class PieChart extends Report {
         $groupByColumn = $groupBy;
     
         $query = "SELECT $groupByColumn, SUM(ip.quantity * p.price) AS total_sales 
-                  FROM InStorePurchase isp 
-                  JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id 
-                  JOIN Products p ON ip.product_id = p.id 
+                  FROM instorepurchase isp 
+                  JOIN instorepurchase_items ip ON isp.order_id = ip.order_id 
+                  JOIN products p ON ip.product_id = p.id 
                   WHERE isp.created_at BETWEEN ? AND ? 
                   GROUP BY $groupByColumn";
     
@@ -119,9 +119,9 @@ class PieChart extends Report {
         $groupByColumn = $groupBy;
 
         $query = "SELECT $groupByColumn, SUM(oi.quantity * p.price) AS total_sales 
-                  FROM Orders o 
-                  JOIN Order_Items oi ON o.order_id = oi.order_id 
-                  JOIN Products p ON oi.product_id = p.id 
+                  FROM orders o 
+                  JOIN order_items oi ON o.order_id = oi.order_id 
+                  JOIN products p ON oi.product_id = p.id 
                   WHERE o.payment_status = 'Payment Completed' 
                   AND o.created_at BETWEEN ? AND ? ";
     
@@ -232,8 +232,8 @@ class LineChart extends Report{
 
     public function fetchSalesDataLineChart($startDate, $endDate) {
         $query = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) AS total_sales 
-                  FROM InStorePurchase isp 
-                  JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id 
+                  FROM instorepurchase isp 
+                  JOIN instorepurchase_items ip ON isp.order_id = ip.order_id 
                   JOIN Products p ON ip.product_id = p.id 
                   WHERE isp.created_at BETWEEN ? AND ? 
                   GROUP BY sale_date";
@@ -248,9 +248,9 @@ class LineChart extends Report{
     
     public function fetchOnlineSalesDataLineChart($startDate, $endDate, $paymentType = null) {
         $query = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) AS total_sales 
-                  FROM Orders o 
-                  JOIN Order_Items oi ON o.order_id = oi.order_id 
-                  JOIN Products p ON oi.product_id = p.id 
+                  FROM orders o 
+                  JOIN order_Items oi ON o.order_id = oi.order_id 
+                  JOIN products p ON oi.product_id = p.id 
                   WHERE o.payment_status = 'Payment Completed' 
                   AND o.created_at BETWEEN ? AND ? ";
     
@@ -337,16 +337,16 @@ class ItemSales extends Report {
     public function getProductSalesFromRange($startDate, $endDate) {
         // Modified queries to include unit price and product image
         $onlineSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(oi.quantity) as total_units 
-                             FROM Orders o
-                             JOIN Order_Items oi ON o.order_id = oi.order_id
-                             JOIN Products p ON oi.product_id = p.id
+                             FROM orders o
+                             JOIN order_Items oi ON o.order_id = oi.order_id
+                             JOIN products p ON oi.product_id = p.id
                              WHERE o.created_at BETWEEN ? AND ?
                              GROUP BY p.id, p.product_name, p.price, p.image1";
 
         $inStoreSalesQuery = "SELECT p.id as product_id, p.product_name, p.price as unit_price, p.image1, SUM(ip.quantity) as total_units
-                              FROM InStorePurchase isp
-                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
-                              JOIN Products p ON ip.product_id = p.id
+                              FROM instorepurchase isp
+                              JOIN instorepurchase_items ip ON isp.order_id = ip.order_id
+                              JOIN products p ON ip.product_id = p.id
                               WHERE isp.created_at BETWEEN ? AND ?
                               GROUP BY p.id, p.product_name, p.price, p.image1";
 
@@ -386,16 +386,16 @@ class ItemSales extends Report {
     public function getDailySalesByProductId($startDate, $endDate, $productId) {
         // Query to get daily sales from online orders
         $onlineSalesQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity) as quantity_sold
-                             FROM Orders o
-                             JOIN Order_Items oi ON o.order_id = oi.order_id
+                             FROM orders o
+                             JOIN order_Items oi ON o.order_id = oi.order_id
                              WHERE oi.product_id = ?
                              AND o.created_at BETWEEN ? AND ?
                              GROUP BY DATE(o.created_at)";
     
         // Query to get daily sales from in-store purchases
         $inStoreSalesQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity) as quantity_sold
-                              FROM InStorePurchase isp
-                              JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
+                              FROM instorepurchase isp
+                              JOIN instorepurchase_items ip ON isp.order_id = ip.order_id
                               WHERE ip.product_id = ?
                               AND isp.created_at BETWEEN ? AND ?
                               GROUP BY DATE(isp.created_at)";
@@ -441,18 +441,18 @@ class ItemSales extends Report {
     public function getDailyRevenueByProductId($startDate, $endDate, $productId) {
         // Query to get daily revenue from online orders
         $onlineRevenueQuery = "SELECT DATE(o.created_at) as sale_date, SUM(oi.quantity * p.price) as daily_revenue
-                                FROM Orders o
-                                JOIN Order_Items oi ON o.order_id = oi.order_id
-                                JOIN Products p ON oi.product_id = p.id
+                                FROM orders o
+                                JOIN order_Items oi ON o.order_id = oi.order_id
+                                JOIN products p ON oi.product_id = p.id
                                 WHERE oi.product_id = ?
                                 AND o.created_at BETWEEN ? AND ?
                                 GROUP BY DATE(o.created_at)";
     
         // Query to get daily revenue from in-store purchases
         $inStoreRevenueQuery = "SELECT DATE(isp.created_at) as sale_date, SUM(ip.quantity * p.price) as daily_revenue
-                                FROM InStorePurchase isp
-                                JOIN InStorePurchase_Items ip ON isp.order_id = ip.order_id
-                                JOIN Products p ON ip.product_id = p.id
+                                FROM instorepurchase isp
+                                JOIN instorepurchase_Items ip ON isp.order_id = ip.order_id
+                                JOIN products p ON ip.product_id = p.id
                                 WHERE ip.product_id = ?
                                 AND isp.created_at BETWEEN ? AND ?
                                 GROUP BY DATE(isp.created_at)";
@@ -508,7 +508,7 @@ class BuildReport extends Report{
 
     public function getBuildRequestCountByDateRange($startDate, $endDate) {
         $query = "SELECT DATE(added_timestamp) as request_date, COUNT(*) as request_count 
-                  FROM Builds 
+                  FROM builds 
                   WHERE added_timestamp BETWEEN ? AND ? 
                   GROUP BY DATE(added_timestamp)
                   ORDER BY DATE(added_timestamp)";
@@ -545,7 +545,7 @@ class BuildReport extends Report{
 
     public function getBuildsCompletedByDateRange($startDate, $endDate) {
         $query = "SELECT DATE(build_completed_date) as completed_date, COUNT(*) as completed_count
-                  FROM Builds
+                  FROM builds
                   WHERE build_completed_date BETWEEN ? AND ?
                   GROUP BY DATE(build_completed_date)
                   ORDER BY DATE(build_completed_date)";
@@ -582,7 +582,7 @@ class BuildReport extends Report{
 
     public function getBuildsCompletedByTechnician($startDate, $endDate) {
         $query = "SELECT ld.id AS technicianID, e.staff_name AS technicianName, COUNT(*) AS completedBuilds
-                  FROM Builds b
+                  FROM builds b
                   INNER JOIN login_details ld ON b.technician_id = ld.id
                   INNER JOIN employees e ON ld.id = e.staff_id
                   WHERE b.build_completed_date BETWEEN ? AND ?
@@ -620,7 +620,7 @@ class BuildReport extends Report{
                         ELSE 'Request Created' 
                     END AS build_stage,
                     COUNT(*) AS stage_count
-                  FROM Builds
+                  FROM builds
                   WHERE added_timestamp BETWEEN ? AND ?
                   GROUP BY build_stage
                   ORDER BY build_stage";
