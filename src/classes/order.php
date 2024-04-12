@@ -59,7 +59,6 @@ class Order {
 
     
 
-
     public function getAllOrders($filterBy = null, $sortBy = null, $paymentType = null, $paymentStatus = null, $deliveryStatus = null,$customerId = null) {
         try {
             $query = "SELECT * FROM Orders";

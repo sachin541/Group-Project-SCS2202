@@ -114,4 +114,3 @@ class Checkout {
 ?>
 
 
-<!-- TODO : should be moved into order class -->
