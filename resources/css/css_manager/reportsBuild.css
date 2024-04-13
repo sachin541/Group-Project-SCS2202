@@ -40,7 +40,16 @@ html, body {
 .grid-item-1 {
     grid-column: 1 / 10;
     grid-row: 1 / 17;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: flex-start; /* Align children to the start vertically */
+    max-height:86vh; /* Use full height of the grid area */
     position: relative;
+}
+
+.filter-date {
+  margin-bottom: 80px;
 }
 
 .grid-item-2, .grid-item-3 {

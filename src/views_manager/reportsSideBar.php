@@ -8,17 +8,29 @@
 
 <nav class="nav-panel">
   <ul class="nav-list">
+
     <li class="nav-item">
-      <!-- Replace with a link to the default page -->
-      <a href="./reportsMain.php" class="nav-link">Default</a>
+      <a href="./reportsMain.php" class="nav-link">Total Sales</a>
     </li>
+
     <li class="nav-item">
-      <!-- Replace with a link to the echo page -->
+      <a href="./reportsItemSales.php" class="nav-link">Product Sales</a>
+    </li>
+
+    <li class="nav-item">
       <a href="reportsBuilds.php" class="nav-link">Builds Data</a>
     </li>
+    
+
     <li class="nav-item">
-      <a href="./reportsItemSales.php" class="nav-link">Item Sales</a>
+      <a href="./reportsBuildsSales.php" class="nav-link">Builds Sales</a>
     </li>
+
+    <li class="nav-item">
+      <a href="./reportsRepair.php" class="nav-link">Repairs Data</a>
+    </li>
+
+    
   </ul>
 </nav>
 

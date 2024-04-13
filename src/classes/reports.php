@@ -83,19 +83,6 @@ class PieChart extends Report {
         $this->db = $db;
     }
 
-    // public function generateColors($numColors){
-    //     $totalColors = count($this->colorPalette);
-    //     $selectedColors = [];
-
-    //     for ($i = 0; $i < $numColors; $i++) {
-    //         // Select colors deterministically from the color palette
-    //         $colorIndex = $i % $totalColors;
-    //         $selectedColors[] = $this->colorPalette[$colorIndex];
-    //     }
-
-    //     return $selectedColors;
-    // }
-
     public function fetchSalesData($startDate, $endDate, $groupBy) {
         $groupByColumn = $groupBy;
     
@@ -642,7 +629,141 @@ class BuildReport extends Report{
     
     
     
+}
 
+class RepairReport extends Report {
+    private $db;
 
+    public function __construct($db) {
+        $this->db = $db;
+    }
 
+    public function getRepairRequestCountByDateRange($startDate, $endDate) {
+        $query = "SELECT DATE(added_timestamp) as request_date, COUNT(*) as request_count
+                  FROM repairs
+                  WHERE added_timestamp BETWEEN ? AND ?
+                  GROUP BY DATE(added_timestamp)
+                  ORDER BY DATE(added_timestamp)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dailyCounts = [];
+
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day')
+        );
+
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $dailyCounts[$formattedDate] = 0; // Initialize with 0
+        }
+
+        foreach ($results as $result) {
+            if (array_key_exists($result['request_date'], $dailyCounts)) {
+                $dailyCounts[$result['request_date']] = (int)$result['request_count'];
+            }
+        }
+
+        return $dailyCounts;
+    }
+
+    public function getRepairsCompletedByDateRange($startDate, $endDate) {
+        $query = "SELECT DATE(repair_completed_date) as completed_date, COUNT(*) as completed_count
+                  FROM repairs
+                  WHERE repair_completed_date BETWEEN ? AND ?
+                  GROUP BY DATE(repair_completed_date)
+                  ORDER BY DATE(repair_completed_date)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dailyCompletedCounts = [];
+
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day')
+        );
+
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $dailyCompletedCounts[$formattedDate] = 0;
+        }
+
+        foreach ($results as $result) {
+            if (array_key_exists($result['completed_date'], $dailyCompletedCounts)) {
+                $dailyCompletedCounts[$result['completed_date']] = (int)$result['completed_count'];
+            }
+        }
+
+        return $dailyCompletedCounts;
+    }
+
+    public function getRepairsCompletedByTechnician($startDate, $endDate) {
+        $query = "SELECT ld.id AS technicianID, e.staff_name AS technicianName, COUNT(*) AS completedRepairs
+                  FROM repairs r
+                  INNER JOIN login_details ld ON r.technician_id = ld.id
+                  INNER JOIN employees e ON ld.id = e.staff_id
+                  WHERE r.item_collected_date BETWEEN ? AND ?
+                  AND ld.role = 'technician'
+                  GROUP BY ld.id, e.staff_name
+                  ORDER BY completedRepairs DESC";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate, PDO::PARAM_STR);
+        $stmt->bindParam(2, $endDate, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $repairsCompletedByTechnician = [];
+
+        foreach ($results as $result) {
+            $repairsCompletedByTechnician[$result['technicianID']] = [
+                'name' => $result['technicianName'],
+                'completedRepairs' => $result['completedRepairs']
+            ];
+        }
+
+        return $repairsCompletedByTechnician;
+    }
+
+    public function getRepairCountsByStageAndDateRange($startDate, $endDate) {
+        $query = "SELECT 
+                    CASE 
+                        WHEN rejected = 1 THEN 'Repair Rejected'
+                        WHEN technician_assigned_date IS NOT NULL AND repair_wip_date IS NULL THEN 'Technician Assigned'
+                        WHEN repair_wip_date IS NOT NULL AND repair_completed_date IS NULL THEN 'In Progress'
+                        WHEN repair_completed_date IS NOT NULL AND item_collected_date IS NULL THEN 'Collection Pending'
+                        WHEN item_collected_date IS NOT NULL THEN 'Repair Completed'
+                        ELSE 'Request Created' 
+                    END AS repair_stage,
+                    COUNT(*) AS stage_count
+                  FROM repairs
+                  WHERE added_timestamp BETWEEN ? AND ?
+                  GROUP BY repair_stage
+                  ORDER BY repair_stage";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $repairsByStage = [];
+
+        foreach ($results as $result) {
+            $repairsByStage[$result['repair_stage']] = $result['stage_count'];
+        }
+
+        return $repairsByStage;
+    }
 }
