@@ -101,8 +101,8 @@ function formatPrice($price) {
                     <tr class="last-row">
                         <td colspan="7" class="add-more-container">
                             <a href="./product_list.php" class="add-more-link">
-                                <img src="../../resources/images/icons/addmore.png" alt="Add More Products">
-                                <span>Add More Products</span>
+                                <!-- <img src="../../resources/images/icons/addmore.png" alt="Add More Products"> -->
+                                <div>Add More Products</div>
                             </a>
                         </td>
                     </tr>
