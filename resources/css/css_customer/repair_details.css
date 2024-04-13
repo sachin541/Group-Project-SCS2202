@@ -6,26 +6,31 @@ body {
 
 .main-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;  /* Changed to space-between to use available space */
   align-items: flex-start;
   padding: 20px;
   gap: 20px;
   background-color: rgb(255, 255, 255);
+  
 }
 
 .create-repair-section, .list-repair-section {
-  flex-basis: 50%;
+  flex: 1;  /* Flex 1 allows each section to take equal space of the container */
   background: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 10px; /* Ensures spacing between the sections */
 }
 
 .section-heading {
   font-size: 24px;
-  margin-bottom: 20px;
+  font-weight: bold;
+  margin-bottom: 60px;
   text-align: center;
   color: #333;
+  background-color: #ddefea;
+  padding: 10px 20px;
 }
 
 .repair-form .form-field, .details-form .repair-item {
@@ -69,19 +74,21 @@ body {
   background-color: red;
 }
 
-.list-repair-section {
-  background-color: #f4f4f4;
-}
-
 .repairs-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .repair-item {
-  background-color: #ffffff;
   padding: 15px;
   margin-bottom: 10px;
+  background-color: #fff;
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
@@ -89,39 +96,16 @@ body {
   border: 1px solid #ddd;
 }
 
-.repair-id, .item-name {
-  margin-right: 10px;
-  font-size: 16px;
-  color: #555;
-}
-
-.details-form {
-  margin: 0;
-}
-
-.details-button {
-  padding: 8px 16px;
-  background-color: #000000;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-.details-button:hover {
-  background-color: red;
-}
-
 @media (max-width: 768px) {
   .main-container {
       flex-direction: column;
-      align-items: center;
+      align-items: stretch; /* Ensures items stretch to take the full container width */
   }
 
   .create-repair-section, .list-repair-section {
-      flex-basis: 100%;
+      flex-basis: auto;  /* Allows the sections to auto-adjust their basis depending on content */
+      margin: 10px 0;  /* Adjusts margin for vertical layout */
+      width: 100%;  /* Ensures each section takes full width on smaller screens */
   }
 
   .repair-item {
@@ -135,37 +119,6 @@ body {
   }
 }
 
-/* Additional Styling */
-.hyperlink-style {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.hyperlink-style:hover {
-  text-decoration: underline;
-}
-
-.button-style {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.button-style:hover {
-  background-color: #0056b3;
-}
-
-.form-error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-/* Responsive Design for Smaller Screens */
 @media (max-width: 480px) {
   .form-input, .form-textarea {
       padding: 8px;
@@ -175,7 +128,12 @@ body {
       font-size: 14px;
       padding: 8px 15px;
   }
+
+  .repairs-list {
+      max-height: 300px;  /* Adjusts max-height for smaller devices */
+  }
 }
+
 
 
 

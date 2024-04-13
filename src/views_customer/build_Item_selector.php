@@ -53,6 +53,7 @@ $items = [
             $id = isset($_SESSION[$itemName]) ? intval($_SESSION[$itemName]) : -1;
             
             if ($id == -1) { ?>
+            <div class="item"> 
                 <form method="post" action="./build_parts.php">
                     <div class="product-title"><?= htmlspecialchars($itemName) . $optionalText ?></div>
                     <div class="main-row2" onclick="submitForm(this);">
@@ -67,9 +68,11 @@ $items = [
                         </div>
                     </div>
                 </form>
+            </div>   
             <?php } else {
                 $productDetails = $product->getProductById($id);
                 if ($productDetails) { ?>
+                <div class="item"> 
                     <div class="product-title"><?= htmlspecialchars($itemName) . $optionalText ?></div>
                     <div class="main-row">
                         <div class="product-row">
@@ -85,7 +88,7 @@ $items = [
                                     <input type="hidden" name="category" value="<?= htmlspecialchars($itemName) ?>"/>
                                     <button type="submit" class="change-btn">Change</button>
                                 </form>
-                                <form method="post" action="../helpers/build_create.php">
+                                <form method="post" action="../helpers/build_create.php" class="remove-form">
                                     <input type="hidden" name="product_id" value="<?= htmlspecialchars($id) ?>"/>
                                     <input type="hidden" name="item_type" value="<?= htmlspecialchars($itemName) ?>">
                                     <input type="hidden" name="handler_type" value="remove_item">
@@ -94,6 +97,7 @@ $items = [
                             </div>
                         </div>
                     </div>
+                </div> 
                 <?php }
             }
         } ?>

@@ -2,7 +2,6 @@
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    
     align-items: center;
     margin-left: 100px;
     margin-right: 100px;
@@ -224,7 +223,27 @@
     margin-right: auto;
 }
 
+.heading {
+    text-align: center;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+.main-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 10px; /* Add space between buttons */
+}
+
+.create-build-btn, .view-current-build-btn {
+    flex : 1 ;
+    text-align: center;
+}
 
 /* Mobile responsiveness and other existing styles */
 
@@ -319,30 +338,6 @@
         color: white; /* Space between elements */
     }
 }
-
-
-.heading {
-    text-align: center;
-    font-size: 2rem;
-    font-family: Arial, sans-serif;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.main-container-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    gap: 10px; /* Add space between buttons */
-}
-
-.create-build-btn, .view-current-build-btn {
-    flex : 1 ;
-    text-align: center;
-}
-
 
 
 @media screen and (max-width: 600px) {
