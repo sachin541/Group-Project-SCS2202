@@ -23,8 +23,14 @@ body {
 /* Box Style */
 .box-style {
     background-color: white;
-    padding: 20px;
+    padding: 6px 20px;
     border-radius: 8px;
+}
+
+.components-section{
+    min-height: 30vh;
+    max-height: 45vh;
+    overflow: auto;
 }
 
 /* Heading Style */
@@ -42,7 +48,6 @@ body {
 .cart-table, .details-table {
     width: 100%;
     padding: 8px;
-    margin-top: 10px;
     border-collapse: collapse;
 }
 
@@ -75,15 +80,10 @@ body {
 
 /* Total Price Section Styles */
 .total-price-section {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: right;
-    color: #16a085;
-    font-size: 1.4rem;
-}
-
-/* First Column Width in Details Table */
-.details-table td:first-child {
-    min-width: 150px;
+    color: #000000;
+    font-size: 1rem;
 }
 
 /* Action Section Styles */
@@ -96,12 +96,35 @@ body {
     
 }
 
+.details-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+
+.details-group {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    flex-grow: 1;
+    min-width: 250px; /* Minimum width of each block */
+    padding: 4px 6px;
+}
+
+.detail {
+    font-size: 16px;
+    margin: 10px 0;
+    
+   
+}
+
 .delivery-status {
     text-align: center;
-    background-color: #ddefea;
+    background-color: #000000;
     border-radius: 10px;
-    margin-bottom: 40px; 
-    padding: 10px ; 
+    padding: 10px ;
+    color: white; 
 }
 
 :root {
@@ -111,6 +134,7 @@ body {
 .progress-container {
     width: 80%;
     margin: 20px auto;
+    padding-top: 0px; /* Padding to prevent clipping */
 }
 
 .progressbar {
@@ -127,54 +151,83 @@ body {
     text-align: center;
     font-size: 1.2rem;
     color: #7d7d7d;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns items to the bottom */
+    height: 160px; /* Increased height for all li elements to accommodate numbers */
 }
 
-.progressbar li:before {
-    content: counter(step);
+.progressbar img {
+    width: 60px; /* Fixed width for consistency */
+    height: auto; /* Height auto to maintain aspect ratio */
+    margin: 0 auto 5px; /* Reduces space above text */
+    max-height: 60px; /* Maximum height to ensure consistency */
+}
+
+.progressbar span {
+    height: 20px; /* Fixed height for span to align texts horizontally */
+    display: block; /* Ensures the span is treated as a block for correct spacing */
+}
+
+.progressbar li::before {
+    content: counter(step); /* Adds step number */
     counter-increment: step;
     width: 30px;
     height: 30px;
-    border: 2px solid #7d7d7d;
-    display: block;
-    text-align: center;
-    margin: 0 auto 10px auto;
+    border: 2px solid var(--progress-bar-green); /* Using variable for color consistency */
     border-radius: 50%;
-    line-height: 30px;
     background: white;
-    color: #7d7d7d;
-    z-index: 2; /* Ensure numbers are above the lines */
-    position: relative; /* Needed for z-index to take effect */
+    color: var(--progress-bar-green);
+    font-size: 1rem;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    margin: 0 auto 10px; /* Space between number and image */
+    position: relative; /* Ensures number is positioned correctly */
+    z-index: 3; /* Above lines and images */
 }
 
-.progressbar li:after {
+.progressbar li::after {
     content: '';
     position: absolute;
-    width: calc(100% - 40px); /* Adjust width to prevent overlap */
+    width: 100%; /* Full width for the connecting line */
     height: 2px;
-    background: #7d7d7d;
-    top: 15px;
-    left: 0%;
-    z-index: 1; /* Ensure lines are below the numbers */
-    transform: translateX(-50%);
+    background: #ddd;
+    bottom: 30px; /* Position line at the bottom of the li, above the text */
+    top: 50px;
+    left: 50%;
+    transform: translateX(-100%);
+    z-index: 1;
 }
 
-.progressbar li:first-child:after {
-    content: none;
+.progressbar li:first-child::after {
+    content: none; /* No line before the first item */
 }
 
 .progressbar li.completed {
+    color: var(--progress-bar-green); /* Highlight text and number when completed */
+}
+
+.progressbar li.completed::before {
+    border-color: var(--progress-bar-green); /* Green border for completed stages */
+    color: white; /* White number text for completed stages */
+    background: var(--progress-bar-green); /* Green background for completed stages */
+}
+
+.progressbar li.completed + li::after {
+    background: var(--progress-bar-green); /* Green line for completed stages */
+}
+
+.progressbar li.completed img {
+    filter: brightness(1.2) grayscale(0); /* Highlight the image for completed stages */
+}
+
+.progressbar li.completed span {
     color: var(--progress-bar-green);
 }
 
-.progressbar li.completed:before {
-    border-color: var(--progress-bar-green);
-    background: var(--progress-bar-green);
-    color: white;
-}
 
-.progressbar li.completed + li:after {
-    background: var(--progress-bar-green);
-}
+
 
 /* Styles for Accept Delivery Button */
 .accept-button-container {
@@ -184,7 +237,6 @@ body {
 
 .accept-button {
     padding: 10px 20px;
-    
     background-color: #16a085;
     color: white;
     border: none;

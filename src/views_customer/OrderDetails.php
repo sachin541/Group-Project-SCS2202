@@ -27,6 +27,17 @@ try {
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
+
+function formatAndCapitalize($str) {
+    // Replace all underscores with spaces
+    $str = str_replace('_', ' ', $str);
+    
+    // Capitalize the first letter of each word
+    $str = ucwords($str);
+    
+    return $str;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,20 +45,18 @@ function formatPrice($price) {
 <head>
     <title>Delivery Details</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/OrderDetails.css">
-    
-    
 </head>
 <body>
 <div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
+    <?php require_once '../components/headers/main_header.php'; ?>
 </div>
 
 <div class="grid-container">
     <!-- First Column: Order Items -->
     <div class="box-style">
+        <h2 class="components-heading">Order Items</h2>
         <div class="components-section">
-            <h2 class="components-heading">Order Items</h2>
-
+            
             <?php if (!empty($orderDetails)): ?>
                 <table class="cart-table">
                     <thead>
@@ -59,11 +68,10 @@ function formatPrice($price) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($orderDetails as $item): ?>
-                            <?php 
+                        <?php foreach ($orderDetails as $item): 
                             $productDetails = $product->getProductById($item['product_id']);
                             $subtotal = $productDetails['price'] * $item['item_quantity'];
-                            ?>
+                        ?>
                             <tr>
                                 <td>
                                     <div class="product-info">
@@ -81,7 +89,6 @@ function formatPrice($price) {
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-
                 <div class="total-price-section">
                     <h3>Total Price: <?= formatPrice($orderDetails[0]['total']) ?></h3>
                 </div>
@@ -91,88 +98,86 @@ function formatPrice($price) {
         </div>
     </div>
 
-    
-
     <!-- Second Column: Delivery Details -->
     <div class="box-style">
         <div class="delivery-details">
             <h2 class="components-heading">Order Details</h2>
-            <?php if (!empty($orderDetails)): ?>
-                <?php $firstItem = $orderDetails[0]; 
+            <?php if (!empty($orderDetails)): 
+                $firstItem = $orderDetails[0];
                 $currentStep = $firstItem['delivery_status'];
-                ?>
-                <table class="details-table">
-                    <tr>
-                        <td>Order ID:</td>
-                        <td><?= htmlspecialchars($firstItem['order_id']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Order Date:</td>
-                        <td><?= htmlspecialchars(date("d-m-Y", strtotime($firstItem['created_at']))) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Payment Type:</td>
-                        <td><?= htmlspecialchars($firstItem['payment_type']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Payment Status:</td>
-                        <td><?= htmlspecialchars($firstItem['payment_status']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail:</td>
-                        <td><?= htmlspecialchars($firstItem['email']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Recipient Name:</td>
-                        <td><?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td><?= htmlspecialchars($firstItem['phone']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Delivery Address:</td>
-                        <td><?= htmlspecialchars($firstItem['delivery_city_address']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>City:</td>
-                        <td><?= htmlspecialchars($firstItem['city']) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Province:</td>
-                        <td><?= htmlspecialchars($firstItem['province']) ?></td>
-                    </tr>
+            ?>
+            <div class="details-flex-container">
+                <div class="details-group">
+                    <div class="detail"><strong>Order ID:</strong> <?= htmlspecialchars($firstItem['order_id']) ?></div>
+                    <div class="detail"><strong>Order Date:</strong> <?= htmlspecialchars(date("d-m-Y", strtotime($firstItem['created_at']))) ?></div>
                    
-                    <tr>
-                        <td>Delivery Person ID</td>
-                        <td><?= htmlspecialchars($firstItem['postalcode']) ?></td>
-                    </tr>
+                </div>
+                <div class="details-group">
                     
-                    
-                </table>
-
+                    <div class="detail"><strong>E-mail:</strong> <?= htmlspecialchars($firstItem['email']) ?></div>
+                    <div class="detail"><strong>Recipient Name:</strong> <?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?></div>
+                </div>
+                <div class="details-group">
+                    <div class="detail"><strong>Phone:</strong> <?= htmlspecialchars($firstItem['phone']) ?></div>
+                    <div class="detail"><strong>Delivery Address:</strong> <?= htmlspecialchars($firstItem['delivery_city_address']) ?></div>
+                    <div class="detail"><strong>City:</strong> <?= htmlspecialchars($firstItem['city']) ?></div>
+                    <div class="detail"><strong>Province:</strong> <?= htmlspecialchars($firstItem['province']) ?></div>
+                </div>
+                <div class="details-group">
+                    <div class="detail"><strong>Delivery Person ID:</strong> <?= htmlspecialchars($firstItem['postalcode']) ?></div>
+                    <div class="detail"><strong>Payment Type:</strong> <?= htmlspecialchars(formatAndCapitalize($firstItem['payment_type'])) ?></div>
+                    <div class="detail"><strong>Payment Status:</strong> <?= htmlspecialchars($firstItem['payment_status']) ?></div>
+                </div>
+            </div>
             <?php else: ?>
-                <p class="not-found">Delivery details not found.</p>
+            <p class="not-found">Delivery details not found.</p>
             <?php endif; ?>
         </div>
     </div>
 
-    <div class="action-section">
+    <!-- Progress Bar Section with Icons -->
+    <!-- <div class="action-section">
         <h2 class="delivery-status">Delivery Status</h2>
-        <!-- Accept Delivery Button --><!-- Progress Bar -->
+        
         <div class="progress-container">
             <ul class="progressbar">
-                    <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Order Placed</li>
-                    <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Accepted</li>
-                    <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Preparing</li>
-                    <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">On The Way</li>
-                    <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">Completed</li>
-                </ul>
+                <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed order-placed' : 'order-placed' ?>">Order Placed</li>
+                <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed accepted' : 'accepted' ?>">Accepted</li>
+                <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed preparing' : 'preparing' ?>">Preparing</li>
+                <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed on-the-way' : 'on-the-way' ?>">On The Way</li>
+                <li class="<?= ($currentStep == 'Completed') ? 'completed completed' : 'completed' ?>">Completed</li>
+            </ul>
         </div>
+    </div> -->
 
-        
 
+    <div class="action-section">
+    <h2 class="delivery-status">Delivery Status</h2>
+    <div class="progress-container">
+        <ul class="progressbar">
+            <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                <img src="../../resources/images/progress_icons/order_placed.png" alt="Order Placed">
+                <span>Order Placed</span>
+            </li>
+            <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                <img src="../../resources/images/progress_icons/accepted.png" alt="Accepted">
+                <span>Accepted</span>
+            </li>
+            <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                <img src="../../resources/images/progress_icons/preparing.png" alt="Preparing">
+                <span>Preparing</span>
+            </li>
+            <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                <img src="../../resources/images/progress_icons/on_the_way.png" alt="On The Way">
+                <span>On The Way</span>
+            </li>
+            <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">
+                <img src="../../resources/images/progress_icons/completed.png" alt="Completed">
+                <span>Completed</span>
+            </li>
+        </ul>
     </div>
+</div>
 
 </div>
 </body>
