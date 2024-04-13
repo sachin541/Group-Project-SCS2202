@@ -1,7 +1,7 @@
 
 <?php
 require_once 'database.php';
-require_once 'Order.php';
+require_once 'order.php';
 class Delivery {
 
     private $db;

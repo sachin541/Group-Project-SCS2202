@@ -21,8 +21,10 @@ usort($categories, function ($a, $b) use ($orderArray) {
 });
 
 // print_r($categories);
+$category = isset($_GET['category']) ? $_GET['category'] : 'Laptop'; // Default to 'laptop' if no GET request
 
-$category = isset($_POST['category']) ? $_POST['category'] : 'Laptop'; // Default to 'laptop' if no POST request
+// $category = isset($_POST['category']) ? $_POST['category'] : 'Laptop'; 
+
 $laptopProducts = $product->getProductsByCategory($category);
 
 // foreach ($categories as $itemC) {
@@ -64,10 +66,15 @@ usort($laptopProducts, function($a, $b) {
         <ul class="nav-list">
             <?php foreach ($categories as $cat): ?>
             <li class="nav-item <?php if (strtolower($cat['category']) == strtolower($category)) echo 'selected-category'; ?>">
-                <form action="product_list.php" method="post">
+                <!-- <form action="product_list.php" method="post">
+                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($cat['category']); ?>">
+                    <input type="submit" value="<?php echo htmlspecialchars($cat['category']); ?>" class="nav-link <?php if (strtolower($cat['category']) == strtolower($category)) echo 'selected-category'; ?>">
+                </form> -->
+                <form action="product_list.php" method="get">
                     <input type="hidden" name="category" value="<?php echo htmlspecialchars($cat['category']); ?>">
                     <input type="submit" value="<?php echo htmlspecialchars($cat['category']); ?>" class="nav-link <?php if (strtolower($cat['category']) == strtolower($category)) echo 'selected-category'; ?>">
                 </form>
+
             </li>
             <?php endforeach; ?>
         </ul>

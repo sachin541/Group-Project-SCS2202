@@ -9,23 +9,6 @@ class Cart {
         $this->db = $db;
     }
 
-    // public function addToCart($userId, $productId, $quantity) {
-    //     try {
-    //         $query = "INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?)";
-    //         $stmt = $this->db->prepare($query);
-
-    //         $stmt->bindParam(1, $userId);
-    //         $stmt->bindParam(2, $productId);
-    //         $stmt->bindParam(3, $quantity);
-
-    //         $stmt->execute();
-    //         return $this->db->lastInsertId();
-    //     } catch(PDOException $e) {
-    //         throw $e;
-    //     }
-    // }
-
-
     public function addToCart($userId, $productId, $quantity) {
         try {
             // Check if the product already exists in the cart
