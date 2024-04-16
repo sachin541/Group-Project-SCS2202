@@ -1,10 +1,7 @@
 <?php
 require '../../config.php';
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'yellow');
-define('DB_USER', 'computify');
-define('DB_PASSWORD', 'com321test@123');
+
 class Database {
     private $conn; //store PDO object 
 
