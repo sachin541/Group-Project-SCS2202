@@ -140,6 +140,24 @@ ul li .descr {
     border-radius: 5px; /* Optional: Rounds the corners */
 }
 
+.details-form{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.amount-repair {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #16a085;  /* One-line border declaration */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
 @media (min-width: 40rem) {
 
   h1{

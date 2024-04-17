@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tech_accept'])){
     }
         echo "Repair Updated";
         $_SESSION['current_repair_tech'] = $repair_id;
-        // header('Location: ../views_tech/repair_managment_details.php');
+        header('Location: ../views_tech/repair_managment_details.php');
     
 
 }
@@ -78,8 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stage4_accept'])){
     $db = $database->getConnection();
     $repair = new Repair($db);
 
+    $amount=$_POST['amount'];
     $repair_id=$_POST['refnumber'];
-    $repair->progress_repair_stage4($repair_id);
+    $repair->progress_repair_stage4($repair_id,$amount);
 
     if ($repair) {
         echo "Repair Updated";

@@ -166,11 +166,12 @@ class Repair {
         }
     }
 
-    public function progress_repair_stage4($repairId) {
+    public function progress_repair_stage4($repairId, $amount) {
         try {
-            $query = "UPDATE repairs SET item_collected_date = CURDATE() WHERE repair_id = ?";
+            $query = "UPDATE repairs SET item_collected_date = CURDATE() , amount = ? WHERE repair_id = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(1, $repairId, PDO::PARAM_INT);
+            $stmt->bindParam(1, $amount, PDO::PARAM_INT);
+            $stmt->bindParam(2, $repairId, PDO::PARAM_INT);
             $stmt->execute();
             return true;
         } catch(PDOException $e) {

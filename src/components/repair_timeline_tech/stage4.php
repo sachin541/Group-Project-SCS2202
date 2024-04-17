@@ -28,11 +28,18 @@ require 'Base.php';
             <div class="date"><?php echo "Payment and collection pending!"?></div>
             <div style="margin-bottom: 20px;"></div>
             <div class="accept_button">
-            <form action="../helpers/repair_handler.php" method="post" class="details-form">
+            
+
+                <form action="../helpers/repair_handler.php" method="post" class="details-form">
                     <input type="hidden" name="stage4_accept" value="true">
-                    <input type="hidden" name="refnumber" value=<?php echo htmlspecialchars($ref_number); ?>>
+                    <input type="number" name="amount" placeholder="Enter amount" class="amount-repair">
+                    <input type="hidden" name="refnumber" value="<?php echo htmlspecialchars($ref_number); ?>">
                     <input type="submit" value="Complete" class="details-button">
-            </form>
+                    
+                </form>
+
+            
+            
             </div>
              
         </li>

@@ -251,6 +251,8 @@ CREATE TABLE ProductCategories (
 CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     paymentdate DATE DEFAULT (CURDATE()),
-    status VARCHAR(50),
+    status INT,
     order_id INT
 );
+
+
