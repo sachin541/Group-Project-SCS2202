@@ -12,8 +12,10 @@
     <!-- Google font api -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- main header -->
-    <?php require_once '../components/headers/main_header.php'; ?>
+    <!-- header stylesheet -->
+    <link rel="stylesheet" href="/resources/css/headersNew.css">
 </head>
 
 <body>
+    <!-- main header -->
+    <?php require_once '../components/headers/main_header.php'; ?>

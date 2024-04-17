@@ -10,24 +10,24 @@ if (isset($_SESSION['role'])) {
 
     switch ($role) {
         case 'customer':
-            include('header_customer.php');
+            include ('header_customer.php');
             break;
         case 'manager':
-            include('header_manager.php');
+            include ('header_manager.php');
             break;
         case 'staff':
-            include('header_staff.php');
+            include ('header_staff.php');
             break;
         case 'technician':
-            include('header_technician.php');
+            include ('header_technician.php');
             break;
         case 'deliverer':
-            include('header_deliverer.php');
-                break;
+            include ('header_deliverer.php');
+            break;
         default:
-            include('header_unreg.php');
+            include ('header-unreg.php');
     }
 } else {
     // If no role is set, show a default header
-    include('header_unreg.php');
+    include ('header-unreg.php');
 }

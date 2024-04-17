@@ -1,3 +1,12 @@
-* {
-    background-color: blueviolet;
+:root {
+    --clr: #222327;
+    --ind: #29fd53;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--clr);   /*sample bg*/
 }
