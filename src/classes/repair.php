@@ -11,7 +11,7 @@ class Repair {
     
     public function getCustomerRepairsbyID($customerId) {
         try {
-            $query = "SELECT repair_id, item_name FROM repairs WHERE customer_id = ?";
+            $query = "SELECT repair_id, item_name FROM repairs WHERE customer_id = ? ORDER BY repair_id DESC";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $customerId, PDO::PARAM_INT);
             $stmt->execute();

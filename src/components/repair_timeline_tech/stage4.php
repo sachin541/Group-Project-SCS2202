@@ -32,7 +32,7 @@ require 'Base.php';
 
                 <form action="../helpers/repair_handler.php" method="post" class="details-form">
                     <input type="hidden" name="stage4_accept" value="true">
-                    <input type="number" name="amount" placeholder="Enter amount" class="amount-repair">
+                    <input type="number" name="amount" placeholder="Enter amount" class="amount-repair" required>
                     <input type="hidden" name="refnumber" value="<?php echo htmlspecialchars($ref_number); ?>">
                     <input type="submit" value="Complete" class="details-button">
                     

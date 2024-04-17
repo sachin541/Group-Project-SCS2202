@@ -25,7 +25,7 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
         <div class="create-repair-section">
             <h1 class="section-heading">Create New Repair</h1>
 
-            <form action="../helpers/handle_repair.php" method="post" class="repair-form">
+            <form action="../helpers/repair_handler.php" method="post" class="repair-form">
                 <div class="form-field">
                     <label for="customer_name" class="form-label">Your Name:</label>
                     <input type="text" id="customer_name" name="customer_id" class="form-input" required>
