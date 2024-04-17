@@ -36,12 +36,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_on_
 //online payments
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_online") {
     try {
+        $payment =  $checkout->GetPaymentStatus($_SESSION["new_order_id"]); 
+
+        if($payment){
+        unset($_SESSION["new_order_id"]); 
         $orderId = $checkout->createOrderOnline($userId, $_POST, $cartItems);//creates order
         $cart->updateProductQuantities($userId);//updates the qty of the products 
         $cart->clearCart($userId);//clears the cart
+        header('Location: ../views_customer/order_success.php?order_id=' . $orderId);
+        
+        }
+        else{
+            $_SESSION["payment_error"] = "Payment failed. Please try again"; 
+            header('Location: ../views_customer/checkout.php');
+            exit;
+        }
+
+        
+        
         
     } catch (Exception $e) {
         echo $e;
     }
 }
+
+
 ?>

@@ -286,6 +286,14 @@ body {
     color: #000; /* Change color on hover */
 }
 
+.alert {
+   padding: 20px;
+}
 
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
 
 

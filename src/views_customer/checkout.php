@@ -5,11 +5,13 @@ require_once '../classes/product.php';
 require_once '../classes/order.php';
 require_once '../components/headers/main_header.php';
 
+
 $database = new Database();
 $db = $database->getConnection();
 $cart = new Cart($db);
 $product = new Product($db);
 $orderobj = new Order($db);
+
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -36,10 +38,14 @@ foreach ($orderDetails as $item){
     $totalAmount += $subtotal;
 }
 
+// $_SESSION["payment_error"] = "Payment failed. Please try again";
+
 $_SESSION['cart_total'] = $totalAmount; 
 
 $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSION['user_id']));
 // echo($numberOfPendingPayments); 
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +82,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
 
 
         function showModal() {
+            console.log("Payment dismissed");
             var modal = document.getElementById("paymentPendingModal");
             var closeButton = document.getElementsByClassName("close-button")[0];
             var closeModalButton = document.getElementById("closeModal");
@@ -122,13 +129,15 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
         function buyNow() {
             // var name = document.getElementById("name");
             // var price = document.getElementById("price");
-            var name = "testing"
-            var price = 120 
+            // var name = "testing"
+            // var price = null 
+            // var order_id = null 
             var form = new FormData();
-            // form.append("name", name.innerHTML);
+            // form.append("sumbit_type", name.innerHTML);
             // form.append("price", price.innerHTML);
-            form.append("name", name);
-            form.append("price", price);
+            form.append("sumbit_type", "payment");
+            // form.append("price", price);
+            // form.append("order_id", order_id);
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "process.php", true);
@@ -139,8 +148,11 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                 // Payment completed. It can be a successful failure.
                 payhere.onCompleted = function onCompleted(orderId) {
                     console.log("Payment completed. OrderID:" + orderId);
+                    // var form = new FormData();
+                    // form.append("sumbit_type", "order");
                     var form = document.querySelector('.checkout-form');
                     form.submit();
+                    
                 };
 
                 // Payment window closed
@@ -161,7 +173,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                     merchant_id: data.merchant_id, // Replace your Merchant ID
                     return_url: undefined, // Important
                     cancel_url: undefined, // Important
-                    notify_url: "http://sample.com/notify",
+                    notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/views_customer/test.php",
                     order_id: data.order_id,
                     items: data.name,
                     amount: data.price,
@@ -198,7 +210,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
         <h2>Billing Details</h2>
         <form onsubmit="return handleSubmit()" action="../helpers/checkout_handler.php" method="post" class="checkout-form">
             <input type="hidden" name="total_amount" value="<?= htmlspecialchars($totalAmount); ?>">
-            
+            <input type="hidden" name="order_id" value="<?= htmlspecialchars($next_order_id); ?>">
             <div class="row">
                 <div>
                     <label for="first_name">First Name</label>
@@ -253,7 +265,12 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                     <label for="pay_online">Pay Online</label>
                 </div>
             </div>
-            
+            <?php if (isset($_SESSION["payment_error"])): ?>
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($_SESSION["payment_error"]); ?>
+                </div>
+                <?php unset($_SESSION["payment_error"]); // Unset immediately after displaying ?>
+            <?php endif; ?>
             <div>
                 <input type="submit" value="Place Order" class="place-order-button">
             </div>
@@ -344,5 +361,4 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
 
 </body>
 </html>
-
 

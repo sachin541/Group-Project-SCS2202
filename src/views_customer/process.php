@@ -1,19 +1,29 @@
 <?php
 
-require_once '../../config.php';
+// require_once '../../config.php';
+require_once '../classes/checkout.php';
+require_once '../classes/database.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$checkout = new Checkout($db);
 
 $merchant_id = MERCHANT_ID;
 $merchant_secret = MERCHANT_SECRET;
 
 session_start();
-$order_id = "1234";
 
-$name = $_POST["name"];
-$price = $_POST["price"];
+if(isset($_POST["sumbit_type"]) && $_POST["sumbit_type"]=="payment"){
+    
+$order_id = $checkout->getNextOrderId(); 
 
+$_SESSION["new_order_id"] = $order_id ; 
+
+$checkout->insertPayment(5,$order_id);
+$name = null;
 $price = $_SESSION['cart_total']; 
-
 $currency = "LKR";
+
 
 $hash = strtoupper(
     md5(
@@ -34,3 +44,9 @@ $obj->currency = $currency;
 $obj->hash = $hash;
 
 echo json_encode($obj);
+
+} 
+
+if(isset($_POST["sumbit_type"]) && $_POST["sumbit_type"]=="order"){
+
+}

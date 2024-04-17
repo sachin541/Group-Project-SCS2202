@@ -110,6 +110,75 @@ class Checkout {
             throw $e;
         }
     }
+
+    // public function setPayHereStatus($status, $order_id){
+        
+    //     $query = "UPDATE orders SET payherestatus = ? WHERE order_id = ?";
+    //     $stmt = $this->db->prepare($query); 
+    //     $result = $stmt->execute([$status,$order_id]); 
+    //     return $result; 
+    // }
+
+    public function getNextOrderId() {
+        try {
+            
+            $stmt = $this->db->query("SELECT MAX(order_id) AS max_id FROM orders");
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $nextId = $row ? $row['max_id'] + 1 : 1;
+
+
+            return $nextId;
+        } catch (PDOException $e) {
+        
+            
+            throw $e;
+        }
+    }
+
+    public function insertPayment($statusCode, $order_id) {
+        try {
+        
+            $stmt = $this->db->prepare("INSERT INTO payments (status, order_id)  VALUES (?,?)");
+        
+            $stmt->execute([$statusCode,$order_id]);
+
+        } catch (PDOException $e) {
+            throw $e; 
+        }
+    }
+
+    public function PayHereNotify($statusCode, $order_id){
+        
+        $stmt = $this->db->prepare("UPDATE payments SET status = ? WHERE order_id = ?"); 
+        
+        
+        $stmt->execute([$statusCode, $order_id]); 
+    }
+
+    public function GetPaymentStatus($order_id) {
+        // Prepare the SQL query
+        $stmt = $this->db->prepare("SELECT EXISTS (
+            SELECT 1 
+            FROM payments 
+            WHERE order_id = :order_id AND status = 2
+        ) AS StatusExists");
+
+        // Bind the order_id parameter to the query
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Return true if there exists at least one record with status 2, false otherwise
+        return (bool)$result['StatusExists'];
+    }
+
+
+    
+
 }
 ?>
 
