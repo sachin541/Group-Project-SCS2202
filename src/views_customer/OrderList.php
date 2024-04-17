@@ -63,21 +63,21 @@ function formatString($str) {
             <div class="filter-sort-container">
                 
                 <form action="" method="GET">
-                    <!-- Payment Type Dropdown -->
-                    <select name="paymentType" class="filter-dropdown">
+                    
+                    <!-- <select name="paymentType" class="filter-dropdown">
                         <option value="">Payment Type</option>
                         <option value="pay_on_delivery" <?php echo $paymentType == 'Pay On Delivery' ? 'selected' : ''; ?>>Pay On Delivery</option>
                         <option value="pay_online" <?php echo $paymentType == 'Online' ? 'selected' : ''; ?>>Online</option>
                     </select>
 
-                    <!-- Payment Status Dropdown -->
+                    
                     <select name="paymentStatus" class="filter-dropdown">
                         <option value="">Payment Status</option>
                         <option value="Pending" <?php echo $paymentStatus == 'pending' ? 'selected' : ''; ?>>Pending</option>
                         <option value="Payment Completed" <?php echo $paymentStatus == 'Completed' ? 'selected' : ''; ?>>Completed</option>
                     </select>
 
-                    <!-- Delivery Status Dropdown -->
+                    
                     <select name="deliveryStatus" class="filter-dropdown">
                         <option value="">Delivery Status</option>
                         <option value="Order Placed" <?php echo $deliveryStatus == 'Order Placed' ? 'selected' : ''; ?>>Order Placed</option>
@@ -85,8 +85,8 @@ function formatString($str) {
                         <option value="Preparing" <?php echo $deliveryStatus == 'Preparing' ? 'selected' : ''; ?>>Preparing</option>
                         <option value="On The Way" <?php echo $deliveryStatus == 'On The Way' ? 'selected' : ''; ?>>On The Way</option>
                         <option value="Completed" <?php echo $deliveryStatus == 'Completed' ? 'selected' : ''; ?>>Completed</option>
-                        <!-- Add other delivery status options as needed -->
-                    </select>
+                        
+                    </select> -->
 
                     <!-- Sort Dropdown -->
                     <!-- Sort Dropdown -->
@@ -119,11 +119,11 @@ function formatString($str) {
                         
                         <th class="header-created-at">Created At</th>
                         
-                        <th class="header-payment-type">Payment Type</th>
+                        <!-- <th class="header-payment-type">Payment Type</th> -->
                         <th class="header-payment-status">Payment Status</th>
                         <th class="header-total">Total (RS.)</th>
                         <th class="header-total">Delivery Status</th>
-                        <th class="header-customer">Customer</th>
+                        <!-- <th class="header-customer">Customer</th> -->
                         <th class="header-details">Details</th>
                     </tr>
                 </thead>
@@ -134,7 +134,7 @@ function formatString($str) {
                             
                             <td><?php echo date('Y-m-d', strtotime($order['created_at'])); ?></td>
 
-                            <td><?php echo htmlspecialchars(formatString($order['payment_type'])); ?></td>
+                            <!-- <td><?php echo htmlspecialchars(formatString($order['payment_type'])); ?></td> -->
 
                             <td><?php 
                             
@@ -150,7 +150,7 @@ function formatString($str) {
 
                             <td><?php echo htmlspecialchars(formatString($order['delivery_status'])); ?></td>
                             
-                            <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td>
+                            <!-- <td><?php echo htmlspecialchars($order['first_name'] . ' ' . $order['last_name']); ?></td> -->
                             <td>
                                 <a href="./OrderDetails.php?order_id=<?php echo $order['order_id']; ?>" class="details-button">View Details</a>
                             </td>
