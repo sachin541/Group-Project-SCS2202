@@ -23,8 +23,9 @@ function truncateText($text, $maxLength = 100)
 <!-- template top -->
 <?php require_once '../components/templates/main-top.php'; ?>
 
-<link rel="stylesheet" type="text/css" href="../../resources/css/test.css">
-<link rel="stylesheet" type="text/css" href="../../resources/css/homeProductCard.css">
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" href="/resources/css/test.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/homeProductCard.css">
 
 
 <div class="flex-container">
@@ -42,12 +43,12 @@ function truncateText($text, $maxLength = 100)
 
     <div class="row" style="height: 18vh; background-color: black;">
         <div class="box large-box brands">
-            <!-- <img src="../../resources/images/newhomepage/brands/1.jpg" alt="brand"> -->
-            <img src="../../resources/images/newhomepage/brands/2.jpg" alt="brand">
-            <img src="../../resources/images/newhomepage/brands/3.jpg" alt="brand">
-            <img src="../../resources/images/newhomepage/brands/4.jpg" alt="brand">
-            <img src="../../resources/images/newhomepage/brands/5.jpg" alt="brand">
-            <img src="../../resources/images/newhomepage/brands/6.jpg" alt="brand">
+            <!-- <img src="/resources/images/newhomepage/brands/1.jpg" alt="brand"> -->
+            <img src="/resources/images/newhomepage/brands/2.jpg" alt="brand">
+            <img src="/resources/images/newhomepage/brands/3.jpg" alt="brand">
+            <img src="/resources/images/newhomepage/brands/4.jpg" alt="brand">
+            <img src="/resources/images/newhomepage/brands/5.jpg" alt="brand">
+            <img src="/resources/images/newhomepage/brands/6.jpg" alt="brand">
 
             <!-- Add more images as needed -->
         </div>
@@ -99,7 +100,7 @@ function truncateText($text, $maxLength = 100)
         <div class="box small-box" style="background-color: black;">
             <div class="service">
                 <!-- Make image smaller by adjusting the style or through CSS class -->
-                <img src="../../resources/images/newhomepage/builds.png" alt="Custom PC Builds"
+                <img src="/resources/images/newhomepage/builds.png" alt="Custom PC Builds"
                     style="width:50%; height:auto;">
                 <p>Custom PC Builds</p>
 
@@ -111,7 +112,7 @@ function truncateText($text, $maxLength = 100)
         <div class="box small-box" style="background-color: white;">
             <div class="service service-white" style="background-color: white;">
 
-                <img src="../../resources/images/newhomepage/repairs.png" alt="Custom PC Builds"
+                <img src="/resources/images/newhomepage/repairs.png" alt="Custom PC Builds"
                     style="width:50%; height:auto;">
                 <p>PC Repairs</p>
 
@@ -127,7 +128,7 @@ function truncateText($text, $maxLength = 100)
         <div class="box small-box" style="background-color: white;">
             <div class="service service-white" style="background-color: white;">
 
-                <img src="../../resources/images/newhomepage/delivery.png" alt="Custom PC Builds"
+                <img src="/resources/images/newhomepage/delivery.png" alt="Custom PC Builds"
                     style="width:50%; height:auto;">
                 <p>Home Delivery</p>
 
@@ -139,7 +140,7 @@ function truncateText($text, $maxLength = 100)
         <div class="box small-box" style="background-color: black;">
             <div class="service">
                 <!-- Make image smaller by adjusting the style or through CSS class -->
-                <img src="../../resources/images/newhomepage/products.png" alt="Custom PC Builds"
+                <img src="/resources/images/newhomepage/products.png" alt="Custom PC Builds"
                     style="width:50%; height:auto;">
                 <p>Newest Products</p>
 
