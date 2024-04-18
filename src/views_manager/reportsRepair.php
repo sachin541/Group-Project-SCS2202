@@ -1,7 +1,6 @@
 <?php
 require_once '../classes/database.php';
 require_once '../classes/reports.php'; // Assuming RepairReport class is defined here
-require_once '../components/headers/main_header.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -30,17 +29,14 @@ $requestsData = array_values($repairRequestsCount);
 $completedData = array_values($repairsCompletedCount);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Repair Reports</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../resources/css/css_manager/reportsSideBar.css">
-    <link rel="stylesheet" href="../../resources/css/css_manager/reportsBuild.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+
+<!-- template top -->
+<?php require_once '../components/templates/main-top.php'; ?>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/css/css_manager/reportsSideBar.css">
+<link rel="stylesheet" href="/resources/css/css_manager/reportsBuild.css">
+
 <div class="main-container">
     <aside class="main-side-nav">
         <?php require_once './reportsSideBar.php'; ?>
@@ -59,7 +55,7 @@ $completedData = array_values($repairsCompletedCount);
             </div>
             <canvas id="repairsChart"></canvas>
         </div>
-        
+
         <div class="grid-item grid-item-2">
             <canvas id="repairsCompletedChart"></canvas>
         </div>
@@ -69,154 +65,162 @@ $completedData = array_values($repairsCompletedCount);
         </div>
     </div>
 </div>
-</body>
-</html>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var ctx = document.getElementById('repairsChart').getContext('2d');
-    var labels = <?php echo json_encode($labels); ?>;
-    var requestsData = <?php echo json_encode($requestsData); ?>;
-    var completedData = <?php echo json_encode($completedData); ?>;
-    
-    var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Repair Requests',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                data: requestsData,
-                fill: false,
-            }, {
-                label: 'Repairs Completed',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                data: completedData,
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Repair Requests vs. Repairs Completed'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Date'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Number'
-                    }
+<!-- scripts -->
+<script src="/resources/js/js_manager/reportsRepairChart.js"></script>
+<!-- chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- template bottom -->
+<?php require_once '../components/templates/main-bottom.php'; ?>
+
+
+<!-- this script is copied to reportsRepairChart.js -->
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('repairsChart').getContext('2d');
+        var labels = <?php echo json_encode($labels); ?>;
+        var requestsData = <?php echo json_encode($requestsData); ?>;
+        var completedData = <?php echo json_encode($completedData); ?>;
+
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Repair Requests',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    data: requestsData,
+                    fill: false,
+                }, {
+                    label: 'Repairs Completed',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    data: completedData,
+                    fill: false,
                 }]
-            }
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var ctx = document.getElementById('repairsCompletedChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode($technicianNames); ?>,
-            datasets: [{
-                label: 'Repairs Completed',
-                data: <?php echo json_encode($completedRepairs); ?>,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
+            },
+            options: {
+                responsive: true,
                 title: {
                     display: true,
-                    text: 'Repairs Completed by Technician'
-                }
-            }
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var ctx = document.getElementById('repairsStagesPie').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode($stageNames); ?>,
-            datasets: [{
-                label: 'Repair Stages',
-                data: <?php echo json_encode($stageCounts); ?>,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
+                    text: 'Repair Requests vs. Repairs Completed'
                 },
-                title: {
-                    display: true,
-                    text: 'Repair Stages Distribution'
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number'
+                        }
+                    }]
                 }
             }
-        }
+        });
     });
-});
-</script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('repairsCompletedChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: <?php echo json_encode($technicianNames); ?>,
+                datasets: [{
+                    label: 'Repairs Completed',
+                    data: <?php echo json_encode($completedRepairs); ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Repairs Completed by Technician'
+                    }
+                }
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('repairsStagesPie').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: <?php echo json_encode($stageNames); ?>,
+                datasets: [{
+                    label: 'Repair Stages',
+                    data: <?php echo json_encode($stageCounts); ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Repair Stages Distribution'
+                    }
+                }
+            }
+        });
+    });
+</script> -->

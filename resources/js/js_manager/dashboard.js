@@ -1,5 +1,10 @@
-// SIDEBAR TOGGLE
+let productNames = <?php echo json_encode($productNames); ?>;
+let productSales = <?php echo json_encode($productSales); ?>;
+// Assuming you have images data prepared
+let productImages = <?php echo json_encode($productImages ?? []); ?>;
 
+
+// SIDEBAR TOGGLE
 
 // ---------- CHARTS ----------
 

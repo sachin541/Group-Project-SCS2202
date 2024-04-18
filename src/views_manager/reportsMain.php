@@ -2,7 +2,7 @@
 $category = isset($_POST['type']) ? $_POST['type'] : 'default';
 
 require_once '../classes/database.php';
-require_once '../classes/reports.php'; 
+require_once '../classes/reports.php';
 
 
 $database = new Database();
@@ -30,108 +30,120 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
 // print_r($lineChartObj->processSalesDataForLineChart($lineChartData));
 ?>
 
-<?php require_once '../components/headers/main_header.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Reports</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../resources/css/css_manager/reportsSideBar.css">
-    <link rel="stylesheet" href="../../resources/css/css_manager/reportsMain.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+<!-- template top -->
+<?php require_once '../components/templates/main-top.php'; ?>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="../../resources/css/css_manager/reportsSideBar.css">
+<link rel="stylesheet" href="../../resources/css/css_manager/reportsMain.css">
 
 <div class="main-container">
 
-        <aside class="main-side-nav">
-            <?php require_once './reportsSideBar.php'; ?>
-        </aside>
+    <aside class="main-side-nav">
+        <?php require_once './reportsSideBar.php'; ?>
+    </aside>
 
-        <div class="main-reports-section">
-            <div class="grid-item-1">
-                <form action="" method="get">
-                    <div class="main-filter-section">
-                        <div class="filter-heading">
-                            <h2>Filter Sales Reports</h2>
-                        </div>
-                        <div class="filter-options">
-                            <label for="startDate" class="date-label">Start Date:</label>
-                            <input type="date" id="startDate" name="startDate" value="<?php echo htmlspecialchars($startDate); ?>" required>
-                            
-                            <label for="endDate">End Date:</label>
-                            <input type="date" id="endDate" name="endDate" value="<?php echo htmlspecialchars($endDate); ?>" required>
-                            
-                            <label for="saleType">Sale Type:</label>
-                            <select id="saleType" name="saleType">
-                                <option value="ALL" <?php echo $saleType == 'ALL' ? 'selected' : ''; ?>>All</option>
-                                <option value="InStore" <?php echo $saleType == 'InStore' ? 'selected' : ''; ?>>Instore</option>
-                                <option value="PayOnlineONLY" <?php echo $saleType == 'PayOnlineONLY' ? 'selected' : ''; ?>>Online</option>
-                                <option value="DeliveryONLY" <?php echo $saleType == 'DeliveryONLY' ? 'selected' : ''; ?>>On Delivery</option>
-                                <option value="PayOnlineAndDelivery" <?php echo $saleType == 'PayOnlineAndDelivery' ? 'selected' : ''; ?>>Online and Delivery</option>
-                            </select>
-                        </div>
-                        <div class="filter-confirm">
-                            <button type="submit">Apply Filters</button>
-                        </div>
+    <div class="main-reports-section">
+        <div class="grid-item-1">
+            <form action="" method="get">
+                <div class="main-filter-section">
+                    <div class="filter-heading">
+                        <h2>Filter Sales Reports</h2>
                     </div>
-                </form>
-            </div>
-        
-            <div class="grid-item grid-item-2">
-                <canvas id="brandPieChart"></canvas>
+                    <div class="filter-options">
+                        <label for="startDate" class="date-label">Start Date:</label>
+                        <input type="date" id="startDate" name="startDate"
+                            value="<?php echo htmlspecialchars($startDate); ?>" required>
 
-            </div>
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate" name="endDate" value="<?php echo htmlspecialchars($endDate); ?>"
+                            required>
 
-            <div class="grid-item grid-item-3">
-                <canvas id="salesLineChart"></canvas>
+                        <label for="saleType">Sale Type:</label>
+                        <select id="saleType" name="saleType">
+                            <option value="ALL" <?php echo $saleType == 'ALL' ? 'selected' : ''; ?>>All</option>
+                            <option value="InStore" <?php echo $saleType == 'InStore' ? 'selected' : ''; ?>>Instore
+                            </option>
+                            <option value="PayOnlineONLY" <?php echo $saleType == 'PayOnlineONLY' ? 'selected' : ''; ?>>
+                                Online</option>
+                            <option value="DeliveryONLY" <?php echo $saleType == 'DeliveryONLY' ? 'selected' : ''; ?>>
+                                On Delivery</option>
+                            <option value="PayOnlineAndDelivery" <?php echo $saleType == 'PayOnlineAndDelivery' ? 'selected' : ''; ?>>Online and Delivery</option>
+                        </select>
+                    </div>
+                    <div class="filter-confirm">
+                        <button type="submit">Apply Filters</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-            </div>
-
-            <div class="grid-item grid-item-4">
-                <canvas id="categoryDoughnutChart"></canvas>
-            </div>
+        <div class="grid-item grid-item-2">
+            <canvas id="brandPieChart"></canvas>
 
         </div>
-  
+
+        <div class="grid-item grid-item-3">
+            <canvas id="salesLineChart"></canvas>
+
+        </div>
+
+        <div class="grid-item grid-item-4">
+            <canvas id="categoryDoughnutChart"></canvas>
+        </div>
+
+    </div>
+
 </div>
 
-<script>
+
+<!-- scripts -->
+<script src="/resources/js/js_manager/reportsMain.js"></script>
+<!-- chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- template bottom -->
+<?php require_once '../components/templates/main-bottom.php'; ?>
+
+
+<!-- this script is copied to reportsMain.js -->
+<!-- <script>
     var salesByBrandData = <?php echo json_encode($salesByBrandData); ?>;
     var salesByCategoryData = <?php echo json_encode($salesByCategoryData); ?>;
     var salesLineChartData = <?php echo json_encode($lineChartData); ?>;
     //   var salesLineChartData = {
-    //     "labels": ["2024-01-26", "2024-01-27", "2024-01-28", "2024-01-29"],
-    //     "datasets": [
-    //         {
-    //             "label": "Total Sales",
-    //             "data": [6958500, 2554000, 3993500, 595100],
-    //             "fill": false,
-    //             "borderColor": "rgb(75, 192, 192)",
-    //             "tension": 0.1
-    //         }
-    //     ]
-    // };
+        //     "labels": ["2024-01-26", "2024-01-27", "2024-01-28", "2024-01-29"],
+        //     "datasets": [
+            //         {
+                //             "label": "Total Sales",
+                //             "data": [6958500, 2554000, 3993500, 595100],
+                //             "fill": false,
+                //             "borderColor": "rgb(75, 192, 192)",
+                //             "tension": 0.1
+                //         }
+                //     ]
+                // };
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Pie Chart - Sales % by Brand
         var ctxBrandPieChart = document.getElementById('brandPieChart').getContext('2d');
         new Chart(ctxBrandPieChart, {
-        type: 'pie',
-        data: salesByBrandData,
-        options: {
-            plugins: {
-                legend: {
-                    position: 'left',
-                    labels: {
-                        boxWidth: 20,
-                        padding: 15
+            type: 'pie',
+            data: salesByBrandData,
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
                     }
                 }
             }
-        }
-    });
+        });
 
         // Line Chart - Sales Over Time
         var ctxLineChart = document.getElementById('salesLineChart').getContext('2d');
@@ -146,24 +158,16 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
             type: 'doughnut',
             data: salesByCategoryData,
             options: {
-            plugins: {
-                legend: {
-                    position: 'left',
-                    labels: {
-                        boxWidth: 20,
-                        padding: 15
+                plugins: {
+                    legend: {
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
                     }
                 }
             }
-        }
+        });
     });
-    });
-</script>
-
-</body>
-</html>
-
-
-
-
-
+</script> -->

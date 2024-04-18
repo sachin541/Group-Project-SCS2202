@@ -1,0 +1,63 @@
+document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('buildsChart').getContext('2d');
+
+        var labels = <?php echo json_encode($labels); ?>;
+        var requestsData = <?php echo json_encode($requestsData); ?>;
+        var completedData = <?php echo json_encode($completedData); ?>;
+
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Build Requests',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    data: requestsData,
+                    fill: false,
+                }, {
+                    label: 'Builds Completed',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    data: completedData,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Build Requests vs. Builds Completed'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number'
+                        }
+                    }]
+                }
+            }
+        });
+    });
+
+    
