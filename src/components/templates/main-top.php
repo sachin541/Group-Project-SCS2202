@@ -11,6 +11,9 @@
 
     <!-- Google font api -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google material icon api -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <!-- header stylesheet -->
     <link rel="stylesheet" href="/resources/css/headersNew.css">
