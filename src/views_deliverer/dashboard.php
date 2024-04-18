@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../../resources/css/css_deliverer/dashboard.css">
+    <link rel="stylesheet" href="/resources/css/css_deliverer/dashboard.css">
 </head>
 
 <body>

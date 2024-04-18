@@ -2,7 +2,7 @@
 <?php require_once '../components/templates/main-top.php'; ?>
 
 <!-- stylesheets -->
-<link rel="stylesheet" href="../../resources/css/css_tech/technician_home.css">
+<link rel="stylesheet" href="/resources/css/css_tech/technician_home.css">
 
 <div id="cont">
     <div class="grid-container">

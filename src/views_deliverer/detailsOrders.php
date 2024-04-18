@@ -46,7 +46,7 @@ function formatAndCapitalize($str)
 <?php require_once '../components/templates/main-top.php'; ?>
 
 <!-- stylesheets -->
-<link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/detailsOrder.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/css_deliverer/detailsOrder.css">
 
 
 <div class="main-header">
