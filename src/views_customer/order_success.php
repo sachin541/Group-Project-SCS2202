@@ -1,6 +1,6 @@
 <?php
 require_once '../classes/database.php';
-require_once '../classes/order.php'; 
+require_once '../classes/order.php';
 
 
 $order_id = $_GET['order_id'] ?? ''; // Fallback to an empty string if not set
@@ -19,21 +19,20 @@ try {
     $errorMessage = $e->getMessage();
 }
 
-function formatPrice($price) {
+function formatPrice($price)
+{
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Invoice</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/invoice-style.css">
-</head>
-<div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
-</div>
-<body>
+
+<!-- template top -->
+<?php require_once '../components/templates/main-top.php'; ?>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/css/css_customer/invoice-style.css">
+
+
 <div class="invoice-container">
     <?php if (!empty($orderDetails)): ?>
         <?php $firstItem = $orderDetails[0]; ?>
@@ -48,7 +47,8 @@ function formatPrice($price) {
                 </tr>
                 <tr>
                     <td>Name:</td>
-                    <td><?= htmlspecialchars($firstItem['first_name']) . ' ' . htmlspecialchars($firstItem['last_name']) ?></td>
+                    <td><?= htmlspecialchars($firstItem['first_name']) . ' ' . htmlspecialchars($firstItem['last_name']) ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Email:</td>
@@ -108,8 +108,6 @@ function formatPrice($price) {
         <p class="not-found">Order not found.</p>
     <?php endif; ?>
 </div>
-</body>
-</html>
 
 <!-- Delivery Notification Modal -->
 <div id="deliveryNotificationModal" class="modal">
@@ -121,27 +119,34 @@ function formatPrice($price) {
     </div>
 </div>
 
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-    // Automatically show the modal
-    var modal = document.getElementById("deliveryNotificationModal");
-    modal.style.display = "block";
+<!-- scripts -->
+<script src="/resources/js/js_customer/order_success.js"></script>
 
-    // Close the modal when the user clicks on <span> (x)
-    document.querySelector(".close-modal").onclick = function() {
-        modal.style.display = "none";
-    };
+<!-- template bottom -->
+<?php require_once '../components/templates/main-bottom.php'; ?>
 
-    // Close the modal on "OK" button click
-    document.getElementById("okButton").onclick = function() {
-        modal.style.display = "none";
-    };
 
-    // Close the modal if the user clicks anywhere outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
+<!-- <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        // Automatically show the modal
+        var modal = document.getElementById("deliveryNotificationModal");
+        modal.style.display = "block";
+
+        // Close the modal when the user clicks on <span> (x)
+        document.querySelector(".close-modal").onclick = function () {
             modal.style.display = "none";
-        }
-    };
-});
-</script>
+        };
+
+        // Close the modal on "OK" button click
+        document.getElementById("okButton").onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script> -->
