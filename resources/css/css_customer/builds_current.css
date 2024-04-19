@@ -1,33 +1,35 @@
 body {
     font-family: Arial, sans-serif;
-    
     color: #333;
     margin: 0;
+    
 }
-
 
 .main-title h2 {
     font-size: 2em;
     text-align: center;
     background-color: #ddefea;
-    max-width: 100%;
+    
     padding: 10px 0px;
 }
 
 
 .table-container {
-    background-color: #f4f4f4f4;
+    
+    
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    
     margin: 20px auto;
     width: 95%;
+    
 }
 
 .builds-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 15px;
+    
     font-size: 0.95em;
 }
 
@@ -67,6 +69,7 @@ body {
     border: 1px solid #ddd;
     font-size: 0.90em;
     font-weight: bold;
+    
 }
 
 .components-container {
@@ -77,9 +80,9 @@ body {
     
 }
 
-.components-cell{
+/* .components-cell{
    max-width: 10%;
-}
+} */
 /* Component Detail Styling */
 .component-detail {
     position: relative;
@@ -238,4 +241,67 @@ body {
 .active-build-btn:hover {
     background-color: red; /* Darker shade for hover */
     
+}
+
+@media (max-width: 768px) {
+    .builds-table, .table-header-row, .table-row {
+        display: block;
+    }
+
+    .header-item, .row-item {
+        display: block;
+        text-align: right;
+        padding: 8px;
+        
+    }
+
+    .row-item[data-label]:before { /* Only apply to elements with a data-label attribute */
+        content: attr(data-label) ": ";
+        float: left;
+        font-weight: bold;
+        text-transform: capitalize;
+        margin-right: 10px; /* Adds space between the label and the data */
+    }
+
+    .components-cell, .components-wrapper {
+        display: inline;
+        
+    }
+
+    .component-detail {
+        margin: 5px auto;  /* Center align the component details */
+    }
+
+    .row-item {
+        text-align: left;
+        border: none;
+        
+    }
+
+    .table-head{
+        display: none;
+    }
+
+    .table-container {
+        padding: 0px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .table-row {
+        
+        background-color: #ededed;
+        padding-bottom: 20px;
+        
+    }
+    
+    .table-row:nth-child(even) {
+        background-color: #ffffff;
+    }
+
+    .component-name-tooltip {
+      
+        display: none;
+        
+    }
 }
