@@ -173,7 +173,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                     merchant_id: data.merchant_id, // Replace your Merchant ID
                     return_url: undefined, // Important
                     cancel_url: undefined, // Important
-                    notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/views_customer/test.php",
+                    notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/ultils/notifyPayHere.php",
                     order_id: data.order_id,
                     items: data.name,
                     amount: data.price,

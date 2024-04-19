@@ -91,7 +91,9 @@ $totalAmount = 0; //used in loop later to calculate total in cart
             </table>
 
             <div class="cart-total">
-                <h2>Total: <?php echo htmlspecialchars(formatPrice($totalAmount, 2)); ?></h2>
+                <h2>Total: <?php echo htmlspecialchars(formatPrice($totalAmount)); ?></h2>
+
+                        <!-- Out of stock message  -->
 
                 <?php if (isset($_SESSION['out_of_stock_message'])): ?>
                     <div class='out-of-stock-message'>
@@ -102,6 +104,8 @@ $totalAmount = 0; //used in loop later to calculate total in cart
                     </div>
                     <?php unset($_SESSION['out_of_stock_message']); ?>
                 <?php endif; ?>
+
+                         <!-- checkout items  -->
 
                 <form action="../helpers/cart_transaction_handler.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userId); ?>">

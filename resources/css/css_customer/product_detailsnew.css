@@ -1,8 +1,6 @@
 /* General Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: white;
-  color: #333;
+
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -10,11 +8,9 @@ body {
 
 /* Main Container Styles */
 .main-container {
-  display: grid;
-  grid-template-columns: 600px 1fr;
-  gap: 20px;
-  margin: 40px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
   background: #f4f4f4;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -22,27 +18,27 @@ body {
 /* Image Carousel Styles */
 .image-container {
   background-color: rgb(255, 255, 255);
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product-image-carousel {
-  padding-top: 40px;
-  padding-bottom: 80px;
-  width: 100%;
-  height: 400px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  width: 90%;
+  max-width: 600px;
+  height: auto;
   position: relative;
 }
 
 .carousel-image {
-  margin-top: 20px;
   width: 100%;
-  height: 100%;
+  max-height: 400px; /* Adjusted for aspect ratio */
   object-fit: contain;
   object-position: center;
   transition: transform 0.3s ease;
-}
-
-.carousel-image:hover {
-  transform: scale(1.1); /* Slightly enlarges the image on hover */
 }
 
 .carousel-button {
@@ -53,9 +49,9 @@ body {
   color: white;
   border: none;
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 20px; /* Larger touch area */
   z-index: 100;
-  transition: background-color 0.3s;
+  font-size: 18px; /* Larger for readability */
 }
 
 .carousel-button.prev {
@@ -66,67 +62,64 @@ body {
   right: 10px;
 }
 
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
 /* Product Info Styles */
 .product-info {
   padding: 20px;
+  flex-basis: 100%;
 }
 
-.product-title {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #16a085;
-  border-bottom: 2px solid #16a085;
-  padding-bottom: 5px;
+.product-title, .product-description, .product-price, .product-stock, .product-brand {
+  text-align: center; /* Centering text for mobile */
 }
 
-.product-description {
-  margin-bottom: 15px;
-  text-align: justify;
-}
-
-/* Enhancements for product details */
-.product-price, .product-stock, .product-brand {
-  font-size: 18px; /* Larger font size for emphasis */
-  color: #333; /* Darker color for better readability */
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-/* Styling each detail separately for customization */
-.product-price {
-  color: #000000; /* Unique color for price */
-}
-
-.product-stock {
-  color: #000000; /* Unique color for stock availability */
-}
-
-.product-brand {
-  color: #000000; /* Unique color for brand */
-}
-
-/* Add to Cart Form Styles */
-.add-to-cart-form {
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
+.product-title{
+  background-color: #ddefea;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .add-to-cart-button {
-  background-color: #16a085;
+  width: 100%; /* Full width button */
+  padding: 20px 8px;
+  margin-bottom: 20px;
+  font-size: 16px; /* Slightly smaller font size */
+  background-color: black;
+  border-radius: 8px;
   color: white;
   border: none;
-  padding: 12px 25px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s;
 }
-
-.add-to-cart-button:hover {
+.add-to-cart-button:hover{
   background-color: red;
 }
+
+@media (min-width: 600px) {
+  .main-container {
+      flex-direction: row;
+      margin-top: 10vh;
+  }
+
+  .image-container, .product-info {
+      flex-basis: 50%;
+  }
+
+  .product-image-carousel {
+      width: 100%;
+      height: 400px;
+  }
+
+  .carousel-image {
+      max-height: 100%;
+  }
+
+  .add-to-cart-button {
+      width: auto; /* Auto width for larger screens */
+      padding: 12px 25px;
+      font-size: 18px;
+  }
+
+  .product-title, .product-description, .product-price, .product-stock, .product-brand {
+      text-align: left;
+  }
+}
+
 

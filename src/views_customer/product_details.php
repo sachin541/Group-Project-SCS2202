@@ -44,7 +44,10 @@ function formatPrice($price) {
             <div class="product-image-carousel">
                 <?php for ($i = 1; $i <= 3; $i++): ?>
                     <?php if ($productDetails['image' . $i]): ?>
-                        <img class="carousel-image" src="data:image/jpeg;base64,<?php echo base64_encode($productDetails['image' . $i]); ?>" alt="Product Image <?php echo $i; ?>" style="<?php echo $i === 1 ? '' : 'display: none;'; ?>">
+                        <img class="carousel-image" src="data:image/jpeg;base64,
+                        <?php echo base64_encode($productDetails['image' . $i]); ?>" alt="Product Image 
+                        <?php echo $i; ?>" style="
+                        <?php echo $i === 1 ? '' : 'display: none;'; ?>">
                     <?php endif; ?>
                 <?php endfor; ?>
                 <button class="carousel-button prev" onclick="changeImage(-1)">❮</button>
@@ -82,39 +85,20 @@ function formatPrice($price) {
 
 
 <script>
-let currentImageIndex = 0;
-const images = document.querySelectorAll('.carousel-image');
-let cycleCount = 0; // Variable to keep track of cycles
-const totalCycles = images.length; // Total number of images
-let interval; // Variable to store the interval
+    let currentImageIndex = 0; // Initialize current image index to 0
+    let images = document.querySelectorAll('.carousel-image'); // Get all carousel images
 
-function changeImage(direction) {
-    // Hide the current image
-    images[currentImageIndex].style.display = 'none';
-    
-    // Change image index
-    currentImageIndex += direction;
-    
-    // If we're at the last image, increase the cycle count
-    if (currentImageIndex >= images.length) {
-        currentImageIndex = 0;
-        cycleCount++;
-    } else if (currentImageIndex < 0) {
-        currentImageIndex = images.length - 1;
+    function changeImage(direction) {
+        images[currentImageIndex].style.display = 'none'; // Hide current image
+        currentImageIndex += direction; // Increment or decrement the index
+
+        // wrap the index if necessary
+        if (currentImageIndex >= images.length) {
+            currentImageIndex = 0; // Go to the first image
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = images.length - 1; // Go to the last image
+        }
+
+        images[currentImageIndex].style.display = 'block'; // Show the new current image
     }
-    
-    // Show the new image
-    images[currentImageIndex].style.display = 'block';
-
-    // Stop cycling after one complete round
-    if (cycleCount >= totalCycles) {
-        clearInterval(interval);
-    }
-}
-
-// Start automatic cycling
-interval = setInterval(function() {
-    changeImage(1);
-}, 8000); // Change image every 8000 milliseconds (8 seconds)
-
 </script>
