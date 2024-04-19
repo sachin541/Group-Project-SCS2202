@@ -17,7 +17,7 @@ body {
 .create-repair-section, .list-repair-section {
   flex: 1;  /* Flex 1 allows each section to take equal space of the container */
   background: #f4f4f4;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0 10px; /* Ensures spacing between the sections */
@@ -100,11 +100,13 @@ body {
   .main-container {
       flex-direction: column;
       align-items: stretch; /* Ensures items stretch to take the full container width */
+      
   }
 
   .create-repair-section, .list-repair-section {
+
       flex-basis: auto;  /* Allows the sections to auto-adjust their basis depending on content */
-      margin: 10px 0;  /* Adjusts margin for vertical layout */
+      margin: 10px 0px;  /* Adjusts margin for vertical layout */
       width: 100%;  /* Ensures each section takes full width on smaller screens */
   }
 

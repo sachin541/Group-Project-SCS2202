@@ -1,7 +1,5 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #fafafa;
     color: #333;
     margin: 0;
     padding: 0;
@@ -15,14 +13,15 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
 .orders-header{
     background-color: #ddefea;
     padding: 12px;
-   
-
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
 }
 /* Orders Table Styles */
 .orders-table {
@@ -47,18 +46,6 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
-
-
-
-
-/* Orders Header */
-.orders-header {
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
-}
-
 /* Empty Orders Message */
 .no-orders-message {
     text-align: center;
@@ -74,7 +61,6 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    
     text-decoration: none;
 }
 
@@ -87,7 +73,7 @@ body {
 }
 
 /* Table Rows Hover Effect */
-.table-data-row:hover {
+/* .table-data-row:hover {
     background-color: #e4f7f4;
     
 }
@@ -95,10 +81,8 @@ body {
 .orders-table tr:nth-child(even):hover {
     background-color: #e4f7f4;
     
-}
+} */
 
-
-/* Filter & Sort Container */
 .filter-sort-container {
     text-align: center;
     margin-bottom: 20px;
@@ -109,33 +93,8 @@ body {
     padding: 8px 12px;
     margin-right: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
     background-color: #f8f8f8;
     font-size: 1rem;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.3s ease;
-    width: auto; /* Adjusted to fit content */
-    display: inline-block;
-    min-width: 150px; /* Ensures a minimum width */
-    max-width: 300px; /* Ensures the dropdown does not become too wide */
-    overflow: hidden; /* Prevents text overflow */
-    text-overflow: ellipsis; /* Adds ellipsis for overflowed text */
-}
-
-/* Style for dropdown items */
-.filter-sort-container select.filter-dropdown option {
-    padding: 10px;
-    background-color: #f8f8f8;
-    color: #333;
-    font-size: 1rem;
-    border-bottom: 1px solid #ddd;
-}
-
-.filter-sort-container select.filter-dropdown:hover,
-.filter-sort-container select.filter-dropdown:focus {
-    border-color: #16a085;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Style for selected option */
@@ -161,5 +120,56 @@ body {
     color: #f8f8f8; /* Lighter color for text on hover */
 }
 
+@media screen and (max-width: 768px) {
+    .orders-table, .orders-table thead, .orders-table tbody, .orders-table th, .orders-table td, .orders-table tr {
+        display: block;
+        width: 100%;
+    }
 
+    .orders-container {
+        width: 90%;
+       
+    }
+
+    .orders-table thead {
+        display: none;
+    }
+
+    .orders-table td {
+        text-align: left; /* Ensures text starts from the left, good for readability */
+        border-bottom: 0px ; 
+        position: relative; /* Allows absolute positioning inside */
+        padding-left: 50%; /* Gives room for the label on the left */
+        margin-top: 10px; /* Space between entries */
+    }
+
+    .td-order-id:before { content: "Order ID: "; }
+    .td-created-at:before { content: "Created At: "; }
+    .td-payment-status:before { content: "Payment Status: "; }
+    .td-total:before { content: "Total (RS.): "; }
+    .td-delivery-status:before { content: "Delivery Status: "; }
+    .td-details:before { content: "Details: "; }
+
+    .orders-table td:before {
+        position: absolute;
+        left: 10px; /* Spacing from the left edge */
+        font-weight: bold; /* Makes the labels bold */
+    }
+
+    .details-button {
+        position: relative;
+    }
+
+    .table-data-row{
+        background-color: #f4f4f4f4; 
+        
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .apply-filter-button {
+        margin: 0px;
+        margin-top: 10px; /* Spacing from the dropdown */
+    }
+}
 
