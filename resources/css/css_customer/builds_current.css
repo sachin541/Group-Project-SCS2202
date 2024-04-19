@@ -5,16 +5,10 @@ body {
     margin: 0;
 }
 
-.main-title {
-    
-    color: #000000;
-    padding: 0px;
-    text-align: center;
-  
-}
 
 .main-title h2 {
     font-size: 2em;
+    text-align: center;
     background-color: #ddefea;
     max-width: 100%;
     padding: 10px 0px;
@@ -101,8 +95,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 5px;
-    transition: all 0.3s ease;
-    
+    transition: all 0.3s ease;  
 }
 
 .component-name-tooltip {
@@ -121,17 +114,6 @@ body {
     opacity: 0;
     transition: visibility 0s, opacity 0.3s ease;
     z-index: 2;
-}
-
-.component-name-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #333 transparent transparent transparent;
 }
 
 .component-detail:hover .component-image {
@@ -250,7 +232,6 @@ body {
     border-radius: 5px;
     font-size: 1.2rem;
     cursor: pointer;
-    
     text-decoration: none;   
 }
 

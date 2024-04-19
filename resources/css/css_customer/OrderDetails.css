@@ -25,6 +25,7 @@ body {
     background-color: white;
     padding: 6px 20px;
     border-radius: 8px;
+    
 }
 
 .components-section{
@@ -100,23 +101,23 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 20px;
-    
+    gap: 8px;
+     
 }
 
 .details-group {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.06);
     flex-grow: 1;
-    min-width: 250px; /* Minimum width of each block */
-    padding: 4px 6px;
+    max-width: 50%;
+    
+    
 }
 
 .detail {
     font-size: 16px;
     margin: 10px 0;
     
-   
 }
 
 .delivery-status {
@@ -227,27 +228,41 @@ body {
 }
 
 
+@media (max-width: 768px) {
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        max-width: 100%;
+        margin: auto;
+    }
 
+    .details-group {
+      
+        max-width: 100%;
+    
+    }
 
-/* Styles for Accept Delivery Button */
-.accept-button-container {
-    text-align: center;
-    margin-bottom: 20px;
+    .progress-container {
+        width: 100%;
+        
+    }
+
+    .progressbar span{
+        /* transform: rotate(90deg); 
+        position: relative;
+        top: 30px; */
+       display: none;
+    }
+
+    .progressbar li::after {
+       
+        top: 70px;
+       
+    }
+
+  
+
+  
 }
-
-.accept-button {
-    padding: 10px 20px;
-    background-color: #16a085;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.accept-button:hover {
-    background-color: red;
-   
-}
-

@@ -135,21 +135,6 @@ function formatAndCapitalize($str) {
         </div>
     </div>
 
-    <!-- Progress Bar Section with Icons -->
-    <!-- <div class="action-section">
-        <h2 class="delivery-status">Delivery Status</h2>
-        
-        <div class="progress-container">
-            <ul class="progressbar">
-                <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed order-placed' : 'order-placed' ?>">Order Placed</li>
-                <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed accepted' : 'accepted' ?>">Accepted</li>
-                <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed preparing' : 'preparing' ?>">Preparing</li>
-                <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed on-the-way' : 'on-the-way' ?>">On The Way</li>
-                <li class="<?= ($currentStep == 'Completed') ? 'completed completed' : 'completed' ?>">Completed</li>
-            </ul>
-        </div>
-    </div> -->
-
 
     <div class="action-section">
     <h2 class="delivery-status">Delivery Status</h2>

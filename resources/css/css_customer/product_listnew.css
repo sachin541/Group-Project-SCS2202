@@ -9,7 +9,7 @@ html, body {
   grid-template-columns: 0.5fr 3fr; /* Adjust grid column ratio */
   gap: 20px;
   height: 100%;
-  overflow-x: hidden;
+  
   background-color: white;
 }
 
@@ -227,6 +227,7 @@ html, body {
 
   .main-container {
     background-color: black;
+    overflow-x: hidden;
   }
 
 }
