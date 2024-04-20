@@ -1,46 +1,40 @@
-<?php 
-require_once '../classes/database.php'; 
-require_once '../classes/product.php'; 
+<?php
+require_once '../classes/database.php';
+require_once '../classes/product.php';
 
 
 
-    $database = new Database();
-    $db = $database->getConnection();
-    $product = new Product($db);
+$database = new Database();
+$db = $database->getConnection();
+$product = new Product($db);
 
-    // Fetch categories
-    $categories = $product->getAllCategories();
+// Fetch categories
+$categories = $product->getAllCategories();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Product</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/add_productnew.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../../resources/css/add_emp.css" /> -->
 
-</head>
+<!-- template top -->
+<?php require_once '../components/templates/main-top.php'; ?>
 
-<body>
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/add_productnew.css">
+<!-- <link rel="stylesheet" type="text/css" href="../../resources/css/add_emp.css"> -->
 
-<?php require_once '../components/headers/main_header.php';?>
 
 <?php
-    
-    if (isset($_SESSION['product_adder'])) {
-        $product_adder = htmlspecialchars($_SESSION['product_adder']);
-        unset($_SESSION['product_adder']); // Clear the message after displaying
-    }?>
 
-    
-    
+if (isset($_SESSION['product_adder'])) {
+    $product_adder = htmlspecialchars($_SESSION['product_adder']);
+    unset($_SESSION['product_adder']); // Clear the message after displaying
+} ?>
+
+
+
 <form action="../helpers/product_handler.php" method="post" enctype="multipart/form-data">
     <?php if (!empty($product_adder)): ?>
         <div style="color: Blue;" class="alert alert-danger"><?= $product_adder ?></div>
-    <?php endif; ?>  
+    <?php endif; ?>
     <div>
         <input type="text" name="product_name" placeholder="Product Name" required>
     </div>
@@ -48,7 +42,9 @@ require_once '../classes/product.php';
         <select name="category" required>
             <option value="">Select Category</option>
             <?php foreach ($categories as $category): ?>
-                <option value="<?= htmlspecialchars($category['category']) ?>"><?= htmlspecialchars($category['category']) ?></option>
+                <option value="<?= htmlspecialchars($category['category']) ?>">
+                    <?= htmlspecialchars($category['category']) ?>
+                </option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -77,14 +73,14 @@ require_once '../classes/product.php';
         <input type="file" name="image3" placeholder="Image 3">
     </div>
 
-    <input type="hidden" name="formType" value="addProduct">  
+    <input type="hidden" name="formType" value="addProduct">
     <!-- only trigger the first post block in handler -->
     <div>
         <input type="submit" value="Add Product">
     </div>
-    
+
 </form>
 
-</body>
-</html>
 
+<!-- template bottom -->
+<?php require_once '../components/templates/main-bottom.php'; ?>

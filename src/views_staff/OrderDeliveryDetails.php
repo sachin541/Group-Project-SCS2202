@@ -24,23 +24,20 @@ try {
 }
 // print_r($orderDetails);
 // print_r($orderDetails);
-function formatPrice($price) {
+function formatPrice($price)
+{
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delivery Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewOrderDeliverySub.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_deliverer/progressBar.css">
-    
-</head>
-<body>
-<div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
-</div>
+
+<!-- template top -->
+<?php require_once '../components/templates/main-top.php'; ?>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/css/css_staff/ViewOrderDeliverySub.css">
+<link rel="stylesheet" href="/resources/css/css_deliverer/progressBar.css">
+
 
 <div class="grid-container">
     <!-- First Column: Order Items -->
@@ -60,7 +57,7 @@ function formatPrice($price) {
                     </thead>
                     <tbody>
                         <?php foreach ($orderDetails as $item): ?>
-                            <?php 
+                            <?php
                             $productDetails = $product->getProductById($item['product_id']);
                             $subtotal = $productDetails['price'] * $item['item_quantity'];
                             ?>
@@ -68,8 +65,8 @@ function formatPrice($price) {
                                 <td>
                                     <div class="product-info">
                                         <?php if ($productDetails['image1']) { ?>
-                                            <img src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>" 
-                                            alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
+                                            <img src="data:image/jpeg;base64,<?= base64_encode($productDetails['image1']) ?>"
+                                                alt="<?= htmlspecialchars($productDetails['product_name']) ?>">
                                         <?php } ?>
                                         <h3><?= htmlspecialchars($productDetails['product_name']) ?></h3>
                                     </div>
@@ -91,14 +88,14 @@ function formatPrice($price) {
         </div>
     </div>
 
-    
+
 
     <!-- Second Column: Delivery Details -->
     <div class="box-style">
         <div class="delivery-details">
             <h2 class="components-heading">Order Details</h2>
             <?php if (!empty($orderDetails)): ?>
-                <?php $firstItem = $orderDetails[0]; 
+                <?php $firstItem = $orderDetails[0];
                 $currentStep = $firstItem['delivery_status'];
                 ?>
                 <table class="details-table">
@@ -142,13 +139,13 @@ function formatPrice($price) {
                         <td>Province:</td>
                         <td><?= htmlspecialchars($firstItem['province']) ?></td>
                     </tr>
-                   
+
                     <tr>
                         <td>Delivery Person ID</td>
                         <td><?= htmlspecialchars($firstItem['postalcode']) ?></td>
                     </tr>
-                    
-                    
+
+
                 </table>
 
             <?php else: ?>
@@ -162,18 +159,26 @@ function formatPrice($price) {
         <!-- Accept Delivery Button --><!-- Progress Bar -->
         <div class="progress-container">
             <ul class="progressbar">
-                    <li class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Order Placed</li>
-                    <li class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Accepted</li>
-                    <li class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">Preparing</li>
-                    <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">On The Way</li>
-                    <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">Completed</li>
-                </ul>
+                <li
+                    class="<?= ($currentStep == 'Order Placed' || $currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                    Order Placed</li>
+                <li
+                    class="<?= ($currentStep == 'Accepted' || $currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                    Accepted</li>
+                <li
+                    class="<?= ($currentStep == 'Preparing' || $currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">
+                    Preparing</li>
+                <li class="<?= ($currentStep == 'On The Way' || $currentStep == 'Completed') ? 'completed' : '' ?>">On
+                    The Way</li>
+                <li class="<?= ($currentStep == 'Completed') ? 'completed' : '' ?>">Completed</li>
+            </ul>
         </div>
 
-        
+
 
     </div>
 
 </div>
-</body>
-</html>
+
+<!-- template bottom -->
+<?php require_once '../components/templates/main-bottom.php'; ?>
