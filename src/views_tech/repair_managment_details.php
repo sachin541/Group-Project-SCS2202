@@ -1,6 +1,4 @@
 <?php
-
-require_once '../components/headers/main_header.php'; 
 require_once '../classes/database.php'; 
 require_once '../classes/repair.php';
 require_once '../classes/technician.php';
