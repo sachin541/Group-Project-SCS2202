@@ -1,149 +1,97 @@
-.main-row {
-    font-family: Arial, sans-serif;
+.main-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 100px;
-    margin-right: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap :50px;
 }
+
+.item{
+    width: 40%;  
+}
+
 .product-title {
     font-size: 1.5rem;
     font-family: Arial, sans-serif;
     font-weight: bold;
-    color: #000000; /* Choose a color that matches your theme */
-    /* margin-bottom: 10px; */
-    margin-top: 10px; /* Spacing between the title and the product */
-    margin-left: 100px;
+    color: #000000; 
 }
 
-.product-row {
+.product-row , .product-row2 {
     border: 1px solid #ddd;
-    padding: 6px 20px;
-    margin: 1px auto;
+    padding: 10px 0px;
     background-color: #f4f4f4;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
 }
 
+.product-row2{
+    background-color: black;
+}
 
+.product-row:hover , .product-row2:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); 
+    transform: translateY(-4px); 
+}
 
-.product-row:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Darker shadow on hover */
-    transform: translateY(-4px); /* Slight lift effect */
+.product-row2:hover {
+    background-color: red;
 }
 
 .product-row img {
-    width: 60px;
+    width: 10%;
+    margin-left: 10px;
     height: auto;
-    margin-right: 10px;
-    border-radius: 5px; /* Rounded corners */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .product-info {
-    display: flex;
-    flex-direction: row;
-    gap: 1px;
-    align-items: center;
-    font-size: 0.5rem; /* Adjust font size */
-    color: #333; /* Dark grey color for better readability */
-}
-
-.product-info span {
-    white-space: nowrap; /* Prevents text from wrapping */
-    margin-left: 80px;
-    font-size: 1.1rem; /* Slightly larger font size for item name */
-    font-weight: bold; /* Make the item name bold */
-    color: #333; /* Space between elements */
+    padding-left: 10px;
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    color: #333; 
+    
 }
 
 .product-actions {
     display: flex;
-    flex-direction: row; /* Stack elements vertically */
-    align-items: center; /* Center align items vertically */
-    gap: 1px; /* Space between price and button */
+    flex-direction: row; 
+    align-items: center; 
+    gap: 1px; 
 }
+
 .product-actions span {
-    font-size: 1.2rem; /* Larger font size for price */
-    font-weight: 600; /* Semi-bold for price */
-    color: #007bff; /* Example: a shade of blue for the price */
-    
-   
-    background-color: rgba(0, 123, 255, 0.1); /* Light background for the price */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    font-size: 1rem; 
+    font-weight: 600; 
+    color: #007bff; 
+    background-color: rgba(0, 123, 255, 0.1); 
+    margin: 10px;
 }
 
-.change-btn {
-    padding: 7px 15px;
-    margin-right: 1px;
-    background-color: #000000; /* Example color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Adding transform to the transition */
-}
-
-.remove-btn {
-    padding: 7px 10px;
+.change-btn , .remove-btn{
+    padding: 8px 12px;
     margin-right: 10px;
-    background-color: #000000; /* Example color */
+    background-color: #000000; 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 1.1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
-.change-btn:hover {
-    background-color: red; /* Darker shade for hover effect */
-
+.change-btn:hover, .remove-btn:hover {
+    background-color: red; 
 }
 
-.remove-btn:hover {
-    background-color: red; /* Darker shade for hover effect */
-   
-}
 
-.product-row form {
-    margin-left: 10px;
-}
-
-/* special select */
-.main-row2 {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-.product-row2 {
-    border: 1px solid #ddd;
-    padding: 6px 20px;
-    margin: 1px auto;
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
-    border-radius: 10px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
-}
 .product-row2:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Darker shadow on hover */
-    transform: translateY(-4px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); 
+    transform: translateY(-4px); 
     background-color: red;
 }
 
@@ -151,23 +99,17 @@
     width: 40px;
     height: auto;
     padding: 10px;
-    margin-right: 10px;
-    border-radius: 5px; /* Rounded corners */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 .product-info2 {
     display: flex;
     gap: 10px;
-    padding-right: 140px;
-    align-items: center;
     font-size: 0.8rem; /* Adjust font size */
     color: #333; /* Dark grey color for better readability */
 }
 
 .product-info2 span {
     white-space: nowrap; /* Prevents text from wrapping */
-    margin-right: 100px;
     font-size: 1.9rem; /* Slightly larger font size for item name */
     font-weight: bold; /* Make the item name bold */
     color: white; /* Space between elements */
@@ -181,7 +123,6 @@
     border-radius: 5px;
     font-size: 1.2rem;
     cursor: pointer;
-    
     text-decoration: none;   
 }
 
@@ -209,6 +150,7 @@
 
     text-align: center;
 }
+
 .error-message {
     color: #D8000C;
     display: inline-flex; /* Changed from flex to inline-flex */
@@ -245,11 +187,14 @@
     text-align: center;
 }
 
-/* Mobile responsiveness and other existing styles */
-
-
 /* Mobile responsiveness */
 @media screen and (max-width: 600px) {
+
+        
+    .item{
+        width: 60%;  
+    }
+
     .product-row {
         flex-direction: column;
         align-items: center;
@@ -267,9 +212,8 @@
     }
 
     .product-info span {
-        text-wrap: balance; /* Prevents text from wrapping */
-        margin-left: 50px;
-        font-size: 1.1rem; /* Slightly larger font size for item name */
+        margin: 0px;
+        font-size: 1rem; /* Slightly larger font size for item name */
         font-weight: bold; /* Make the item name bold */
         color: #333; /* Space between elements */
     }
@@ -282,57 +226,17 @@
         align-items: center;
     }
 
-    .change-btn {
-        
-        padding: 8px 12px;
-        font-size: 0.9rem;
-        margin-top: 10px; /* Add space above the button */
-    }
 
-    .remove-btn {
+    .remove-btn, .change-btn {
+        width: 100px;
         margin-right: 0px;
         margin-bottom: 5px;
-        padding: 7px 12px;
-        font-size: 0.9rem;
-        margin-top: 10px; /* Add space above the button */
-    }
-
-    /**/
-     .product-row2 {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-row2 img {
-        width: 20%; /* Smaller image size for mobile */
-        max-width: 100px; /* Set a max-width to keep images from being too large */
-        margin-right: 0; /* Remove margin on the right */
-        margin-bottom: 0px; /* Add space below the image */
-        align-items: center;
-    }
-
-    .product-info2 {
-        margin-left: 250px;
-        margin-bottom: 10px;
-        align-items: center;
-    }
-
-    .product-actions2 {
-        display: flex;
-        flex-direction: column; /* Stack elements vertically */
-        align-items: center;
-        width: 100%;
-    }
-
-    .change-btn {
-        padding: 8px 12px;
         font-size: 0.9rem;
         margin-top: 10px; /* Add space above the button */
     }
 
     .product-info2 span {
         white-space: nowrap; /* Prevents text from wrapping */
-        
         font-size: 1.1rem; /* Slightly larger font size for item name */
         font-weight: bold; /* Make the item name bold */
         color: white; /* Space between elements */
