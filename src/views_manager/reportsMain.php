@@ -11,18 +11,16 @@ $db = $database->getConnection();
 $reportObj = new PieChart($db);
 $lineChartObj = new LineChart($db); // Create an instance of LineChart
 
-$today = date('Y-m-d');
+$from = date('Y-m-d' , strtotime("0 day"));
+$to = date('Y-m-d', strtotime("-4 month"));
 
-$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : '2024-01-01'; // Default start date
-$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : '2024-01-31';   // Default end date
+$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : $to; // Default start date
+$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : $from;   // Default end date
 $saleType = isset($_GET['saleType']) ? $_GET['saleType'] : 'ALL';        // Default sale type
 
 $salesByBrandData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "brand", $saleType);
 $salesByCategoryData = $reportObj->getSalesDataForPieChart($startDate, $endDate, "category", $saleType);
 $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $saleType);
-
-
-
 
 // $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, "InStore"); // Get line chart data
 // $lineChartData = $lineChartObj->fetchSalesData($startDate, $endDate); 
@@ -50,19 +48,24 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
         </aside>
 
         <div class="main-reports-section">
+            
             <div class="grid-item-1">
+
                 <form action="" method="get">
                     <div class="main-filter-section">
-                        <div class="filter-heading">
-                            <h2>Filter Sales Reports</h2>
-                        </div>
+                        
+                        <h2>Product Sales Reports</h2>
+                        
                         <div class="filter-options">
-                            <label for="startDate" class="date-label">Start Date:</label>
+
+                            <div class="date" >
+                            <label for="startDate" class="date-label">From: </label>
                             <input type="date" id="startDate" name="startDate" value="<?php echo htmlspecialchars($startDate); ?>" required>
                             
-                            <label for="endDate">End Date:</label>
+                            <label for="endDate"> To:</label>
                             <input type="date" id="endDate" name="endDate" value="<?php echo htmlspecialchars($endDate); ?>" required>
-                            
+                            </div>
+
                             <label for="saleType">Sale Type:</label>
                             <select id="saleType" name="saleType">
                                 <option value="ALL" <?php echo $saleType == 'ALL' ? 'selected' : ''; ?>>All</option>
@@ -71,12 +74,14 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
                                 <option value="DeliveryONLY" <?php echo $saleType == 'DeliveryONLY' ? 'selected' : ''; ?>>On Delivery</option>
                                 <option value="PayOnlineAndDelivery" <?php echo $saleType == 'PayOnlineAndDelivery' ? 'selected' : ''; ?>>Online and Delivery</option>
                             </select>
+
                         </div>
                         <div class="filter-confirm">
                             <button type="submit">Apply Filters</button>
                         </div>
                     </div>
                 </form>
+
             </div>
         
             <div class="grid-item grid-item-2">
@@ -101,43 +106,103 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
     var salesByBrandData = <?php echo json_encode($salesByBrandData); ?>;
     var salesByCategoryData = <?php echo json_encode($salesByCategoryData); ?>;
     var salesLineChartData = <?php echo json_encode($lineChartData); ?>;
-    //   var salesLineChartData = {
-    //     "labels": ["2024-01-26", "2024-01-27", "2024-01-28", "2024-01-29"],
-    //     "datasets": [
-    //         {
-    //             "label": "Total Sales",
-    //             "data": [6958500, 2554000, 3993500, 595100],
-    //             "fill": false,
-    //             "borderColor": "rgb(75, 192, 192)",
-    //             "tension": 0.1
-    //         }
-    //     ]
-    // };
 
     document.addEventListener('DOMContentLoaded', function() {
         // Pie Chart - Sales % by Brand
         var ctxBrandPieChart = document.getElementById('brandPieChart').getContext('2d');
         new Chart(ctxBrandPieChart, {
-        type: 'pie',
-        data: salesByBrandData,
-        options: {
-            plugins: {
-                legend: {
-                    position: 'left',
-                    labels: {
-                        boxWidth: 20,
-                        padding: 15
+            type: 'pie',
+            data: salesByBrandData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Sales Distribution by Brand',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
                     }
                 }
             }
-        }
-    });
+        });
 
         // Line Chart - Sales Over Time
         var ctxLineChart = document.getElementById('salesLineChart').getContext('2d');
         new Chart(ctxLineChart, {
             type: 'line',
-            data: salesLineChartData
+            data: salesLineChartData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Sales Over Time',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.3 // Smoother lines
+                    },
+                    point: {
+                        radius: 5 // Points on the line
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sales LKR',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: {top: 10, bottom: 10}
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 10,
+                            maxRotation: 90, // Rotates labels up to 90 degrees
+                            minRotation: 60 // Minimum rotation in degrees
+                        },
+                       
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: {top: 10, bottom: 10}
+                        }
+                    }
+                }
+            }
         });
 
         // Doughnut Chart - Sales % by Category
@@ -146,19 +211,32 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
             type: 'doughnut',
             data: salesByCategoryData,
             options: {
-            plugins: {
-                legend: {
-                    position: 'left',
-                    labels: {
-                        boxWidth: 20,
-                        padding: 15
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Sales Distribution by Category',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
                     }
                 }
             }
-        }
-    });
+        });
     });
 </script>
+
 
 </body>
 </html>
