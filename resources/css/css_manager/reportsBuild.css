@@ -19,14 +19,14 @@ html, body {
     grid-template-rows: repeat(16, 1fr);
     gap: 20px;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #f8f8f8;
     margin-bottom: 80px;
     max-width: 100vw;
     max-height: 86%;
 }
 
 .grid-item {
-    background-color: #ffffff;
+    background-color: #f8f8f8;
     color: #333;
     padding: 20px;
     border-radius: 10px;
@@ -78,7 +78,7 @@ input[type=submit], button {
 }
 
 input[type=submit]:hover, button:hover {
-    opacity: 0.8;
+    background-color: red;
 }
 
 

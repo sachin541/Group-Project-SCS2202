@@ -8,7 +8,7 @@ $db = $database->getConnection();
 
 $buildReport = new BuildReport($db);
 
-$defaultStartDate = date('Y-m-d', strtotime('-2 weeks'));
+$defaultStartDate = date('Y-m-d', strtotime('-4 weeks'));
 $defaultEndDate = date('Y-m-d');
 
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : $defaultStartDate;
@@ -50,7 +50,9 @@ $stageCounts = array_values($buildsByStage);
     </aside>
 
     <div class="main-reports-section">
+        
         <div class="grid-item grid-item-1">
+            <h2>Product Sales Reports</h2>
             <div class="filter-date">
                 <form action="" method="GET">
                     <label for="startDate">Start Date:</label>
@@ -99,51 +101,86 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Build Requests',
+                label: 'Requests Created',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 data: requestsData,
                 fill: false,
+                pointRadius: requestsData.map(value => value === 0 ? 1 : 3),
+                pointHoverRadius: requestsData.map(value => value === 0 ? 3 : 6),
+                lineTension: 0.4 // Smooths the line
             }, {
-                label: 'Builds Completed',
+                label: 'Requets Completed',
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 data: completedData,
                 fill: false,
+                pointRadius: completedData.map(value => value === 0 ? 1 : 3),
+                pointHoverRadius: completedData.map(value => value === 0 ? 3 : 6),
+                lineTension: 0.4 // Smooths the line
             }]
         },
         options: {
             responsive: true,
-            title: {
-                display: true,
-                text: 'Build Requests vs. Builds Completed'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: 'black' // consistent with the revenue chart
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Build Requests vs. Builds Completed',
+                    font: {
+                        size: 20
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    },
+                    
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    bodyFont: {
+                        size: 14
+                    },
+                    titleFont: {
+                        size: 14
+                    }
+                }
             },
             scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Date'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
+                x: {
                     ticks: {
-                        beginAtZero: true
+                        maxRotation: 90, // Rotates each label to 90 degrees
+                        minRotation: 60, // Keeps labels slanted to improve readability
+                        autoSkip: true, // Automatically skips labels to avoid overlap
+                        autoSkipPadding: 20, // Padding between skips (px)
+                        major: {
+                            enabled: true // Major ticks are enhanced for visibility
+                        },
+                        color: '#000' // Black text for better readability
                     },
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Number'
+                    grid: {
+                        display: false // Hide grid lines on x-axis
                     }
-                }]
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0, // Avoids decimal values
+                        color: '#000' // Black text for better readability
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)', // Light grey grid lines
+                        display: true // Optionally visible y-axis grid lines for clarity
+                    }
+                }
             }
         }
     });
@@ -162,42 +199,44 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Builds Completed',
                 data: <?php echo json_encode($completedBuilds); ?>,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',
-                    
+                    labels: {
+                        color: 'black' // ensures text color is black for better readability
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Builds Completed by Technician'
+                    text: 'Builds Completed by Technicians',
+                    font: {
+                        size: 20
+                    },
+                    
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
                 }
             }
         }
     });
 });
+</script>
 
-
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('buildsStagesPie').getContext('2d');
     var chart = new Chart(ctx, {
@@ -207,44 +246,42 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Build Stages',
                 data: <?php echo json_encode($stageCounts); ?>,
-                backgroundColor: [
-                    // Add more colors if you have more stages
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    // Add more border colors if you have more stages
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                
                 borderWidth: 1
             }]
         },
         options: {
-            
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',
                     labels: {
-                    padding: 8 // Increase padding between legend items
-                }
+                        padding: 10, // slightly more padding for better legibility
+                        color: 'black' // consistent with other charts
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Build Stages Distribution'
+                    text: 'Build Stages Distribution',
+                    font: {
+                        size: 20
+                    },
+                    
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
                 }
             }
         }
     });
 });
-
 </script>
+
+

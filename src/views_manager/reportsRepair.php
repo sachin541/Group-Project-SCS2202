@@ -47,7 +47,9 @@ $completedData = array_values($repairsCompletedCount);
     </aside>
 
     <div class="main-reports-section">
+        
         <div class="grid-item grid-item-1">
+        <h2>Product Sales Reports</h2>
             <div class="filter-date">
                 <form action="" method="GET">
                     <label for="startDate">Start Date:</label>
@@ -75,6 +77,7 @@ $completedData = array_values($repairsCompletedCount);
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var ctx = document.getElementById('repairsChart').getContext('2d');
+    
     var labels = <?php echo json_encode($labels); ?>;
     var requestsData = <?php echo json_encode($requestsData); ?>;
     var completedData = <?php echo json_encode($completedData); ?>;
@@ -89,51 +92,88 @@ document.addEventListener('DOMContentLoaded', function () {
                 borderColor: 'rgba(255, 99, 132, 1)',
                 data: requestsData,
                 fill: false,
+                pointRadius: requestsData.map(value => value === 0 ? 1 : 3), // Conditional radius based on value
+                pointHoverRadius: requestsData.map(value => value === 0 ? 3 : 6), // Larger on hover
+                lineTension: 0.4 // Slightly smooths lines for better visual appeal
             }, {
                 label: 'Repairs Completed',
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 data: completedData,
                 fill: false,
+                pointRadius: completedData.map(value => value === 0 ? 1 : 3),
+                pointHoverRadius: completedData.map(value => value === 0 ? 3 : 6),
+                lineTension: 0.4
             }]
         },
         options: {
             responsive: true,
-            title: {
-                display: true,
-                text: 'Repair Requests vs. Repairs Completed'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
+            
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: 'black'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Repair Requests vs. Repairs Completed',
+                    font: {
+                        size: 20
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    },
+                    
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    bodyFont: {
+                        size: 14
+                    },
+                    titleFont: {
+                        size: 14
+                    }
+                }
             },
             scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Date'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
+                x: {
                     ticks: {
-                        beginAtZero: true
+                        maxRotation: 90,
+                        minRotation: 60,
+                        autoSkip: true,
+                        autoSkipPadding: 20,
+                        major: {
+                            enabled: true
+                        },
+                        color: '#000' // Black text for better readability
                     },
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Number'
+                    grid: {
+                        display: false // Hide grid lines on x-axis
                     }
-                }]
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        color: '#000' // Black text for better readability
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)', // Light grey grid lines
+                        display: true // Optionally visible y-axis grid lines for clarity
+                    }
+                }
             }
         }
     });
 });
-
+</script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('repairsCompletedChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -143,40 +183,46 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Repairs Completed',
                 data: <?php echo json_encode($completedRepairs); ?>,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                
+                
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        color: 'black', // consistent with the line chart
+                        padding: 10
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Repairs Completed by Technician'
+                    text: 'Repairs Completed by Technician',
+                    font: {
+                        size: 20
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    },
+                    
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
                 }
             }
         }
     });
 });
+</script>
 
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('repairsStagesPie').getContext('2d');
     var chart = new Chart(ctx, {
@@ -186,34 +232,37 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Repair Stages',
                 data: <?php echo json_encode($stageCounts); ?>,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        color: 'black', // ensures text color is black for better readability
+                        padding: 10
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Repair Stages Distribution'
+                    text: 'Repair Stages Distribution',
+                    font: {
+                        size: 20
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    },
+                    
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
                 }
             }
         }
