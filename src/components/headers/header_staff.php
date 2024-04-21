@@ -1,4 +1,4 @@
-<!-- <?php include("header_layout.php"); ?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -36,4 +36,12 @@
                 <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
                 <a href="../ultils/logout.php" class="unreg-log">Logout</a>
 
-                <?php include("header_layout_end.php");
+                </div>
+        <div class="content">
+
+</div>
+</div>
+</header>
+</body>
+
+</html>
