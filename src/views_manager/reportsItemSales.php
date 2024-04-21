@@ -8,7 +8,7 @@ $db = $database->getConnection();
 $report = new ItemSales($db);
 
 // Calculate the start date as 6 months back from today
-$defaultStartDate = date('Y-m-d', strtotime('-2 months'));
+$defaultStartDate = date('Y-m-d', strtotime('-1 months'));
 $defaultEndDate = date('Y-m-d'); // Current date as the default end date
 
 // Check if the dates are set in the GET parameters; otherwise, use calculated default dates
@@ -82,7 +82,7 @@ $salesRevenueByItem = $report->getDailyRevenueByProductId($startDate . " 00:00:0
                     <table>
                         <thead>
                             <tr>
-                                <th>Product ID</th>
+                                <th>ID</th>
                                 <th>Product Image</th>
                                 <th>Product Name</th>
                                 <th>Total Units Sold</th>
@@ -112,15 +112,17 @@ $salesRevenueByItem = $report->getDailyRevenueByProductId($startDate . " 00:00:0
                         </table>
                     </div>
                 </div>
+
             </div>
-                <div class="pagination">
-                    <button id="prevPage">Previous</button>
-                    <button id="nextPage">Next</button>
-                </div>
+            <div class="pagination">
+                <button id="prevPage">Previous</button>
+                <button id="nextPage">Next</button>
+            </div>
+               
         </div>
         
         <div class="grid-item grid-item-2">
-           SELECTED ITEM <?php echo $_SESSION['selectedProductId'];?>
+           <!-- Data for Item ID <?php echo $_SESSION['selectedProductId'];?> -->
             <!-- Potentially for more details or other reports -->
             <div class="chart-container" style="width:100%;">
                 <canvas id="salesChart" ></canvas>
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var urlParams = new URLSearchParams(window.location.search);
     var pageFromUrl = urlParams.get('page');
     currentPage = pageFromUrl ? parseInt(pageFromUrl) : 0;
-    var itemsPerPage = 7;
+    var itemsPerPage = 6;
     var searchKeyword = new URL(window.location.href).searchParams.get('productSearch');
     var filteredData = salesData; // Initialize with all data
     var selectedProductId = "<?php echo $selectedProductId; ?>";
@@ -264,72 +266,80 @@ document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById('salesChart').getContext('2d');
     var salesData = <?php echo json_encode(array_values($salesDataByItem)); ?>;
     var salesLabels = <?php echo json_encode(array_keys($salesDataByItem)); ?>;
-    
-    // For a bar chart, you might not need to customize point colors as in the line chart.
-    // However, if you want to customize the bar colors based on the value, you can do so here.
-
-    var chart = new Chart(ctx, {
-        type: 'bar', // Changed from 'line' to 'bar'
+    var myChart = new Chart(ctx, {
+        type: 'bar',
         data: {
             labels: salesLabels,
             datasets: [{
-                label: 'Total Sales',
+                label: 'Sales Volume',
                 data: salesData,
-                backgroundColor: salesData.map(value => value === 0 ? 'transparent' : 'rgba(0, 123, 255, 0.5)'), // Optional: make 0 value bars transparent
-                borderColor: 'rgba(0, 123, 255, 1)',
-                borderWidth: 1
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Light green/blue
+                borderColor: 'rgba(75, 192, 192, 1)', // Darker green/blue
+                borderWidth: 1,
+                 
             }]
         },
         options: {
             responsive: true,
-            title: {
-                display: true,
-                text: 'Daily Sales for Product ID: <?php echo $selectedProductId; ?>'
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: 'black' // Label color
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Item Sales for Product ID: <?php echo $selectedProductId; ?>',
+                    font: {
+                        size: 20
+                    },
+                    
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    bodyFont: {
+                        size: 14
+                    },
+                    titleFont: {
+                        size: 14
+                    }
+                }
             },
             scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Date'
-                    },
-                    gridLines: {
-                        display: false
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Units Sold'
-                    },
-                    gridLines: {
-                        display: false
-                    },
+                x: {
                     ticks: {
-                        beginAtZero: true
+                        maxRotation: 90, // Rotates each label to 90 degrees
+                        minRotation: 60, // Keeps labels slanted to improve readability
+                        autoSkip: true, // Automatically skips labels to avoid overlap
+                        autoSkipPadding: 20, // Padding between skips (px)
+                        major: {
+                            enabled: true // Major ticks are enhanced for visibility
+                        },
+                        color: '#000', // Change the color of text to black for better readability
+                    },
+                    grid: {
+                        display: false // Hide grid lines on x-axis to enhance clarity
                     }
-                }]
-            },
-            legend: {
-                display: true,
-                labels: {
-                    // Set font color for the legend text
-                    fontColor: '#r', // Example: dark gray
-                    // Customize the legend box color
-                    usePointStyle: true, // Use point style for a cleaner look
-                    // To set box color, you typically adjust the dataset's backgroundColor
                 },
-                // Optionally, set the legend position
-                position: 'top'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0, // Avoid decimal values in y-axis ticks
+                        color: '#000' // Change the color of text to black for better readability
+                    },
+                    grid: {
+                        
+                    }
+                }
             }
         }
     });
@@ -338,10 +348,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     <?php if ($selectedProductId && !empty($salesRevenueByItem)): ?>
-    // Assuming $salesDataByItem now contains daily revenue data
     var ctxRevenue = document.getElementById('revenueChart').getContext('2d'); // Ensure you have a canvas with id="revenueChart"
     var revenueData = <?php echo json_encode(array_values($salesRevenueByItem)); ?>;
     var revenueLabels = <?php echo json_encode(array_keys($salesRevenueByItem)); ?>;
@@ -357,52 +367,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 borderColor: 'rgba(255, 99, 132, 1)', // Darker red border
                 borderWidth: 1,
                 fill: false,
-                pointRadius: revenueData.map(value => value === 0 ? 1 : 2), // Smaller radius for 0 values
-                pointHoverRadius: revenueData.map(value => value === 0 ? 3 : 7),
+                pointRadius: revenueData.map(value => value === 0 ? 1 : 3), // Conditional radius based on value
+                pointHoverRadius: revenueData.map(value => value === 0 ? 3 : 6), // Larger on hover
+                lineTension: 0.4 // Slightly smooths lines for better visual appeal
             }]
         },
         options: {
             responsive: true,
-            title: {
-                display: true,
-                text: 'Daily Revenue for Product ID: <?php echo $selectedProductId; ?>'
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: 'black' // consistent with the bar chart
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Daily Revenue for Product ID: <?php echo $selectedProductId; ?>',
+                    font: {
+                        size: 20
+                    },
+                    
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    bodyFont: {
+                        size: 14
+                    },
+                    titleFont: {
+                        size: 14
+                    }
+                }
             },
             scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Date'
-                    },
-                    gridLines: {
-                        display: false
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Revenue ($)'
-                    },
-                    gridLines: {
-                        display: false
-                    },
+                x: {
                     ticks: {
-                        beginAtZero: true
+                        maxRotation: 90, // Rotates each label to 90 degrees
+                        minRotation: 60, // Keeps labels slanted to improve readability
+                        autoSkip: true, // Automatically skips labels to avoid overlap
+                        autoSkipPadding: 20, // Padding between skips (px)
+                        major: {
+                            enabled: true // Major ticks are enhanced for visibility
+                        },
+                        color: '#000' // Black text for better readability
+                    },
+                    grid: {
+                        display: false // Hide grid lines on x-axis
                     }
-                }]
-            },
-            legend: {
-                display: true,
-                position: 'top'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0, // Avoids decimal values
+                        color: '#000' // Black text for better readability
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)', // Light grey grid lines
+                        display: true // Optionally visible y-axis grid lines for clarity
+                    }
+                }
             }
         }
     });
