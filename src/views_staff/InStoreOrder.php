@@ -30,6 +30,7 @@ function formatPrice($price) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/InStoreOrder.css" />
+    
 </head>
 <body>
     <div class="cart-container">

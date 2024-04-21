@@ -28,7 +28,7 @@ $pageType = "Retail";
 <html lang="en">
 <head>
     <!-- ...existing head elements... -->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewAllOrders.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/OrdersDeliverySub.css" />
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/toggleswitch.css" />
 </head>
 <body>

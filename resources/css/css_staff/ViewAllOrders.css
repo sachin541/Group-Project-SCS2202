@@ -1,4 +1,4 @@
-/* General Styles */
+/* 
 body {
     font-family: Arial, sans-serif;
     background-color: #fafafa;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Orders Container Styles */
+
 .orders-container {
     width: 80%;
     margin: 40px auto;
@@ -17,7 +17,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Orders Table Styles */
+
 .orders-table {
     width: 100%;
     border-collapse: collapse;
@@ -36,19 +36,19 @@ body {
 }
 
 .orders-table td {
-    padding: 15px; /* Increase this value as needed */
+    padding: 15px;
     border-bottom: 1px solid #ddd;
 }
 
-/* Remove Underline from View Details Links */
+
 
 
 .details-button:hover {
     background-color: #333;
-    text-decoration: none; /* Ensures underline doesn't reappear on hover */
+    text-decoration: none; 
 }
 
-/* Orders Header */
+
 .orders-header {
     color: #333;
     text-align: center;
@@ -56,14 +56,14 @@ body {
     font-size: 2em;
 }
 
-/* Empty Orders Message */
+
 .no-orders-message {
     text-align: center;
     color: #666;
     font-style: italic;
 }
 
-/* Details Button */
+
 .details-button {
     background-color: #000000;
     color: white;
@@ -72,19 +72,19 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    text-decoration: none; /* Removes the underline */
+    text-decoration: none;
 }
 
 .details-button:hover {
     background-color: #333;
 }
 
-/* Table Rows Hover Effect */
+
 .table-data-row:hover {
     background-color: #f2f2f2;
 }
 
-/* Out-of-Stock Message */
+
 .out-of-stock-message {
     background-color: #ffdddd;
     border: 1px solid #ff0000;
@@ -106,7 +106,7 @@ body {
 }
 
 
-/* Dropdown Styles */
+
 .filter-sort-container select.filter-dropdown {
     
     padding: 8px 12px;
@@ -116,12 +116,12 @@ body {
     background-color: #f8f8f8;
     font-size: 1rem;
     cursor: pointer;
-    outline: none; /* Removes the default focus outline */
+    outline: none; 
     transition: all 0.3s ease;
-    width: 150px; /* Set the desired width for the dropdowns */
+    width: 150px; 
 }
 
-/* Style for dropdown items */
+
 .filter-sort-container select.filter-dropdown option {
     padding: 10px;
     background-color: #f8f8f8;
@@ -136,11 +136,11 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for selected option */
+
 .filter-sort-container select.filter-dropdown option:checked {
     background-color: #16a085;
     color: white;
-}
+} */
 
 
 
