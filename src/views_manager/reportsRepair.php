@@ -49,7 +49,7 @@ $completedData = array_values($repairsCompletedCount);
     <div class="main-reports-section">
         
         <div class="grid-item grid-item-1">
-        <h2>Product Sales Reports</h2>
+        <h2>Repairs Report</h2>
             <div class="filter-date">
                 <form action="" method="GET">
                     <label for="startDate">Start Date:</label>

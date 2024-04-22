@@ -208,7 +208,7 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
         // Doughnut Chart - Sales % by Category
         var ctxCategoryDoughnutChart = document.getElementById('categoryDoughnutChart').getContext('2d');
         new Chart(ctxCategoryDoughnutChart, {
-            type: 'doughnut',
+            type: 'pie',
             data: salesByCategoryData,
             options: {
                 responsive: true,
