@@ -143,7 +143,7 @@ class Build {
     public function getTechnicianBuildsbyID($technicianId, $filter = 'all') {
         
         try {
-            $query = "SELECT build_id, customer_name, build_start_date, build_completed_date, build_collected_date FROM builds WHERE technician_id = :technicianId";
+            $query = "SELECT * FROM builds WHERE technician_id = ?";
 
             if ($filter == 'rejected'){
                 $query.= " AND rejected IS NOT NULL";
@@ -155,7 +155,7 @@ class Build {
             }
 
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':technicianId', $technicianId, PDO::PARAM_INT);
+            $stmt->bindParam(1, $technicianId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
@@ -180,7 +180,7 @@ class Build {
 
     //eror here
     public function getBuildStatus($build) {
-        if($build['rejected'] == 1){
+        if(isset($build['rejected']) && $build['rejected'] == 1){
             return ['Rejected', 'status-request-rejected'];
         }
         else if ($build['build_collected_date'] !== null && $build['build_collected_date'] !== '') {

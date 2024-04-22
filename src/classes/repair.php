@@ -23,7 +23,7 @@ class Repair {
     
     public function getTechnicianRepairsbyID($technicianId, $filter = 'all') {
         try {
-            $query = "SELECT repair_id, item_name, technician_assigned_date, repair_wip_date, repair_completed_date, item_collected_date , rejected , rejected_reason FROM repairs WHERE technician_id = ?";
+            $query = "SELECT * FROM repairs WHERE technician_id = ?";
 
             if ($filter == 'rejected'){
                 $query.= " AND rejected IS NOT NULL";

@@ -58,7 +58,9 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                     </thead>
                     <tbody>
                         <?php foreach($allBuilds as $build): ?>
-                            <?php $statusData = $buildobj->getBuildStatus($build); ?>
+                            
+                            <?php 
+                                 $statusData = $buildobj->getBuildStatus($build);  ?>
                             <tr>
                                 <td><?= htmlspecialchars($build['build_id']) ?></td>
                                 <td><?= htmlspecialchars($build['customer_name']) ?></td>
