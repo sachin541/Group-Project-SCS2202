@@ -626,6 +626,59 @@ class BuildReport extends Report{
     
         return $buildsByStage;
     }
+
+    public function getDailyProfitFromBuilds($startDate, $endDate) {
+        $query = "SELECT DATE(build_completed_date) as completed_date, 
+                         SUM(amount) as daily_profit
+                  FROM builds
+                  WHERE build_completed_date BETWEEN ? AND ?
+                  GROUP BY DATE(build_completed_date)
+                  ORDER BY DATE(build_completed_date)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $startDate);
+        $stmt->bindParam(2, $endDate);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Prepare the array to store daily profit data formatted for Chart.js
+        $formattedData = [
+            'labels' => [],
+            'datasets' => [
+                [
+                    'label' => "Daily Sales",
+                    'data' => [],
+                    'backgroundColor' => "rgba(75, 192, 192, 0.2)",
+                    'borderColor' => "rgba(75, 192, 192, 1)",
+                    'fill' => false
+                ]
+            ]
+        ];
+
+        // Generate a DatePeriod from startDate to endDate + 1 day
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day')
+        );
+
+        // Initialize all dates in the period with a profit of 0
+        foreach ($period as $date) {
+            $formattedDate = $date->format("Y-m-d");
+            $formattedData['labels'][] = $formattedDate;
+            $formattedData['datasets'][0]['data'][] = 0;  // Initialize profits as 0
+        }
+
+        // Map database results to the appropriate dates
+        foreach ($results as $result) {
+            $dateKey = array_search($result['completed_date'], $formattedData['labels']);
+            if ($dateKey !== false) {
+                $formattedData['datasets'][0]['data'][$dateKey] = (float)$result['daily_profit'];
+            }
+        }
+
+        return $formattedData;
+    }
     
     
     
