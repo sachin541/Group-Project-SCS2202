@@ -1,65 +1,52 @@
-<div class="outer-container">
+<div class="header-container">
+        
+        <!-- logo container -->
+        <div class="logo">
+            <a href="#home">COMPUTIFY</a>
+        </div>
 
-    <div class="logo">
-        <a href="#">
-            <span>COMPUTIFY</span>
-        </a>
-    </div>
+        <!-- middle navigations -->
+        <div class="middle-nav-container">
+            <div class="list active">
+                <a href="#home">
+                    <span class="text">HOME</span>
+                    <span class="material-symbols-outlined">home</span>
+                </a>
+            </div>
+            <div class="list">
+                <a href="#products">
+                    <span class="text">PRODUCTS</span>
+                    <span class="material-symbols-outlined">inventory_2</span>
+                </a>
+            </div>
+            <!-- <div class="list">
+                <a href="#repairs">
+                    <span class="material-symbols-outlined">repair</span>
+                    <span class="text">REPAIRS</span>
+                </a>
+            </div> -->
+            <div class="list">
+                <a href="#builds">
+                    <span class="text">BUILDS</span>
+                    <span class="material-symbols-outlined">build</span>
+                </a>
+            </div>
+            <div class="list">
+                <a href="#cart">
+                    <span class="text">CART</span>
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </a>
+            </div>
+        </div>
 
-    <div class="navigation">
-        <ul>
-            <li class="list active">
-                <a href="#">
-                    <span class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </span>
-                    <span class="text">Home</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </span>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </span>
-                    <span class="text">Staff</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </span>
-                    <span class="text">Stock</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </span>
-                    <span class="text">Reports</span>
-                </a>
-            </li>
+        <!-- login register -->
+        <div class="login-register">
+            <div class="login-block">
+                <a href="#login"><span>LOGIN</span></a>
+            </div>
+            <div class="register-block">
+                <a href="#register"><span>REGISTER</span></a>
+            </div>
+        </div>
 
-            <div class="indicator"></div>
-        </ul>
-    </div>
-
-    <div class="setting">
-        <a href="#">
-            <span class="sign">Sign in</span>
-        </a>
-        <a href="#">
-            <span class="sign">Sign out</span>
-        </a>
-    </div>
-
-</div>
+    </div> 
