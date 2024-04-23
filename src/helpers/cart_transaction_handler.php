@@ -1,5 +1,6 @@
 <?php
 
+//only for valiation at the cart 
 
 require_once '../classes/database.php';
 require_once '../classes/cart.php';
@@ -9,7 +10,6 @@ session_start();
 
 $database = new Database();
 $db = $database->getConnection();
-// Assume $db is your database connection
 $cart = new Cart($db);
 $product = new Product($db);
 

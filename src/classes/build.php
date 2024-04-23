@@ -59,15 +59,24 @@ class Build {
         }
     }
     
-
+    //ORDER BY  b.added_timestamp DESC|ASC
     public function getBuildsByCustomerId($customerId) {
+        try{
         $query = "SELECT b.*, c.* FROM builds b
                   INNER JOIN components_list c ON b.components_list_id = c.id
-                  WHERE b.customer_id = ?";
+                  WHERE b.customer_id = ? ORDER BY b.added_timestamp DESC";
+                  
+        // if($start != null && $end != null){
+        //     $query = $query . "AND b.added_timestamp BETWEEN '" . $start . "' AND '" . $end ."' ORDER BY b.added_timestamp ASC"; 
+        // }
+
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $customerId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            throw $e ; 
+        }
     }
     
 

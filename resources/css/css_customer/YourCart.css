@@ -41,14 +41,18 @@ body {
     padding: 10px; 
 }
 
+/* product column */
 .cart-table td:first-child {
     max-width: 200px;
     padding-right: 30px;
 }
 
+/* price column */
 .cart-table td:nth-child(2) {
     max-width: 100px;
+    
 }
+
 
 .cart-table th:nth-child(3) {
     padding-left: 40px;
@@ -56,6 +60,7 @@ body {
 
 .cart-table th:nth-child(4) {
     padding-left: 35px;
+    /* background-color: red; */
 }
 
 .product-details {
@@ -159,8 +164,13 @@ body {
 }
 
 .empty-cart-message {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background.jpg'); */
+    /* background-position: center center; */
+    background-image: url(../../images/cart-empty.png);
+    background-size: contain;
+    background-repeat: no-repeat;
     color: #555;
-    background-color: #f2f2f2;
+    background-color: #fffefe;
     border: 1px solid #ddd;
     padding: 10vh 20vh; 
     text-align: center;

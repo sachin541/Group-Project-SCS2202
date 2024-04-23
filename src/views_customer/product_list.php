@@ -11,7 +11,6 @@ $product = new Product($db);
 // print_r($categories);
 
 $categories  = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "CPU Coolers", "PowerSupply", "Storage", "Case", "Monitor", "Keyboard" , "Mouse", "Accessories"];
-
 // Sort the $categories array based on the order defined in $orderArray
 
 // usort($categories, function ($a, $b) use ($orderArray) {
@@ -24,9 +23,15 @@ $categories  = ["Laptop", "CPU" , "GPU", "Memory", "MotherBoard", "CPU Coolers",
 // print_r($categories);
 $category = isset($_GET['category']) ? $_GET['category'] : 'Laptop'; // Default to 'laptop' if no GET request
 
+// if(isset($_GET['product_s'])){
+//     $search = $_GET['product_s']; 
+// }else{
+//     $search = NULL ; 
+// }; 
+
 // $category = isset($_POST['category']) ? $_POST['category'] : 'Laptop'; 
 
-$laptopProducts = $product->getProductsByCategory($category);
+$Products = $product->getProductsByCategory($category);
 
 // foreach ($categories as $itemC) {
 //   echo htmlspecialchars($itemC['category']) . "<br>";
@@ -37,15 +42,25 @@ function formatPrice($price) {
 }
 
 //sort based on quantity 
-usort($laptopProducts, function($a, $b) {
-  return $b['quantity'] <=> $a['quantity'];
-});
+// usort($Products, function($a, $b) {
+//   return $b['quantity'] <=> $a['quantity'];
+// });
 
+usort($Products, 'sort_by_qty'); 
 
+function sort_by_qty($a,$b){
+    if($a['quantity'] === $b['quantity']){
+        return 0 ; 
+    }else if ($a['quantity'] > $b['quantity']){
+        return -1 ; 
+    }else{
+        return 1 ; 
+    }
+    
+}
+
+// shuffle($array)
 ?>
-
-
-
 
 <?php require_once '../components/headers/main_header.php';?> 
 
@@ -61,9 +76,17 @@ usort($laptopProducts, function($a, $b) {
 
 <div class="mobile-menu">☰</div>
 
-<div class="main-container">
-    
+<!-- <div class="search-bar" >
+    <form action="" method="get">
+        <label for="product">Search</label>
+        <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+        <input type="text" name="product_s" id="product" class="search">
+        <input type="email">
+        <button type="submit" value="submit">Submit</button>
+    </form>
+</div> -->
 
+<div class="main-container">
     <aside class="main-side-nav" id="mySidenav">
         <?php foreach ($categories as $cat): ?>
             <form action="product_list.php" method="get">
@@ -75,29 +98,32 @@ usort($laptopProducts, function($a, $b) {
 
     <div class="products-container">
         <!-- Product Cards -->
-        <?php foreach ($laptopProducts as $item): ?>
-        <div class="product-card <?php echo $item['quantity'] <= 0 ? 'product-out-of-stock' : ''; ?>">
-            <!-- Out of Stock Ribbon -->
-            <?php if ($item['quantity'] <= 0): ?>
-                <div class="out-of-stock-ribbon">Out of Stock</div>
-            <?php endif; ?>
+        <?php foreach ($Products as $item): ?>
+            <div class="product-card <?php echo $item['quantity'] <= 0 ? 'product-out-of-stock' : ''; ?>">
+                <!-- Out of Stock Ribbon -->
+                <?php if ($item['quantity'] <= 0): ?>
+                    <div class="out-of-stock-ribbon">Out of Stock</div>
+                <?php endif; ?>
+                    
+                <div class="product-image">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
+                </div>
 
-            <div class="product-image">
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
+                <div class="product-details">
+                    <h3 class="product-title"><?php echo htmlspecialchars($item['product_name']); ?></h3>
+                    <p class="product-price">Price: Rs <?php echo htmlspecialchars(number_format($item['price'])); ?></p>
+                    <p class="product-brand">Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
+                    <p class="product-stock">In Stock: <?php echo htmlspecialchars($item['quantity']); ?></p>
+                </div>
+
+                <div class="product-actions">
+                    <form action="product_details.php" method="get">
+                        <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                        <input type="submit" value="Add to Cart" class="add-to-cart-button">
+                    </form>
+                </div>
+
             </div>
-            <div class="product-details">
-                <h3 class="product-title"><?php echo htmlspecialchars($item['product_name']); ?></h3>
-                <p class="product-price">Price: Rs <?php echo htmlspecialchars(number_format($item['price'])); ?></p>
-                <p class="product-brand">Brand: <?php echo htmlspecialchars($item['brand']); ?></p>
-                <p class="product-stock">In Stock: <?php echo htmlspecialchars($item['quantity']); ?></p>
-            </div>
-            <div class="product-actions">
-                <form action="product_details.php" method="get">
-                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                    <input type="submit" value="Add to Cart" class="add-to-cart-button">
-                </form>
-            </div>
-        </div>
         <?php endforeach; ?>
     </div>
 

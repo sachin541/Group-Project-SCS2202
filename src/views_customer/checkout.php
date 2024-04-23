@@ -26,22 +26,20 @@ if (empty($orderDetails)) {
     exit;
 }
 
-$totalAmount = 0;
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
     
 }
+//cal total 
+$totalAmount = 0;
 
 foreach ($orderDetails as $item){
     $productDetails = $product->getProductById($item['product_id']);
     $subtotal = $productDetails['price'] * $item['quantity'];
     $totalAmount += $subtotal;
 }
-
-// $_SESSION["payment_error"] = "Payment failed. Please try again";
-
 $_SESSION['cart_total'] = $totalAmount; 
-
+// $_SESSION["payment_error"] = "Payment failed. Please try again";
 $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSION['user_id']));
 // echo($numberOfPendingPayments); 
 
@@ -56,6 +54,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
     <script type="text/javascript">
         
+        //function to show pay on delivery confirmation modal 
         function showConfirmationModal() {
             var modal = document.getElementById("confirmationModal");
             var noBtn = document.getElementById("confirmNo");
@@ -80,7 +79,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
             };
         }
 
-
+        //function to show pay on delivery declined due to pending payments 
         function showModal() {
             console.log("Payment dismissed");
             var modal = document.getElementById("paymentPendingModal");
@@ -105,25 +104,26 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
         }
 
         function handleSubmit() {
-            var payOnline = document.getElementById('pay_online').checked;
+            var payOnline = document.getElementById('pay_online').checked; //retrieves the current checked state 
             var numberOfPendingPayments = <?= json_encode($numberOfPendingPayments); ?>; // Convert PHP variable to JS
             if (!payOnline && numberOfPendingPayments > 100) {
+                //Pay on delivary 
                 showModal();
-                return false; // Prevent form submission
+                return false; //dont submit 
             }
             
             if (!payOnline) {
-                // Show confirmation dialog for Pay on Delivery
+                //Pay on delivery 
                 showConfirmationModal();
-                return false;
+                return false; //dont submit form if modal is closed 
             }
             
             if (payOnline) {
                 buyNow();
-                return false;
+                return true; //return true to submit form 
             }
             
-            return true; // Proceed with form submission if all checks pass
+            return true; // Proceed if numberofPending is less and Its pay on delivery 
         }
 
         function buyNow() {
@@ -171,20 +171,20 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                 var payment = {
                     sandbox: true,
                     merchant_id: data.merchant_id, // Replace your Merchant ID
-                    return_url: undefined, // Important
-                    cancel_url: undefined, // Important
+                    return_url: undefined, 
+                    cancel_url: undefined, 
                     notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/ultils/notifyPayHere.php",
                     order_id: data.order_id,
                     items: data.name,
                     amount: data.price,
                     currency: data.currency,
                     hash: data.hash, // *Replace with generated hash retrieved from backend
-                    first_name: "test",
-                    last_name: "test",
-                    email: "test@gmail.com",
-                    phone: "0771234567",
-                    address: "test",
-                    city: "Colombo",
+                    first_name: data.temp,
+                    last_name: data.temp,
+                    email: data.temp,
+                    phone: data.temp,
+                    address: data.temp,
+                    city: data.temp,
                     country: "Sri Lanka",
                 };
 
@@ -195,7 +195,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
             xhr.send(form);
         }
 
-        document.querySelector('.checkout-form').addEventListener('submit', handleSubmit);
+        // document.querySelector('.checkout-form').addEventListener('submit', handleSubmit);
     </script>
 </head>
 <body>
@@ -205,80 +205,46 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
 </div>
 
 <div class="grid-container">
-
-<div class="box-style">
+      <!-- Billing details  -->
+    <div class="box-style">
         <h2>Billing Details</h2>
         <form onsubmit="return handleSubmit()" action="../helpers/checkout_handler.php" method="post" class="checkout-form">
             <input type="hidden" name="total_amount" value="<?= htmlspecialchars($totalAmount); ?>">
             <input type="hidden" name="order_id" value="<?= htmlspecialchars($next_order_id); ?>">
             <div class="row">
-                <div>
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                </div>
-                <div>
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                </div>
+                <div><label for="first_name">First Name</label><input type="text" id="first_name" name="first_name" placeholder="First Name" required></div>
+                <div><label for="last_name">Last Name</label><input type="text" id="last_name" name="last_name" placeholder="Last Name" required></div>
+            </div>
+        
+            <div class="row">
+                <div><label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email" required></div>
+                <div><label for="phone">Phone</label><input type="text" id="phone" name="phone" placeholder="Phone" required></div>
             </div>
             
             <div class="row">
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                </div>
-                <div>
-                    <label for="phone">Phone</label>
-                    <input type="text" id="phone" name="phone" placeholder="Phone" required>
-                </div>
+                <div><label for="province">Province</label><input type="text" id="province" name="province" placeholder="Province" required></div>
+                <div><label for="city">City</label><input type="text" id="city" name="city" placeholder="City" required></div>
             </div>
             
-            <div class="row">
-                <div>
-                    <label for="province">Province</label>
-                    <input type="text" id="province" name="province" placeholder="Province" required>
-                </div>
-                <div>
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" placeholder="City" required>
-                </div>
-            </div>
+            <div><label for="delivery_address">Delivery Address</label><input type="text" id="delivery_address" name="delivery_address" placeholder="Delivery Address" required></div>
+            <div><label for="postalcode">Postal Code</label><input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" required></div>
             
-            <div>
-                <label for="delivery_address">Delivery Address</label>
-                <input type="text" id="delivery_address" name="delivery_address" placeholder="Delivery Address" required>
+            <div class="payment-options"><h3>Payment Options</h3>
+                <div><input type="radio" id="pay_delivery" name="payment_method" value="pay_on_delivery" checked><label for="pay_delivery">Pay on Delivery</label></div>
+                <div><input type="radio" id="pay_online" name="payment_method" value="pay_online"><label for="pay_online">Pay Online</label></div>
             </div>
-            
-            <div>
-                <label for="postalcode">Postal Code</label>
-                <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" required>
-            </div>
-            
-            <div class="payment-options">
-                <h3>Payment Options</h3>
-                <div>
-                    <input type="radio" id="pay_delivery" name="payment_method" value="pay_on_delivery" checked>
-                    <label for="pay_delivery">Pay on Delivery</label>
-                </div>
-                <div>
-                    <input type="radio" id="pay_online" name="payment_method" value="pay_online">
-                    <label for="pay_online">Pay Online</label>
-                </div>
-            </div>
+
             <?php if (isset($_SESSION["payment_error"])): ?>
-                <div class="alert alert-danger">
-                    <?= htmlspecialchars($_SESSION["payment_error"]); ?>
-                </div>
+                <div class="alert alert-danger"><?= htmlspecialchars($_SESSION["payment_error"]); ?></div>
                 <?php unset($_SESSION["payment_error"]); // Unset immediately after displaying ?>
             <?php endif; ?>
-            <div>
-                <input type="submit" value="Place Order" class="place-order-button">
-            </div>
+
+            <div><input type="submit" value="Place Order" class="place-order-button"></div>
         </form>
 
 
     </div>
-    <!-- First Column: Order Items -->
+    <!--  Order Items -->
     <div class="box-style">
         <div class="components-section">
             <h2 class="components-heading">Order Items</h2>

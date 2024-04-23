@@ -16,14 +16,13 @@ session_start();
 if(isset($_POST["sumbit_type"]) && $_POST["sumbit_type"]=="payment"){
     
 $order_id = $checkout->getNextOrderId(); 
-
 $_SESSION["new_order_id"] = $order_id ; 
-
-$checkout->insertPayment(5,$order_id);
-$name = null;
+$checkout->insertPayment(5,$order_id); //5  =>  pending payment 
 $price = $_SESSION['cart_total']; 
 $currency = "LKR";
-
+$name = null;
+$items = null; 
+$temp = null; 
 
 $hash = strtoupper(
     md5(
@@ -47,6 +46,6 @@ echo json_encode($obj);
 
 } 
 
-if(isset($_POST["sumbit_type"]) && $_POST["sumbit_type"]=="order"){
+// if(isset($_POST["sumbit_type"]) && $_POST["sumbit_type"]=="order"){
 
-}
+// }

@@ -85,7 +85,7 @@ function formatPrice($price) {
 
 
 <script>
-    let currentImageIndex = 0; // Initialize current image index to 0
+    let currentImageIndex = 0; // Initialize current image index to 0 when the page loads in 
     let images = document.querySelectorAll('.carousel-image'); // Get all carousel images
 
     function changeImage(direction) {

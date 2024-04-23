@@ -9,7 +9,8 @@ $db = $database->getConnection();
 
 $cart = new Cart($db);
 
-// Check if the user is logged in
+//Controlling the current state of the cart 
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views_main/login.php');
     exit;
@@ -20,37 +21,39 @@ if (isset($_POST['product_id']) && isset($_POST['remove_from_cart'])) {
     $productId = $_POST['product_id'];
 
     $userId = $_SESSION['user_id'];
-    // Delete from cart
+  
     $cart->deleteFromCart($userId, $productId);
 
-    // Redirect back to the cart page
+   
     header('Location: ../views_customer/view_cart.php');
     exit;
 }
 
 if (isset($_POST['product_id']) && isset($_POST['quantity']) && isset($_POST['update_cart_qty'])) {
     $productId = $_POST['product_id'];
+
     $quantity = max(1, $_POST['quantity']); // Ensures quantity is at least 1
+
     $userId = $_SESSION['user_id'];
 
-    // Update the cart
+    
     $cart->updateCartQuantity($userId, $productId, $quantity);
 
-    // Redirect back to the cart page
+   
     header('Location: ../views_customer/view_cart.php');
     exit;
 }
 
-// Check if the product ID and quantity are set in the POST request
+//adding items from product_details_page 
 if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
     $productId = $_POST['product_id'];
     $quantity = $_POST['quantity'];
     $userId = $_SESSION['user_id']; 
     
-    // Add to cart
+   
     $cart->addToCart($userId, $productId, $quantity);
 
-    // Redirect to cart page
+   
     header('Location: ../views_customer/view_cart.php');
     exit;
 }

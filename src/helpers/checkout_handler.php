@@ -15,7 +15,6 @@ $db = $database->getConnection();
 $cart = new Cart($db);
 $checkout = new Checkout($db);
 
-
 $cartItems = $cart->getCartItemsByUserId($userId);
 
 //payment on delivery 
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_on_
         $orderId = $checkout->createOrder($userId, $_POST, $cartItems);//creates order
         $cart->updateProductQuantities($userId);//updates the qty of the products 
         $cart->clearCart($userId);//clears the cart
-        //cocurrency issues 
+        
         header('Location: ../views_customer/order_success.php?order_id=' . $orderId);
         exit;
     } catch (Exception $e) {

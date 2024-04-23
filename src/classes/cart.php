@@ -9,6 +9,19 @@ class Cart {
         $this->db = $db;
     }
 
+    // public function test($userId, $productId, $quantity){
+    //     $checkQuery = "SELECT * FROM cart_items WHERE user_id = ? AND product_id = ?";
+    //     $checkStmt = $this->db->prepare($checkQuery);
+
+    //     $checkStmt->bindParam(1, $userId);
+    //     $checkStmt->bindParam(2, $productId);
+
+    //     $checkStmt->execute();
+    //     // $checkStmt->fetchAll(PDO::FETCH_ASSOC); 
+    //     return $checkStmt;
+
+    // }
+
     public function addToCart($userId, $productId, $quantity) {
         try {
             // Check if the product already exists in the cart
@@ -67,17 +80,17 @@ class Cart {
         }
     }
 
+    // for testing 
+    // $stmt->bindParam(1, $userId);
+    // $stmt->bindParam(2, $productId);
 
-
+    //remove single item 
     public function deleteFromCart($userId, $productId) {
         try {
             $query = "DELETE FROM cart_items WHERE user_id = ? AND product_id = ?";
             $stmt = $this->db->prepare($query);
 
-            $stmt->bindParam(1, $userId);
-            $stmt->bindParam(2, $productId);
-
-            $stmt->execute();
+            $stmt->execute([$userId,$productId]);
         } catch(PDOException $e) {
             throw $e;
         }
@@ -113,8 +126,8 @@ class Cart {
         }
     }
 
-
-    public function updateProductQuantities($userId) {
+    //used when making orders 
+        public function updateProductQuantities($userId) {
         try {
             $this->db->beginTransaction();
 

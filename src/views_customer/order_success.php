@@ -9,15 +9,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 $orderClass = new Order($db);
-$orderDetails = [];
-
-try {
-    if (!empty($order_id)) {
-        $orderDetails = $orderClass->getOrderDetails($order_id);
-    }
-} catch (Exception $e) {
-    $errorMessage = $e->getMessage();
-}
+$orderDetails = $orderClass->getOrderDetails($order_id);
 
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
@@ -37,43 +29,21 @@ function formatPrice($price) {
 <div class="invoice-container">
     <?php if (!empty($orderDetails)): ?>
         <?php $firstItem = $orderDetails[0]; ?>
+
         <div class="invoice-header">
             <h1>Invoice for Order #<?= htmlspecialchars($order_id) ?></h1>
         </div>
+
         <div class="customer-details">
             <table class="details-table">
-                <tr>
-                    <td>Date:</td>
-                    <td><?= htmlspecialchars($firstItem['created_at']) ?></td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><?= htmlspecialchars($firstItem['first_name']) . ' ' . htmlspecialchars($firstItem['last_name']) ?></td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><?= htmlspecialchars($firstItem['email']) ?></td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td><?= htmlspecialchars($firstItem['phone']) ?></td>
-                </tr>
-                <tr>
-                    <td>Delivery Address:</td>
-                    <td><?= htmlspecialchars($firstItem['delivery_city_address']) ?></td>
-                </tr>
-                <tr>
-                    <td>City:</td>
-                    <td><?= htmlspecialchars($firstItem['city']) ?></td>
-                </tr>
-                <tr>
-                    <td>Province:</td>
-                    <td><?= htmlspecialchars($firstItem['province']) ?></td>
-                </tr>
-                <tr>
-                    <td>Postal Code:</td>
-                    <td><?= htmlspecialchars($firstItem['postalcode']) ?></td>
-                </tr>
+                <tr><td>Date:</td><td><?= htmlspecialchars($firstItem['created_at']) ?></td></tr>
+                <tr><td>Name:</td><td><?= htmlspecialchars($firstItem['first_name']) . ' ' . htmlspecialchars($firstItem['last_name']) ?></td></tr>
+                <tr><td>Email:</td><td><?= htmlspecialchars($firstItem['email']) ?></td></tr>
+                <tr><td>Phone:</td><td><?= htmlspecialchars($firstItem['phone']) ?></td></tr>
+                <tr><td>Delivery Address:</td><td><?= htmlspecialchars($firstItem['delivery_city_address']) ?></td></tr>
+                <tr><td>City:</td><td><?= htmlspecialchars($firstItem['city']) ?></td></tr>
+                <tr><td>Province:</td><td><?= htmlspecialchars($firstItem['province']) ?></td></tr>
+                <tr><td>Postal Code:</td><td><?= htmlspecialchars($firstItem['postalcode']) ?></td></tr>
             </table>
         </div>
 
@@ -102,11 +72,13 @@ function formatPrice($price) {
             <p class="total-amount">Total: <?= formatPrice($firstItem['total']) ?></p>
             <button class="print-button" onclick="window.print();">Print Invoice</button>
         </div>
+
     <?php elseif (isset($errorMessage)): ?>
         <p class="error-message">Error: <?= htmlspecialchars($errorMessage) ?></p>
     <?php else: ?>
         <p class="not-found">Order not found.</p>
     <?php endif; ?>
+    
 </div>
 </body>
 </html>

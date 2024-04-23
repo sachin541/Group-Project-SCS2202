@@ -20,6 +20,13 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $cartItems = $cart->getCartItemsByUserId($userId);
 $totalAmount = 0; //used in loop later to calculate total in cart
+
+// print_r( $cart->test(39,26,26)->fetchAll(PDO::FETCH_ASSOC));
+// echo '<br>';
+// print_r( $cart->test(39,26,26)->fetch(PDO::FETCH_ASSOC));
+// echo '<br>';
+// print_r( $cart->test(39,26,26)->fetchColumn(1));
+
 ?>
 
 <!DOCTYPE html>
@@ -55,15 +62,16 @@ $totalAmount = 0; //used in loop later to calculate total in cart
                         $totalAmount += $subtotal;
                         ?>
                         <tr class="cart-item">
-
+                            <!-- product -->
                             <td>
                                 <div class="product-details">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($item['image1']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
                                     <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
                                 </div>
                             </td>
-                            
+                            <!-- price  -->
                             <td><?php echo htmlspecialchars(formatPrice($item['price'])); ?></td>
+                            <!-- quantity -->
                             <td>
                                 <div class="quantity-controls">
                                     <form action="../helpers/cart_handler.php" method="post" id="update-form-<?php echo $item['id']; ?>">
@@ -75,7 +83,7 @@ $totalAmount = 0; //used in loop later to calculate total in cart
                                     </form>
                                 </div>
                             </td>
-                            
+                            <!-- remove -->
                             <td>
                                 <form action="../helpers/cart_handler.php" method="post">
                                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">

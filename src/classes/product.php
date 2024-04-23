@@ -8,8 +8,7 @@ class Product {
         $this->db = $db;
     }
 
-    public function addProduct($productName, $category, $quantity, $description, $price, $discount, 
-    $brand, $image1, $image2, $image3) {
+    public function addProduct($productName, $category, $quantity, $description, $price, $discount, $brand, $image1, $image2, $image3) {
         try {
             $query = "INSERT INTO products (product_name, category, quantity, product_description, 
             price, discount, brand, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -45,9 +44,14 @@ class Product {
     }
 
 
-    public function getProductsByCategory($categoryName) {
+    public function getProductsByCategory($categoryName,$search=NULL) {
         try {
-            $query = "SELECT * FROM products WHERE category = ?";
+            $query = "SELECT * FROM products WHERE category = ? AND price";
+
+            if($search != NULL){
+                $query = $query . "AND product_name LIKE '%" . $search . "%'"; 
+            }
+
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $categoryName);
             $stmt->execute();
@@ -124,6 +128,7 @@ class Product {
         }
     }
     
+    //from categories table 
     public function getAllCategories() {
         try {
             $query = "SELECT category FROM productcategories ORDER BY category";
@@ -135,6 +140,7 @@ class Product {
         }
     }
 
+    //from products table 
     public function getDistincCategoriesFromProduct() {
         try {
             // Adjusted query to select unique categories from the products table
