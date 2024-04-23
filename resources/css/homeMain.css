@@ -5,10 +5,6 @@ body, html {
     min-height: 100%;
 }
 
-body {
-    /* font-family: 'Merriweather', serif; */
-}
-
 .flex-container {
     display: flex;
     flex-direction: column;

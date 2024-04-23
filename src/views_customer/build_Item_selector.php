@@ -32,7 +32,10 @@ $items = [
 <body>
 
     <div class="heading">
-    <p>Create Your Own PC Build!</p>
+
+    
+    <h1>Create Your Own PC Build!</h1>
+    <a href="./builds_current.php" class="Active-Build">View Active Build Requests!</a>
     </div>
     <div class="error-box">
     <?php if (isset($_SESSION['error'])): ?>
@@ -104,19 +107,16 @@ $items = [
     </div>
 
     <div class="main-container-2">
+    
+        <!-- Form with submit button -->
+        <form method="post" action="./build_create.php" class="button-style">
+            <input type="hidden" name="handler_type" value="submit-build">
+            <button type="submit" class="create">Create New Build Request!</button>
+        </form>
 
-        <div class="create-build-btn">
-            <form method="post" action="./build_create.php">
-                <input type="hidden" name="handler_type" value="submit-build">
-                <button type="submit" class="remove-btn">Create New Build Request!</button>
-                </form>
-        </div>  
-
-        <div class="view-current-build-btn">
-            <a href="./builds_current.php" class="active-build-btn">View Active Build Requests!</a>
-        </div>
- 
+   
     </div>
+
 
 
 

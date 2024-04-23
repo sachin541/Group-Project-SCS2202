@@ -9,17 +9,10 @@ body {
 
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-        "orderItems deliveryDetails"
-        "fullWidth fullWidth"; 
+    display: flex;
     gap: 20px;
-    padding: 20px;
-    max-width: 100%;
-    margin: auto;
-    
-    
+    min-width: 100%;
+    justify-content: center;
 }
 
 
@@ -27,7 +20,7 @@ body {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    
+    width: 80%;
 }
 
 
@@ -187,10 +180,6 @@ body {
 }
 
 
-
-
-
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -252,13 +241,6 @@ body {
     background-color: red;
 }
 
-/* Responsive Modal Content */
-@media screen and (max-width: 600px) {
-    .modal-content {
-        width: 80%;
-    }
-}
-
 .modal-button {
     padding: 10px 20px;
     margin: 10px;
@@ -294,6 +276,38 @@ body {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
+}
+
+
+/* Responsive Modal Content */
+@media screen and (max-width: 600px) {
+    .modal-content {
+        width: 80%;
+        
+    }
+
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 10%;
+        
+           
+    }
+
+    .box-style {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        overflow: auto;
+        
+    }
+
+    .cart-table, .details-table {
+        
+    }
+    
 }
 
 

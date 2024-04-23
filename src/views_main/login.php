@@ -52,12 +52,12 @@
                                 echo '<div style="color: red;" class="alert alert-danger">' . $login_err . '</div>';
                             }
                             ?>
-                        <input type="text" id="email" name="email" placeholder="Enter e-mail" class="field" />
+                        <input type="text" id="email" name="email" placeholder="Enter e-mail" class="field" required />
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="form-label">Your Password</label>
-                        <input type="password" id="password" name="password" placeholder="password" class="field" />
+                        <input type="password" id="password" name="password" placeholder="password" class="field" required />
                     </div>
 
 

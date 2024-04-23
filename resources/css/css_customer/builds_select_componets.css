@@ -172,20 +172,42 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.heading > h1{
+    
+    font-size: 40px;
+    
+   
+}
+
+.heading > a{
+    color: grey;
+}
 
 .main-container-2 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    gap: 10px; /* Add space between buttons */
+    justify-content: center; /* Centers the button container */
+    padding: 20px;
+    
+    
 }
 
-.create-build-btn, .view-current-build-btn {
-    flex : 1 ;
-    text-align: center;
+.create{
+    border: none;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(224, 222, 222);
+    font-weight: bold;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.create:hover{
+    transform: translateY(-4px); 
+    background-color: red;
+    color: white;
+}
+
 
 /* Mobile responsiveness */
 @media screen and (max-width: 600px) {
@@ -245,14 +267,7 @@
 
 
 @media screen and (max-width: 600px) {
-    .main-container-2 {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .create-build-btn, .view-current-build-btn {
-        width: 100%;
-    }
+ 
 }
 
 

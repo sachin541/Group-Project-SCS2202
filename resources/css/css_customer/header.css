@@ -1,6 +1,6 @@
 /* Base styles */
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: Arial;
 }
 
@@ -11,18 +11,26 @@ body{
   background: #000000; /* Example background color */
   color: white;
   padding: 0 20px;
-  
 }
 
 .logo-container {
   display: flex;
-  gap :10px;
+  gap: 10px;
   align-items: center;
 }
 
-.content{
- 
+.hamburger {
+  display: none; /* Hidden by default */
+  font-size: 2em;
+  cursor: pointer;
 }
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .name {
   font-size: 1.5em;
   font-weight: bold;
@@ -38,10 +46,9 @@ body{
 }
 
 .nav-icon {
-    height: 30px;  /* Adjust size as needed */
-    vertical-align: middle;
-    
-    margin-right: 8px;  /* Space between icon and text */
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 .topnav-item:hover {
@@ -59,4 +66,50 @@ body{
 
 .unreg-log:hover {
   background-color: #7f2920;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .outer-grid-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 4px;
+    
+  }
+  
+  .logo-container {
+    display: flex;
+    
+    gap: 0px;
+    
+  }
+
+  .logo-container, .content {
+    width: 100%;
+    
+  }
+
+
+  .hamburger {
+    display: block; /* Show hamburger icon */
+    width: 100%;
+    text-align: center;
+    background-color: #555;
+    padding: 10px 0px;
+  }
+
+  .content {
+    display: flex; /* Hide content initially */
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .nav-icon {
+    height: 40px;
+  }
+
+  .unreg-log {
+    margin-top: 10px;
+    margin-left: 0;
+  }
 }

@@ -81,8 +81,6 @@
     
 }
 
-
-
 .modal {
     display: none; /* Initially hidden */
     position: fixed;
@@ -131,4 +129,58 @@
 
 .modal-button:hover {
     background-color: red;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .invoice-container {
+        width: 90%; /* Makes better use of available screen width */
+        margin: 0px auto;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .details-table, .items-table {
+        width: 100%;
+        border: 0;
+    }
+
+    .details-table td, .items-table th, .items-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .details-table td, .items-table th {
+        text-align: left;
+        padding: 10px;
+    }
+
+    .items-table th {
+      
+        display: none
+    }
+
+    .items-table td {
+        padding-left: 20%;
+        text-align: right;
+    }
+
+    .items-table td::before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    .print-button, .modal-button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 90%; /* Adjust modal size for smaller screens */
+    }
 }

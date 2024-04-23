@@ -27,7 +27,7 @@ function truncateText($text, $maxLength = 100) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page Layout</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/test.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/homeMain.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/homeProductCard.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">   
 </head>
@@ -105,7 +105,7 @@ function truncateText($text, $maxLength = 100) {
                 <p>Custom PC Builds</p>
                 
                 <!-- Button linking to a different page -->
-                <a href="path/to/your/page" class="service-cta">View More</a>
+                <!-- <a href="path/to/your/page" class="service-cta">View More</a> -->
             </div>
         </div>
 
@@ -116,7 +116,7 @@ function truncateText($text, $maxLength = 100) {
                 <p>PC Repairs</p>
                 
                 <!-- Button linking to a different page -->
-                <a href="path/to/your/page" class="service-cta">View More</a>
+                <!-- <a href="path/to/your/page" class="service-cta">View More</a> -->
             </div>
         </div>
     </div>
@@ -131,7 +131,7 @@ function truncateText($text, $maxLength = 100) {
                 <p>Home Delivery</p>
                 
                 <!-- Button linking to a different page -->
-                <a href="path/to/your/page" class="service-cta">View More</a>
+                <!-- <a href="path/to/your/page" class="service-cta">View More</a> -->
             </div>
         </div>
 
@@ -142,7 +142,7 @@ function truncateText($text, $maxLength = 100) {
                 <p>Newest Products</p>
                 
                 <!-- Button linking to a different page -->
-                <a href="path/to/your/page" class="service-cta">View More</a>
+                <!-- <a href="path/to/your/page" class="service-cta">View More</a> -->
             </div>
         </div>
 
