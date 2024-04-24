@@ -65,11 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $pattern = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
 
-    if (!preg_match($pattern, $password)) {
-        $_SESSION['registration_error'] = 'Weak Password.';
-        header('Location: ../views_main/reg.php');
-        exit;
-    }
+    // if (!preg_match($pattern, $password)) {
+    //     $_SESSION['registration_error'] = 'Weak Password.';
+    //     header('Location: ../views_main/reg.php');
+    //     exit;
+    // }
 
     // Generate OTP
     $otp = rand(100000, 999999); // Consider a more secure OTP generation method

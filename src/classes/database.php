@@ -6,8 +6,8 @@ ini_set("error_log", "/path/to/php-error.log");
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'yellow');
-define('DB_USER', 'computify');
-define('DB_PASSWORD', 'com321test@123');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 
 class Database {
     private $conn; //store PDO object 
