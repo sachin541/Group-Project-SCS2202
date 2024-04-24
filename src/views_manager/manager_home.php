@@ -20,7 +20,7 @@ require_once '../components/headers/main_header.php';
         </div>
         </a>
 
-        <a href="linkhere" class="card">
+        <a href="./reportsMain.php" class="card">
         <div class="card">
             <img src="../../resources/images/homePagImages/manager/reports.png" class="foto" style="width:100%">
             <header>

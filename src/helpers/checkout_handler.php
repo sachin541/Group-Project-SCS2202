@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment_method'] == "pay_onl
     try {
         $payment =  $checkout->GetPaymentStatus($_SESSION["new_order_id"]); 
 
-        $payment = true ; //ignore notify
+        
 
         if($payment){
         unset($_SESSION["new_order_id"]); 

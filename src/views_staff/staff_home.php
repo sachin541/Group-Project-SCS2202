@@ -28,11 +28,11 @@ require_once '../components/headers/main_header.php';
             </header>
         </div>
         </a>
-        <a href="linkhere" class="card">
+        <a href="./InStoreOrder.php" class="card">
         <div class="card">
             <img src="../../resources/images/homePagImages/technician/profile.png" class="foto" style="width:100%">
             <header>
-                <h1>Profile</h1>
+                <h1>Order</h1>
             </header>
         </div>
         </a> 

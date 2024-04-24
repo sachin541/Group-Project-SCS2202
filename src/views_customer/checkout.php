@@ -120,7 +120,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
             
             if (payOnline) {
                 buyNow();
-                return true; //return true to submit form 
+                return false; //ALLOWS THE BUYNOW() FUNCTION TO HANDLE THE SUBMIT (oncomplete function in by now)
             }
             
             return true; // Proceed if numberofPending is less and Its pay on delivery 
@@ -151,7 +151,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
                     // var form = new FormData();
                     // form.append("sumbit_type", "order");
                     var form = document.querySelector('.checkout-form');
-                    form.submit();
+                    form.submit(); //SUBMITS FORM FOR ONLINE PAYMENTS
                     
                 };
 

@@ -20,9 +20,9 @@ $_SESSION["new_order_id"] = $order_id ;
 $checkout->insertPayment(5,$order_id); //5  =>  pending payment 
 $price = $_SESSION['cart_total']; 
 $currency = "LKR";
-$name = null;
-$items = null; 
-$temp = null; 
+$name = "test name";
+$items = "test"; 
+$temp = "test"; 
 
 $hash = strtoupper(
     md5(

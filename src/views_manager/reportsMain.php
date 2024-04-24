@@ -38,6 +38,8 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
     <link rel="stylesheet" href="../../resources/css/css_manager/reportsSideBar.css">
     <link rel="stylesheet" href="../../resources/css/css_manager/reportsMain.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 </head>
 <body>
 

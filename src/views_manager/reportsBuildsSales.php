@@ -33,7 +33,7 @@ $lineChartData = $reportObj->getDailyProfitFromBuilds($startDate, $endDate);
     <title>Reports</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../resources/css/css_manager/reportsSideBar.css">
-    <link rel="stylesheet" href="../../resources/css/css_manager/reportsMain.css">
+    <link rel="stylesheet" href="../../resources/css/css_manager/reportsBuildsSales.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -51,7 +51,7 @@ $lineChartData = $reportObj->getDailyProfitFromBuilds($startDate, $endDate);
                 <form action="" method="get">
                     <div class="main-filter-section">
                         
-                        <h2>Product Sales Reports</h2>
+                        <h2>Build Sales Reports</h2>
                         
                         <div class="filter-options">
 
