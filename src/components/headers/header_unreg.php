@@ -18,7 +18,14 @@
         <div class="content" id="navLinks">
             <a href="../views_customer/product_list.php" class="topnav-item">
                 <img src="../../resources/images/icons/bag.png" alt="Products" class="nav-icon">Products</a>
-            <a href="../views_customer/view_cart.php" class="topnav-item">
+            <a href="../views_main/loginRequest.php" class="topnav-item">
+                <img src="../../resources/images/icons/cart.png" alt="Cart" class="nav-icon">Cart</a>
+            <a href="../views_main/loginRequest.php" class="topnav-item">
+                <img src="../../resources/images/icons/tools.png" alt="Repairs" class="nav-icon">Repairs</a>
+            <a href="../views_main/loginRequest.php" class="topnav-item">
+                <img src="../../resources/images/icons/pc.png" alt="Builds" class="nav-icon">Builds</a>
+            <a href="../views_main/loginRequest.php" class="topnav-item">
+                <img src="../../resources/images/icons/order.png" alt="Orders" class="nav-icon">Orders</a>
             <a href="../views_main/login.php" class="unreg-log"> Login </a>
             <a href="../views_main/reg.php" class="unreg-log">Sign-up</a>
         </div>
