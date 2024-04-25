@@ -21,15 +21,23 @@
     padding: 10px 0px;
     background-color: #f4f4f4;
     display: flex;
-    justify-content: space-between;
+    gap : 20px ; 
     align-items: center;
     width: 100%;
     border-radius: 10px;
     transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    text-align: center;
+}
+
+.product-row2 {
+    
+    text-align: left;
 }
 
 .product-row2{
+    
     background-color: black;
+    
 }
 
 .product-row:hover , .product-row2:hover{
@@ -262,6 +270,19 @@
         font-size: 1.1rem; /* Slightly larger font size for item name */
         font-weight: bold; /* Make the item name bold */
         color: white; /* Space between elements */
+    }
+
+    .product-row , .product-row2 {
+        border: 1px solid #ddd;
+        padding: 10px 0px;
+        
+        display: flex;
+        justify-content: center;
+        gap: 0px ; 
+        width: 100%;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease, transform 0.3s ease; 
+        
     }
 }
 

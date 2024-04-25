@@ -7,7 +7,7 @@ require_once '../components/headers/main_header.php';
 <html>
 <head>
     <title>Grid Layout Example</title>
-    <link rel="stylesheet"  href="../../resources/css/css_tech/technician_home.css">
+    <link rel="stylesheet"  href="../../resources/css/css_tech/tech_home_new.css">
 </head>
 <div id="cont">
     <div class="grid-container">
@@ -20,7 +20,7 @@ require_once '../components/headers/main_header.php';
         </div>
         </a>
 
-        <a href="linkhere" class="card">
+        <a href="./build_management.php" class="card">
         <div class="card">
             <img src="../../resources/images/homePagImages/technician/pc_build.png" class="foto" style="width:100%">
             <header>
@@ -28,14 +28,14 @@ require_once '../components/headers/main_header.php';
             </header>
         </div>
         </a>
-        <a href="linkhere" class="card">
+        <!-- <a href="linkhere" class="card">
         <div class="card">
             <img src="../../resources/images/homePagImages/technician/profile.png" class="foto" style="width:100%">
             <header>
                 <h1>Profile</h1>
             </header>
         </div>
-        </a> 
+        </a>  -->
 
         
     </div>

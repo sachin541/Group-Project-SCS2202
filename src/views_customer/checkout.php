@@ -15,7 +15,7 @@ $orderobj = new Order($db);
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
-    exit;
+    exit; 
 }
 
 $userId = $_SESSION['user_id'];
