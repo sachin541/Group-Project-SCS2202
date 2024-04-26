@@ -92,6 +92,16 @@ class Delivery {
         }
     }
 
+    public function getDeliveryPerson($orderID){
+        $query = "SELECT employees.staff_name , employees.mobile_no FROM deliveries 
+        JOIN employees ON employees.staff_id = deliveries.delivery_person_id
+        WHERE order_id = ?" ;
+        $stmt = $this->db->prepare($query); 
+        $stmt->execute([$orderID]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);  
+       
+    }
+
 
     
 }

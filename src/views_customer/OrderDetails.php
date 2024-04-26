@@ -2,14 +2,14 @@
 require_once '../classes/database.php';
 require_once '../classes/product.php';
 require_once '../classes/order.php';
-
+require_once '../classes/delivery.php'; 
 
 $database = new Database();
 $db = $database->getConnection();
 
 $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : '';
 
-
+$delivery = new Delivery($db); 
 $product = new Product($db);
 $inStore = new Order($db);
 
@@ -18,11 +18,16 @@ $orderDetails = [];
 try {
     if (!empty($order_id)) {
         $orderDetails = $inStore->getOrderDetails($order_id);
+        $delivery = $delivery->getDeliveryPerson($order_id); 
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
 }
 // print_r($orderDetails);
+print_r($delivery);
+if(empty($delivery)){
+    echo 1; 
+}
 // print_r($orderDetails);
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
@@ -116,15 +121,17 @@ function formatAndCapitalize($str) {
                     
                     <div class="detail"><strong>E-mail:</strong> <?= htmlspecialchars($firstItem['email']) ?></div>
                     <div class="detail"><strong>Recipient Name:</strong> <?= htmlspecialchars($firstItem['first_name'] . " " . $firstItem['last_name']) ?></div>
-                </div>
-                <div class="details-group">
                     <div class="detail"><strong>Phone:</strong> <?= htmlspecialchars($firstItem['phone']) ?></div>
-                    <div class="detail"><strong>Delivery Address:</strong> <?= htmlspecialchars($firstItem['delivery_city_address']) ?></div>
-                    <div class="detail"><strong>City:</strong> <?= htmlspecialchars($firstItem['city']) ?></div>
-                    <div class="detail"><strong>Province:</strong> <?= htmlspecialchars($firstItem['province']) ?></div>
                 </div>
                 <div class="details-group">
-                    <div class="detail"><strong>Delivery Person ID:</strong> <?= htmlspecialchars($firstItem['postalcode']) ?></div>
+                    <div class="detail"><strong>Province:</strong> <?= htmlspecialchars($firstItem['province']) ?></div>
+                    <div class="detail"><strong>City:</strong> <?= htmlspecialchars($firstItem['city']) ?></div>
+                    <div class="detail"><strong>Delivery Address:</strong> <?= htmlspecialchars($firstItem['delivery_city_address']) ?></div>
+                    <div class="detail"><strong>Postal Code : </strong> <?= htmlspecialchars($firstItem['postalcode']) ?></div>
+                    
+                </div>
+                <div class="details-group">
+                    
                     <div class="detail"><strong>Payment Type:</strong> <?= htmlspecialchars(formatAndCapitalize($firstItem['payment_type'])) ?></div>
                     <div class="detail"><strong>Payment Status:</strong> <?= htmlspecialchars($firstItem['payment_status']) ?></div>
                 </div>

@@ -18,6 +18,7 @@
         .cont{
             display: flex; 
             flex-wrap: wrap;
+            justify-content: center;
             margin-top: 10vh;
             border: 10px solid #f9f9f9;
             box-shadow: 10px;
