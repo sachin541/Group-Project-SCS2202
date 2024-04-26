@@ -25,6 +25,13 @@ function formatPrice($price) {
 <head>
     <title>Invoice</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/invoice-style.css">
+    <style>
+        @media print {
+            .outer-grid-container {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <div class="main-header">
 

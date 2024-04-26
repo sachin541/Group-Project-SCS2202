@@ -6,8 +6,6 @@ if(!(isset($_SESSION['role'])) || !($_SESSION['role'] != 'manager' || $_SESSION[
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>

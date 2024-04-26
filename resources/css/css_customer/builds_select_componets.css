@@ -28,7 +28,9 @@
     transition: box-shadow 0.3s ease, transform 0.3s ease; 
     text-align: center;
 }
-
+.product-row{
+    justify-content: space-between;
+}
 .product-row2 {
     
     text-align: left;
