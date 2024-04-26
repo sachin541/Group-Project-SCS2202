@@ -2,6 +2,10 @@
 require_once '../components/headers/main_header.php';
 require_once '../classes/database.php';
 require_once '../classes/reports.php'; 
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 $category = isset($_POST['type']) ? $_POST['type'] : 'default';
 
 $database = new Database();

@@ -1,6 +1,11 @@
 <?php
 require_once '../classes/database.php'; 
 require_once '../classes/product.php';
+require_once '../components/headers/main_header.php';
+if(!isset($_SESSION['role'])){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 
 $database = new Database();
 
@@ -35,7 +40,7 @@ $sidebarItems = [
 ?>
 
 
-<?php require_once '../components/headers/main_header.php';?> 
+
 
 <!DOCTYPE html>
 <html lang="en">

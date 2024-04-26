@@ -2,8 +2,13 @@
 require_once '../classes/database.php'; 
 require_once '../classes/UserManager.php'; 
 require_once '../components/headers/main_header.php';
-require_once '../components/confirm_modal.php'; 
 
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
+
+require_once '../components/confirm_modal.php'; 
 $database = new Database();
 $db = $database->getConnection(); 
 

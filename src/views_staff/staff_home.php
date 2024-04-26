@@ -1,6 +1,11 @@
 <?php
 require_once '../components/headers/main_header.php';
+if(!(isset($_SESSION['role'])) || !($_SESSION['role'] != 'manager' || $_SESSION['role'] != 'staff')){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 ?>
+
 
 
 <!DOCTYPE html>

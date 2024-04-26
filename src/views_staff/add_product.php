@@ -1,9 +1,12 @@
 <?php 
+require_once '../components/headers/main_header.php';
+if(!(isset($_SESSION['role'])) || !($_SESSION['role'] != 'manager' || $_SESSION['role'] != 'staff')){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
+
 require_once '../classes/database.php'; 
 require_once '../classes/product.php'; 
-
-
-
     $database = new Database();
     $db = $database->getConnection();
     $product = new Product($db);
@@ -25,7 +28,7 @@ require_once '../classes/product.php';
 
 <body>
 
-<?php require_once '../components/headers/main_header.php';?>
+
 
 <?php
     if (isset($_SESSION['product_adder'])) {

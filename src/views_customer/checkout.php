@@ -4,7 +4,10 @@ require_once '../classes/cart.php';
 require_once '../classes/product.php';
 require_once '../classes/order.php';
 require_once '../components/headers/main_header.php';
-
+if(!isset($_SESSION['role'])){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 
 $database = new Database();
 $db = $database->getConnection();

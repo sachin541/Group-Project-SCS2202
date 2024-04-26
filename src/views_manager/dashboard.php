@@ -3,7 +3,10 @@ require_once '../components/headers/main_header.php';
 require_once '../classes/product.php';
 require_once '../classes/UserManager.php'; 
 require_once '../classes/reports.php';
-
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 $database = new Database();
 $db = $database->getConnection();
 $productobj = new Product($db);

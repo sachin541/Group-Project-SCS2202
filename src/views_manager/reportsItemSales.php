@@ -2,7 +2,10 @@
 require_once '../classes/database.php';
 require_once '../classes/reports.php';
 require_once '../components/headers/main_header.php';
-
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 $database = new Database();
 $db = $database->getConnection();
 $report = new ItemSales($db);

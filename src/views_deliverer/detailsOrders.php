@@ -2,6 +2,11 @@
 require_once '../classes/database.php';
 require_once '../classes/product.php';
 require_once '../classes/order.php'; 
+require_once '../components/headers/main_header.php';
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'deliverer' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 $database = new Database();
 $db = $database->getConnection();
 
@@ -48,7 +53,7 @@ function formatAndCapitalize($str) {
 </head>
 <body>
 <div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
+    <?php ?>
 </div>
 
 <div class="grid-container">

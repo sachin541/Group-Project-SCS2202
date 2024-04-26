@@ -28,7 +28,13 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
 // print_r($lineChartObj->processSalesDataForLineChart($lineChartData));
 ?>
 
-<?php require_once '../components/headers/main_header.php'; ?>
+<?php require_once '../components/headers/main_header.php';
+  if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Employee Details</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/add_emp.css" />
-</head>
-<body>
-    <?php 
+<?php 
     require_once '../components/headers/main_header.php'; 
     require_once '../classes/database.php'; 
     require_once '../classes/UserManager.php'; 
-
+    if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'manager' )){
+        header('Location: ../views_main/denied.php');
+        exit;
+    }
     $database = new Database();
     $db = $database->getConnection();
     $userManager = new UserManager();
@@ -30,8 +24,18 @@
         $validationError = htmlspecialchars($_SESSION['error']);
         unset($_SESSION['error']); // Clear the message after displaying
     }
-    ?>
+?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee Details</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_manager/add_emp.css" />
+</head>
+<body>
     <form action="../helpers/employee_handler.php" method="post" enctype="multipart/form-data">
         <h2 class="form-heading">Edit Employee Details</h2>
         <input type="hidden" name="form_mode" value="edit">

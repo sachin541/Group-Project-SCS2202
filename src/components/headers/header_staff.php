@@ -29,7 +29,7 @@
             <div class="content">
 
 
-                <a href="../views_staff/staff_home.php" class="topnav-item">Home</a>
+                <!-- <a href="../views_staff/staff_home.php" class="topnav-item">Home</a> -->
                 <!-- <a href="../views_staff/dashboard.php" class="topnav-item">Dashboard</a> -->
                 <a href="../views_staff/product_list.php" class="topnav-item">Products</a>
                 <a href="../views_staff/add_product.php" class="topnav-item">Add Products</a>

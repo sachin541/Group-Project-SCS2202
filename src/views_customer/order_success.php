@@ -1,7 +1,11 @@
 <?php
 require_once '../classes/database.php';
 require_once '../classes/order.php'; 
-
+require_once '../components/headers/main_header.php';
+if(!isset($_SESSION['role'])){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 
 $order_id = $_GET['order_id'] ?? ''; // Fallback to an empty string if not set
 
@@ -23,7 +27,7 @@ function formatPrice($price) {
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/invoice-style.css">
 </head>
 <div class="main-header">
-    <?php require_once '../components/headers/main_header.php';?>
+
 </div>
 <body>
 <div class="invoice-container">

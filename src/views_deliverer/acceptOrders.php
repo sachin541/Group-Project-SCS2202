@@ -3,6 +3,11 @@ require_once '../classes/database.php';
 require_once '../classes/order.php'; // Adjust this to your actual OrderManager class
 require_once '../classes/delivery.php'; 
 require_once '../components/headers/main_header.php';
+ 
+if(!isset($_SESSION['role']) || ($_SESSION['role'] != 'deliverer' )){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 $database = new Database();
 $db = $database->getConnection(); 
 
