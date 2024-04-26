@@ -23,11 +23,8 @@ try {
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
 }
-// print_r($orderDetails);
-print_r($delivery);
-if(empty($delivery)){
-    echo 1; 
-}
+
+
 // print_r($orderDetails);
 function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
@@ -131,9 +128,15 @@ function formatAndCapitalize($str) {
                     
                 </div>
                 <div class="details-group">
-                    
                     <div class="detail"><strong>Payment Type:</strong> <?= htmlspecialchars(formatAndCapitalize($firstItem['payment_type'])) ?></div>
-                    <div class="detail"><strong>Payment Status:</strong> <?= htmlspecialchars($firstItem['payment_status']) ?></div>
+                    <div class="detail"><strong>Payment Status:</strong> <?= htmlspecialchars(formatAndCapitalize($firstItem['payment_status'])) ?></div>
+                    
+                    <?php if(!empty($delivery)){
+                        echo "<div class='detail'><strong>Carrier  Name:</strong> " . $delivery['staff_name'] . "</div>";
+                         
+                        echo "<div class='detail'><strong>Mobile  No:</strong> " . $delivery['mobile_no'] . "</div>";
+
+                    }?>
                 </div>
             </div>
             <?php else: ?>
