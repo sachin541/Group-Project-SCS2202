@@ -119,12 +119,13 @@ function formatAndCapitalize($str) {
                 </div>
                 <div class="details-group">
                     <div class="detail"><strong>Phone:</strong> <?= htmlspecialchars($firstItem['phone']) ?></div>
-                    <div class="detail"><strong>Delivery Address:</strong> <?= htmlspecialchars($firstItem['delivery_city_address']) ?></div>
-                    <div class="detail"><strong>City:</strong> <?= htmlspecialchars($firstItem['city']) ?></div>
                     <div class="detail"><strong>Province:</strong> <?= htmlspecialchars($firstItem['province']) ?></div>
+                    <div class="detail"><strong>City:</strong> <?= htmlspecialchars($firstItem['city']) ?></div>
+                    <div class="detail"><strong>Delivery Address:</strong> <?= htmlspecialchars($firstItem['delivery_city_address']) ?></div>
+                    <div class="detail"><strong>postal Code:</strong> <?= htmlspecialchars($firstItem['postalcode']) ?></div>
                 </div>
                 <div class="details-group">
-                    <div class="detail"><strong>Delivery Person ID:</strong> <?= htmlspecialchars($firstItem['postalcode']) ?></div>
+                    
                     <div class="detail"><strong>Payment Type:</strong> <?= htmlspecialchars(formatAndCapitalize($firstItem['payment_type'])) ?></div>
                     <div class="detail"><strong>Payment Status:</strong> <?= htmlspecialchars($firstItem['payment_status']) ?></div>
                 </div>

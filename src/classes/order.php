@@ -34,11 +34,11 @@ class Order {
     }
     }
 
-    public function getUnassignedOrders() {
+    public function getUnassignedOrders($orderBy = "DESC") {
         try {
-            $query = "SELECT * FROM orders WHERE delivery_status = 'Order Placed' ORDER BY created_at DESC";
+            $query = "SELECT * FROM orders WHERE delivery_status = 'Order Placed' ORDER BY created_at " . $orderBy ;
             $stmt = $this->db->prepare($query);
-            $stmt->execute();
+            $stmt->execute([]);
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
