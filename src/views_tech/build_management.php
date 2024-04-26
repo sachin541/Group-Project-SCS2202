@@ -20,7 +20,9 @@ function formatPrice($price) {
     return 'Rs. ' . number_format($price, 2, '.', ',') . '/-';
 }
 
-$allBuilds = $buildobj->getAllNewBuilds(); // Fetch all new builds
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'ASC';
+
+$allBuilds = $buildobj->getAllNewBuilds($sort); // Fetch all new builds
 
 $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // Fetch builds by technician ID
 
@@ -35,14 +37,20 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
 </head>
 
 <body>
-    <h1>All Builds</h1>
+   
 
     
     <div class="flex-container">
 
         
         <div class="table-container column">
-            <h2>New Builds</h2>
+            <h2>New Builds<form action="" method="get" class="filter-form">
+                <select name="sort">
+                    <option value="ASC" <?php echo ($sort == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
+                    <option value="DESC" <?php echo ($sort == 'DESC') ? 'selected' : ''; ?>>Decending</option> 
+                </select>
+                <input type="submit" value="Sort">
+            </form></h2>
             <?php if(empty($allBuilds)): ?>
                 <p>No new builds!</p>
             <?php else: ?>
@@ -50,6 +58,7 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                     <thead>
                         <tr>
                             <th class="column-build-id">ID</th>
+                            
                             <th class="column-customer-name">Customer</th>
                             <th class="column-components">Components</th>
                             <th class="column-status">Status</th>
@@ -63,6 +72,7 @@ $myBuilds = $buildobj->getTechnicianBuildsbyID($technicianId, $buildFilter); // 
                                  $statusData = $buildobj->getBuildStatus($build);  ?>
                             <tr>
                                 <td><?= htmlspecialchars($build['build_id']) ?></td>
+                                
                                 <td><?= htmlspecialchars($build['customer_name']) ?></td>
                                 <!-- Add a new cell for components -->
 

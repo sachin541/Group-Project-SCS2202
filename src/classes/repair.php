@@ -83,10 +83,10 @@ class Repair {
     }
     
 
-    public function getAllNewRepairs(){
+    public function getAllNewRepairs($orderby = "ASC"){
         try {
            
-            $query = "SELECT * FROM repairs WHERE technician_assigned_date IS NULL";
+            $query = "SELECT * FROM repairs WHERE technician_assigned_date IS NULL ORDER BY added_timestamp " . $orderby ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchall(PDO::FETCH_ASSOC);

@@ -172,12 +172,12 @@ class Build {
         }
     }
 
-    public function getAllNewBuilds(){
+    public function getAllNewBuilds($sortby = 'ASC'){
             try {
                
                 $query = "SELECT b.*, c.* FROM builds b
                   INNER JOIN components_list c ON b.components_list_id = c.id
-                  WHERE technician_assigned_date IS NULL";
+                  WHERE technician_assigned_date IS NULL ORDER BY added_timestamp " . $sortby;
 
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();

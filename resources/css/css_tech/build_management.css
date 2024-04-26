@@ -20,20 +20,17 @@ body {
   /* Adjust the width as necessary for your design */
 }
 
-h1 {
-  text-align: center;
-  color: #000000;
-  font-weight: bold;
-  padding-bottom: 10px;
-  
-}
+
 
 h2 {
   text-align: center;
   color: #000000;
   font-weight: bold;
-  padding-bottom: 10px;
   border-bottom: 3px solid #21bd9e; 
+}
+
+h2 > form{
+  padding: 10px;
 }
 
 .table-container {
@@ -107,11 +104,11 @@ tbody tr:hover {
 
 .filter-form select,
 .filter-form input[type="submit"] {
-  padding: 8px;
+  padding: 3px 10px;
   margin-right: 10px;
   border-radius: 4px;
   border: 1px solid #ddd;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
 .filter-form input[type="submit"] {

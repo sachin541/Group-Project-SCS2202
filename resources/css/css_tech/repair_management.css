@@ -20,19 +20,15 @@ body {
   /* Adjust the width as necessary for your design */
 }
 
-h1 {
-  text-align: center;
-  color: #000000;
-  font-weight: bold;
-  padding-bottom: 10px;
-  
+h2 > form{
+  padding: 10px;
 }
 
 h2 {
   text-align: center;
   color: #000000;
   font-weight: bold;
-  padding-bottom: 10px;
+  
   border-bottom: 3px solid #21bd9e; 
 }
 
@@ -42,6 +38,8 @@ h2 {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   width: 95%;
+  max-height: 80vh;
+  overflow: auto;
 }
 
 table {
@@ -49,11 +47,13 @@ table {
   border-collapse: separate;
   border-spacing: 0 15px;
   font-size: 0.95em;
+
 }
 
 tbody {
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 th {
