@@ -77,15 +77,21 @@ class Delivery {
     }
 
 
-    public function getMyDeliveries($deliveryPersonId) {
+    public function getMyDeliveries($deliveryPersonId , $status=NULL) {
         try {
-            $query = "SELECT d.*, o.total, o.created_at 
+            $query = "SELECT d.*, o.total, o.created_at , o.delivery_status 
                       FROM deliveries d
                       JOIN orders o ON d.order_id = o.order_id
-                      WHERE d.delivery_person_id = ? AND d.status = 'Accepted'";
+                      WHERE d.delivery_person_id = ?"; 
+                      
+            if($status != NULL){
+                $query = $query . "AND o.delivery_status = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute([$deliveryPersonId, $status]);
+            }else{
             $stmt = $this->db->prepare($query);
             $stmt->execute([$deliveryPersonId]);
-
+            }
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw $e;

@@ -10,8 +10,9 @@ $orderManager = new Order($db); // Initialize OrderManager with DB connection
 $unassignedOrders = $orderManager->getUnassignedOrders(); // Fetch unassigned orders
 
 $deliveryObj = new Delivery($db);
-$userDeliveries = $deliveryObj->getMyDeliveries($_SESSION['user_id']);
 
+$status = isset($_GET['status']) ? $_GET['status'] : 'Accepted' ; 
+$userDeliveries = $deliveryObj->getMyDeliveries($_SESSION['user_id'] , $status);
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +66,17 @@ $userDeliveries = $deliveryObj->getMyDeliveries($_SESSION['user_id']);
 
         <div class="table-container">
             <h1 class="unassigned">Your Orders</h1>
+            <form action="" get="get">
+                 <label for="status">Status :</label>   
+                <select name="status" id="status">
+                    <!-- <option value="">Sort by</option> -->
+                    <option value="Accepted" <?php echo $status == 'Accepted' ? 'selected' : ''; ?>>Accepted</option>
+                    <option value="Preparing" <?php echo $status == 'Preparing' ? 'selected' : ''; ?>>Preparing</option>
+                    <option value="Completed" <?php echo $status == 'Completed' ? 'selected' : ''; ?>>Completed</option>
+                    <option value="On The Way" <?php echo $status == 'On The Way' ? 'selected' : ''; ?>>On The Way</option>
+                </select>
+            <input type="submit">       
+            </form>
             <table>
                 <thead>
                     <tr>
