@@ -4,7 +4,10 @@ require_once '../classes/build.php'; // Change to the Build class
 require_once '../classes/product.php'; 
 require_once '../components/headers/main_header.php';
 
-
+if($_SESSION['role'] != 'technician'){
+    header('Location: ../views_main/denied.php');
+    exit; 
+}
 
 $technicianId = $_SESSION['user_id'];
 

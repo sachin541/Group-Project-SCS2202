@@ -1,5 +1,10 @@
 <?php
 require_once '../components/headers/main_header.php';
+
+if($_SESSION['role'] != 'technician'){
+    header('Location: ../views_main/denied.php');
+    exit;
+}
 ?>
 
 
