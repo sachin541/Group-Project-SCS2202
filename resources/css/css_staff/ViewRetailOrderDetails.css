@@ -37,6 +37,9 @@ body {
     
 }
 
+.cart-table{
+    width: 100%;
+}
 
 .cart-table th, .cart-table td {
     text-align: left; /* Aligns text to the left in table headers and cells */

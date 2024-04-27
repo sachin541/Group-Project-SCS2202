@@ -41,6 +41,7 @@ function formatPrice($price) {
     <title>Delivery Details</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/ViewRetailOrderDetails.css">
     
+    
 </head>
 <body>
 <div class="main-header">
