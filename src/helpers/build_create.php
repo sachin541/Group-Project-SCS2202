@@ -109,6 +109,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    
     if (isset($_POST['handler_type']) && $_POST['handler_type'] === 'create_new_build') {
 
+        $customerName = $_POST['customer_name'];
+        $contactNumber = $_POST['contact_number'];
+    
+        // Regular expressions for validation
+        $namePattern = "/^[a-zA-Z\s]+$/";
+        $mobilePattern = "/^07\d{8}$/";
+    
+        $errors = [];
+    
+        // Validate customer name
+        if (!preg_match($namePattern, $customerName)) {
+            $errors['nameError'] = "Invalid name. Only letters and spaces are allowed.";
+        }
+    
+        // Validate mobile number
+        if (!preg_match($mobilePattern, $contactNumber)) {
+            $errors['mobileError'] = "Invalid mobile number.";
+        }
+    
+        if (!empty($errors)) {
+            $_SESSION['error_messages'] = $errors;
+            header('Location: ../views_customer/build_create.php');
+            exit;
+        }
+
         $requiredComponents = ['CPU', 'GPU', 'MotherBoard', 'CPU Coolers' , 'Memory', 'Storage', 'PowerSupply', 'Case'];
         $missingComponents = [];
     
@@ -127,8 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $customer_id= $_SESSION['user_id']; 
-        $customerName = $_POST['customer_name'];
-        $contactNumber = $_POST['contact_number'];
+        // $customerName = $_POST['customer_name'];
+        // $contactNumber = $_POST['contact_number'];
         $additionalNotes = $_POST['additional_notes'];
         $totalPrice = $_POST['build_total'];
 
@@ -154,7 +179,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 unset($_SESSION[$key]);
             }
         }
-        
+        header('Location: ../views_customer/builds_current.php');
+        exit;    
     }
     
 

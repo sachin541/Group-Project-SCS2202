@@ -44,10 +44,10 @@ class Repair {
     }
     
 
-    public function createRepair($customer_id, $contact, $item_name, $repair_description) {
+    public function createRepair($customer_id, $contact, $item_name, $repair_description, $customer_name) {
         try {
             
-            $query = "INSERT INTO repairs (customer_id, contact, item_name, repair_description) VALUES (?, ?, ?, ?)";
+            $query = "INSERT INTO repairs (customer_id, contact, item_name, repair_description, customer_name) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
 
            
@@ -55,7 +55,7 @@ class Repair {
             $stmt->bindParam(2, $contact, PDO::PARAM_STR);
             $stmt->bindParam(3, $item_name, PDO::PARAM_STR);
             $stmt->bindParam(4, $repair_description, PDO::PARAM_STR);
-
+            $stmt->bindParam(5, $customer_name, PDO::PARAM_STR);
             
             $stmt->execute();
 

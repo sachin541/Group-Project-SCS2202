@@ -28,10 +28,20 @@ $repairs = $repair->getCustomerRepairsByID($customerId);
         <div class="create-repair-section">
             <h1 class="section-heading">Create New Repair</h1>
 
+            <div class="form-errors">
+                <?php if (isset($_SESSION['form_errors'])): ?>
+                    <?php foreach ($_SESSION['form_errors'] as $field => $message): ?>
+                        <p class="error"><?php echo htmlspecialchars($message); ?></p>
+                    <?php endforeach; ?>
+                    <?php unset($_SESSION['form_errors']); // Clear errors after displaying ?>
+                <?php endif; ?>
+            </div>
+
+
             <form action="../helpers/repair_handler.php" method="post" class="repair-form">
                 <div class="form-field">
                     <label for="customer_name" class="form-label">Your Name:</label>
-                    <input type="text" id="customer_name" name="customer_id" class="form-input" required>
+                    <input type="text" id="customer_name" name="customer_name" class="form-input" required>
                 </div>
 
                 <div class="form-field">

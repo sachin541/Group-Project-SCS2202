@@ -9,20 +9,41 @@ $db = $database->getConnection();
 $repair = new Repair($db);
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rq_type']) )
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rq_type']) ){
 $customer_id = $_SESSION['user_id'];
-
+$customer_name = $_POST['customer_name']; 
 $contact = $_POST['contact'];
 $item_name = $_POST['item_name'];
 $repair_description = $_POST['repair_description'];
+$namePattern = "/^[a-zA-Z\s]+$/";
+$contactPattern = "/^07\d{8}$/";
 
-$result = $repair->createRepair($customer_id, $contact, $item_name, $repair_description);
+$errors = [];
+
+// Validate customer name
+if (!preg_match($namePattern, $customer_name)) {
+    $errors['customer_name'] = "Name must contain only letters and spaces.";
+}
+
+// Validate contact number
+if (!preg_match($contactPattern, $contact)) {
+    $errors['contact'] = "Contact number Invalid.";
+}
+
+// Check for any errors
+if (count($errors) > 0) {
+    $_SESSION['form_errors'] = $errors;
+    header('Location: ../views_customer/repairs.php'); // Adjust as necessary to the correct form page
+    exit;
+}
+$result = $repair->createRepair($customer_id, $contact, $item_name, $repair_description,$customer_name);
 
 if ($result) {
     echo "Repair created successfully.";
     header('Location: ../views_customer/repairs.php');
 } else {
     echo "Error creating repair.";
+}
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tech_accept'])){

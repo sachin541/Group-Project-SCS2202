@@ -106,6 +106,14 @@ function formatPrice($price) {
 
     <div class="additional-info info-section">
         <h1 class="info-heading">Create New Build Request</h1>
+                <?php if (isset($_SESSION['error_messages'])): ?>
+            <div class="error-messages">
+                <?php foreach ($_SESSION['error_messages'] as $error): ?>
+                    <p class="error"><?php echo htmlspecialchars($error); ?></p>
+                <?php endforeach; ?>
+            </div>
+            <?php unset($_SESSION['error_messages']); // Clear errors after displaying ?>
+        <?php endif; ?>
        
         <form action="../helpers/build_create.php" method="post" class="build-form">
             <div class="form-group">
@@ -119,7 +127,7 @@ function formatPrice($price) {
             </div>
 
             <div class="form-group">
-                <label for="additional_notes" class="form-label">Additional Notes:</label>
+                <label for="additional_notes" class="form-label">Additional Notes:(Optional)</label>
                 <textarea id="additional_notes" name="additional_notes" class="form-textarea"></textarea>
             </div>
 

@@ -63,10 +63,10 @@ $_SESSION["category"]  = $product['category'];
             <input type="text" id="price" name="price" class="form-input price-input" value="<?php echo htmlspecialchars($product['price']); ?>" required>
         </div>
 
-        <div class="form-group discount-group">
+        <!-- <div class="form-group discount-group">
             <label for="discount" class="form-label discount-label">Discount:</label>
             <input type="text" id="discount" name="discount" class="form-input discount-input" value="<?php echo htmlspecialchars($product['discount']); ?>">
-        </div>
+        </div> -->
 
         <div class="form-group brand-group">
             <label for="brand" class="form-label brand-label">Brand:</label>
