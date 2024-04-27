@@ -14,7 +14,7 @@ $productobj = new Product($db);
 
 $productId = $_GET['product_id'] ?? null;
 $product = null;
-
+$categories = $productobj->getAllCategories();
 if ($productId) {
     $product = $productobj->getProductById($productId);
 }
@@ -33,9 +33,11 @@ $_SESSION["category"]  = $product['category'];
     <meta charset="UTF-8">
     <title>Edit Product</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/product_edit.css" />
+    <link rel="stylesheet" type="text/css" href="../../resources/css/css_staff/add_productnew.css" />
 </head>
 <body>
     <form action="../helpers/edit_product.php" method="post" enctype="multipart/form-data" class="product-form">
+        <h1>Edit Product</h1>
         <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
 
         <div class="form-group product-name-group">
@@ -43,10 +45,21 @@ $_SESSION["category"]  = $product['category'];
             <input type="text" id="product_name" name="product_name" class="form-input product-name-input" value="<?php echo htmlspecialchars($product['product_name']); ?>" required>
         </div>
 
-        <div class="form-group category-group">
+        <!-- <div class="form-group category-group">
             <label for="category" class="form-label category-label">Category:</label>
             <input type="text" id="category" name="category" class="form-input category-input" value="<?php echo htmlspecialchars($product['category']); ?>" required>
-        </div>
+        </div> -->
+        <label for="category" class="form-label category-label">Category:</label>
+        <select id="category" name="category" required>
+            
+            <option value="">Select Category</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= htmlspecialchars($category['category']) ?>" <?= ($category['category'] == $product['category']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($category['category']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
 
         <div class="form-group quantity-group">
             <label for="quantity" class="form-label quantity-label">Quantity:</label>

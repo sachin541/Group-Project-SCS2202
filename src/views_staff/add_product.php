@@ -73,11 +73,11 @@ require_once '../classes/product.php';
     </div>
     <div>
         <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand" placeholder="Brand">
+        <input type="text" id="brand" name="brand" placeholder="Brand" required>
     </div>
     <div>
         <label for="image1">Image 1:</label>
-        <input type="file" id="image1" name="image1" placeholder="Image 1">
+        <input type="file" id="image1" name="image1" placeholder="Image 1" required>
     </div>
     <div>
         <label for="image2">Image 2:</label>
