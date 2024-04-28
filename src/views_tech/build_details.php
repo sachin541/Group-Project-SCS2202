@@ -54,8 +54,7 @@ else if(isset($_SESSION['current_build_tech'])) {
             $tech_mobile = $technicianDetails['mobile_no'];
         }
 
-        // Render build details
-        // TODO: Add HTML and PHP code to display the build details
+ 
 
     } else {
         echo "No details found for the given build ID.";
@@ -78,7 +77,6 @@ else if ($build_collected_date) {
 }
 
 
-// Include components for build stages
-// TODO: Add components for different stages of the build process similar to repair timeline
+
 
 ?>

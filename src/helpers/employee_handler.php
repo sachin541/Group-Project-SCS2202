@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ' . $redirectPath . 'edit_staff.php?id=' . $staff_id);
             exit;
         }
+        // /^[A-Za-z]+$/
 
         if (!preg_match('/^07\d{8}$/', $mobile_no)) {
             $_SESSION['error'] = 'Invalid mobile number format.';

@@ -113,7 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $contactNumber = $_POST['contact_number'];
     
         // Regular expressions for validation
-        $namePattern = "/^[a-zA-Z\s]+$/";
+        $namePattern = "/^[a-zA-Z\s]+$/"; 
+        // + one or more of preceeding 
         $mobilePattern = "/^07\d{8}$/";
     
         $errors = [];

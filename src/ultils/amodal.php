@@ -37,7 +37,12 @@ button {
 <body>
 
 <!-- Form -->
-<form id="myForm" action="/submit-form" method="post">
+<!-- <form id="myForm" action="/submit-form" method="post">
+    <input type="text" name="data" placeholder="Enter some data">
+    <button type="submit">Submit</button>
+</form> -->
+
+<form class="myForm" action="/submit-form" method="post">
     <input type="text" name="data" placeholder="Enter some data">
     <button type="submit">Submit</button>
 </form>
@@ -56,7 +61,7 @@ button {
 </body>
 </html>
 
-
+<!-- 
 <script>
     // script.js
 document.getElementById('myForm').addEventListener('submit', function(event) {
@@ -72,5 +77,30 @@ document.getElementById('confirmSubmit').addEventListener('click', function() {
 document.getElementById('cancelSubmit').addEventListener('click', function() {
     document.getElementById('confirmModal').style.display = 'none'; // Hide the modal
 });
+
+</script> -->
+
+<script>
+// script.js
+document.querySelectorAll('.myForm').forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+        showModal(form);
+    });
+});
+
+function showModal(form) {
+    const modal = document.getElementById('confirmModal');
+    modal.style.display = 'block'; // Show the modal
+
+    document.getElementById('confirmSubmit').onclick = function() {
+        modal.style.display = 'none'; // Hide the modal
+        form.submit(); // Submit the currently active form
+    };
+
+    document.getElementById('cancelSubmit').onclick = function() {
+        modal.style.display = 'none'; // Hide the modal
+    };
+}
 
 </script>
