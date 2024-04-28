@@ -15,8 +15,9 @@
     <header class="outer-grid-container">
 
         <div class="logo-container">
-            <a href="../views_deliverer/deliverer_home.php"><img src="../../resources/images/logo2.png" alt="logo png"
-                    id="logo" height="50px" /></a>
+                <a href="../views_main/home.php">
+                        <img src="../../resources/images/logo2.png" alt="logo png" id="logo" height="50px" />
+                    </a>
             <p class="name">COMPUTIFY</p>
         </div>
 
@@ -27,13 +28,13 @@
             </div>
             <div class="content">
 
-                <a href="../views_deliverer/deliverer_home.php" class="topnav-item">Home</a>
+                <!-- <a href="../views_deliverer/deliverer_home.php" class="topnav-item">Home</a> -->
                 <!-- <a href="../views_deliverer/dashboard.php" class="topnav-item">Dashboard</a> -->
                 <a href="../views_deliverer/acceptOrders.php" class="topnav-item">Orders</a>
 
                 <!-- <a href="../pages/product_list.php" class="topnav-item">Request Products</a> -->
                 <!-- <a href="../pages/repairs.php" class="topnav-item">Repairs</a> -->
-                <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a>
+                <!-- <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a> -->
                 <a href="../ultils/logout.php" class="unreg-log">Logout</a>
 
                 </div>

@@ -39,15 +39,16 @@ $userDeliveries = $deliveryObj->getMyDeliveries($_SESSION['user_id'] , $status);
         <div class="table-container">
             <h1 class="unassigned">Unassigned Orders</h1>
             <div class="form-cont">
-            <form action="" get="get">
-            <label for="sortBy">Sort By :</label>   
-                <select name="sortBy" id="sortBy" class="filter-dropdown">
-                        <option value="DESC" <?php echo $sortBy == 'date_asc' ? 'selected' : ''; ?>>Date Ascending</option>
-                        <option value="ASC" <?php echo $sortBy == 'date_desc' ? 'selected' : ''; ?>>Date Descending</option>
-                        <input type="submit" name="" id="">
-                </select>
-            </form>
+                <form action="" method="get">
+                    <label for="sortBy">Sort By :</label>   
+                    <select name="sortBy" id="sortBy" class="filter-dropdown">
+                        <option value="ASC" <?php echo $sortBy == 'ASC' ? 'selected' : ''; ?>>Date Ascending</option>
+                        <option value="DESC" <?php echo $sortBy == 'DESC' ? 'selected' : ''; ?>>Date Descending</option>
+                    </select>
+                    <input type="submit" value="Apply">
+                </form>
             </div>
+
             <table>
                 <thead>
                     <tr>
