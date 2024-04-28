@@ -21,7 +21,8 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : null;
 
-$orders = $inStore->getAllOrders($filterBy=null, $sortBy); 
+
+$orders = $inStore->getAllOrders($filterBy = null, $sortBy, $paymentType = null, $paymentStatus = null, $deliveryStatus = null,$customerId = $userId); 
 
 function formatString($str) {
     // Replace underscores with spaces
@@ -51,10 +52,10 @@ function formatString($str) {
                         <option value="">Sort by</option>
                         <option value="date_asc" <?php echo $sortBy == 'date_asc' ? 'selected' : ''; ?>>Date Ascending</option>
                         <option value="date_desc" <?php echo $sortBy == 'date_desc' ? 'selected' : ''; ?>>Date Descending</option>
-                        <option value="id_asc" <?php echo $sortBy == 'id_asc' ? 'selected' : ''; ?>>Order ID Ascending</option>
+                        <!-- <option value="id_asc" <?php echo $sortBy == 'id_asc' ? 'selected' : ''; ?>>Order ID Ascending</option>
                         <option value="id_desc" <?php echo $sortBy == 'id_desc' ? 'selected' : ''; ?>>Order ID Descending</option>
                         <option value="total_asc" <?php echo $sortBy == 'total_asc' ? 'selected' : ''; ?>>Total Ascending</option>
-                        <option value="total_desc" <?php echo $sortBy == 'total_desc' ? 'selected' : ''; ?>>Total Descending</option>
+                        <option value="total_desc" <?php echo $sortBy == 'total_desc' ? 'selected' : ''; ?>>Total Descending</option> -->
                     </select>
                     <button class="apply-filter-button">Apply Filter</button>
                 </form>

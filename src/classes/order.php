@@ -160,7 +160,12 @@ class Order {
     
 
  
-
+    public function test(){
+        $query = "SELECT SUM(total) , DATE(created_at) from orders GROUP BY DATE(created_at)"; 
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return  $stmt->fetchall(PDO::FETCH_ASSOC); 
+    }
 
 
 
