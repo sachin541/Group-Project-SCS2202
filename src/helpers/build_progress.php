@@ -1,5 +1,6 @@
 <?php
 require_once '../classes/build.php';
+require_once '../ultils/sendEmail.php';
 session_start();
 
 $database = new Database();
@@ -39,17 +40,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['start_build'])) {
         $build->startBuild($buildId);
-        // Redirect or handle response
+       
     }
 
     if (isset($_POST['complete_build'])) {
+        
+        // Check if email notification is opted-in
+        if (isset($_POST['notify_customer']) && $_POST['notify_customer'] == 'yes') {
+            // Assuming $customerEmail is retrieved from the database or session
+            $subject = "Your Custom Build is Complete!";
+            $body = "Hello!
+
+            We are thrilled to announce that your custom build, reference number $buildId, has been meticulously crafted and is now complete. Your exciting new setup awaits and is ready for collection at your earliest convenience.";
+            $customerEmail = $build->getEmail($buildId); 
+            $customerEmail = $customerEmail['email'];
+            $sendResult = sendEmail($customerEmail, $subject, $body);
+
+            if ($sendResult !== true) {
+               
+                $_SESSION['email_error'] = $sendResult;
+            }
+        }
         $build->completeBuild($buildId);
-        // Redirect or handle response
     }
+
 
     if (isset($_POST['collect_build'])) {
         $build->collectBuild($buildId);
-        // Redirect or handle response
+       
     }
 
     

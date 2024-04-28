@@ -358,8 +358,14 @@ class Build {
         }
     }
     
+   
+    public function getEmail($buildId){
+        $query = "SELECT l.email FROM builds b JOIN login_details l on l.id = b.customer_id WHERE b.build_id = ?"; 
+        $stmt = $this->db->prepare($query); 
+        $stmt->execute([$buildId]); 
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
 
-
+    }
 
 
 }
