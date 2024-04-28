@@ -55,10 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $customerEmail = $build->getEmail($buildId); 
             $customerEmail = $customerEmail['email'];
             $sendResult = sendEmail($customerEmail, $subject, $body);
-
+            
             if ($sendResult !== true) {
                
-                $_SESSION['email_error'] = $sendResult;
+                $_SESSION['email_error'] = "Failed to Connect"; 
+                header('Location: ../views_tech/build_details.php');
+                exit ; 
             }
         }
         $build->completeBuild($buildId);

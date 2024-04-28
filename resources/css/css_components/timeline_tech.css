@@ -273,3 +273,26 @@ ul li .descr {
   width: 80%;
   text-align: center;
 }
+
+.alert {
+  padding: 10px;
+  margin-top: 100px;
+  border-radius: 5px;
+  color: #721c24;
+  background-color: #f8d7da;
+  text-align: center;
+}
+
+
+.custom-checkbox {
+  display: block;
+  font-size: 18px;
+}
+
+.checkbox{
+  background-color: red;
+}
+
+
+
+
