@@ -30,7 +30,32 @@ class Customer extends User {
         return $stmt->execute();
     }
 
-    // Other customer-specific methods...
+
+    public function new_password($email, $password) {
+
+        
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        
+
+        $stmt = $this->db->prepare("UPDATE login_details SET user_password=? where email=?");
+        $stmt->execute([$hashedPassword,$email]); 
+        
+
+        return $stmt->execute();
+    }
+
+    
+    public function new_email($email, $id) {
+
+    
+        $stmt = $this->db->prepare("UPDATE login_details SET email=? where id=?");
+        $stmt->execute([$email,$id]); 
+        
+
+        return $stmt->execute();
+    }
+   
 }
 
 // Usage

@@ -54,152 +54,7 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
 <head>
     <title>Delivery Details</title>
     <link rel="stylesheet" type="text/css" href="../../resources/css/css_customer/checkout.css">
-    <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
-    <script type="text/javascript">
-        
-        //function to show pay on delivery confirmation modal 
-        function showConfirmationModal() {
-            var modal = document.getElementById("confirmationModal");
-            var noBtn = document.getElementById("confirmNo");
-            var yesBtn = document.getElementById("confirmYes");
 
-            modal.style.display = "block";
-            
-            noBtn.onclick = function() {
-                modal.style.display = "none";
-            };
-            
-            yesBtn.onclick = function() {
-                modal.style.display = "none";
-                document.querySelector('.checkout-form').submit(); // Submit form on "Yes"
-            };
-            
-            // This handler closes the modal if the user clicks outside of it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            };
-        }
-
-        //function to show pay on delivery declined due to pending payments 
-        function showModal() {
-            console.log("Payment dismissed");
-            var modal = document.getElementById("paymentPendingModal");
-            var closeButton = document.getElementsByClassName("close-button")[0];
-            var closeModalButton = document.getElementById("closeModal");
-
-            modal.style.display = "block";
-            
-            closeButton.onclick = function() {
-                modal.style.display = "none";
-            }
-            
-            closeModalButton.onclick = function() {
-                modal.style.display = "none";
-            }
-            
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        }
-
-        function handleSubmit() {
-            var payOnline = document.getElementById('pay_online').checked; //retrieves the current checked state 
-            var numberOfPendingPayments = <?= json_encode($numberOfPendingPayments); ?>; // Convert PHP variable to JS
-            if (!payOnline && numberOfPendingPayments > 100) {
-                //Pay on delivary 
-                showModal();
-                return false; //dont submit 
-            }
-            
-            if (!payOnline) {
-                //Pay on delivery 
-                showConfirmationModal();
-                return false; //dont submit form if modal is closed 
-            }
-            
-            if (payOnline) {
-                buyNow();
-                return false; //ALLOWS THE BUYNOW() FUNCTION TO HANDLE THE SUBMIT (oncomplete function in by now)
-            }
-            
-            return true; // Proceed if numberofPending is less and Its pay on delivery 
-        }
-
-        function buyNow() {
-            // var name = document.getElementById("name");
-            // var price = document.getElementById("price");
-            // var name = "testing"
-            // var price = null 
-            // var order_id = null 
-            var form = new FormData();
-            // form.append("sumbit_type", name.innerHTML);
-            // form.append("price", price.innerHTML);
-            form.append("sumbit_type", "payment");
-            // form.append("price", price);
-            // form.append("order_id", order_id);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "process.php", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.status === 200 && xhr.readyState === 4) {
-                var data = JSON.parse(xhr.responseText);
-
-                // Payment completed. It can be a successful failure.
-                payhere.onCompleted = function onCompleted(orderId) {
-                    console.log("Payment completed. OrderID:" + orderId);
-                    // var form = new FormData();
-                    // form.append("sumbit_type", "order");
-                    var form = document.querySelector('.checkout-form');
-                    form.submit(); //SUBMITS FORM FOR ONLINE PAYMENTS
-                    
-                };
-
-                // Payment window closed
-                payhere.onDismissed = function onDismissed() {
-                    // Note: Prompt user to pay again or show an error page
-                    console.log("Payment dismissed");
-                };
-
-                // Error occurred
-                payhere.onError = function onError(error) {
-                    // Note: show an error page
-                    console.log("Error:" + error);
-                };
-
-                // Put the payment variables here
-                var payment = {
-                    sandbox: true,
-                    merchant_id: data.merchant_id, // Replace your Merchant ID
-                    return_url: undefined, 
-                    cancel_url: undefined, 
-                    notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/ultils/notifyPayHere.php",
-                    order_id: data.order_id,
-                    items: data.name,
-                    amount: data.price,
-                    currency: data.currency,
-                    hash: data.hash, // *Replace with generated hash retrieved from backend
-                    first_name: data.temp,
-                    last_name: data.temp,
-                    email: data.temp,
-                    phone: data.temp,
-                    address: data.temp,
-                    city: data.temp,
-                    country: "Sri Lanka",
-                };
-
-                // Show the payhere.js popup, when "PayHere Pay" is clicked
-                payhere.startPayment(payment);
-                }
-            };
-            xhr.send(form);
-        }
-
-        // document.querySelector('.checkout-form').addEventListener('submit', handleSubmit);
-    </script>
 </head>
 <body>
 
@@ -329,5 +184,159 @@ $numberOfPendingPayments = $orderobj->countPendingPaymentsByCustomerId(($_SESSIO
 
 
 </body>
+
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+    <script type="text/javascript">
+        
+        //function to show pay on delivery confirmation modal 
+        function showConfirmationModal() {
+            var modal = document.getElementById("confirmationModal");
+            var noBtn = document.getElementById("confirmNo");
+            var yesBtn = document.getElementById("confirmYes");
+
+            modal.style.display = "block";
+            
+            noBtn.onclick = function() {
+                modal.style.display = "none";
+            };
+            
+            yesBtn.onclick = function() {
+                modal.style.display = "none";
+                document.querySelector('.checkout-form').submit(); // Submit form on "Yes"
+            };
+            
+            // This handler closes the modal if the user clicks outside of it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        }
+
+        //function to show pay on delivery declined due to pending payments 
+        function showModal() {
+            console.log("Payment dismissed");
+            var modal = document.getElementById("paymentPendingModal");
+            var closeButton = document.getElementsByClassName("close-button")[0];
+            var closeModalButton = document.getElementById("closeModal");
+
+            modal.style.display = "block";
+            
+            closeButton.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            closeModalButton.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        function handleSubmit() {
+            var payOnline = document.getElementById('pay_online').checked; //retrieves the current checked state 
+            var numberOfPendingPayments = <?= json_encode($numberOfPendingPayments); ?>; // Convert PHP variable to JS
+            if (!payOnline && numberOfPendingPayments > 100) {
+                //Pay on delivary 
+                showModal();
+                return false; //dont submit 
+            }
+            
+            if (!payOnline) {
+                //Pay on delivery 
+                showConfirmationModal();
+                return false; //dont submit form if modal is closed 
+            }
+            
+            if (payOnline) {
+                buyNow();
+                return false; //ALLOWS THE BUYNOW() FUNCTION TO HANDLE THE SUBMIT (oncomplete function in by now)
+            }
+            
+            return true; // Proceed if numberofPending is less and Its pay on delivery 
+        }
+
+        function buyNow() {
+            // var name = document.getElementById("name");
+            // var price = document.getElementById("price");
+            // var name = "testing"
+            // var price = null 
+            // var order_id = null 
+            var form = new FormData();
+            // form.append("sumbit_type", name.innerHTML);
+            // form.append("price", price.innerHTML);
+            form.append("sumbit_type", "payment");
+            // form.append("price", price);
+            // form.append("order_id", order_id);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "process.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                var data = JSON.parse(xhr.responseText);
+
+                // Payment completed. It can be a successful failure.
+                payhere.onCompleted = function onCompleted(orderId) {
+                    console.log("Payment completed. OrderID:" + orderId);
+                    // var form = new FormData();
+                    // form.append("sumbit_type", "order");
+                    var form = document.querySelector('.checkout-form');
+                    form.submit(); //SUBMITS FORM FOR ONLINE PAYMENTS
+                    
+                };
+
+                // Payment window closed
+                payhere.onDismissed = function onDismissed() {
+                    // Note: Prompt user to pay again or show an error page
+                    console.log("Payment dismissed");
+                };
+
+                // Error occurred
+                payhere.onError = function onError(error) {
+                    // Note: show an error page
+                    console.log("Error:" + error);
+                };
+
+                // Put the payment variables here
+                var payment = {
+                    sandbox: true,
+                    merchant_id: data.merchant_id, // Replace your Merchant ID
+                    return_url: undefined, 
+                    cancel_url: undefined, 
+                    notify_url: "https://fe78-112-134-209-22.ngrok-free.app/red/project/src/ultils/notifyPayHere.php",
+                    order_id: data.order_id,
+                    items: data.name,
+                    amount: data.price,
+                    currency: data.currency,
+                    hash: data.hash, // *Replace with generated hash retrieved from backend
+                    first_name: "Saman",
+                    last_name: "Perera",
+                    email: "samanp@gmail.com",
+                    phone: "0771234567",
+                    address: "No.1, Galle Road",
+                    city: "Colombo",
+                    country: "Sri Lanka",
+                    // first_name: data.temp,
+                    // last_name: data.temp,
+                    // email: data.temp,
+                    // phone: data.temp,
+                    // address: data.temp,
+                    // city: data.temp,
+                    // country: "Sri Lanka",
+                };
+
+                // Show the payhere.js popup, when "PayHere Pay" is clicked
+                payhere.startPayment(payment);
+                }
+            };
+            xhr.send(form);
+        }
+
+        // document.querySelector('.checkout-form').addEventListener('submit', handleSubmit);
+    </script>
 </html>
 
