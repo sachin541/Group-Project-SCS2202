@@ -17,7 +17,7 @@ function truncateText($text, $maxLength = 100) {
         return $text;
     }
 }
-
+// hello
 ?>
 
 
