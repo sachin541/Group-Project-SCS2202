@@ -117,4 +117,6 @@ echo date('d/m/Y H:i:s', $timestamp); // Outputs: 02/01/2024 01:19:51
 echo date('l, F j, Y', $timestamp); // Outputs: Wednesday, January 2, 2024
 
 // array_reverse()
+
+// $topProducts = array_slice($topProducts, 0, 5);
 ?>

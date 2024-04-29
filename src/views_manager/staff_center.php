@@ -100,7 +100,7 @@ function formatMobileNumber($number) {
 
                             <a href="edit_staff.php?id=<?= $row['staff_id'] ?>" class="button-like-link">Edit</a>
                             <form action="../helpers/employee_handler.php" method="post">
-                                <input type="hidden" name="id" value="<?= $row['staff_id'] ?>">
+                                <input type="hidden" name="staff_id" value="<?= $row['staff_id'] ?>">
                                 <input type="hidden" name="handler_type" value="remove_staff">
                                 
                                 <input type="submit" id="delete" class="delete-btn" value="Delete" data-message="Are you sure you want to delete this employee?">

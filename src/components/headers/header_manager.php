@@ -28,11 +28,20 @@
             <div class="content">
 
                 <!-- <a href="../views_main/product_list.php" class="topnav-item">Products</a> -->
-                <a href="../views_manager/manager_home.php" class="topnav-item">Home</a>
-                <a href="../views_manager/dashboard.php" class="topnav-item">Dashboard</a>
-                <a href="../views_manager/staff_center.php" class="topnav-item">Staff Center</a>
-                <a href="../views_manager/add_staff.php" class="topnav-item">Add Staff</a>
-                <a href="../views_manager/reportsMain.php" class="topnav-item">Reports</a>
+                
+                <a href="../views_manager/manager_home.php" class="topnav-item">
+                <img src="../../resources/images/icons/dashboard.png" alt="Products" class="nav-icon">Dashboard
+                
+                </a>
+                <!-- <a href="../views_manager/dashboard.php" class="topnav-item">Dashboard</a> -->
+                
+                <a href="../views_manager/staff_center.php" class="topnav-item">
+                    <img src="../../resources/images/icons/team.png" alt="Products" class="nav-icon">
+                Staff Center</a>
+                <a href="../views_manager/add_staff.php" class="topnav-item">
+                <img src="../../resources/images/icons/addstaff.png" alt="Products" class="nav-icon">Add Staff</a>
+                <a href="../views_manager/reportsMain.php" class="topnav-item">
+                <img src="../../resources/images/icons/report.png" alt="Products" class="nav-icon">Reports</a>
                 <!-- <a href="../views_manager/test.php" class="topnav-item">test2</a> -->
                 <!-- <a href="../pages/contact_us.php" class="topnav-item">Contact Us</a> -->
                 <a href="../ultils/logout.php" class="unreg-log">Log Out</a>

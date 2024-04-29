@@ -216,6 +216,27 @@ class UserManager {
             throw $e; // Handle any exceptions
         }
     }
+
+    public function getNumberOfDeliveries(){
+        $query = "SELECT COUNT(*) FROM deliveries WHERE status != 'completed'"; 
+        $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['COUNT(*)'];
+    }
+    
+    public function lastweekorders(){
+        $query = "SELECT DATE(created_at) as order_date, COUNT(*) as order_count
+          FROM orders
+          WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+          GROUP BY DATE(created_at)
+          ORDER BY DATE(created_at)";
+
+        $stmt = $this->db->prepare($query);   
+        $stmt->execute();
+        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+        return $result ;  
+    }
     
     
 

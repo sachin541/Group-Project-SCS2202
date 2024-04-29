@@ -23,7 +23,7 @@
     
 
     <li class="nav-item">
-      <a href="./reportsBuildsSales.php" class="nav-link">Builds Sales</a>
+      <a href="./reportsBuildsSales.php" class="nav-link">Builds & Repairs Sales</a>
     </li>
 
     <li class="nav-item">

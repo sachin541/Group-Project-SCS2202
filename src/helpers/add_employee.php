@@ -1,7 +1,7 @@
 <?php
 session_start(); // Ensure session start at the beginning of the script
-require_once '../classes/database.php'; 
-require_once '../classes/UserManager.php'; 
+require_once '../classes/database.php';
+require_once '../classes/UserManager.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userManager = new UserManager();
@@ -26,11 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
     $user_password = $_POST['user_password'];
+    $user_re_password = $_POST['user_re_password'];
     $role = $_POST['role'];
     $nic = $_POST['nic'];
     $staff_name = $_POST['staff_name'];
     $mobile_no = $_POST['mobile_no'];
 
+    if ($user_re_password != $user_password) {
+        $_SESSION['error'] = 'Password doesn\'t match.';
+        header('Location: ' . $redirectPath);
+        exit;
+    }
     // Validate name - must not contain numbers
     if (preg_match('/[0-9]/', $staff_name)) {
         $_SESSION['error'] = 'Name cannot contain numbers.';
