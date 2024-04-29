@@ -39,6 +39,10 @@ function sendOtpEmail($recipientEmail, $otp) {
     }
 }
 
+
+
+
+
 // Example usage:
 // $otp = rand(100000, 999999); // Generate OTP
 // $sendStatus = sendOtpEmail('recipient@example.com', $otp);
