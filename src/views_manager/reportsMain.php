@@ -127,8 +127,8 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
                     legend: {
                         position: 'left',
                         labels: {
-                            boxWidth: 20,
-                            padding: 15
+                            boxWidth: 10,
+                            padding: 8
                         }
                     },
                     title: {
@@ -224,8 +224,8 @@ $lineChartData = $lineChartObj->getSalesDataForLineChart($startDate, $endDate, $
                     legend: {
                         position: 'left',
                         labels: {
-                            boxWidth: 20,
-                            padding: 15
+                            boxWidth: 15,
+                            padding: 8
                         }
                     },
                     title: {

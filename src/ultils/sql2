@@ -217,11 +217,78 @@ CREATE TABLE InStorePurchase_Items (
     FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE SET NULL 
 );
 
-ALTER TABLE employees
-ADD COLUMN nic VARCHAR(255),
-ADD COLUMN profile_picture BLOB;
+-- ALTER TABLE employees
+-- ADD COLUMN nic VARCHAR(255),
+-- ADD COLUMN profile_picture BLOB;
 
 
 
+-- ALTER TABLE Orders
+-- ADD COLUMN customer_comments TEXT;
+
+-- ALTER TABLE employees
+-- MODIFY COLUMN mobile_no VARCHAR(15);
+
+-- ALTER TABLE products
+-- DROP COLUMN discount;
+
+-- INSERT INTO login_details (email, user_password, role)
+-- VALUES ('example@email.com', 'securepassword', 'customer');
+
+-- UPDATE login_details
+-- SET role = 'admin'
+-- WHERE email = 'example@email.com';
+
+-- SELECT o.order_id, o.total, o.created_at, oi.quantity, oi.product_id
+-- FROM Orders o
+-- JOIN Order_Items oi ON o.order_id = oi.order_id
+-- WHERE o.order_id = 101;
+
+-- SELECT e.staff_name, e.staff_address, e.mobile_no, ld.email, ld.role
+-- FROM employees e
+-- JOIN login_details ld ON e.staff_id = ld.id;
+
+-- SELECT p.product_name, p.price, ci.quantity, ld.email
+-- FROM cart_items ci
+-- JOIN products p ON ci.product_id = p.id
+-- JOIN login_details ld ON ci.user_id = ld.id
+-- WHERE ld.email = 'example@email.com';
+
+-- SELECT CURRENT_TIMESTAMP AS CurrentDateTime;
+
+-- SELECT id, product_name, added_timestamp, DATE_ADD(added_timestamp, INTERVAL 30 DAY) AS NewDate
+-- FROM products;
+
+-- SELECT order_id, DATEDIFF(CURRENT_DATE, created_at) AS DaysSinceOrder
+-- FROM Orders;
+
+-- SELECT *
+-- FROM Orders
+-- WHERE created_at >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY);
 
 
+-- SELECT product_name, price
+-- FROM products
+-- WHERE price BETWEEN 100 AND 500;
+
+-- SELECT staff_name, date_of_birth
+-- FROM employees
+-- WHERE date_of_birth BETWEEN '1980-01-01' AND '1990-12-31';
+
+-- SELECT order_id, total
+-- FROM Orders
+-- WHERE total > 500;
+
+-- SELECT product_name
+-- FROM products
+-- WHERE product_name LIKE '%Pro%';
+
+-- SELECT staff_name, sal
+-- FROM employees
+-- WHERE sal > 30000 AND sal < 60000;
+
+-- <?php
+-- echo "Wait for 3 seconds...";
+-- sleep(3); // Pauses the script for 3 seconds
+-- echo "Done waiting!";
+-- ?>
